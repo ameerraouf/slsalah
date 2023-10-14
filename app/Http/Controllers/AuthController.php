@@ -248,18 +248,18 @@ class AuthController extends Controller
         ]);
 
         //Verify recaptcha v2
-        if (!empty($super_settings['config_recaptcha_in_admin_login'])) {
-            $recaptcha = $request->get('g-recaptcha-response');
-            $secret = $this->super_settings['recaptcha_secret_key'] ?? '';
-
-            $verify = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$secret}&response={$recaptcha}");
-            $captcha_success = json_decode($verify);
-            if ($captcha_success->success == false) {
-                return redirect()->back()->withErrors([
-                    'key' => 'Invalid captcha',
-                ]);
-            }
-        }
+//        if (!empty($super_settings['config_recaptcha_in_admin_login'])) {
+//            $recaptcha = $request->get('g-recaptcha-response');
+//            $secret = $this->super_settings['recaptcha_secret_key'] ?? '';
+//
+//            $verify = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$secret}&response={$recaptcha}");
+//            $captcha_success = json_decode($verify);
+//            if ($captcha_success->success == false) {
+//                return redirect()->back()->withErrors([
+//                    'key' => 'Invalid captcha',
+//                ]);
+//            }
+//        }
 
         $user = User::where("email", $request->email)->first();
 
@@ -279,7 +279,8 @@ class AuthController extends Controller
             Auth::login($user, true);
             $request->session()->regenerate();
 
-            return redirect(config("app.url") . "/super-admin/dashboard");
+//            return redirect(config("app.url") . "/super-admin/dashboard");
+            return redirect()->to('/super-admin/dashboard');
         }
 
         return back()->withErrors([
