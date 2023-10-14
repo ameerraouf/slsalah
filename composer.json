@@ -22,7 +22,6 @@
         "mews/purifier": "^3.3",
         "rinvex/countries": "^7.3",
         "spatie/laravel-ray": "^1.23",
-        "srmklive/paypal": "~3.0",
         "stripe/stripe-php": "^7.92"
     },
     "require-dev": {
