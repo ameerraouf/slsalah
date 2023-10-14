@@ -48,7 +48,10 @@ class MyPlanController extends BaseController
             ->first();
         $data['planningRevenueOperatingAssumptions'] = PlanningRevenueOperatingAssumption::where('workspace_id', $this->user->workspace_id)
             ->first();
-        $data['calc_total'] = $data['planningRevenueOperatingAssumptions']->calc_total;
+//        $data['calc_total'] = $data['planningRevenueOperatingAssumptions']->calc_total;
+        $planningRevenueOperatingAssumptions = PlanningRevenueOperatingAssumption::where('workspace_id', $this->user->workspace_id)
+            ->first();
+        $data['calc_total'] = $planningRevenueOperatingAssumptions->calc_total;
         $workingInvestedTotal = WorkingInvestedCapital::select(DB::raw('SUM(investing_annual_cost) as investing_annual_cost_total'))->where("workspace_id", $this->user->workspace_id)->get()->pluck('investing_annual_cost_total');
         $fixedInvestedTotal = FixedInvestedCapital::select(DB::raw('SUM(investing_price) as investing_price_total'))->where("workspace_id", $this->user->workspace_id)->get()->pluck('investing_price_total');
         $totalInvestedCapital = (!empty($workingInvestedTotal) ? $workingInvestedTotal[0] : 0.0)+(!empty($fixedInvestedTotal) ? $fixedInvestedTotal[0] : 0.0);
