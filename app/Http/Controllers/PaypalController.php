@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Setting;
 use App\Models\SubscriptionPlan;
 use Illuminate\Http\Request;
-use Srmklive\PayPal\Services\PayPal as PayPalClient;
+//use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 
 class PaypalController extends Controller
@@ -29,25 +29,25 @@ class PaypalController extends Controller
     {
         $package = SubscriptionPlan::query()->find($request->input('package'));
 
-        $provider = new PayPalClient;
-        $provider->setApiCredentials(config('paypal'));
-        $paypalToken = $provider->getAccessToken();
-
-        $response = $provider->createOrder([
-            "intent" => "CAPTURE",
-            "application_context" => [
-                "return_url" => route('paypalSuccessTransaction'),
-                "cancel_url" => route('paypalCancelTransaction'),
-            ],
-            "purchase_units" => [
-                0 => [
-                    "amount" => [
-                        "currency_code" => "USD",
-                        "value" => "1000.00"
-                    ]
-                ]
-            ]
-        ]);
+//        $provider = new PayPalClient;
+//        $provider->setApiCredentials(config('paypal'));
+//        $paypalToken = $provider->getAccessToken();
+//
+//        $response = $provider->createOrder([
+//            "intent" => "CAPTURE",
+//            "application_context" => [
+//                "return_url" => route('paypalSuccessTransaction'),
+//                "cancel_url" => route('paypalCancelTransaction'),
+//            ],
+//            "purchase_units" => [
+//                0 => [
+//                    "amount" => [
+//                        "currency_code" => "USD",
+//                        "value" => "1000.00"
+//                    ]
+//                ]
+//            ]
+//        ]);
         if (isset($response['id']) && $response['id'] != null) {
             // redirect to approve href
             foreach ($response['links'] as $links) {
@@ -72,7 +72,7 @@ class PaypalController extends Controller
      */
     public function successTransaction(Request $request)
     {
-        $provider = new PayPalClient;
+//        $provider = new PayPalClient;
         $provider->setApiCredentials(config('paypal'));
         $provider->getAccessToken();
         $response = $provider->capturePaymentOrder($request['token']);

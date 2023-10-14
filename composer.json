@@ -9,7 +9,6 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
-        "ext-curl": "*",
         "ext-json": "*",
         "ext-mysqli": "*",
         "akaunting/laravel-money": "^1.2",
@@ -22,7 +21,8 @@
         "mews/purifier": "^3.3",
         "rinvex/countries": "^7.3",
         "spatie/laravel-ray": "^1.23",
-        "stripe/stripe-php": "^7.92"
+        "stripe/stripe-php": "^7.92",
+        "ext-curl": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
