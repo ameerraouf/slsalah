@@ -211,7 +211,7 @@ return [
         'bank_account'                  => 'الحساب البنكي',
         'identification'                  => 'رقم الهوية',
         'bank_name'                  => 'اسم الحساب البنكي',
-        'url'                  => 'الربط',
+        'url'                  => 'الرابط',
         'yearly_increasing_percentage'                  => 'نسبة نمو الإيرادات السنوية',
         'investing_description'                  => 'النوع',
         'investing_monthly_cost'                  => 'التكلفة الشهرية',
@@ -231,7 +231,12 @@ return [
         'offer_price_monthly'                  => 'سعر العرض شهري',
         'percentage_discount_annual'                  => 'نسبة الخصم على الاشتراك السنوي', 
         'main_goal'                  => 'الهدف الاستراتيحي',
-
+        'amount' => 'المبلغ المقدر للاستثمار ',
+        'max_file_upload_size' =>'الحد الأقصى لحجم الملفات المرفوعه (كيلوبايت)',
+        'features' => 'المميزات',
+        'features.*' => 'الميزة',
+        'file_space_limit' => ' نوع الملفات المسموح بها ',
+        'paypal_plan_id' => 'وصف نصي'
     ],
 
 ];

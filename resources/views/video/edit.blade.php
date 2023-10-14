@@ -42,7 +42,7 @@
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-md-12">
-                                            <label>{{ __('Description') }}</label><label class="text-danger">*</label>
+                                            <label>{{ __('Description_in_video') }}</label><label class="text-danger">*</label>
                                             <input name="description" class="multisteps-form__input form-control"
                                                 type="text" value="{{ $video->description }}">
                                             
@@ -51,7 +51,7 @@
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-md-12">
-                                            <label>{{ __('Time') }}</label><label class="text-danger">*</label>
+                                            <label>{{ __('Time_in_video') }}</label><label class="text-danger">*</label>
                                             <input name="time" class="multisteps-form__input form-control"
                                                 type="time" value="{{ $video->time}}">
                                            
@@ -76,7 +76,7 @@
 
                             <div class="button-row text-left mt-4">
                                 <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" type="submit"
-                                    title="Next">تقديم</button>
+                                    title="Next">@lang('add')</button>
                             </div>
                         </form>
                     </div>

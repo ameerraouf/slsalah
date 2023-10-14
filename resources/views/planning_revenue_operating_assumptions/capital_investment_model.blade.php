@@ -27,34 +27,41 @@
                                 <td>{{ $calc_total['totalRevenueFirstYear'] }}</td>
                                 <td>{{ $calc_total['totalRevenueSecondYear']}}</td>
                                 <td>{{ $calc_total['totalRevenueThirdYear'] }}</td>
-                                <td>{{ $totalInvestedCapital }}</td>
+{{--                                <td>{{ $totalInvestedCapital }}</td>--}}
+                                <td></td>
                             </tr>
                             <tr>
                                 <td style="text-align: center">اجمالي التكاليف</td>
                                 <td>{{ $calc_total['first_year_costs'] }}</td>
                                 <td>{{ $calc_total['second_year_costs'] }}</td>
                                 <td>{{ $calc_total['third_year_costs'] }}</td>
-                                <td>{{ $totalInvestedCapital }}</td>
+{{--                                <td>{{ $totalInvestedCapital }}</td>--}}
+                                <td></td>
                             </tr>
                             <tr>
                                 <td style="text-align: center">صافي الربح</td>
                                 <td>{{ $calc_total['first_year_profit_after_zakat'] }}</td>
                                 <td>{{ $calc_total['second_year_profit_after_zakat'] }}</td>
                                 <td>{{ $calc_total['third_year_profit_after_zakat'] }}</td>
-                                <td>{{ $totalInvestedCapital }}</td>
+{{--                                <td>{{ $totalInvestedCapital }}</td>--}}
+                                <td></td>
                             </tr>
                             <tr>
                                 <td style="text-align: center">التدفق النقدي السنوي</td>
-                                <td @if($calc_total['pure_first_year_profit_after_zakat'] < \App\Models\ProjectRevenuePlanning::calcTotalRevenueFirstYear()) style="color: red;" @endif>{{ $calc_total['first_year_cash_flow'] }}</td>
-                                <td @if($calc_total['pure_second_year_profit_after_zakat'] < \App\Models\ProjectRevenuePlanning::calcTotalRevenueSecondYear()) style="color: red;" @endif>{{ $calc_total['second_year_cash_flow'] }}</td>
-                                <td @if($calc_total['pure_third_year_profit_after_zakat'] < \App\Models\ProjectRevenuePlanning::calcTotalRevenueThirdYear()) style="color: red;" @endif>{{ $calc_total['third_year_cash_flow'] }}</td>
-                                <td>{{ $totalInvestedCapital }}</td>
+                                <td @if($calc_total['first_year_net_cash_flow_number'] < 0) style="color: red;" @endif>{{ $calc_total['first_year_net_cash_flow'] }}</td>
+                                <td @if($calc_total['third_year_net_cash_flow_number'] < 0) style="color: red;" @endif>{{ $calc_total['third_year_net_cash_flow'] }}</td>
+                                <td @if($calc_total['third_year_net_cash_flow_number'] < 0) style="color: red;" @endif>{{ $calc_total['third_year_net_cash_flow'] }}</td>
+{{--                                <td>{{ $totalInvestedCapital }}</td>--}}
+                                <td></td>
                             </tr>
                             <tr>
                                 <td style="text-align: center">{{ __('Invested_capital') }}</td>
-                                <td>{{ $totalInvestedCapital }}</td>
-                                <td>{{ $totalInvestedCapital }}</td>
-                                <td>{{ $totalInvestedCapital }}</td>
+{{--                                <td>{{ $totalInvestedCapital }}</td>--}}
+{{--                                <td>{{ $totalInvestedCapital }}</td>--}}
+{{--                                <td>{{ $totalInvestedCapital }}</td>--}}
+                                <td></td>
+                                <td></td>
+                                <td></td>
                                 <td>{{ $totalInvestedCapital }}</td>
                             </tr>
                             </tbody>

@@ -1,4 +1,5 @@
 @extends('layouts.primary')
+
 @section('content')
     <div class=" row">
         <div class="col">
@@ -25,12 +26,12 @@
                     <tr>
                         <form method="post" action="{{ route('planning_financial_assumptions.store') }}" onsubmit="submitForm(event,this)" id="PlanningFinancialAssumptions">@csrf</form>
                         <td style="position: relative">
-                            <input class="form-control" onchange="checkNumbers(this)" type="text" min="1" step="0.01" max="100" name="net_profit" onfocusin="showHint('planningCostAssumptionNetProfitHint')" onfocusout="showHint('planningCostAssumptionNetProfitHint')" form="PlanningFinancialAssumptions" value="{{ $planningFinancialAssumption ? $planningFinancialAssumption->net_profit : 0 }}">
+                            <input class="form-control" onchange="checkNumbers(this)" type="text" min="1" step="0.01" max="100" id="net_profit" name="net_profit" onfocusin="showHint('planningCostAssumptionNetProfitHint')" onfocusout="showHint('planningCostAssumptionNetProfitHint')" form="PlanningFinancialAssumptions" value="{{ $planningFinancialAssumption ? $planningFinancialAssumption->net_profit : 0 }}">
                             <span style="color:#DDD;position: absolute;top: 3px;left: 17px;font-size: xx-large;">%</span>
                             <span style="color:green;display: none;position: fixed;right: 25%;" id="planningCostAssumptionNetProfitHint">{{ $planningCostAssumptionNetProfitHint }}</span>
                         </td>
                         <td style="position: relative">
-                            <input class="form-control" onchange="checkNumbers(this)" type="text" min="5" step="0.01" max="20" name="cash_percentage_of_net_profit" form="PlanningFinancialAssumptions" onfocusin="showHint('cash_percentage_of_net_profit_hint')" onfocusout="showHint('cash_percentage_of_net_profit_hint')" value="{{ $planningFinancialAssumption ? $planningFinancialAssumption->cash_percentage_of_net_profit : 0 }}">
+                            <input class="form-control" onchange="checkNumbers(this)" type="text" min="5" step="0.01" max="20" id="cash_percentage_of_net_profit" name="cash_percentage_of_net_profit" form="PlanningFinancialAssumptions" onfocusin="showHint('cash_percentage_of_net_profit_hint')" onfocusout="showHint('cash_percentage_of_net_profit_hint')" value="{{ $planningFinancialAssumption ? $planningFinancialAssumption->cash_percentage_of_net_profit : 0 }}">
                             <span style="color:#DDD;position: absolute;top: 3px;left: 17px;font-size: xx-large;">%</span>
                             <span style="color:green;display: none;position: fixed;right: 51%;" id="cash_percentage_of_net_profit_hint">{{ __('cash_percentage_of_net_profit_hint') }}</span>
                         </td>
@@ -57,6 +58,7 @@
         function checkNumbers(obj){
             var reg = /^[+-]?\d+(\.\d+)?$/;
             var hash = obj.value;
+
             if(!reg.test(hash)){
                 obj.value = 0;
                 Toast.fire({
@@ -71,12 +73,28 @@
             $('input').tooltip();
         });
         function submitForm(event,obj){
+         event.preventDefault(); // avoid to execute the actual submit of the form.
+          if($("#net_profit").val() === '0' || $("#net_profit").val() ==''){
+               Toast.fire({
+                    icon: 'error',
+                    title: 'يرجى اضافة ارقام فقط ولاتدع الحقل فارغ'
+                });
+                return 0;
+          }
+            if($("#cash_percentage_of_net_profit").val() === '0' || $("#cash_percentage_of_net_profit").val() ==''){
+               Toast.fire({
+                    icon: 'error',
+                    title: 'يرجى اضافة ارقام فقط ولاتدع الحقل فارغ'
+                });
+                return 0;
+          }
+
             // console.log(event,obj);
             $('button[type="submit"]').prop('disabled',true);
             $('input').removeClass('is-invalid');
             $('.invalid-feedback').remove();
             // console.log($(obj).serializeArray());
-            event.preventDefault(); // avoid to execute the actual submit of the form.
+
             $.ajax({
                 url:$(obj).attr('action'),
                 type:$(obj).attr('method'),

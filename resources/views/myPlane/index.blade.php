@@ -38,7 +38,7 @@
                                             <tr>
                                                 <td>{{ $source->name }}</td>
                                                 <td>{{ $source->unit }}</td>
-                                                <td>{{ $source->unit_price }}</td>
+                                                <td>{{__('Ryal_in_english'). $source->unit_price  }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -96,10 +96,13 @@
                         <table class="table align-items-center m-1" border="1" id="cloudonex_table">
                             <thead>
                             <tr>
-                                <th class="text-uppercase  text-xxs font-weight-bolder" colspan="5">{{ __('strategic_objective') }}</th>
+                                <th class="text-uppercase text-xxs font-weight-bolder" colspan="5">{{ __('strategic_objective') }}</th>
                             </tr>
                             <tr>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder " colspan="5">{{ $task_goal->description }}</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder" colspan="5">{{ $task_goal->description ?? "" }}</th>
+                            </tr>
+                            <tr>
+                            <th>            <h4>  {{__('workplan')}}</h4></th>
                             </tr>
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder">{{ __('Subject/Task') }}</th>
@@ -110,13 +113,11 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td colspan="5"><p>{{ __('workplan') }}</p></td>
-                            </tr>
+
                             @foreach($tasks as $task)
                                 <tr>
                                     <td>{{ $task->subject }}</td>
-                                    <td>{{ isset($task->assign) ?  $task->assign->first_name . ' ' . $task->assign->last_name : '' }}</td>
+                                    <td>{{ isset($task->assign) ? $task->assign->first_name . ' ' . $task->assign->last_name : '' }}</td>
                                     <td>
                                         @if (!empty($task->start_date))
                                             {{ \App\Supports\DateSupport::parse($task->start_date)->format(config('app.date_time_format')) }}
@@ -128,18 +129,19 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <button
-                                                class="text-xs btn btn-sm
-                                         @if ($task->status === 'Not Started') btn-info
+                                        <button class="text-xs btn btn-sm
+                                            @if ($task->status === 'Not Started')
+                                                btn-info
                                             @elseif($task->status === 'done')
-                                                    btn-success
+                                                btn-success
                                             @elseif($task->status === 'in_progress')
-                                                    btn-primary
+                                                btn-primary
                                             @elseif($task->status === 'in_review')
-                                                    btn-warning
+                                                btn-warning
                                             @else
-                                                        btn-secondary @endif
-                                                        ">
+                                                btn-secondary
+                                            @endif
+                                        ">
                                             {{ $task->status ?? 'todo' }}
                                         </button>
                                     </td>
@@ -162,7 +164,7 @@
                                 @foreach($fixedInvested as $invest)
                                     <tr>
                                         <td>{{ $invest->investing_description }}</td>
-                                        <td>{{ $invest->investing_price }}</td>
+                                        <td>{{ $invest->investing_price . __("Ryal_in_english")}}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -191,8 +193,8 @@
                                 @foreach($workingInvested as $invest)
                                     <tr>
                                         <td>{{ $invest->investing_description }}</td>
-                                        <td>{{ $invest->investing_monthly_cost }}</td>
-                                        <td>{{ $invest->investing_annual_cost }}</td>
+                                        <td>{{ $invest->investing_monthly_cost . __('Ryal_in_english') }}</td>
+                                        <td>{{ $invest->investing_annual_cost . __('Ryal_in_english')}}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -205,31 +207,36 @@
                             <div id="working_chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row my-4">
                         <h4>{{__('افتراضات التكاليف ')}}</h4>
                         <div class="col-md-6">
                             <table class="table align-items-center mb-0" border="1">
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase text-xxs font-weight-bolder">{{__('operational_costs')}}</th>
-                                        <td class="text-uppercase text-secondary text-xxs font-weight-bolder">{{ $planningCostAssumption ? $planningCostAssumption->operational_costs : 0 }} %</td>
+                                        <td class="text-uppercase text-secondary text-xxs font-weight-bolder">{{ $planningCostAssumption ? $planningCostAssumption->operational_costs : 0 }} % من إجمالى الإيرادات </td>
                                     </tr>
                                     <tr>
                                         <th class="text-uppercase text-xxs font-weight-bolder">{{__('general_expenses')}}</th>
-                                        <td class="text-uppercase text-secondary text-xxs font-weight-bolder">{{ $planningCostAssumption ? $planningCostAssumption->general_expenses : 0 }} %</td>
+                                        <td class="text-uppercase text-secondary text-xxs font-weight-bolder">{{ $planningCostAssumption ? $planningCostAssumption->general_expenses : 0 }} % من إجمالى الإيرادات </td>
                                     </tr>
                                     <tr>
                                         <th class="text-uppercase text-xxs font-weight-bolder">{{__('marketing_expenses')}}</th>
-                                        <td class="text-uppercase text-secondary text-xxs font-weight-bolder">{{ $planningCostAssumption ? $planningCostAssumption->marketing_expenses : 0 }} %</td>
+                                        <td class="text-uppercase text-secondary text-xxs font-weight-bolder">{{ $planningCostAssumption ? $planningCostAssumption->marketing_expenses : 0 }} % من إجمالى الإيرادات </td>
                                     </tr>
                                 </thead>
                             </table>
                         </div>
-                        @foreach($projectRevenues as $revenue)
-                            <div class="col-md-6">
-                                <div id="costAssumption_chart_{{ $revenue->id }}" style="width: 100%; height: 300px;display: inline-block;" class="position-"></div>
-                            </div>
-                        @endforeach
+
+                        <div class="row">
+                            <h4 class="my-4">توقعات ايرادات المشروع</h4>
+                            @foreach($projectRevenues as $revenue)
+                                <div class="col-md-6">
+                                    <div id="costAssumption_chart_{{ $revenue->id }}" style="width: 100%; height: 300px;display: inline-block;" class="position-"></div>
+                                </div>
+                            @endforeach
+                        </div>
+
                         <h4>{{__('قائمة الدخل')}}</h4>
                         <div class="col-md-12">
                             <table class="table align-items-center mb-0">
@@ -244,25 +251,25 @@
                                 <tbody>
 
                                 <tr>
-                                    <td style="text-align: center">مصروفات تشغيلية</td>
+                                    <td style="text-align: center">المصروفات  تشغيلية</td>
                                     <td class="first_year">{{ formatCurrency((\App\Models\ProjectRevenuePlanning::calcTotalRevenueFirstYear() * $planningCostAssumption->operational_costs / 100) ,getWorkspaceCurrency($settings)) }}</td>
                                     <td class="second_year">{{ formatCurrency((\App\Models\ProjectRevenuePlanning::calcTotalRevenueSecondYear() * $planningCostAssumption->operational_costs / 100) ,getWorkspaceCurrency($settings)) }}</td>
                                     <td class="third_year">{{ formatCurrency((\App\Models\ProjectRevenuePlanning::calcTotalRevenueThirdYear() * $planningCostAssumption->operational_costs / 100) ,getWorkspaceCurrency($settings)) }}</td>
                                 </tr>
                                 <tr>
-                                    <td style="text-align: center">مصروفات عمومية</td>
+                                    <td style="text-align: center">المصروفات الإدارية والعمومية</td>
                                     <td class="first_year">{{ formatCurrency((\App\Models\ProjectRevenuePlanning::calcTotalRevenueFirstYear() * $planningCostAssumption->general_expenses / 100),getWorkspaceCurrency($settings)) }}</td>
                                     <td class="second_year">{{ formatCurrency((\App\Models\ProjectRevenuePlanning::calcTotalRevenueSecondYear() * $planningCostAssumption->general_expenses / 100),getWorkspaceCurrency($settings)) }}</td>
                                     <td class="third_year">{{ formatCurrency((\App\Models\ProjectRevenuePlanning::calcTotalRevenueThirdYear() * $planningCostAssumption->general_expenses / 100),getWorkspaceCurrency($settings)) }}</td>
                                 </tr>
                                 <tr>
-                                    <td style="text-align: center">مصروفات تسويقية</td>
+                                    <td style="text-align: center">المصروفات  تسويقية</td>
                                     <td class="first_year">{{ formatCurrency((\App\Models\ProjectRevenuePlanning::calcTotalRevenueFirstYear() * $planningCostAssumption->marketing_expenses / 100) ,getWorkspaceCurrency($settings)) }}</td>
                                     <td class="second_year">{{ formatCurrency((\App\Models\ProjectRevenuePlanning::calcTotalRevenueSecondYear() * $planningCostAssumption->marketing_expenses / 100) ,getWorkspaceCurrency($settings)) }}</td>
                                     <td class="third_year">{{ formatCurrency((\App\Models\ProjectRevenuePlanning::calcTotalRevenueThirdYear() * $planningCostAssumption->marketing_expenses / 100) ,getWorkspaceCurrency($settings)) }}</td>
                                 </tr>
                                 <tr>
-                                    <td style="text-align: center;">{{__('total')}}</td>
+                                    <td style="text-align: center;">{{__('total_cost')}}</td>
                                     <td id="first_year_total"></td>
                                     <td id="second_year_total"></td>
                                     <td id="third_year_total"></td>
@@ -281,6 +288,7 @@
                             </table>
                         </div>
                         <h4>{{__('قائمة التدفقات النقدية من الأنشطة التشغيلية ')}}</h4>
+
                         <div class="col-md-12">
                             <table class="table align-items-center mb-0">
                                 <thead>
@@ -290,6 +298,7 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('second_year')}}</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('third_year')}}</th>
                                 </tr>
+                                <h6>التدفق النقدي التشغيلي</h6>
                                 </thead>
                                 <tbody>
                                 @php
@@ -314,63 +323,72 @@
                                 </tr>
                                 <tr>
                                     <td style="text-align: center">صافي التدفق النقدي من الأنشطة التشغيلية</td>
-                                    <td @if($calc_total['pure_first_year_profit_after_zakat'] < \App\Models\ProjectRevenuePlanning::calcTotalRevenueFirstYear()) style="color: red;" @endif>{{ $first_year_net_cash_flow }}</td>
-                                    <td @if($calc_total['pure_second_year_profit_after_zakat'] < \App\Models\ProjectRevenuePlanning::calcTotalRevenueSecondYear()) style="color: red;" @endif>{{ $second_year_net_cash_flow }}</td>
-                                    <td @if($calc_total['pure_third_year_profit_after_zakat'] < \App\Models\ProjectRevenuePlanning::calcTotalRevenueThirdYear()) style="color: red;" @endif>{{ $third_year_net_cash_flow }}</td>
+                                    <td @if($calc_total['first_year_net_cash_flow_number'] < 0) style="color: red;" @endif>{{ $first_year_net_cash_flow }}</td>
+                                    <td @if($calc_total['second_year_net_cash_flow_number'] < 0) style="color: red;" @endif>{{ $second_year_net_cash_flow }}</td>
+                                    <td @if($calc_total['third_year_net_cash_flow_number'] < 0) style="color: red;" @endif>{{ $third_year_net_cash_flow }}</td>
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
                         <h4>{{__('نموذج الاستثمار الرأسمالي')}}</h4>
                         <div class="col-md-12">
-                            <table class="table align-items-center mb-0">
-                                <thead>
-                                <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('first_year')}}</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('second_year')}}</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('third_year')}}</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('foundation_period')}}</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td style="text-align: center">اجمالي الايرادات</td>
-                                    <td>{{ $calc_total['totalRevenueFirstYear'] }}</td>
-                                    <td>{{ $calc_total['totalRevenueSecondYear']}}</td>
-                                    <td>{{ $calc_total['totalRevenueThirdYear'] }}</td>
-                                    <td>{{ $totalInvestedCapital }}</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center">اجمالي التكاليف</td>
-                                    <td>{{ $calc_total['first_year_costs'] }}</td>
-                                    <td>{{ $calc_total['second_year_costs'] }}</td>
-                                    <td>{{ $calc_total['third_year_costs'] }}</td>
-                                    <td>{{ $totalInvestedCapital }}</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center">صافي الربح</td>
-                                    <td>{{ $calc_total['first_year_profit_after_zakat'] }}</td>
-                                    <td>{{ $calc_total['second_year_profit_after_zakat'] }}</td>
-                                    <td>{{ $calc_total['third_year_profit_after_zakat'] }}</td>
-                                    <td>{{ $totalInvestedCapital }}</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center">التدفق النقدي السنوي</td>
-                                    <td @if($calc_total['pure_first_year_profit_after_zakat'] < \App\Models\ProjectRevenuePlanning::calcTotalRevenueFirstYear()) style="color: red;" @endif>{{ $calc_total['first_year_cash_flow'] }}</td>
-                                    <td @if($calc_total['pure_second_year_profit_after_zakat'] < \App\Models\ProjectRevenuePlanning::calcTotalRevenueSecondYear()) style="color: red;" @endif>{{ $calc_total['second_year_cash_flow'] }}</td>
-                                    <td @if($calc_total['pure_third_year_profit_after_zakat'] < \App\Models\ProjectRevenuePlanning::calcTotalRevenueThirdYear()) style="color: red;" @endif>{{ $calc_total['third_year_cash_flow'] }}</td>
-                                    <td>{{ $totalInvestedCapital }}</td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align: center">{{ __('Invested_capital') }}</td>
-                                    <td>{{ $totalInvestedCapital }}</td>
-                                    <td>{{ $totalInvestedCapital }}</td>
-                                    <td>{{ $totalInvestedCapital }}</td>
-                                    <td>{{ $totalInvestedCapital }}</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                            <div class="col-md-12">
+                                <table class="table align-items-center mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('first_year')}}</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('second_year')}}</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('third_year')}}</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('foundation_period')}}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td style="text-align: center">اجمالي الايرادات</td>
+                                        <td>{{ $calc_total['totalRevenueFirstYear'] }}</td>
+                                        <td>{{ $calc_total['totalRevenueSecondYear']}}</td>
+                                        <td>{{ $calc_total['totalRevenueThirdYear'] }}</td>
+                                        {{--                                    <td>{{ $totalInvestedCapital }}</td>--}}
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center">اجمالي التكاليف</td>
+                                        <td>{{ $calc_total['first_year_costs'] }}</td>
+                                        <td>{{ $calc_total['second_year_costs'] }}</td>
+                                        <td>{{ $calc_total['third_year_costs'] }}</td>
+                                        {{--                                    <td>{{ $totalInvestedCapital }}</td>--}}
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center">صافي الربح</td>
+                                        <td>{{ $calc_total['first_year_profit_after_zakat'] }}</td>
+                                        <td>{{ $calc_total['second_year_profit_after_zakat'] }}</td>
+                                        <td>{{ $calc_total['third_year_profit_after_zakat'] }}</td>
+                                        {{--                                    <td>{{ $totalInvestedCapital }}</td>--}}
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center">التدفق النقدي السنوي</td>
+                                        <td @if($calc_total['pure_first_year_profit_after_zakat'] < \App\Models\ProjectRevenuePlanning::calcTotalRevenueFirstYear()) style="color: red;" @endif>{{ $calc_total['first_year_cash_flow'] }}</td>
+                                        <td @if($calc_total['pure_second_year_profit_after_zakat'] < \App\Models\ProjectRevenuePlanning::calcTotalRevenueSecondYear()) style="color: red;" @endif>{{ $calc_total['second_year_cash_flow'] }}</td>
+                                        <td @if($calc_total['pure_third_year_profit_after_zakat'] < \App\Models\ProjectRevenuePlanning::calcTotalRevenueThirdYear()) style="color: red;" @endif>{{ $calc_total['third_year_cash_flow'] }}</td>
+                                        {{--                                    <td>{{ $totalInvestedCapital }}</td>--}}
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: center">{{ __('Invested_capital') }}</td>
+                                        {{--                                    <td>{{ $totalInvestedCapital }}</td>--}}
+                                        {{--                                    <td>{{ $totalInvestedCapital }}</td>--}}
+                                        {{--                                    <td>{{ $totalInvestedCapital }}</td>--}}
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>{{ $totalInvestedCapital }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -462,33 +480,40 @@
             }]
         });
         chart.render();
-        var chart = new CanvasJS.Chart("working_chartContainer", {
-            animationEnabled: true,
-            colorSet: "greenShades",
-            title:{
-                text: 'رأس المال العامل هو مقدار رأس المال الذى يستخدم بجميع عمليات المشروع ويعد مؤشر قوى لتقييم الاستثمار بالمشروع',
-                horizontalAlign: "center",
-                fontSize: 20,
-            },
-            data: [{
-                type: "doughnut",
-                startAngle: 60,
-                //innerRadius: 60,
-                indexLabelFontSize: 17,
-                indexLabel: "{label}",
-                toolTipContent: "<b>{label}</b>",
-                dataPoints: {!! json_encode($workingChart) !!}
-            }]
-        });
-        chart.render();
+            var chart = new CanvasJS.Chart("working_chartContainer", {
+                animationEnabled: true,
+                colorSet: "greenShades",
+                title:{
+                    text: 'رأس المال العامل هو مقدار رأس المال الذى يستخدم بجميع عمليات المشروع ويعد مؤشر قوى لتقييم الاستثمار بالمشروع',
+                    horizontalAlign: "center",
+                    fontSize: 20,
+                },
+                data: [{
+                    type: "doughnut",
+                    startAngle: 60,
+                    //innerRadius: 60,
+                    indexLabelFontSize: 17,
+                    indexLabel: "{label}",
+
+                    toolTipContent: "<b>{label}</b>",
+                    dataPoints: {!! json_encode($workingChart) !!}
+                }]
+            });
+
+            chart.render();
 
         function toolTipFormatter(e) {
+
             var str = "";
             var total = 0 ;
             var str3;
             var str2 ;
             for (var i = 0; i < e.entries.length; i++){
-                var str1 = "<span style= \"color:"+e.entries[i].dataSeries.color + "\">" + e.entries[i].dataSeries.name + "</span>: <strong>"+  e.entries[i].dataPoint.y + "ر.س</strong> <br/>" ;
+                 if(e.entries[i].dataSeries.name =='الوحدة'){
+                   var str1 = "<span style= \"color:black;font-weight:bold" + "\">" + e.entries[i].dataSeries.name + "</span>: <strong>"+  e.entries[i].dataPoint.y + "</strong> <br/>" ;
+                 }else{
+                    var str1 = "<span style= \"color:"+e.entries[i].dataSeries.color + "\">" +'<span class="mr-1 text-dark">SAR-</span>'+ e.entries[i].dataSeries.name + "</span>: <strong>"+  e.entries[i].dataPoint.y + "</strong> <br/>" ;
+                 }
                 total = e.entries[i].dataPoint.y + total;
                 str = str.concat(str1);
             }
@@ -515,14 +540,14 @@
                     text: "{!! $revenue->name !!}"
                 },
                 axisY: {
-                    title: "",
+                    title: "SAR",
                     titleFontColor: "#4F81BC",
                     lineColor: "#4F81BC",
                     labelFontColor: "#4F81BC",
                     tickColor: "#4F81BC"
                 },
                 axisY2: {
-                    title: "",
+                    title: "SAR",
                     titleFontColor: "#C0504E",
                     lineColor: "#C0504E",
                     labelFontColor: "#C0504E",
@@ -543,7 +568,7 @@
                         showInLegend: true,
                         dataPoints:[
                             @foreach($revenue->sources as $source)
-                                { label: "{!! $source->name !!}", y: {!! $source->total_revenue * ($planningRevenueOperatingAssumptions->first_year / 100) !!} },
+                                { label:"{!! $source->name  !!}", y: {!! $source->total_revenue * ($planningRevenueOperatingAssumptions->first_year / 100) !!} },
                             @endforeach
                         ]
                     },

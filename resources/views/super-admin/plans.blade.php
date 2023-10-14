@@ -15,7 +15,7 @@
     <div class="row">
         @foreach($plans as $plan)
             <div class="col-md-3  mb-4 ">
-                <div class="card ">
+                <div class="card " style="height: 460px; overflow-y:scroll">
                     <div class="card-header text-center ">
                         <h5 class="text-purple opacity-8 text mb-2">{{$plan->name}}</h5>
                         <p>{!! $plan->description !!}</p>
@@ -55,8 +55,8 @@
                     <div class="card-footer pt-0">
                         <a href="/subscription-plan?id={{$plan->id}}" type="button"
                            class="btn btn-info mt-3 btn-md ">{{__('Edit')}}</a>
-                        <a href="/delete/subscription-plan/{{$plan->id}}" type="button"
-                           class="btn btn-warning btn-md mt-3">{{__('Delete')}}</a>
+{{--                        <a href="/delete/subscription-plan/{{$plan->id}}" type="button"--}}
+{{--                           class="btn btn-warning btn-md mt-3">{{__('Delete')}}</a>--}}
                     </div>
                 </div>
             </div>

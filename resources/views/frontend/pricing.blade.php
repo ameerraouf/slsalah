@@ -56,14 +56,11 @@
 
 
                                         @endif
-
-
-
                                     </div>
-                                    <div class="card-footer text-center pt-0">
-                                        <a href="/signup" type="button"
-                                           class="btn  btn-white mb-0 ">{{__('Get Started')}}</a>
 
+                                    <div class="card-footer text-center pt-0">
+                                        <a href="{{route('packages.details',$plan->id)}}" type="button"
+                                           class="btn  btn-white mb-0 ">{{__('Get Started')}}</a>
                                     </div>
                                 </div>
                             </div>

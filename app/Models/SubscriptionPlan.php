@@ -10,17 +10,17 @@ class SubscriptionPlan extends Model
     {
         return [
             [
-                'title' => __('marketing_and_economic_plan'),
+                'title' =>'1- '. __('marketing_and_economic_plan'),
                 'modules' => [
                     'projects' => __('Product Planning'),
                     'swot' => __('SWOT Analysis'),
-                    'porter' => __('Porter\'s Five Forces Model'),
+                    'porter' => __('نموذج porter 5'),
                     'pestle' => __('PESTLE Analysis'),
                     'project_revenue_planning' => __('project_revenue_planning'),
                 ],
             ],
             [
-                'title' => __('Managing the strategic business plan'),
+                'title' =>'2 -'. __('Managing the strategic business plan'),
                 'modules' => [
                     'brainstorm' => __('Ideation Canvas'),
                     'business_model' => __('Business Model'),
@@ -28,19 +28,19 @@ class SubscriptionPlan extends Model
                     'mckinsey' => __('McKinsey 7-S Model'),
                     'calendar' => __('Calendar'),
                     'notes' => __('Note Book'),
-                    'documents' => __('Documents'),
+//                    'documents' => __('Documents'),
                 ],
             ],
             [
-                'title' => __('invested capital plan'),
+                'title' =>'3 -'. __('invested capital plan'),
                 'modules' => [
                     'fixed_capital_planning' => __('Fixed capital planning'),
                     'working_capital_planning' => __('Working capital planning'),
-                    'investors' => __('Investors'),
+                    'investors' => __('Investors_plan'),
                 ],
             ],
             [
-                'title' => __('financial projections'),
+                'title' =>'4 -'. __('financial projections'),
                 'modules' => [
                     'planning_cost_assumptions' => __('Planning cost assumptions'),
                     'planning_financial_assumptions' => __('Planning financial assumptions'),
@@ -48,13 +48,12 @@ class SubscriptionPlan extends Model
                 ],
             ],
             [
-                'title' => __('financial reports'),
+                'title' =>'5 -'. __('financial reports'),
                 'modules' => [
-                    'PlanningRevenueOperatingAssumptions' => 'توقعات الإيرادات',
-                    'IncomeList' => ' قائمة الدخل',
-                    'statement_of_cash_flows' => 'قائمة التدفقات النقدية',
-                    'capital_investment_model' => ' نموذج الاستثمار الرأسمالي',
-                    'textReport' => ' التقارير النصية',
+                    'PlanningRevenueOperatingAssumptions' => 'التقرير المالي الشامل',
+                    'IncomeList' => "فيديوهات تعليمية حول دراسة المشاريع وإعداد الخطط اللازمة <br>باستخدام الأدوات العلمية اللازمة.",
+                    'statement_of_cash_flows' => "فيديوهات تعليمية حول التخطيط المالي للمشاريع باستخدام<br>الأدوات العلمية اللازمة. ",
+                    'capital_investment_model' => "جلسات دعم ومساعدة من قبل مختصين واستشاريين في مجال تخطيط<br> وتنفيذ المشاريع (جلستين – 3 جلسات - 4 جلسات).",
                 ],
             ],
 //            'startup_canvas' => __('Startup Canvas'),

@@ -140,9 +140,10 @@ class FixedInvestedCapitalController extends BaseController
         $fixedInvested = FixedInvestedCapital::where('workspace_id', $this->user->workspace_id)->get();
         $data = [];
         foreach ($fixedInvested as $key =>$item){
-            $data[] = ['y' => $item->investing_price, 'label' => $key+1 . ' - '. $item->investing_description . ' : ' . $item->investing_price. ' ريال سعودي' ];
+            $data[] = ['y' => $item->investing_price, 'label' => $key+1 . ' - '. $item->investing_description . ' : ' . __('Ryal_in_english'). $item->investing_price];
         }
         $selected_navigation = "fixed_capital_planning";
+
       return view('Fixedinvested.show', compact('data', 'selected_navigation'));
     }
 

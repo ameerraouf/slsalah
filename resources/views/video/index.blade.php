@@ -1,5 +1,13 @@
 @extends('layouts.super-admin-portal')
 @section('content')
+
+    <style>
+        table.dataTable thead > tr > td.sorting_desc_disabled:after {
+            top: 50%;
+            content: "▾";
+            opacity: 1 !important;
+        }
+    </style>
     <div class=" row">
         <div class="col">
             <h5 class="mb-2 text-secondary fw-bolder">
@@ -14,6 +22,7 @@
         </div>
     </div>
 
+
     <div class="row">
         <div class="col-12">
             <div class="card card-body mb-4">
@@ -22,19 +31,19 @@
                         <table class="table align-items-center mb-0" id="cloudonex_table">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ __('Name') }}</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ __('Description') }}</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ __('url') }}</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">#</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
+                                        {{ __('video_name') }}</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
+                                        {{ __('Description_in_video') }}</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
+                                        {{ __('video_url') }}</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-79ps-2">
                                         {{ __('Created at') }}</th>
                                     <th
-                                        class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
                                         {{ __('Status') }}</th>
-                                    <th class="text-secondary opacity-7"></th>
+                                    <th class="text-secondary opacity-9"></th>
                                 </tr>
                             <tbody>
                                 @foreach ($videos as $video)

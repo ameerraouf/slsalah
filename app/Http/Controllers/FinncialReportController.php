@@ -54,7 +54,10 @@ class FinncialReportController extends BaseController
             ->first();
         $selected_navigation = 'statement_of_cash_flows';
         $calc_total = $planningRevenueOperatingAssumptions->calc_total;
-
+        foreach ($calc_total as &$value) {
+            $value = str_replace('$', ' SAR ', $value);
+            $value = str_replace('-', ' <strong>&ndash;</strong>', $value);
+        }
         return view('planning_revenue_operating_assumptions.statement_of_cash_flows',
             compact('calc_total','planningRevenueOperatingAssumptions','planningFinancialAssumption','planningCostAssumption','all_revenues_forecasting','all_revenues_costs_forecasting', 'selected_navigation'));
     }
@@ -94,6 +97,8 @@ class FinncialReportController extends BaseController
         $workingInvestedTotal = WorkingInvestedCapital::select(DB::raw('SUM(investing_annual_cost) as investing_annual_cost_total'))->where("workspace_id", $this->user->workspace_id)->get()->pluck('investing_annual_cost_total');
         $fixedInvestedTotal = FixedInvestedCapital::select(DB::raw('SUM(investing_price) as investing_price_total'))->where("workspace_id", $this->user->workspace_id)->get()->pluck('investing_price_total');
         $totalInvestedCapital = (!empty($workingInvestedTotal) ? $workingInvestedTotal[0] : 0.0)+(!empty($fixedInvestedTotal) ? $fixedInvestedTotal[0] : 0.0);
+        $calc_total = $planningRevenueOperatingAssumptions->calc_total;
+
         return view('planning_revenue_operating_assumptions.textReport',
             compact( 'selected_navigation',
                 'projectRevenues',
@@ -101,7 +106,8 @@ class FinncialReportController extends BaseController
                 'planningCostAssumption',
                 'all_revenues_costs_forecasting',
                 'planningFinancialAssumption',
-                'totalInvestedCapital'
+                'totalInvestedCapital',
+            'calc_total'
             ));
     }
 }

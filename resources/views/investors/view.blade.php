@@ -9,7 +9,7 @@
                 <div class="card-body">
                     <h5 class="fw-bolder text-white mb-4">{{__('Investment Details')}}</h5>
                     <h6 class="text-white">
-                        Product: @if(!empty($products[$investor->product_id]))
+                        @lang('The product') : @if(!empty($products[$investor->product_id]))
                             @if(isset($products[$investor->product_id]))
                                 {{$products[$investor->product_id]->title}}
                             @endif
@@ -17,13 +17,13 @@
                     </h6>
                     <h6 class="text-white">
 
-    {{__(' Amount:')}} {{formatCurrency($investor->amount,getWorkspaceCurrency($super_settings))}}
+    {{__('Investment amount')}} {{formatCurrency($investor->amount,getWorkspaceCurrency($super_settings))}}
   </h6>
 
 
-      <h6 class="text-white"><span>{{__('Status:')}}</span><span class="text-success">
+      <h6 class="text-white"><span>{{__('Status:')}}</span><span class="text-white">
 
-       {{$investor->status}}
+       {{__($investor->status)}}
 
 
 

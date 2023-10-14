@@ -123,11 +123,13 @@ class PlanningRevenueOperatingAssumption extends Model
             'profit_before_zakat'=> formatCurrency($profit_before_zakat,getWorkspaceCurrency($settings)),
             'zakat_percent_value'=>formatCurrency($profit_before_zakat*0.025,getWorkspaceCurrency($settings)),
             'profit_after_zakat'=>formatCurrency(($profit_before_zakat - $profit_before_zakat*0.025),getWorkspaceCurrency($settings)),
-
+            'net_zakat_value' => formatCurrency($profit_before_zakat - ($profit_before_zakat - $profit_before_zakat*0.025) ,getWorkspaceCurrency($settings)),
             'first_year_net_cash_flow' => formatCurrency((($first_year_profit_before_zakat - $first_year_profit_before_zakat*0.025) * ($planningFinancialAssumption->cash_percentage_of_net_profit/100)) ,getWorkspaceCurrency($settings)),
             'second_year_net_cash_flow' => formatCurrency((($second_year_profit_before_zakat - $second_year_profit_before_zakat*0.025) * ($planningFinancialAssumption->cash_percentage_of_net_profit/100)) ,getWorkspaceCurrency($settings)),
             'third_year_net_cash_flow' => formatCurrency((($third_year_profit_before_zakat - $third_year_profit_before_zakat*0.025) * ($planningFinancialAssumption->cash_percentage_of_net_profit/100)) ,getWorkspaceCurrency($settings)),
-
+            'first_year_net_cash_flow_number' => ($first_year_profit_before_zakat - $first_year_profit_before_zakat*0.025) * ($planningFinancialAssumption->cash_percentage_of_net_profit/100),
+            'second_year_net_cash_flow_number' => ($second_year_profit_before_zakat - $second_year_profit_before_zakat*0.025) * ($planningFinancialAssumption->cash_percentage_of_net_profit/100),
+              'third_year_net_cash_flow_number' => ($third_year_profit_before_zakat - $third_year_profit_before_zakat*0.025) * ($planningFinancialAssumption->cash_percentage_of_net_profit/100),
                 //////////////////////////////////
 
             'first_year_capital_change' => formatCurrency(((($first_year_profit_before_zakat - $first_year_profit_before_zakat*0.025) * ($planningFinancialAssumption->cash_percentage_of_net_profit/100)) - ($first_year_profit_before_zakat - $first_year_profit_before_zakat*0.025)) ,getWorkspaceCurrency($settings)),

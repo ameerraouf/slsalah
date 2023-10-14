@@ -54,6 +54,17 @@ class MyPlanController extends BaseController
         $totalInvestedCapital = (!empty($workingInvestedTotal) ? $workingInvestedTotal[0] : 0.0)+(!empty($fixedInvestedTotal) ? $fixedInvestedTotal[0] : 0.0);
         $data['totalInvestedCapital'] = formatCurrency($totalInvestedCapital,getWorkspaceCurrency($this->settings));
 
+
+        foreach ($data['workingChart'] as $key => $value) {
+            $data['workingChart'][$key]['label'] = ($key + 1) . '- SAR ' . str_replace('ريال سعودي', '', $value['label']);
+        }
+
+
+        foreach ($data['fixedChart'] as &$value) {
+            $value = str_replace('ريال سعودي', '', $value);
+            $value = str_replace('-', '- SAR', $value);
+        }
+
         return view('myPlane.index', $data);
     }
 }

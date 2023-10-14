@@ -13,6 +13,7 @@ use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\MarketingController;
 use App\Http\Controllers\MckinseyController;
 use App\Http\Controllers\NoticeController;
+use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\PestController;
 use App\Http\Controllers\PestelController;
 use App\Http\Controllers\PlansController;
@@ -282,7 +283,10 @@ Route::post("/business-model-post", [
 ]);
 
 Route::get("/", [FrontendController::class, "home"]);
-Route::get("/pricing", [FrontendController::class, "pricing"]);
+
+Route::get("/pricing", [FrontendController::class, "pricing"])->middleware('auth');
+Route::get('/subscribe', [FrontendController::class,'subscribe'])->middleware('auth');
+
 Route::get('/privacy', [FrontendController::class,'privacy']);
 Route::get("/termsandconditions", [FrontendController::class, "termsCondition"]);
 Route::get("/cookie-policy", [FrontendController::class, "cookiePolicy"]);
@@ -397,3 +401,12 @@ Route::get("/textReport", [\App\Http\Controllers\FinncialReportController::class
 
 
 Route::get('/myPlan', [\App\Http\Controllers\MyPlanController::class, 'index'])->name('myPlan.index');
+
+Route::get('paypal/{package}', [PayPalController::class, 'createTransaction'])->name('paypal');
+Route::get('paypal-process', [PayPalController::class, 'processTransaction'])->name('paypalProcessTransaction');
+Route::get('paypal-success', [PayPalController::class, 'successTransaction'])->name('paypalSuccessTransaction');
+Route::get('paypal-cancel', [PayPalController::class, 'cancelTransaction'])->name('paypalCancelTransaction');
+
+Route::prefix('packages')->middleware('auth')->group(function (){
+    Route::get('/{package}', [\App\Http\Controllers\PackageController::class,'show'])->name('packages.details');
+});

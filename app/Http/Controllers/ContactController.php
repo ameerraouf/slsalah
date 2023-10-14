@@ -69,22 +69,22 @@ class ContactController extends BaseController
         $selected_navigation = "invested_capital_planning";
     $data = [];
         foreach ($investors as $item){
-            $data[] = ['y' => $item->amount, 'label' => $item->first_name . ' ' . $item->last_name . " : $item->amount" . ' ريال سعودي'];
+            $data[] = ['y' => $item->amount, 'label' => $item->first_name . ' ' . $item->last_name . " : $item->amount" . __('Ryal_in_english')];
         }
+
         return view('investors.show', compact('data', 'selected_navigation'));
     }
 
 
     public function investorPost(Request $request)
     {
-
         if ($this->modules && !in_array("investors", $this->modules)) {
             abort(401);
         }
         $request->validate([
             "first_name" => "required|string|max:100",
             "last_name" => "required|string|max:100",
-            "email" => "required|email",
+            "email" => "required|email|unique:investors,email",
             "phone" => "nullable|string|max:50",
             "amount" => "nullable|gt:0",
             "id" => "nullable|integer",

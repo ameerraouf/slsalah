@@ -9,11 +9,18 @@
                     <div class="row mb-4z">
                         <div class="col-md-12" style="text-align: center">{{ __('total revenues') }}</div>
                         <div class="col-md-2" style="background-color: #DDD;">{{ __('first_year') }}</div>
-                        <div class="col-md-2 text-muted">{{ formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueFirstYear() ,getWorkspaceCurrency($settings))}}</div>
+                        @php
+                            $planningRevenueOperatingAssumptions =\App\Models\PlanningRevenueOperatingAssumption::query()->where('workspace_id', auth()->user()->workspace_id)->first();
+                            $first_year_percentage =  $planningRevenueOperatingAssumptions? $planningRevenueOperatingAssumptions->first_year / 100: .50;
+                            $second_year_percentage = $planningRevenueOperatingAssumptions? $planningRevenueOperatingAssumptions->second_year / 100: 1;
+                            $third_year_percentage = $planningRevenueOperatingAssumptions? $planningRevenueOperatingAssumptions->third_year / 100: 1;
+
+                        @endphp
+                        <div class="col-md-2 text-muted">{{ formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueFirstYear() * $first_year_percentage ,getWorkspaceCurrency($settings))}}</div>
                         <div class="col-md-2" style="background-color: #DDD;">{{ __('second_year') }}</div>
-                        <div class="col-md-2 text-muted">{{ formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueSecondYear(),getWorkspaceCurrency($settings)) }}</div>
+                        <div class="col-md-2 text-muted">{{ formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueSecondYear() * $second_year_percentage,getWorkspaceCurrency($settings)) }}</div>
                         <div class="col-md-2" style="background-color: #DDD;">{{ __('third_year') }}</div>
-                        <div class="col-md-2 text-muted">{{ formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueThirdYear() ,getWorkspaceCurrency($settings))}}</div>
+                        <div class="col-md-2 text-muted">{{ formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueThirdYear() * $third_year_percentage,getWorkspaceCurrency($settings))}}</div>
 
                         {{--                                <td>{{ $total_first_year }} SAR</td>--}}
                         {{--                                <td>{{ $total_second_year }} SAR</td>--}}
@@ -60,6 +67,7 @@
                                 </tr>
                                 <tr>
                                     <td style="text-align: center;">{{__('yearly_profit_before_zakat')}}</td>
+
                                     <td>{{ $calc_total['first_year_profit_before_zakat'] }}</td>
                                     <td>{{ $calc_total['second_year_profit_before_zakat'] }}</td>
                                     <td>{{ $calc_total['third_year_profit_before_zakat'] }}</td>
@@ -69,6 +77,12 @@
                                     <td style="text-align: center;" id="profit_before_zakat"></td>
                                     <td style="text-align: center;">{{__('zakat_percent_value')}}</td>
                                     <td style="text-align: center;" id="zakat_percent_value">2.5%</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">{{__('net_zakat_value')}}</td>
+                                    <td style="text-align: center;" id="first_year_profit_before_zakat_percent_value"></td>
+                                    <td style="text-align: center;" id="second_year_profit_before_zakat_percent_value"></td>
+                                    <td style="text-align: center;" id="third_year_profit_before_zakat_percent_value"></td>
                                 </tr>
                                 <tr>
                                     <td style="text-align: center;" colspan="2">{{__('profit_after_zakat')}}</td>
@@ -92,6 +106,11 @@
             $('#profit_before_zakat').text('<?=$calc_total['profit_before_zakat']?>');
             {{--$('#zakat_percent_value').text('<?=$calc_total['zakat_percent_value']?>');--}}
             $('#profit_after_zakat').text('<?=$calc_total['profit_after_zakat']?>');
+            $('#first_year_profit_before_zakat_percent_value').text('<?=$calc_total['first_year_profit_before_zakat_percent_value']?>');
+                    $('#second_year_profit_before_zakat_percent_value').text('<?=$calc_total['second_year_profit_before_zakat_percent_value']?>');
+
+            $('#third_year_profit_before_zakat_percent_value').text('<?=$calc_total['third_year_profit_before_zakat_percent_value']?>');
+
         });
     </script>
 @endsection

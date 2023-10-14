@@ -36,15 +36,15 @@
                             </tr>
                             <tr>
                                 <td style="text-align: center">التغير في رأس المال العامل</td>
-                                <td>{{ $calc_total['first_year_capital_change'] }}</td>
-                                <td>{{ $calc_total['second_year_capital_change'] }}</td>
-                                <td>{{ $calc_total['third_year_capital_change'] }}</td>
+                                <td>{!! $calc_total['first_year_capital_change'] !!}</td>
+                                <td>{!! $calc_total['second_year_capital_change'] !!}</td>
+                                <td>{!! $calc_total['third_year_capital_change'] !!}</td>
                             </tr>
                             <tr>
                                 <td style="text-align: center">صافي التدفق النقدي من الأنشطة التشغيلية</td>
-                                <td @if($calc_total['pure_first_year_profit_after_zakat'] < \App\Models\ProjectRevenuePlanning::calcTotalRevenueFirstYear()) style="color: red;" @endif>{{ $first_year_net_cash_flow }}</td>
-                                <td @if($calc_total['pure_second_year_profit_after_zakat'] < \App\Models\ProjectRevenuePlanning::calcTotalRevenueSecondYear()) style="color: red;" @endif>{{ $second_year_net_cash_flow }}</td>
-                                <td @if($calc_total['pure_third_year_profit_after_zakat'] < \App\Models\ProjectRevenuePlanning::calcTotalRevenueThirdYear()) style="color: red;" @endif>{{ $third_year_net_cash_flow }}</td>
+                                <td @if($calc_total['pure_first_year_profit_after_zakat'] <0 ) style="color: red;" @endif>{{ $first_year_net_cash_flow }}</td>
+                                <td @if($calc_total['pure_second_year_profit_after_zakat'] < 0) style="color: red;" @endif>{{ $second_year_net_cash_flow }}</td>
+                                <td @if($calc_total['pure_third_year_profit_after_zakat'] < 0 ) style="color: red;" @endif>{{ $third_year_net_cash_flow }}</td>
                             </tr>
                             </tbody>
                         </table>

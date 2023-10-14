@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="file_space_limit" class="form-label">{{__('File Space Limit')}} ({{__('mb')}})</label><label class="text-danger">*</label>
+                                        <label for="file_space_limit" class="form-label">نوع الملفات المسموح بها </label><label class="text-danger">*</label>
                                         <input type="text" class="form-control" name="file_space_limit" value="{{$plan->file_space_limit ?? old('file_space_limit') ?? ''}}" id="file_space_limit">
 
                                     </div>
@@ -110,6 +110,7 @@
                                         <p>{{ $module['title'] }}</p>
                                     </div>
                                 </li>
+
                             @foreach($module['modules'] as $key2 =>$item)
                                     <li class="list-group-item border-0 px-0">
                                         <div class="form-check form-switch ps-0">
@@ -117,7 +118,7 @@
                                                    name="modules[{{ $key2 }}]"
                                                    @if(!empty($plan_modules) && in_array($key2,$plan_modules)) checked @endif>
                                             <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0"
-                                                   for="module_{{$key}}">{{$item}}</label>
+                                                   for="module_{{$key}}">{!! $item !!}</label>
                                         </div>
                                     </li>
                                 @endforeach
@@ -129,7 +130,12 @@
 
                         <div class="form-group">
                             <textarea class="form-control" rows="10" id="description"
-                                      name="description">@if(!empty($plan)){{$plan->description}}@endif</textarea>
+                                      name="description" >
+                                @if(!empty($plan))
+                                    {{$plan->description}}
+                                    @else
+                                     {{old('description')??""}}
+                                @endif</textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">{{__('Features')}}</label>

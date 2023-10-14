@@ -216,7 +216,6 @@ class SuperAdminController extends SuperAdminBaseController
             }
         }
 
-
         $available_modules = SubscriptionPlan::availableModules();
 
         return \view("super-admin.create-plan", [
@@ -232,15 +231,16 @@ class SuperAdminController extends SuperAdminBaseController
         $request->validate([
             "name" => "required|max:70",
             "id" => "nullable|integer",
-            "features" => "nullable|array",
+            "features" => "required|array",
+            'features.*' => 'string',
             "maximum_allowed_users" => "required|integer|gt:0",
             "description" => "required",
 //            "price_yearly" => "required|numeric|gt:0",
             "price_monthly" => "required|numeric|min:0",
-            "paypal_plan_id" => "nullable|string",
-            "max_file_upload_size" => "nullable|integer",
-            "file_space_limit" => "nullable|integer",
-            "offer_price_monthly" => "required|numeric|min:0",
+            "paypal_plan_id" => "required|string",
+            "max_file_upload_size" => "required|integer|gt:0",
+            "file_space_limit" => "required|string",
+            "offer_price_monthly" => "nullable|numeric|min:0",
             "percentage_discount_annual" => "required|numeric|min:0|max:100",
 //            "offer_price_yearly" => "required|numeric|gt:0",
         ]);
@@ -290,13 +290,15 @@ class SuperAdminController extends SuperAdminBaseController
 //                $modules[] = $key;
 //            }
 //        }
-        foreach ($request->modules as $key=> $value){
-            if (array_key_exists($key, $available_modules)){
-                $modules[] = $key;
-            }
-        }
 
-        if ($modules) {
+        if ($request->modules) {
+
+            foreach ($request->modules as $key=> $value){
+                if (array_key_exists($key, $available_modules)){
+                    $modules[] = $key;
+                }
+            }
+
             $plan->modules = json_encode($modules);
         }
 

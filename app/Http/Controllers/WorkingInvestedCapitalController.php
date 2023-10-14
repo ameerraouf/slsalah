@@ -156,11 +156,12 @@ class WorkingInvestedCapitalController extends BaseController
         //
         $workInvested = WorkingInvestedCapital::where('workspace_id', $this->user->workspace_id)->get();
         $data = [];
+        $number = 1;
+
         foreach ($workInvested as $item){
-            $data[] = ['y' => $item->investing_annual_cost, 'label' => $item->investing_description . ' : ' .$item->investing_annual_cost . ' ريال سعودي'];
+            $data[] = ['y' => $item->investing_annual_cost,  'label' => $number++. ' - '. $item->investing_description . ' : '. __('Ryal_in_english') .$item->investing_annual_cost];
         }
         $selected_navigation = "working_capital_planning";
-
         return view('workingInvested.show', compact('data', 'selected_navigation'));
     }
 
