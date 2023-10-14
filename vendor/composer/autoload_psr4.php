@@ -42,6 +42,7 @@ return array(
     'Symfony\\Component\\CssSelector\\' => array($vendorDir . '/symfony/css-selector'),
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
     'Stripe\\' => array($vendorDir . '/stripe/stripe-php/lib'),
+    'Srmklive\\PayPal\\' => array($vendorDir . '/srmklive/paypal/src'),
     'Spatie\\Ray\\' => array($vendorDir . '/spatie/ray/src'),
     'Spatie\\Macroable\\' => array($vendorDir . '/spatie/macroable/src'),
     'Spatie\\LaravelRay\\' => array($vendorDir . '/spatie/laravel-ray/src'),
