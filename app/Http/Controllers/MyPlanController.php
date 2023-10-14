@@ -48,7 +48,7 @@ class MyPlanController extends BaseController
             ->first();
         $data['planningRevenueOperatingAssumptions'] = PlanningRevenueOperatingAssumption::where('workspace_id', $this->user->workspace_id)
             ->first() ;
-
+dd($this->user);
         $data['calc_total'] = $data['planningRevenueOperatingAssumptions']? $data['planningRevenueOperatingAssumptions']->calc_total:[];
         dd($data['calc_total']);
         $workingInvestedTotal = WorkingInvestedCapital::select(DB::raw('SUM(investing_annual_cost) as investing_annual_cost_total'))->where("workspace_id", $this->user->workspace_id)->get()->pluck('investing_annual_cost_total');
