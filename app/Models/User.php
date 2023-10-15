@@ -52,4 +52,9 @@ class User extends Authenticatable
         'sk' => 'Slovak',
         'pt_br' => 'Portuguese(Brazil)',
     ];
+
+    public function subscribes()
+    {
+        return $this->hasMany(Subscribe::class);
+    }
 }

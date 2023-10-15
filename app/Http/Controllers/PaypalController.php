@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 
-class PaypalController extends Controller
+class PaypalController extends BaseController
 {
     /**
      * create transaction.
@@ -25,9 +25,12 @@ class PaypalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function processTransaction(Request $request)
+    public function processTransaction($package, Request $request)
     {
-        $package = SubscriptionPlan::query()->find($request->input('package'));
+
+        $package = SubscriptionPlan::query()->find($package);
+        $price = $request->query('type') == 'monthly' ? $package->price_monthly : $package->price_yearly;
+        $type = $request->query('type');
 
         $provider = new PayPalClient;
         $provider->setApiCredentials(config('paypal'));
@@ -36,14 +39,15 @@ class PaypalController extends Controller
         $response = $provider->createOrder([
             "intent" => "CAPTURE",
             "application_context" => [
-                "return_url" => route('paypalSuccessTransaction'),
+                "return_url" => route('paypalSuccessTransaction', ['package' => $package, 'type' => $type, 'price' => $price]),
                 "cancel_url" => route('paypalCancelTransaction'),
             ],
+
             "purchase_units" => [
                 0 => [
                     "amount" => [
                         "currency_code" => "USD",
-                        "value" => "1000.00"
+                        "value" => "$price"
                     ]
                 ]
             ]
@@ -55,13 +59,15 @@ class PaypalController extends Controller
                     return redirect()->away($links['href']);
                 }
             }
-
+            session()->flash('error_message', 'يوجد مشكله في الدفع جرب مره اخري ف وقت لاحق');
             return redirect()
-                ->route('paypal')
+                ->route('packages.details', $package->id)
                 ->with('error', 'Something went wrong.');
         } else {
+            session()->flash('error_message', 'يوجد مشكله في الدفع جرب مره اخري ف وقت لاحق');
+
             return redirect()
-                ->route('paypal')
+                ->route('packages.details', $package->id)
                 ->with('error', $response['message'] ?? 'Something went wrong.');
         }
     }
@@ -76,13 +82,22 @@ class PaypalController extends Controller
         $provider->setApiCredentials(config('paypal'));
         $provider->getAccessToken();
         $response = $provider->capturePaymentOrder($request['token']);
+        $planId = $request->query('package');
+        $subscriptionType = $request->query('type');
+        $price = $request->query('price');
+
+        userSubscribe($planId,$subscriptionType,$price,'paypal', null,null,'',1);
+
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
+            userSubscribe($planId,$subscriptionType,$price,'paypal', null,null,'',1);
+
             return redirect()
-                ->route('paypal')
+                ->route('user.package')
                 ->with('success', 'Transaction complete.');
         } else {
+
             return redirect()
-                ->route('paypal')
+                ->route('packages.details',$planId)
                 ->with('error', $response['message'] ?? 'Something went wrong.');
         }
     }

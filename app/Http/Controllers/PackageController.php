@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Setting;
+use App\Models\Subscribe;
 use App\Models\SubscriptionPlan;
-use Illuminate\Http\Request;
-
-class PackageController extends Controller
+class PackageController extends BaseController
 {
     public function show($package)
     {
@@ -14,5 +13,14 @@ class PackageController extends Controller
         $super_settings = Setting::query()->first();
 
         return view('frontend.package.show', compact('package', 'super_settings'));
+    }
+
+    public function showUserPackage()
+    {
+        $plans = SubscriptionPlan::withCount(['workspace'])->get();
+        $settings = Setting::query()->first();
+        $subscribes = Subscribe::query()->where('user_id', 1)->get();
+
+        return view('package.show', compact('plans', 'settings', 'subscribes'));
     }
 }
