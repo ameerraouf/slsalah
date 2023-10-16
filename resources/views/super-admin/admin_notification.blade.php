@@ -6,7 +6,7 @@
 
             <div class="col-auto my-auto">
                 <div class="h-100">
-                    <h5 class="mb-1 mt-5">الاشعارات الادمن</h5>
+                    <h5 class="mb-1 mt-5">الاشعارات</h5>
                     <p class="mb-0  text-sm">
 
                     </p>
@@ -19,43 +19,57 @@
                     </ul>
                 </div>
             </div>
-        </div>
+        </di>
     </div>
         <div class="container">
             <div class="row mt-lg-0 mt-4 d-flex">
-                <div class="col-12  border  border mb-2 p-2">
-                    <strong> نوع الاشعار : اشتراك جديد |</strong>
-                    <strong> اسم الباقة  : تست | </strong>
-                    <strong> تاريخ الاشتراك  : 2023-10-15</strong>
-                </div>
-                <div class="col-12   border mb-2 p-2">
-                    <strong> نوع الاشعار : اشتراك جديد |</strong>
-                    <strong> اسم الباقة  : تست | </strong>
-                    <strong> تاريخ الاشتراك  : 2023-10-15</strong>
-                </div>
-                <div class="col-12  border mb-2 p-2">
-                    <strong> نوع الاشعار : اشتراك جديد |</strong>
-                    <strong> اسم الباقة  : تست | </strong>
-                    <strong> تاريخ الاشتراك  : 2023-10-15</strong>
-                </div>
-                <div class="col-12   border mb-2 p-2">
-                    <strong> نوع الاشعار : اشتراك جديد |</strong>
-                    <strong> اسم الباقة  : تست | </strong>
-                    <strong> تاريخ الاشتراك  : 2023-10-15</strong>
-                </div>
-                <div class="col-12  border mb-2 p-2">
-                    <strong> نوع الاشعار : اشتراك جديد |</strong>
-                    <strong> اسم الباقة  : تست | </strong>
-                    <strong> تاريخ الاشتراك  : 2023-10-15</strong>
-                </div>
-                <div class="col-12   border mb-2 p-2">
-                    <strong> نوع الاشعار : اشتراك جديد |</strong>
-                    <strong> اسم الباقة  : تست | </strong>
-                    <strong> تاريخ الاشتراك  : 2023-10-15</strong>
-                </div>
+                @foreach($notifications as $notification)
 
+                    <div class="col-12 border border mb-2 p-2 cursor-pointer @if(is_null($notification->read_at)) bg-secondary text-white @endif" onclick="readNotification(this)">
+                        <input type="hidden" name="notification_id" value="{{ $notification->id }}">
+                        <strong class="mx-1">{{ $notification->data['type'] }} |</strong>
+                        <strong>اسم الباقة : <strong>{{$notification->data['plan']? $notification->data['plan']['name']:""}}</strong> |</strong>
+                        <strong class="mx-1">تاريخ الاشتراك :{{$notification['data']['subscribe']['subscription_date_start']}}</strong>
+                        <span> -
+                            @if(is_null($notification->read_at))
+                                <span class="mx-2">جديد</span>
+                            @else
+                                <span>مرئي</span>
+                            @endif
+                        </span>
+                    </div>
+                @endforeach
             </div>
-
         </div>
+    </div>
 
 @endsection
+
+<script>
+    function readNotification(element) {
+        $(element).removeClass('bg-secondary');
+        $(element).removeClass('text-white');
+        $(element).find('span').text(' - مرئي ');
+
+    var notificationId = $(element).find('input[name="notification_id"]').val();
+console.log('the id is '+ notificationId);
+    $.ajax({
+        url: "/admin/notifications/"+ notificationId,
+        type: 'POST',
+        data: { notification_id: notificationId },
+          headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  },
+        success: function(response) {
+             var countElement = $('#admin_notification_count');
+            var count = parseInt(countElement.text());
+            if (!isNaN(count) && count > 0) {
+                countElement.text(count - 1);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error marking notification as read:', error);
+        }
+    });
+    }
+</script>

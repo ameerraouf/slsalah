@@ -206,6 +206,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, $remember)) {
             $user = User::where('email', $request->email)->first();
+            session()->put('user_id', $user->id);
             if ($user) {
                 $workspace = Workspace::find($user->workspace_id);
 
@@ -222,6 +223,7 @@ class AuthController extends Controller
                         $trial_will_expire = strtotime($workspace_creation_date) + ($free_trial_days * 24 * 60 * 60);
 
                         if ($trial_will_expire < time()) {
+
                             Auth::logout();
                             return back()->withErrors([
                                 'trial_expired' => __('Your trial has been expired.'),

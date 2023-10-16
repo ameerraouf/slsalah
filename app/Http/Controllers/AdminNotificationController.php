@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notification;
 use Illuminate\Http\Request;
 
-class AdminNotificationController extends Controller
+class AdminNotificationController extends SuperAdminController
 {
     public function index()
     {
-        return view('super-admin.admin_notification');
+        $notifications = $this->user->notifications;
+        return view('super-admin.admin_notification', compact('notifications'));
+    }
+
+    public function readNotification($notification)
+    {
+        Notification::query()->find($notification)->update(['read_at' => now()]);
     }
 }

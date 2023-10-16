@@ -415,4 +415,6 @@ Route::prefix('packages')->group(function (){
 
 Route::get('/user/package', [\App\Http\Controllers\PackageController::class, 'showUserPackage'])->name('user.package');
 Route::get('/user/notifications', [\App\Http\Controllers\UserNotificationController::class,'index']);
+Route::post('/user/notifications/{notification}', [\App\Http\Controllers\UserNotificationController::class,'readNotification'])->name('user.read_notification');
 Route::get('/admin/notifications', [\App\Http\Controllers\AdminNotificationController::class,'index']);
+Route::post('/admin/notifications/{notification}', [\App\Http\Controllers\AdminNotificationController::class,'readNotification'])->name('admin.read_notification');

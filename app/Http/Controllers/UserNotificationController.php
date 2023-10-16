@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Notification;
 
 class UserNotificationController extends Controller
 {
     public function index()
     {
-        return view('user_notification');
+        $notifications = [];
+        return view('user_notification', compact('notifications'));
+    }
+    public function readNotification($notification)
+    {
+        Notification::query()->find($notification)->update(['read_at' => now()]);
     }
 }

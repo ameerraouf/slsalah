@@ -26,7 +26,6 @@ class DashboardController extends BaseController
 
     public function dashboard()
     {
-
         $ldate = date("Y-m-d H:i:s");
         $today = Carbon::now();
 

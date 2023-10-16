@@ -11,22 +11,25 @@
     </div>
 
     <div class="row">
+
         <div class="col-12">
             <div class="card card-body mb-4">
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
                         <table class="table align-items-center mb-0" id="cloudonex_table">
+
                             <thead>
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('username')}}</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('plan_name')}}</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('Subscription type (monthly-yearly)')}}</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">نوع الاشتراك</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('amount')}}</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('payment method')}}</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('Subscription date')}}</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('Subscription status (valid – expired)')}}</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">حالة الاشتراك</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('Transfer number')}}</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الأجراء</th>
                             </tr>
                             <tbody>
                             @foreach($workspaces as $workspace)
@@ -68,6 +71,15 @@
                                     <td>
                                         <p class="text-xs font-weight-bold mb-0">{{$workspace->transfer_number}}</p>
                                     </td>
+                                    <td>
+                                        @if($workspace->payment_type == 'offline')
+                                            <form action="{{route('user.active_page')}}">
+                                                @csrf
+                                                @method('post')
+                                                <button type="submit" class="btn btn-primary">تفعيل</button>
+                                            </form>
+                                        @endif
+                                    </td>
 
                                 </tr>
                             @endforeach
@@ -92,5 +104,6 @@
             });
 
         });
+
     </script>
 @endsection
