@@ -1,5 +1,9 @@
 <?php
 use Akaunting\Money\Money;
+use App\Models\Subscribe;
+use App\Models\SubscriptionPlan;
+use Illuminate\Support\Carbon;
+
 function formatCurrency($amount, $isoCode)
 {
     if (!$amount) {
@@ -55,4 +59,40 @@ function getClientIP()
     }
 
     return 'UNKNOWN';
+}
+function userSubscribe($planId, $subscriptionType, $price,$paymentType,$bankName =null, $bankTransferImage =null, $transferNumber = null, $isActive = 1)
+{
+    $subscription_date_end = $subscriptionType == 'monthly' ? Carbon::parse(now())->addMonth() : Carbon::parse(now())->addYear();
+
+    Subscribe::query()->create([
+        'user_id' => auth()->id(),
+        'subscription_plan_id' => $planId,
+        'subscription_type' => $subscriptionType,
+        'price' => $price,
+        'payment_type' => $paymentType,
+        'subscription_date_start' => now(),
+        'subscription_date_end' => $subscription_date_end,
+        'is_subscription_end' => 0,
+        'bank_name' => $bankName,
+        'image_bank_transfer' => $bankTransferImage,
+        'number_of_transfer' => $transferNumber,
+        'is_active' => $isActive,
+    ]);
+}
+
+function isUserSubscribeInPlan($userId, $planId)
+{
+    return Subscribe::query()->where('user_id', $userId)->where('subscription_plan_id', $planId)->exists();
+}
+
+function isSubscribptionIsValid($planId)
+{
+    $subscribe = Subscribe::find($planId);
+
+    if($subscribe){
+        dd(Carbon::parse($subscribe->subscription_date_end)->format('Y-m-d'));
+        return Carbon::parse($subscribe->subscription_date_end)->format('Y-m-d');
+    }
+
+    return false;
 }

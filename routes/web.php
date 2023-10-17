@@ -65,6 +65,7 @@ Route::get("/subscription-plan", [
     SuperAdminController::class,
     "createSaasPlan",
 ]);
+
 Route::get("/payment-gateways", [
     SuperAdminController::class,
     "paymentGateways",
@@ -209,6 +210,7 @@ Route::get("/billing", [SettingController::class, "billing"]);
 Route::get("/delete/{action}/{id}", [DeleteController::class, "delete"]);
 
 Route::get('subscriptions', [\App\Http\Controllers\SubscriptionController::class, 'index'])->name('subscription.index');
+Route::get('subscriptions-all', [\App\Http\Controllers\SubscriptionController::class, 'showAll'] )->name('all_subscriptions');
 
 Route::post("/save-reset-password", [
     AuthController::class,
@@ -284,7 +286,7 @@ Route::post("/business-model-post", [
 
 Route::get("/", [FrontendController::class, "home"]);
 
-Route::get("/pricing", [FrontendController::class, "pricing"])->middleware('auth');
+Route::get("/pricing", [FrontendController::class, "pricing"]);
 Route::get('/subscribe', [FrontendController::class,'subscribe'])->middleware('auth');
 
 Route::get('/privacy', [FrontendController::class,'privacy']);
@@ -403,10 +405,21 @@ Route::get("/textReport", [\App\Http\Controllers\FinncialReportController::class
 Route::get('/myPlan', [\App\Http\Controllers\MyPlanController::class, 'index'])->name('myPlan.index');
 
 Route::get('paypal/{package}', [PayPalController::class, 'createTransaction'])->name('paypal');
-Route::get('paypal-process', [PayPalController::class, 'processTransaction'])->name('paypalProcessTransaction');
+Route::get('paypal-process/{package}', [PayPalController::class, 'processTransaction'])->name('paypalProcessTransaction');
 Route::get('paypal-success', [PayPalController::class, 'successTransaction'])->name('paypalSuccessTransaction');
 Route::get('paypal-cancel', [PayPalController::class, 'cancelTransaction'])->name('paypalCancelTransaction');
 
-Route::prefix('packages')->middleware('auth')->group(function (){
+Route::middleware('auth')->prefix('packages')->group(function (){
     Route::get('/{package}', [\App\Http\Controllers\PackageController::class,'show'])->name('packages.details');
 });
+
+Route::get('/user/package', [\App\Http\Controllers\PackageController::class, 'showUserPackage'])->name('user.package');
+Route::get('/user/notifications', [\App\Http\Controllers\UserNotificationController::class,'index']);
+Route::post('/user/notifications/{notification}', [\App\Http\Controllers\UserNotificationController::class,'readNotification'])->name('user.read_notification');
+Route::get('/admin/notifications', [\App\Http\Controllers\AdminNotificationController::class,'index']);
+Route::post('/admin/notifications/{notification}', [\App\Http\Controllers\AdminNotificationController::class,'readNotification'])->name('admin.read_notification');
+
+Route::post('/admin/active/subscription/{subscription}', [\App\Http\Controllers\SubscriptionController::class,'activeSubscription'])->name('admin.active_subscription');
+Route::get('/admin/subscriptions/{subscription}', [\App\Http\Controllers\SubscriptionController::class,'show'])->name('admin.subscriptions.details');
+
+Route::post('/transfer-bank', [\App\Http\Controllers\TransferBankController::class, 'store'])->name('user.transfer_bank');

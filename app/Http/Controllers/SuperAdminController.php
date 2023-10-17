@@ -80,7 +80,7 @@ class SuperAdminController extends SuperAdminBaseController
 
 
 
-        return redirect(config('app.url').'/super-admin/dashboard');
+        return redirect('/super-admin/dashboard');
     }
 
     public function users()

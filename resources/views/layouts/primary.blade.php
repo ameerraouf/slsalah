@@ -44,7 +44,7 @@
     <div class="sidenav-header h-auto">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute right-0 top-0 d-none d-xl-none"
            aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand text-center m-0" href="{{config('app.url')}}/dashboard">
+        <a class="navbar-brand text-center m-0 id='dash'" href="{{config('app.url')}}/dashboard">
             @if(!empty($super_settings['logo']))
                 <img src="{{PUBLIC_DIR}}/uploads/{{$super_settings['logo']}}" class="navbar-brand-img h-100" alt="...">
             @else
@@ -76,7 +76,7 @@
 
         <ul class="navbar-nav px-0">
             <li class="nav-item">
-                <a class="nav-link @if(($selected_navigation ?? '') === 'dashboard') active @endif" href="/dashboard">
+                <a class="nav-link @if(($selected_navigation ?? '') === 'dashboard') active @endif" id="abanoub" href="/dashboard">
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -465,6 +465,28 @@
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
                     <span class="nav-link-text ms-3">{{__('Profile')}}</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @if(request()->path() === 'user/package') active @endif " href="/user/package">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="feather feather-user">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span class="nav-link-text ms-3">الاشتراك ف الباقة</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @if(request()->path() === 'user/notifications') active @endif " href="/user/notifications">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="feather feather-user">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span class="nav-link-text ms-3"> <strong class="pr-2 text-danger" id="user_notification_count" style="padding-left: 5px">{{auth()->user()->notifications()->where('read_at', null)->count()}}</strong>الاشعارات</span>
                 </a>
             </li>
             <li class="nav-item">
