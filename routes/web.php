@@ -409,7 +409,7 @@ Route::get('paypal-process/{package}', [PayPalController::class, 'processTransac
 Route::get('paypal-success', [PayPalController::class, 'successTransaction'])->name('paypalSuccessTransaction');
 Route::get('paypal-cancel', [PayPalController::class, 'cancelTransaction'])->name('paypalCancelTransaction');
 
-Route::prefix('packages')->group(function (){
+Route::middleware('auth')->prefix('packages')->group(function (){
     Route::get('/{package}', [\App\Http\Controllers\PackageController::class,'show'])->name('packages.details');
 });
 
@@ -418,3 +418,6 @@ Route::get('/user/notifications', [\App\Http\Controllers\UserNotificationControl
 Route::post('/user/notifications/{notification}', [\App\Http\Controllers\UserNotificationController::class,'readNotification'])->name('user.read_notification');
 Route::get('/admin/notifications', [\App\Http\Controllers\AdminNotificationController::class,'index']);
 Route::post('/admin/notifications/{notification}', [\App\Http\Controllers\AdminNotificationController::class,'readNotification'])->name('admin.read_notification');
+
+Route::post('/admin/active/subscription/{subscription}', [\App\Http\Controllers\SubscriptionController::class,'activeSubscription'])->name('admin.active_subscription');
+Route::get('/admin/subscriptions/{subscription}', [\App\Http\Controllers\SubscriptionController::class,'show'])->name('admin.subscriptions.details');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Setting;
 use App\Models\Subscribe;
 use App\Models\SubscriptionPlan;
+use App\Models\User;
 use App\Notifications\NewSubscriptionNotification;
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
@@ -87,18 +88,21 @@ class PaypalController extends BaseController
         $subscriptionType = $request->query('type');
         $price = $request->query('price');
 
-        userSubscribe($planId,$subscriptionType,$price,'paypal', null,null,'',1);
+        userSubscribe($planId,$subscriptionType,$price,'حواله بنكية', null,null,'',0);
         $subscription= Subscribe::query()->where('subscription_plan_id', $planId)->first();
 
-        //must make a notification a  new subscription
-        // must notifiy admin here
-        // but i really do not now the current user;
         $data = [
             'subscribe' => $subscription,
             'plan' => SubscriptionPlan::query()->find($planId),
         ];
 
-        $this->user->notify(new NewSubscriptionNotification($data));
+        $admins = User::query()->where('super_admin', 1)->get();
+
+        foreach ($admins as $admin)
+        {
+            $admin->notify(new NewSubscriptionNotification($data));
+        }
+
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
             userSubscribe($planId,$subscriptionType,$price,'paypal', null,null,'',1);
 

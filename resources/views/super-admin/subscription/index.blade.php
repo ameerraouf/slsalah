@@ -19,6 +19,7 @@
                         <table class="table align-items-center mb-0" id="cloudonex_table">
 
                             <thead>
+
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('username')}}</th>
@@ -60,7 +61,7 @@
                                     </td>
                                     <td>
                                         <p class="text-xs font-weight-bold mb-0">
-                                            @if($workspace->is_active)
+                                            @if($workspace->is_subscription_end == 0)
                                                 <span class="badge badge-sm bg-success-light text-success">ساري</span>
                                             @else
                                                 <span class="badge badge-sm bg-pink-light text-danger">منتهي</span>
@@ -72,13 +73,14 @@
                                         <p class="text-xs font-weight-bold mb-0">{{$workspace->transfer_number}}</p>
                                     </td>
                                     <td>
-                                        @if($workspace->payment_type == 'offline')
-                                            <form action="{{route('user.active_page')}}">
+                                        @if($workspace->is_active == 0)
+                                            <form action="{{route('admin.active_subscription', $workspace->id)}}" method="post">
                                                 @csrf
                                                 @method('post')
-                                                <button type="submit" class="btn btn-primary">تفعيل</button>
+                                                <button type="submit" class="btn btn-primary">تفعيل الاشتراك</button>
                                             </form>
                                         @endif
+                                        <a class="btn btn-info" href="{{route('admin.subscriptions.details', $workspace->id)}}">تفاصيل</a>
                                     </td>
 
                                 </tr>
