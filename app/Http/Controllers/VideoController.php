@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SubscriptionPlan;
+use App\Models\User;
 use App\Models\Video;
 use App\Http\Controllers\Controller;
+use App\Notifications\NewVideoNotification;
 use Illuminate\Http\Request;
 
 class VideoController extends Controller
@@ -46,24 +49,34 @@ class VideoController extends Controller
         ], [
             'url.starts_with' => 'يجب ان يكون الحقل رابط من موقع اليوتيوب '
         ]);
-        Video::create([
+       $video = Video::create([
             'name' => $request->name,
             'url' => $request->url,
             'description' => $request->description,
             'time' => $request->time,
             'isActive' => ($request->isActive == 1 ? 1 :0 ),
         ]);
+        $users = User::query()->where('super_admin', 0)->get();
+
+        $data = [
+            'subscribe' => '',
+            'plan' => '',
+            'user' => '',
+            'type' => 'فيديو جديد',
+            'notification_type'=> 'video',
+            'video' => $video->id,
+        ];
+
+        foreach ($users as $user)  {
+            $user->notify(new NewVideoNotification($data));
+        }
+
         return redirect()->route('video.index')->with('msg', 'تم اضافة الفيديو');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Video  $video
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show(Video $video)
     {
+      return  view('video.show', compact('video'));
     }
 
     /**

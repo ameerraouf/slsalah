@@ -421,3 +421,5 @@ Route::post('/admin/notifications/{notification}', [\App\Http\Controllers\AdminN
 
 Route::post('/admin/active/subscription/{subscription}', [\App\Http\Controllers\SubscriptionController::class,'activeSubscription'])->name('admin.active_subscription');
 Route::get('/admin/subscriptions/{subscription}', [\App\Http\Controllers\SubscriptionController::class,'show'])->name('admin.subscriptions.details');
+
+Route::post('/transfer-bank', [\App\Http\Controllers\TransferBankController::class, 'store'])->name('user.transfer_bank');

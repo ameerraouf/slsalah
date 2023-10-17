@@ -94,6 +94,8 @@ class PaypalController extends BaseController
         $data = [
             'subscribe' => $subscription,
             'plan' => SubscriptionPlan::query()->find($planId),
+            'user' => $this->user,
+            'type' => 'اشتراك جديد'
         ];
 
         $admins = User::query()->where('super_admin', 1)->get();

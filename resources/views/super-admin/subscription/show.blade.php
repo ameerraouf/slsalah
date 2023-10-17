@@ -31,10 +31,10 @@
                     <br>
                     <div><span class="mx-3  d-inline-block" style="width: 100px">حالة الاشتراك
                         </span>:
-                        @if($plan->is_active ==1)
-                            ساري
+                        @if($plan->is_subscription_end == 0)
+                            <span class="badge badge-sm bg-success-light text-success">ساري</span>
                         @else
-                            منتهي
+                            <span class="badge badge-sm bg-pink-light text-danger">منتهي</span>
                         @endif
                     </div>
                     <br>
@@ -42,7 +42,14 @@
                     <br>
                     <div><span class="mx-3  d-inline-block" style="width: 100px">رقم التحويل</span>: {{$plan->bank_name}}</div>
                     <br>
-                    <div><span class="mx-3  d-inline-block" style="width: 100px">صوره التحويل</span>: <a href="{{$plan->image_bank_transfer}}"></a></div>
+                    <div>
+                        <span class="mx-3  d-inline-block" style="width: 100px">صوره التحويل</span> :
+                        @if($plan->bank_name)
+                        <a target="_blank" href="{{'/uploads/' . $plan->image_bank_transfer}} ">
+                            <strong class="bg-danger text-white p-2 rounded">الصوره</strong>
+                        </a>
+                        @endif
+                    </div>
 
                 </div>
             </div>

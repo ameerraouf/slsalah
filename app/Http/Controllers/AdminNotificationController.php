@@ -16,5 +16,6 @@ class AdminNotificationController extends SuperAdminController
     public function readNotification($notification)
     {
         Notification::query()->find($notification)->update(['read_at' => now()]);
+
     }
 }

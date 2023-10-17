@@ -51,7 +51,50 @@
                         <a href="">Clickup (Yearly)</a>
                     </div>
                 </div>
+                <div class="col-12">
+                    @if ($errors->any())
+                        <div class="alert bg-pink-light text-danger">
+                            <ul class="list-unstyled">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
 
+                    <h5>حواله بنكية</h5>
+                    <form method="post" action="{{route('user.transfer_bank')}}" enctype="multipart/form-data">
+                        @csrf
+                        @method('post')
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <input hidden name="plan_id" value="{{$package->id}}">
+                                <div class="col-6">
+                                       <label>نوع الاشتراك </label>
+                                       <input type="radio"  name="subscription_type" value="monthly">    <strong>شهري</strong>
+                                       <strong class="mx-3"></strong>
+                                       <input type="radio" name="subscription_type" value="yearly"> <strong >سنوي</strong>
+                                </div>
+                                <div class="col-6 mt-4">
+                                    <label>رقم التحويل</label>
+                                    <input class="p-2" name="number_of_transfer" type="text" placeholder="رقم التحويل" required value="{{old('number_of_transfer')??''}}">
+                                </div>
+                                <div class="col-6 my-2">
+                                    <label>اسم البنك</label>
+                                    <input class="p-2" type="text" name="bank_name" placeholder="اسم البنك" required value="{{old('bank_name')??""}}">
+                                </div>
+                                <div class="col-6">
+                                    <label>مرفق الحواله</label>
+                                    <input type="file" name="image_bank_transfer" accept="image/*" required>
+                                </div>
+                                <div class="mt-4">
+                                    <button type="submit" class="btn btn-primary">ادفع</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
 
             </div>
         </div>

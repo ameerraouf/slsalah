@@ -65,7 +65,7 @@ function userSubscribe($planId, $subscriptionType, $price,$paymentType,$bankName
     $subscription_date_end = $subscriptionType == 'monthly' ? Carbon::parse(now())->addMonth() : Carbon::parse(now())->addYear();
 
     Subscribe::query()->create([
-        'user_id' => session()->get('user_id'),
+        'user_id' => auth()->id(),
         'subscription_plan_id' => $planId,
         'subscription_type' => $subscriptionType,
         'price' => $price,

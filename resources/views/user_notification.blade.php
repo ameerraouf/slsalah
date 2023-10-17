@@ -22,20 +22,42 @@
     </div>
     <div class="container">
         <div class="row mt-lg-0 mt-4 d-flex">
+
             @foreach($notifications as $notification)
-                <div class="col-12 border border mb-2 p-2 cursor-pointer @if(is_null($notification->read_at)) bg-secondary text-white @endif" onclick="readNotification(this)">
-                    <input type="hidden" name="notification_id" value="{{ $notification->id }}">
-                    <strong class="mx-1">{{ $notification->data['type'] }} |</strong>
-                    <strong>اسم الباقة : <strong>{{$notification->data['plan']? $notification->data['plan']['name']:""}}</strong> |</strong>
-                    <strong class="mx-1">تاريخ الاشتراك :{{$notification['data']['subscribe']['subscription_date_start']}}</strong>
-                    <span> -
-                        @if(is_null($notification->read_at))
-                            <span class="mx-2">جديد</span>
-                        @else
-                            <span>مرئي</span>
-                        @endif
-                    </span>
-                </div>
+                @if($notification['data']['notification_type'] == 'subscription')
+                    <a href="{{route('user.package')}}">
+                        <div class="col-12 border border mb-2 p-2 cursor-pointer @if(is_null($notification->read_at)) bg-secondary text-white @endif" onclick="readNotification(this)">
+                            <input type="hidden" name="notification_id" value="{{ $notification->id }}">
+                            <strong class="mx-1">{{ $notification['data']['type'] }} |</strong>
+                            <strong>اسم الباقة : <strong>{{$notification->data['plan']? $notification->data['plan']['name']:""}}</strong> |</strong>
+                            <strong class="mx-1">تاريخ الاشتراك :{{\Carbon\Carbon::parse($notification['data']['subscription']['created_at'])->format('Y-m-d m:h:s')}}</strong>
+                            <span> -
+                                @if(is_null($notification->read_at))
+                                    <span class="mx-2">جديد</span>
+                                @else
+                                    <span>مرئي</span>
+                                @endif
+                            </span>
+                        </div>
+                    </a>
+                 @else
+                    <a href="{{route('video.show', $notification['data']['video'])}}">
+                    <div class="col-12 border border mb-2 p-2 cursor-pointer @if(is_null($notification->read_at)) bg-secondary text-white @endif" onclick="readNotification(this)">
+                        <input type="hidden" name="notification_id" value="{{ $notification->id }}">
+                        <strong class="mx-1">{{ $notification['data']['type'] }} |</strong>
+{{--                        <strong>اسم الباقة : <strong>{{$notification->data['plan']? $notification->data['plan']['name']:""}}</strong> |</strong>--}}
+{{--                        <strong class="mx-1">تاريخ الاشتراك :{{\Carbon\Carbon::parse($notification['data']['subscription']['created_at'])->format('Y-m-d m:h:s')}}</strong>--}}
+                        <span> -
+                                @if(is_null($notification->read_at))
+                                <span class="mx-2">جديد</span>
+                            @else
+                                <span>مرئي</span>
+                            @endif
+                            </span>
+                    </div>
+                    </a>
+                @endif
+
             @endforeach
         </div>
     </div>
