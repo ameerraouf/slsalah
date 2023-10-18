@@ -132,10 +132,12 @@ $(document).ready(function() {
             },
             success: function(response) {
                 response.data.forEach(function(message) {
-                    if(message.sender_id  == {{auth()->id()}}) {
+
+
+                    if(message.sender_id == 1) {
+                    console.log('fdslkfjds')
                         sender(message,response.userPhoto)
                     }else{
-                    console.log('here')
                        receiver(message,response.adminPhoto);
                     }
                 });
