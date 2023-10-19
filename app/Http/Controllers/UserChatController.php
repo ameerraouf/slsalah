@@ -42,12 +42,20 @@ class UserChatController extends Controller
 
         $admin = User::query()->where('super_admin' , 1)->first();
 
+        $filePath = '';
+        if($request->has('file') && $request->input('file') != "undefined") {
+            $file = $request->file('file');
+
+            $filePath = $file->store("media", "uploads");
+        }
+
         $chat = Chat::query()->create(
             [
                 'sender_id' => auth()->id(),
                 'message' => $request->input('message'),
                 'user_read_at' => now(),
                 'receiver_id' => $admin->id,
+                'file' => $filePath??null,
             ]
         );
 

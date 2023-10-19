@@ -13,20 +13,6 @@ class AdminChatController extends Controller
 {
     public function index()
     {
-        $chats = Chat::whereIn('id', function ($query) {
-            $query->select(DB::raw('MAX(id)'))
-                ->from('chats')
-                ->where('receiver_id', 1)
-                ->groupBy('sender_id');
-        })
-            ->get();
-        ;
-        return view('super-admin.chat.index', compact('chats'));
-    }
-
-    public function getChat(Request $request)
-    {
-        $chats = Chat::where('sender_id', $request->input('chatId'))->get();
         $adminPhoto = User::query()->where('super_admin', 1)->first()->photo;
         if($adminPhoto) {
             $adminPhoto = url('uploads/'. $adminPhoto);
@@ -42,6 +28,35 @@ class AdminChatController extends Controller
             $userPhoto = env('DEFAULT_PHOTO')??"";
         }
 
+        $chats = Chat::whereIn('id', function ($query) {
+            $query->select(DB::raw('MAX(id)'))
+                ->from('chats')
+                ->where('receiver_id', 1)
+                ->groupBy('sender_id');
+        })
+            ->get();
+        ;
+        return view('super-admin.chat.index', compact('chats', 'userPhoto', 'adminPhoto'));
+    }
+
+    public function getChat(Request $request)
+    {
+        $chats = Chat::where('sender_id', $request->input('chatId'))->orWhere('receiver_id', $request->input('chatId'))->get();
+        $adminPhoto = User::query()->where('super_admin', 1)->first()->photo;
+        if($adminPhoto) {
+            $adminPhoto = url('uploads/'. $adminPhoto);
+        }else{
+            $adminPhoto = env('DEFAULT_PHOTO')??"";
+        }
+
+        $user = User::query()->find($request->input('chatId'));
+
+        if($user){
+            $userPhoto = url('uploads/' . $user->photo);
+        }else{
+            $userPhoto = env('DEFAULT_PHOTO')??"";
+        }
+
         return response()->json(['data' => $chats, 'userPhoto' => $userPhoto, 'adminPhoto' => $adminPhoto]);
     }
 
@@ -53,16 +68,27 @@ class AdminChatController extends Controller
             config('broadcasting.connections.pusher.app_id'),
             config('broadcasting.connections.pusher.options')
         );
+
         $admin = User::query()->where('super_admin' , 1)->first();
+
+        if($request->has('file') && $request->input('file') != "undefined") {
+            $file = $request->file('file');
+
+            $filePath = $file->store("media", "uploads");
+        }
+
         $chat = Chat::query()->create(
             [
                 'sender_id' => $admin->id,
                 'message' => $request->input('message'),
                 'user_read_at' => now(),
-                'receiver_id' => 71,
+                'receiver_id' => $request->input('user_id'),
+                'file' => $filePath??null
             ]
         );
-        $chat['created_at'] = Carbon::parse($chat->created_at)->format('Y-m-d h:m:s');
+
+
         $pusher->trigger('chat-channel', 'new-message', ['chat' => $chat]);
+        return response()->json(['data' => $chat]);
     }
 }

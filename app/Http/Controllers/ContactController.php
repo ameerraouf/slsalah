@@ -67,9 +67,9 @@ class ContactController extends BaseController
     public function show(){
         $investors = Investor::where("workspace_id", $this->user->workspace_id)->get();
         $selected_navigation = "invested_capital_planning";
-    $data = [];
+        $data = [];
         foreach ($investors as $item){
-            $data[] = ['y' => $item->amount, 'label' => $item->first_name . ' ' . $item->last_name . " : $item->amount" . __('Ryal_in_english')];
+            $data[] = ['y' => $item->amount, 'label' => $item->first_name . ' ' . $item->last_name . " : ".  __('Ryal_in_english'). "$item->amount"];
         }
 
         return view('investors.show', compact('data', 'selected_navigation'));

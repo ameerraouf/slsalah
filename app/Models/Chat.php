@@ -24,4 +24,13 @@ class Chat extends Model
     {
         return $this->belongsTo(User::class, 'receiver_id');
     }
+
+
+    public function getFileAttribute($value)
+    {
+        if($value){
+            return url('uploads/'. $value);
+        }
+        return  null;
+    }
 }
