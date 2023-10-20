@@ -648,7 +648,7 @@
     "third_year_hint":"ادخل نسبة السنة الثالثة ، يجب ان تكون اكبر من او تساوي 100 %",
     "planningRevenueOperatingAssumptionsStored": "تم حفظ بيانات تخطيط افتراضات تشغيل الإيرادات",
     "revenue_name": "اسم الايراد",
-    "costs": "التكاليف",
+    "costs": "المصروفات ",
     "profit_before_zakat": "الربح قبل الزكاة EBIT ",
     "yearly_profit_before_zakat": "الربح لكل سنة قبل الزكاة",
     "profit_after_zakat": "صافى الربح EAT",
@@ -715,6 +715,6 @@
     "video_url" : "رابط الفيديو",
     "control_video" : " التحكم في الفيديوهات ",
     "package_details" : "تفاصيل الاشتراك",
-    "net_zakat_value" : " الذكاة",
+    "net_zakat_value" : " الزكاة",
     "View_video" : "عرض الفيديو"
 }

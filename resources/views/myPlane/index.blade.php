@@ -238,6 +238,7 @@
                         </div>
 
                         <h4>{{__('قائمة الدخل')}}</h4>
+                        <x-revenue-after-operating-assumptions></x-revenue-after-operating-assumptions>
                         <div class="col-md-12">
                             <table class="table align-items-center mb-0">
                                 <thead>
@@ -263,7 +264,7 @@
                                     <td class="third_year">{{ formatCurrency((\App\Models\ProjectRevenuePlanning::calcTotalRevenueThirdYear() * $planningCostAssumption->general_expenses / 100),getWorkspaceCurrency($settings)) }}</td>
                                 </tr>
                                 <tr>
-                                    <td style="text-align: center">المصروفات  تسويقية</td>
+                                    <td style="text-align: center">المصروفات  التسويقية </td>
                                     <td class="first_year">{{ formatCurrency((\App\Models\ProjectRevenuePlanning::calcTotalRevenueFirstYear() * $planningCostAssumption->marketing_expenses / 100) ,getWorkspaceCurrency($settings)) }}</td>
                                     <td class="second_year">{{ formatCurrency((\App\Models\ProjectRevenuePlanning::calcTotalRevenueSecondYear() * $planningCostAssumption->marketing_expenses / 100) ,getWorkspaceCurrency($settings)) }}</td>
                                     <td class="third_year">{{ formatCurrency((\App\Models\ProjectRevenuePlanning::calcTotalRevenueThirdYear() * $planningCostAssumption->marketing_expenses / 100) ,getWorkspaceCurrency($settings)) }}</td>
@@ -275,15 +276,64 @@
                                     <td id="third_year_total"></td>
                                 </tr>
                                 <tr>
-                                    <td style="text-align: center;">{{__('profit_before_zakat')}}</td>
-                                    <td style="text-align: center;" id="profit_before_zakat"></td>
-                                    <td style="text-align: center;">{{__('zakat_percent_value')}}</td>
-                                    <td style="text-align: center;" id="zakat_percent_value"></td>
+                                    <td style="text-align: center;">{{__('yearly_profit_before_zakat')}}</td>
+                                    <td>
+                                        @if($calc_total['first_year_profit_before_zakat_as_number'] < 0 )
+                                            <span class="text-danger"> {{$calc_total['first_year_profit_before_zakat']}}</span>
+                                        @else
+                                            {{ $calc_total['first_year_profit_before_zakat'] }}
+                                        @endif
+
+                                    </td>
+                                    <td>
+                                        @if($calc_total['second_year_profit_before_zakat_as_number'] < 0 )
+                                            <span class="text-danger">0 </span>
+                                        @else
+                                            {{ $calc_total['second_year_profit_before_zakat'] }}
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($calc_total['third_year_profit_before_zakat_as_number'] < 0 )
+                                            <span class="text-danger">0 </span>
+                                        @else
+                                            {{ $calc_total['third_year_profit_before_zakat'] }}
+                                        @endif
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td style="text-align: center;" colspan="2">{{__('profit_after_zakat')}}</td>
-                                    <td style="text-align: center;" colspan="2" id="profit_after_zakat"></td>
+                                    <td style="text-align: center;">{{__('net_zakat_value')}}</td>
+                                    <td style="text-align: center;" >
+                                        @if($calc_total['first_year_profit_before_zakat_as_number'] < 0 )
+                                            <span class="text-danger"> 0</span>
+                                        @else
+                                            {{ $calc_total['first_year_profit_before_zakat_percent_value'] }}
+                                        @endif
+                                    </td>
+                                    <td style="text-align: center;" id="second_year_profit_before_zakat_percent_value"></td>
+                                    <td style="text-align: center;" id="third_year_profit_before_zakat_percent_value"></td>
                                 </tr>
+
+                                <tr>
+                                    <td style="text-align: center;" >{{__('profit_after_zakat')}}</td>
+
+                                        @if($calc_total['net_profit_first_year_as_number'] < 0)
+                                        <td style="text-align: center;" class="bg-danger"  >
+
+                                        </td>
+                                    @else
+                                            <td>
+                                                {{$calc_total['net_profit_first_year_as_string']}}
+                                            </td>
+                                        @endif
+
+                                    <td style="text-align: center;"  >
+                                        {{$calc_total['net_profit_second_year_as_string']}}
+                                    </td>
+                                    <td style="text-align: center;"  >
+                                        {{$calc_total['net_profit_third_year_as_string']}}
+                                    </td>
+                                </tr>
+
                                 </tbody>
                             </table>
                         </div>
@@ -337,54 +387,59 @@
                                     <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('foundation_period')}}</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('first_year')}}</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('second_year')}}</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('third_year')}}</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('foundation_period')}}</th>
+
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
                                         <td style="text-align: center">اجمالي الايرادات</td>
+                                        <td></td>
                                         <td>{{ $calc_total['totalRevenueFirstYear'] }}</td>
                                         <td>{{ $calc_total['totalRevenueSecondYear']}}</td>
                                         <td>{{ $calc_total['totalRevenueThirdYear'] }}</td>
                                         {{--                                    <td>{{ $totalInvestedCapital }}</td>--}}
-                                        <td></td>
+{{--                                        <td></td>--}}
                                     </tr>
                                     <tr>
                                         <td style="text-align: center">اجمالي التكاليف</td>
+                                        <td></td>
                                         <td>{{ $calc_total['first_year_costs'] }}</td>
                                         <td>{{ $calc_total['second_year_costs'] }}</td>
                                         <td>{{ $calc_total['third_year_costs'] }}</td>
                                         {{--                                    <td>{{ $totalInvestedCapital }}</td>--}}
-                                        <td></td>
+
                                     </tr>
                                     <tr>
                                         <td style="text-align: center">صافي الربح</td>
+                                        <td></td>
                                         <td>{{ $calc_total['first_year_profit_after_zakat'] }}</td>
                                         <td>{{ $calc_total['second_year_profit_after_zakat'] }}</td>
                                         <td>{{ $calc_total['third_year_profit_after_zakat'] }}</td>
                                         {{--                                    <td>{{ $totalInvestedCapital }}</td>--}}
-                                        <td></td>
+
                                     </tr>
                                     <tr>
                                         <td style="text-align: center">التدفق النقدي السنوي</td>
+                                        <td></td>
                                         <td @if($calc_total['pure_first_year_profit_after_zakat'] < \App\Models\ProjectRevenuePlanning::calcTotalRevenueFirstYear()) style="color: red;" @endif>{{ $calc_total['first_year_cash_flow'] }}</td>
                                         <td @if($calc_total['pure_second_year_profit_after_zakat'] < \App\Models\ProjectRevenuePlanning::calcTotalRevenueSecondYear()) style="color: red;" @endif>{{ $calc_total['second_year_cash_flow'] }}</td>
                                         <td @if($calc_total['pure_third_year_profit_after_zakat'] < \App\Models\ProjectRevenuePlanning::calcTotalRevenueThirdYear()) style="color: red;" @endif>{{ $calc_total['third_year_cash_flow'] }}</td>
                                         {{--                                    <td>{{ $totalInvestedCapital }}</td>--}}
-                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td style="text-align: center">{{ __('Invested_capital') }}</td>
-                                        {{--                                    <td>{{ $totalInvestedCapital }}</td>--}}
-                                        {{--                                    <td>{{ $totalInvestedCapital }}</td>--}}
-                                        {{--                                    <td>{{ $totalInvestedCapital }}</td>--}}
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
                                         <td>{{ $totalInvestedCapital }}</td>
+                                        {{--                                    <td>{{ $totalInvestedCapital }}</td>--}}
+                                        {{--                                    <td>{{ $totalInvestedCapital }}</td>--}}
+                                        {{--                                    <td>{{ $totalInvestedCapital }}</td>--}}
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+
                                     </tr>
                                     </tbody>
                                 </table>
@@ -435,7 +490,7 @@
                         color: "#ff8d04",
                         dataPoints: [
                             @foreach($revenue->sources as $source)
-                                { y: {!! $source->unit !!}, label: '{!! $source->name !!}' },
+                                    { y: {!! $source->unit !!}, label: '{!! $source->name !!}' },
                             @endforeach
                         ]
                     },
@@ -510,7 +565,7 @@
             var str2 ;
             for (var i = 0; i < e.entries.length; i++){
                  if(e.entries[i].dataSeries.name =='الوحدة'){
-                   var str1 = "<span style= \"color:black;font-weight:bold" + "\">" + e.entries[i].dataSeries.name + "</span>: <strong>"+  e.entries[i].dataPoint.y + "</strong> <br/>" ;
+                   var str1 = "<span style= \"color:#ff8d04;font-weight:bold" + "\">" + e.entries[i].dataSeries.name + "</span>: <strong>"+  e.entries[i].dataPoint.y + "</strong> <br/>" ;
                  }else{
                     var str1 = "<span style= \"color:"+e.entries[i].dataSeries.color + "\">" +'<span class="mr-1 text-dark">SAR-</span>'+ e.entries[i].dataSeries.name + "</span>: <strong>"+  e.entries[i].dataPoint.y + "</strong> <br/>" ;
                  }
@@ -636,4 +691,17 @@
             });
         })
     </script>
+
+
+        <script>
+            $(document).ready(function(){
+
+                $('#first_year_profit_before_zakat_percent_value').text('<?=$calc_total['first_year_profit_before_zakat_percent_value']?>');
+                    $('#second_year_profit_before_zakat_percent_value').text('<?=$calc_total['second_year_profit_before_zakat_percent_value']?>');
+
+            $('#third_year_profit_before_zakat_percent_value').text('<?=$calc_total['third_year_profit_before_zakat_percent_value']?>');
+
+        });
+        </script>
+
 @endsection

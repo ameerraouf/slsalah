@@ -53,7 +53,7 @@
                             </div>
                     </div>
                     <div class="card-footer pt-0">
-                        <a href="/subscription-plan?id={{$plan->id}}" type="button"
+                        <a href="/subscription-plan?id={{$plan->id}}" type="button" style="position: absolute;bottom: 0px;"
                            class="btn btn-info mt-3 btn-md ">{{__('Edit')}}</a>
 {{--                        <a href="/delete/subscription-plan/{{$plan->id}}" type="button"--}}
 {{--                           class="btn btn-warning btn-md mt-3">{{__('Delete')}}</a>--}}

@@ -78,24 +78,157 @@ class PlanningRevenueOperatingAssumption extends Model
         foreach ($settings_data as $setting) {
             $settings[$setting->key] = $setting->value;
         }
+
+        $planningRevenueOperatingAssumption = PlanningRevenueOperatingAssumption::query()->where('workspace_id', \auth()->user()->workspace_id)->get()->first();
+        $percentage_first_year_operating_assumption = $planningRevenueOperatingAssumption->first_year / 100;
+        $percentage_second_year_operating_assumption = $planningRevenueOperatingAssumption->second_year / 100;
+        $percentage_third_year_operating_assumption = $planningRevenueOperatingAssumption->third_year / 100;
+
         $planningCostAssumption = PlanningCostAssumption::where(['workspace_id' =>Auth::user()->workspace_id])
             ->first();
+
         $planningFinancialAssumption = PlanningFinancialAssumption::where('workspace_id', Auth::user()->workspace_id)
             ->first();
         $totalRevenueFirstYear = \App\Models\ProjectRevenuePlanning::calcTotalRevenueFirstYear();
+
         $totalRevenueSecondYear = \App\Models\ProjectRevenuePlanning::calcTotalRevenueSecondYear();
         $totalRevenueThirdYear = \App\Models\ProjectRevenuePlanning::calcTotalRevenueThirdYear();
 
         $first_year = ($totalRevenueFirstYear * $planningCostAssumption->operational_costs / 100) + ($totalRevenueFirstYear * $planningCostAssumption->general_expenses / 100) + ($totalRevenueFirstYear * $planningCostAssumption->marketing_expenses / 100);
         $second_year = ($totalRevenueSecondYear * $planningCostAssumption->operational_costs / 100) + ($totalRevenueSecondYear * $planningCostAssumption->general_expenses / 100) + ($totalRevenueSecondYear * $planningCostAssumption->marketing_expenses / 100);
         $third_year = ($totalRevenueThirdYear * $planningCostAssumption->operational_costs / 100) + ($totalRevenueThirdYear * $planningCostAssumption->general_expenses / 100) + ($totalRevenueThirdYear * $planningCostAssumption->marketing_expenses / 100);
+        //added by abanoub
 
+        // اجمالي التكاليف بعد افتراضات التشغيل
+        $firstYearTotalAfterOperatingAssumption = $totalRevenueFirstYear * $percentage_first_year_operating_assumption;
+        $secondYearTotalAfterOperatingAssumption = $totalRevenueSecondYear * $percentage_second_year_operating_assumption;
+        $thirdYearTotalAfterOperatingAssumption = $totalRevenueThirdYear * $percentage_third_year_operating_assumption;
+
+        $first_year_after_operating_assumption_as_string = formatCurrency($firstYearTotalAfterOperatingAssumption ,getWorkspaceCurrency($settings));
+        $second_year_after_operating_assumption_as_string = formatCurrency($secondYearTotalAfterOperatingAssumption ,getWorkspaceCurrency($settings));
+        $third_year_after_operating_assumption_as_string = formatCurrency($thirdYearTotalAfterOperatingAssumption ,getWorkspaceCurrency($settings));
+
+
+        // المصروفات التشغيلية
+        $firstYearOperatingExpenses = $planningCostAssumption->operational_costs /100 * $firstYearTotalAfterOperatingAssumption;
+        $secondYearOperatingExpenses = $planningCostAssumption->operational_costs /100 * $secondYearTotalAfterOperatingAssumption;
+        $thirdYearOperatingExpenses = $planningCostAssumption->operational_costs /100 * $thirdYearTotalAfterOperatingAssumption;
+
+        $firstYearOperatingExpensesAsString = formatCurrency($firstYearOperatingExpenses ,getWorkspaceCurrency($settings));
+        $secondYearOperatingExpensesAsString = formatCurrency($secondYearOperatingExpenses ,getWorkspaceCurrency($settings));
+        $thirdYearOperatingExpensesAsString = formatCurrency($thirdYearOperatingExpenses ,getWorkspaceCurrency($settings));
+
+         // المصروفات التسويقية
+        // = نسبتها * الايرادات قبل افتراضات التشغيل
+        $firstYearMarketingExpenses = $planningCostAssumption->marketing_expenses / 100 * $totalRevenueFirstYear;
+        $secondYearMarketingExpenses = $planningCostAssumption->marketing_expenses / 100 * $totalRevenueSecondYear;
+        $thirdYearMarketingExpenses = $planningCostAssumption->marketing_expenses / 100 * $totalRevenueThirdYear;
+
+        $firstYearMarketingExpensesAsString = formatCurrency($firstYearMarketingExpenses ,getWorkspaceCurrency($settings));
+        $secondYearMarketingExpensesAsString = formatCurrency($secondYearMarketingExpenses ,getWorkspaceCurrency($settings));
+        $thirdYearMarketingExpensesAsString = formatCurrency($thirdYearMarketingExpenses ,getWorkspaceCurrency($settings));
+
+        // مصروفات عمومية
+        $firstYearGeneralExpenses = $planningCostAssumption->general_expenses / 100 * $totalRevenueFirstYear;
+        $secondYearGeneralExpenses = $planningCostAssumption->general_expenses / 100 * $totalRevenueSecondYear;
+        $thirdYearGeneralExpenses = $planningCostAssumption->general_expenses / 100 * $totalRevenueThirdYear;
+
+        $firstYearGeneralExpensesAsString = formatCurrency($firstYearGeneralExpenses ,getWorkspaceCurrency($settings));
+        $secondYearGeneralExpensesAsString = formatCurrency($secondYearGeneralExpenses ,getWorkspaceCurrency($settings));
+        $thirdYearGeneralExpensesAsString = formatCurrency($thirdYearGeneralExpenses ,getWorkspaceCurrency($settings));
+
+        //total cost
+        $totalCostFirstYear = $firstYearGeneralExpenses + $firstYearMarketingExpenses + $firstYearOperatingExpenses;
+        $totalCostFirstYearAsString = formatCurrency($totalCostFirstYear ,getWorkspaceCurrency($settings));
+
+        $totalCostSecondYear = $secondYearGeneralExpenses + $secondYearMarketingExpenses + $secondYearOperatingExpenses;
+        $totalCostSecondYearAsString = formatCurrency($totalCostSecondYear ,getWorkspaceCurrency($settings));
+
+        $totalCostThirdYear = $thirdYearGeneralExpenses + $thirdYearMarketingExpenses + $thirdYearOperatingExpenses;
+        $totalCostThirdYearAsString = formatCurrency($totalCostThirdYear ,getWorkspaceCurrency($settings));
+
+        //end by abanoub
         $profit_before_zakat = ( $totalRevenueFirstYear+ $totalRevenueSecondYear+ $totalRevenueThirdYear) - ( $first_year+ $second_year+ $third_year);
 
-        $first_year_profit_before_zakat = $totalRevenueFirstYear - $first_year;
-        $second_year_profit_before_zakat = $totalRevenueSecondYear - $second_year;
-        $third_year_profit_before_zakat = $totalRevenueThirdYear - $third_year;
+        // اجمالي الايردات بعد افتراضات التشغيل - التكلفة لهذه السنه
+
+        $first_year_profit_before_zakat = $firstYearTotalAfterOperatingAssumption - $totalCostFirstYear;
+        $second_year_profit_before_zakat = $secondYearTotalAfterOperatingAssumption - $totalCostSecondYear;
+        $third_year_profit_before_zakat = $thirdYearTotalAfterOperatingAssumption - $totalCostThirdYear;
+
+        $firstYearProfitBeforeZakatAsString = formatCurrency($first_year_profit_before_zakat, getWorkspaceCurrency($settings));
+        $secondYearProfitBeforeZakatAsString = formatCurrency($second_year_profit_before_zakat, getWorkspaceCurrency($settings));
+        $thirdYearProfitBeforeZakatAsString = formatCurrency($third_year_profit_before_zakat, getWorkspaceCurrency($settings));
+
+
+
+        if($first_year_profit_before_zakat < 0) {
+            $totalProfitBeforeZakatAsNumber =  $second_year_profit_before_zakat + $third_year_profit_before_zakat ;
+        }else{
+            $totalProfitBeforeZakatAsNumber = $first_year_profit_before_zakat + $second_year_profit_before_zakat + $third_year_profit_before_zakat;
+        }
+
+        $totalProfitBeforeZakatAsString = formatCurrency($totalProfitBeforeZakatAsNumber, getWorkspaceCurrency($settings));
+        $totalOfZakat = $totalProfitBeforeZakatAsNumber * .025;
+        $totalProfitAfterZakatAsNumber =  $totalProfitBeforeZakatAsNumber - $totalOfZakat;
+        $totalProfitAfterZakatAsString = formatCurrency($totalProfitAfterZakatAsNumber, getWorkspaceCurrency($settings));
+
+        //صافي الربح لكل سنه
+        $zakatFirstYear = $first_year_profit_before_zakat > 0 ? $first_year_profit_before_zakat * .025 : 0;
+        $zakatSecondYear = $second_year_profit_before_zakat * .025;
+        $zakatThirdYear = $third_year_profit_before_zakat * .025;
+
+        $firstYearNetProfit = $first_year_profit_before_zakat - $zakatFirstYear;
+        $secondYearNetProfit = $second_year_profit_before_zakat - $zakatSecondYear;
+        $thirdYearNetProfit = $third_year_profit_before_zakat - $zakatThirdYear;
+        $investTotalCostFirstYear = $totalCostFirstYear  + $zakatFirstYear;
+
+        $investTotalCostSecondYear = $totalCostSecondYear  + $zakatSecondYear;
+
+        $investTotalCostThirdYear = $totalCostThirdYear  + $zakatThirdYear;
+
         return [
+            // added by abanoub
+            // operating expenses (مصروفات تشغيلية)
+                'first_year_operating_expenses_as_number' => $firstYearOperatingExpenses,
+                'second_year_operating_expenses_as_number' => $secondYearOperatingExpenses,
+                'third_year_operating_expenses_as_number' => $thirdYearOperatingExpenses,
+                'first_year_operating_expenses_as_string' => $firstYearOperatingExpensesAsString,
+                'second_year_operating_expenses_as_string' => $secondYearOperatingExpensesAsString,
+                'third_year_operating_expenses_as_string' => $thirdYearOperatingExpensesAsString,
+            // مصروفات تسويقية
+            'first_year_operating_marketing_as_number' => $firstYearMarketingExpenses,
+            'second_year_operating_marketing_as_number' => $firstYearMarketingExpenses,
+            'third_year_operating_marketing_as_number' => $firstYearMarketingExpenses,
+            'first_year_operating_marketing_as_string' => $firstYearMarketingExpensesAsString,
+            'second_year_operating_marketing_as_string' => $secondYearMarketingExpensesAsString,
+            'third_year_operating_marketing_as_string' => $thirdYearMarketingExpensesAsString,
+            // مصروفات عمومية
+            'first_year_operating_general_as_number' => $firstYearGeneralExpenses,
+            'second_year_operating_general_as_number' => $secondYearGeneralExpenses,
+            'third_year_operating_general_as_number' => $thirdYearGeneralExpenses,
+            'first_year_operating_general_as_string' => $firstYearGeneralExpensesAsString,
+            'second_year_operating_general_as_string' => $secondYearGeneralExpensesAsString,
+            'third_year_operating_general_as_string' => $thirdYearGeneralExpensesAsString,
+
+            // اجمالي التكلفة
+            'total_cost_first_year_as_number' => $totalCostFirstYear,
+            'total_cost_second_year_as_number' => $totalCostSecondYear,
+            'total_cost_third_year_as_number' => $totalCostThirdYear,
+            'total_cost_first_year_as_string' => $totalCostFirstYearAsString,
+            'total_cost_second_year_as_string' => $totalCostSecondYearAsString,
+            'total_cost_third_year_as_string' => $totalCostThirdYearAsString,
+            //اجمالي التكاليف بعد افتراضات التشغيل
+            'first_year_after_operating_assumption_as_number' => $firstYearTotalAfterOperatingAssumption,
+            'second_year_after_operating_assumption_as_number' => $secondYearTotalAfterOperatingAssumption,
+            'third_year_after_operating_assumption_as_number' => $thirdYearTotalAfterOperatingAssumption,
+            'first_year_after_operating_assumption_as_string' => $first_year_after_operating_assumption_as_string,
+            'second_year_after_operating_assumption_as_string' => $second_year_after_operating_assumption_as_string,
+            'third_year_after_operating_assumption_as_string' => $third_year_after_operating_assumption_as_string,
+            //end
+            // profit =
+            'total_profit_before_zakat_as_number' => $totalProfitBeforeZakatAsNumber,
+            'total_profit_before_zakat_as_string' => $totalProfitBeforeZakatAsString,
             'totalRevenueFirstYear'=>formatCurrency($totalRevenueFirstYear ,getWorkspaceCurrency($settings)),
             'totalRevenueSecondYear'=>formatCurrency($totalRevenueSecondYear ,getWorkspaceCurrency($settings)),
             'totalRevenueThirdYear'=>formatCurrency($totalRevenueThirdYear ,getWorkspaceCurrency($settings)),
@@ -104,9 +237,12 @@ class PlanningRevenueOperatingAssumption extends Model
             'second_year'=> formatCurrency($second_year ,getWorkspaceCurrency($settings)),
             'third_year' => formatCurrency($third_year ,getWorkspaceCurrency($settings)),
 
-            'first_year_profit_before_zakat' => formatCurrency($first_year_profit_before_zakat ,getWorkspaceCurrency($settings)),
-            'second_year_profit_before_zakat' => formatCurrency($second_year_profit_before_zakat ,getWorkspaceCurrency($settings)),
-            'third_year_profit_before_zakat' => formatCurrency($third_year_profit_before_zakat ,getWorkspaceCurrency($settings)),
+            'first_year_profit_before_zakat' => $firstYearProfitBeforeZakatAsString,
+            'second_year_profit_before_zakat' => $secondYearProfitBeforeZakatAsString,
+            'third_year_profit_before_zakat' =>$thirdYearProfitBeforeZakatAsString,
+            'first_year_profit_before_zakat_as_number' => $first_year_profit_before_zakat,
+            'second_year_profit_before_zakat_as_number' => $second_year_profit_before_zakat,
+            'third_year_profit_before_zakat_as_number' =>$third_year_profit_before_zakat,
 
             'first_year_profit_before_zakat_percent_value' => formatCurrency($first_year_profit_before_zakat*0.025 ,getWorkspaceCurrency($settings)),
             'second_year_profit_before_zakat_percent_value' => formatCurrency($second_year_profit_before_zakat*0.025 ,getWorkspaceCurrency($settings)),
@@ -132,6 +268,8 @@ class PlanningRevenueOperatingAssumption extends Model
               'third_year_net_cash_flow_number' => ($third_year_profit_before_zakat - $third_year_profit_before_zakat*0.025) * ($planningFinancialAssumption->cash_percentage_of_net_profit/100),
                 //////////////////////////////////
 
+            'total_profit_after_zakat_as_string' => $totalProfitAfterZakatAsString,
+            'total_profit_after_zakat_as_number' => $totalProfitAfterZakatAsNumber,
             'first_year_capital_change' => formatCurrency(((($first_year_profit_before_zakat - $first_year_profit_before_zakat*0.025) * ($planningFinancialAssumption->cash_percentage_of_net_profit/100)) - ($first_year_profit_before_zakat - $first_year_profit_before_zakat*0.025)) ,getWorkspaceCurrency($settings)),
             'second_year_capital_change' => formatCurrency(((($second_year_profit_before_zakat - $second_year_profit_before_zakat*0.025) * ($planningFinancialAssumption->cash_percentage_of_net_profit/100)) - ($second_year_profit_before_zakat - $second_year_profit_before_zakat*0.025)) ,getWorkspaceCurrency($settings)),
             'third_year_capital_change' => formatCurrency(((($third_year_profit_before_zakat - $third_year_profit_before_zakat*0.025) * ($planningFinancialAssumption->cash_percentage_of_net_profit/100)) - ($third_year_profit_before_zakat - $third_year_profit_before_zakat*0.025)),getWorkspaceCurrency($settings)),
@@ -142,7 +280,25 @@ class PlanningRevenueOperatingAssumption extends Model
 
             'first_year_cash_flow'=>formatCurrency(((($first_year_profit_before_zakat - ($first_year_profit_before_zakat*0.025))-$first_year_profit_before_zakat) * ($planningFinancialAssumption->cash_percentage_of_net_profit/100)),getWorkspaceCurrency($settings)),
             'second_year_cash_flow'=>formatCurrency(((($second_year_profit_before_zakat - ($second_year_profit_before_zakat*0.025))-$second_year_profit_before_zakat) * ($planningFinancialAssumption->cash_percentage_of_net_profit/100)),getWorkspaceCurrency($settings)),
-            'third_year_cash_flow'=>formatCurrency(((($third_year_profit_before_zakat - ($third_year_profit_before_zakat*0.025))-$third_year_profit_before_zakat) * ($planningFinancialAssumption->cash_percentage_of_net_profit/100)),getWorkspaceCurrency($settings))
+            'third_year_cash_flow'=>formatCurrency(((($third_year_profit_before_zakat - ($third_year_profit_before_zakat*0.025))-$third_year_profit_before_zakat) * ($planningFinancialAssumption->cash_percentage_of_net_profit/100)),getWorkspaceCurrency($settings)),
+            'zakat_first_year_value_as_string' => formatCurrency($zakatFirstYear, getWorkspaceCurrency($settings)),
+            'zakat_second_year_value_as_string' => formatCurrency($zakatSecondYear, getWorkspaceCurrency($settings)),
+            'zakat_third_year_value_as_string' => formatCurrency($zakatThirdYear, getWorkspaceCurrency($settings)),
+            'zakat_first_year_as_number' => $zakatFirstYear,
+            'zakat_second_year_as_number' => $zakatSecondYear,
+            'zakat_third_year_as_number' => $zakatThirdYear,
+            'net_profit_first_year_as_string' => formatCurrency($firstYearNetProfit, getWorkspaceCurrency($settings)),
+            'net_profit_second_year_as_string' => formatCurrency($secondYearNetProfit, getWorkspaceCurrency($settings)),
+            'net_profit_third_year_as_string' => formatCurrency($thirdYearNetProfit, getWorkspaceCurrency($settings)),
+            'net_profit_first_year_as_number' => $firstYearNetProfit,
+            'net_profit_second_year_as_number' => $secondYearNetProfit,
+            'net_profit_third_year_as_number' => $thirdYearNetProfit,
+            'invest_total_cost_first_year_as_string' => formatCurrency($investTotalCostFirstYear, getWorkspaceCurrency($settings)),
+            'invest_total_cost_second_year_as_string' => formatCurrency($investTotalCostSecondYear, getWorkspaceCurrency($settings)),
+            'invest_total_cost_third_year_as_string' => formatCurrency($investTotalCostThirdYear, getWorkspaceCurrency($settings)),
+            'invest_total_cost_first_year_as_number' => $investTotalCostFirstYear,
+            'invest_total_cost_second_year_as_number' => $investTotalCostSecondYear,
+            'invest_total_cost_third_year_as_number' => $investTotalCostThirdYear,
         ];
     }
 }
