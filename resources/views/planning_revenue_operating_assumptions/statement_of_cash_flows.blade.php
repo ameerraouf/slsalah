@@ -30,19 +30,39 @@
                             @endphp
                             <tr>
                                 <td style="text-align: center">صافي الربح</td>
-                                <td>{{ $first_year_profit }}</td>
-                                <td>{{ $second_year_profit }}</td>
-                                <td>{{ $third_year_profit }}</td>
+                                <td>
+                                    @if($calc_total['net_profit_first_year_as_number'] < 0)
+                                        <strong class="text-danger">{!! $calc_total['net_profit_first_year_as_string'] !!}</strong>
+                                    @else
+                                        {!! $calc_total['net_profit_first_year_as_string'] !!}
+                                    @endif
+                                </td>
+                                <td>{{ $calc_total['net_profit_second_year_as_string']  }}</td>
+                                <td>{{ $calc_total['net_profit_third_year_as_string']  }}</td>
                             </tr>
                             <tr>
                                 <td style="text-align: center">التغير في رأس المال العامل</td>
-                                <td>{!! $calc_total['first_year_capital_change'] !!}</td>
+
+                                    @if($calc_total['net_profit_first_year_as_number'] < 0)
+                                    <td class="bg-danger">
+                                    </td>
+                                        @else
+                                            {!! $calc_total['first_year_capital_change'] !!}
+                                @endif
+
                                 <td>{!! $calc_total['second_year_capital_change'] !!}</td>
                                 <td>{!! $calc_total['third_year_capital_change'] !!}</td>
                             </tr>
                             <tr>
                                 <td style="text-align: center">صافي التدفق النقدي من الأنشطة التشغيلية</td>
-                                <td @if($calc_total['pure_first_year_profit_after_zakat'] <0 ) style="color: red;" @endif>{{ $first_year_net_cash_flow }}</td>
+                                @if($calc_total['net_profit_first_year_as_number'] < 0)
+                                    <td class="bg-danger">
+                                    </td>
+                                @else
+                                <td>
+                                    {!! $first_year_net_cash_flow!!}
+                                </td>
+                                @endif
                                 <td @if($calc_total['pure_second_year_profit_after_zakat'] < 0) style="color: red;" @endif>{{ $second_year_net_cash_flow }}</td>
                                 <td @if($calc_total['pure_third_year_profit_after_zakat'] < 0 ) style="color: red;" @endif>{{ $third_year_net_cash_flow }}</td>
                             </tr>

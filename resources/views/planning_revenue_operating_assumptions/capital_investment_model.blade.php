@@ -24,33 +24,61 @@
                             <tbody>
                             <tr>
                                 <td style="text-align: center">اجمالي الايرادات</td>
-                                <td>{{ $calc_total['totalRevenueFirstYear'] }}</td>
-                                <td>{{ $calc_total['totalRevenueSecondYear']}}</td>
-                                <td>{{ $calc_total['totalRevenueThirdYear'] }}</td>
+                                <td>{{ $calc_total['first_year_after_operating_assumption_as_string'] }}</td>
+                                <td>{{ $calc_total['second_year_after_operating_assumption_as_string']}}</td>
+                                <td>{{ $calc_total['third_year_after_operating_assumption_as_string'] }}</td>
 {{--                                <td>{{ $totalInvestedCapital }}</td>--}}
                                 <td></td>
                             </tr>
                             <tr>
                                 <td style="text-align: center">اجمالي التكاليف</td>
-                                <td>{{ $calc_total['first_year_costs'] }}</td>
-                                <td>{{ $calc_total['second_year_costs'] }}</td>
-                                <td>{{ $calc_total['third_year_costs'] }}</td>
+                                <td>
+
+                                    {{ $calc_total['invest_total_cost_first_year_as_string'] }}
+                                </td>
+                                <td>{{ $calc_total['invest_total_cost_second_year_as_string'] }}</td>
+                                <td>{{ $calc_total['invest_total_cost_third_year_as_string'] }}</td>
 {{--                                <td>{{ $totalInvestedCapital }}</td>--}}
                                 <td></td>
                             </tr>
                             <tr>
                                 <td style="text-align: center">صافي الربح</td>
-                                <td>{{ $calc_total['first_year_profit_after_zakat'] }}</td>
+                                @if($calc_total['net_profit_first_year_as_number'] < 0)
+                                    <td class="text-danger">
+                                        {{ $calc_total['net_profit_first_year_as_string'] }}
+                                    </td>
+                                @else
+                                    <td>
+                                        {{ $calc_total['net_profit_first_year_as_string'] }}
+                                    </td>
+                                @endif
+
                                 <td>{{ $calc_total['second_year_profit_after_zakat'] }}</td>
                                 <td>{{ $calc_total['third_year_profit_after_zakat'] }}</td>
 {{--                                <td>{{ $totalInvestedCapital }}</td>--}}
                                 <td></td>
                             </tr>
                             <tr>
+                                @php
+                                    $first_year_profit = $calc_total['first_year_profit_after_zakat'];
+                                    $second_year_profit = $calc_total['second_year_profit_after_zakat'];
+                                    $third_year_profit = $calc_total['third_year_profit_after_zakat'];
+                                    $first_year_net_cash_flow = $calc_total['first_year_net_cash_flow'];
+                                    $second_year_net_cash_flow = $calc_total['second_year_net_cash_flow'];
+                                    $third_year_net_cash_flow = $calc_total['third_year_net_cash_flow'];
+                                @endphp
                                 <td style="text-align: center">التدفق النقدي السنوي</td>
-                                <td @if($calc_total['first_year_net_cash_flow_number'] < 0) style="color: red;" @endif>{{ $calc_total['first_year_net_cash_flow'] }}</td>
-                                <td @if($calc_total['third_year_net_cash_flow_number'] < 0) style="color: red;" @endif>{{ $calc_total['third_year_net_cash_flow'] }}</td>
-                                <td @if($calc_total['third_year_net_cash_flow_number'] < 0) style="color: red;" @endif>{{ $calc_total['third_year_net_cash_flow'] }}</td>
+                                @if($calc_total['net_profit_first_year_as_number'] < 0)
+                                    <td class="bg-danger">
+
+                                    </td>
+                                @else
+                                    <td>
+                                        {!! $first_year_net_cash_flow!!}
+                                    </td>
+                                @endif
+                                <td @if($calc_total['pure_second_year_profit_after_zakat'] < 0) style="color: red;" @endif>{{ $second_year_net_cash_flow }}</td>
+                                <td @if($calc_total['pure_third_year_profit_after_zakat'] < 0 ) style="color: red;" @endif>{{ $third_year_net_cash_flow }}</td>
 {{--                                <td>{{ $totalInvestedCapital }}</td>--}}
                                 <td></td>
                             </tr>

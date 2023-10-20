@@ -61,7 +61,7 @@
                                 <input class="form-control datetimepicker" type="number" min="0" name="price_monthly" value="{{$plan->price_monthly ?? old('price_monthly') ?? ''}}" data-input>
                             </div>
                             <div class="col-6">
-                                <label class="form-label">{{__('offer_price_monthly')}}</label><label class="text-danger">*</label>
+                                <label class="form-label">{{__('offer_price_monthly')}}</label>
                                 <input class="form-control datetimepicker" name="offer_price_monthly" type="number" min="0"
                                        value="{{$plan->offer_price_monthly ?? old('offer_price_monthly') ?? ''}}" data-input>
                             </div>
@@ -82,12 +82,12 @@
 
                             <div class="col-6">
                                 <label class="form-label">{{__('offer_price_yearly')}}</label><label class="text-danger">*</label>
-                                <input class="form-control datetimepicker" type="number" min="0" name="offer_price_yearly" disabled value="{{$plan->offer_price_yearly ?? old('offer_price_yearly') ?? ''}}" data-input>
+                                <input class="form-control datetimepicker" type="number" min="0" name="offer_price_yearly" value="{{$plan->offer_price_yearly ?? old('offer_price_yearly') ?? ''}}" data-input>
                             </div>
                         </div>
 
                             <div class="mb-3 mt-3">
-                                <label for="paypal_plan_id" class="form-label">{{__('PayPal Plan ID')}}</label>
+                                <label for="paypal_plan_id" class="form-label">{{__('وصف نصي ')}}</label>
                                 <input type="text" class="form-control" name="paypal_plan_id" value="{{$plan->paypal_plan_id ?? old('name') ?? ''}}" id="paypal_plan_id">
                             </div>
 

@@ -242,7 +242,7 @@ class SuperAdminController extends SuperAdminBaseController
             "file_space_limit" => "required|string",
             "offer_price_monthly" => "nullable|numeric|min:0",
             "percentage_discount_annual" => "required|numeric|min:0|max:100",
-//            "offer_price_yearly" => "required|numeric|gt:0",
+            "offer_price_yearly" => "nullable|numeric|gt:0",
         ]);
 
         $plan = false;
@@ -261,7 +261,8 @@ class SuperAdminController extends SuperAdminBaseController
         $plan->price_monthly = $request->price_monthly;
         $plan->offer_price_monthly = $request->offer_price_monthly;
         $plan->percentage_discount_annual = $request->percentage_discount_annual;
-        $plan->offer_price_yearly = $plan->price_yearly - ( $plan->price_yearly * ($request->offer_price_yearly / 100 ));
+        $plan->offer_price_yearly = $plan->price_yearly - ( $plan->price_yearly * ($request->percentage_discount_annual / 100 ));
+
         $plan->maximum_allowed_users = $request->maximum_allowed_users;
         $plan->max_file_upload_size = $request->max_file_upload_size;
         $plan->file_space_limit = $request->file_space_limit;

@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\DB;
 class FinncialReportController extends BaseController
 {
     //
-
     public function getPlanningRevenueOperatingAssumptions(Request $request){
         $planningRevenueOperatingAssumptions = PlanningRevenueOperatingAssumption::where('workspace_id', $this->user->workspace_id)
             ->first();
