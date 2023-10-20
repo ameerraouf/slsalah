@@ -423,3 +423,14 @@ Route::post('/admin/active/subscription/{subscription}', [\App\Http\Controllers\
 Route::get('/admin/subscriptions/{subscription}', [\App\Http\Controllers\SubscriptionController::class,'show'])->name('admin.subscriptions.details');
 
 Route::post('/transfer-bank', [\App\Http\Controllers\TransferBankController::class, 'store'])->name('user.transfer_bank');
+
+Route::prefix('user/chat')->middleware('auth')->group(function (){
+    Route::get('/', [\App\Http\Controllers\UserChatController::class,'index'])->name('user.chat.index');
+    Route::post('/', [\App\Http\Controllers\UserChatController::class, 'send'])->name('user.chat.send');
+});
+
+Route::prefix('admin/chat')->middleware('auth')->group(function (){
+    Route::get('/', [\App\Http\Controllers\AdminChatController::class, 'index'])->name('admin.chat.index');
+    Route::post('/', [\App\Http\Controllers\AdminChatController::class,'send'])->name('admin.chat.send');
+    Route::get('/{chat}', [\App\Http\Controllers\AdminChatController::class,'getChat'])->name('admin.get.chat');
+});
