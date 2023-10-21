@@ -434,3 +434,4 @@ Route::prefix('admin/chat')->middleware('auth')->group(function (){
     Route::post('/', [\App\Http\Controllers\AdminChatController::class,'send'])->name('admin.chat.send');
     Route::get('/{chat}', [\App\Http\Controllers\AdminChatController::class,'getChat'])->name('admin.get.chat');
 });
+
