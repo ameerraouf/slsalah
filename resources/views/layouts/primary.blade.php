@@ -431,6 +431,7 @@
             @if(empty($modules) || in_array('textReport',$modules))
             <li class="nav-item">
                 <a class="nav-link @if(($selected_navigation ?? '') === 'textReport') active @endif  " href="{{ route('textReport.get') }}">
+                    <img src="{{asset('img/reports.svg')}}" height="20" width="20">
                     <span class="nav-link-text ms-3"> التقارير النصية</span>
                 </a>
             </li>

@@ -76,9 +76,10 @@
                                 @endforeach
                                 <tr>
                                     <th>{{ __('total') }}</th>
-                                    <th class="text-muted">{{ formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueFirstYear() ,getWorkspaceCurrency($settings))}}</th>
-                                    <th class="text-muted">{{ formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueSecondYear(),getWorkspaceCurrency($settings)) }}</th>
-                                    <th class="text-muted">{{ formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueThirdYear() ,getWorkspaceCurrency($settings))}}</th>
+
+                                    <th class="text-muted text-center">{{ formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueFirstYear() ,getWorkspaceCurrency($settings))}}</th>
+                                    <th class="text-muted text-center">{{ formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueSecondYear(),getWorkspaceCurrency($settings)) }}</th>
+                                    <th class="text-muted text-center">{{ formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueThirdYear() ,getWorkspaceCurrency($settings))}}</th>
                                 </tr>
                             @endif
                             </tbody>
@@ -490,24 +491,24 @@
                         color: "#ff8d04",
                         dataPoints: [
                             @foreach($revenue->sources as $source)
-                                    { y: {!! $source->unit !!}, label: '{!! $source->name !!}' },
+                                { y: {!! $source->unit !!}, label: '{!! $source->name !!}', indexLabel: '{!! $source->unit !!}', indexLabelPlacement: "outside", indexLabelOrientation: "horizontal" },
                             @endforeach
-                        ]
-                    },
-                    {
+                            ]
+                     },
+                     {
                         type: "bar",
                         showInLegend: true,
                         name: "{!! __('source_unit_price') !!}",
                         color: "#00ffeb",
                         dataPoints: [
                             @foreach($revenue->sources as $source)
-                                { y: {!! $source->unit_price !!}, label: '{!! $source->name !!}' },
+                                { y: {!! $source->unit_price !!}, label: '{!! $source->name !!}', indexLabel: "'{!! $source->unit_price!!}'", indexLabelPlacement: "outside" },
                             @endforeach
-                        ]
-                    },
-                ]
-            });
-            chart.render();
+                            ]
+                        }
+                   ]
+                    });
+                    chart.render();
         @endforeach
 
         CanvasJS.addColorSet("greenShades",
@@ -549,7 +550,6 @@
                     //innerRadius: 60,
                     indexLabelFontSize: 17,
                     indexLabel: "{label}",
-
                     toolTipContent: "<b>{label}</b>",
                     dataPoints: {!! json_encode($workingChart) !!}
                 }]
@@ -595,11 +595,12 @@
                     text: "{!! $revenue->name !!}"
                 },
                 axisY: {
-                    title: "SAR",
+                    title: "",
                     titleFontColor: "#4F81BC",
                     lineColor: "#4F81BC",
                     labelFontColor: "#4F81BC",
-                    tickColor: "#4F81BC"
+                    tickColor: "#4F81BC",
+                    prefix : 'SAR '
                 },
                 axisY2: {
                     title: "SAR",

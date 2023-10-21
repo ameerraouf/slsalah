@@ -41,8 +41,8 @@ class PaypalController extends BaseController
         $response = $provider->createOrder([
             "intent" => "CAPTURE",
             "application_context" => [
-                "return_url" => route('paypalSuccessTransaction', ['package' => $package, 'type' => $type, 'price' => $price]),
-                "cancel_url" => route('paypalCancelTransaction'),
+                "return_url" => route('paypalSuccessTransaction', ['package' => $package->id, 'type' => $type, 'price' => $price]),
+                "cancel_url" => route('paypalCancelTransaction', $package->id),
             ],
 
             "purchase_units" => [
@@ -52,6 +52,9 @@ class PaypalController extends BaseController
                         "value" => "$price"
                     ]
                 ]
+            ],
+            "payment_method"=> [
+                "payee_preferred"=> "UNRESTRICTED"
             ]
         ]);
         if (isset($response['id']) && $response['id'] != null) {
@@ -123,10 +126,10 @@ class PaypalController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function cancelTransaction(Request $request)
+    public function cancelTransaction(Request $request, $package)
     {
         return redirect()
-            ->route('paypal')
+            ->route('packages.details', $package)
             ->with('error', $response['message'] ?? 'You have canceled the transaction.');
     }
 }
