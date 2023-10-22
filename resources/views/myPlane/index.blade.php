@@ -600,14 +600,16 @@
                     lineColor: "#4F81BC",
                     labelFontColor: "#4F81BC",
                     tickColor: "#4F81BC",
-                    prefix : 'SAR '
+                    prefix : 'SAR ',
+                       nameFontColor: 'black'
                 },
                 axisY2: {
                     title: "SAR",
                     titleFontColor: "#C0504E",
                     lineColor: "#C0504E",
                     labelFontColor: "#C0504E",
-                    tickColor: "#C0504E"
+                    tickColor: "#C0504E",
+                     nameFontColor: 'black'
                 },
                 toolTip: {
                     shared: true
@@ -619,34 +621,34 @@
                 data: [
                     {
                         type: "column",
-                        name: "{!! __('first_year') !!}",
-                        legendText: "{!! __('first_year') !!}",
+                        name: "SAR {!! __('first_year') !!}",
+                        legendText: "SAR {!! __('first_year') !!}",
                         showInLegend: true,
                         dataPoints:[
                             @foreach($revenue->sources as $source)
-                                { label:"{!! $source->name  !!}", y:" SAR "+  {!! $source->total_revenue * ($planningRevenueOperatingAssumptions->first_year / 100) !!} },
+                                { label:"{!! $source->name  !!}", y: {!! $source->total_revenue * ($planningRevenueOperatingAssumptions->first_year / 100) !!} },
                             @endforeach
                         ]
                     },
                     {
                         type: "column",
-                        name: "{!! __('second_year') !!}",
+                        name: "SAR {!! __('second_year') !!}",
                         legendText: "{!! __('second_year') !!}",
                         showInLegend: true,
                         dataPoints:[
                             @foreach($revenue->sources as $source)
-                                { label: "{!! $source->name !!}", y:" SAR "+  {!! $source->total_second_revenue * ($planningRevenueOperatingAssumptions->second_year / 100) !!} },
+                                { label: "{!! $source->name !!}", y: {!! $source->total_second_revenue * ($planningRevenueOperatingAssumptions->second_year / 100) !!} },
                             @endforeach
                         ]
                     },
                     {
                         type: "column",
-                        name: "{!! __('third_year') !!}",
+                        name: "SAR {!! __('third_year') !!}",
                         legendText: "{!! __('third_year') !!}",
                         showInLegend: true,
                         dataPoints:[
                             @foreach($revenue->sources as $source)
-                                { label: "{!! $source->name !!}", y:" SAR "+  {!! $source->total_third_revenue * ($planningRevenueOperatingAssumptions->third_year / 100) !!} },
+                                { label: "{!! $source->name !!}", y: {!! $source->total_third_revenue * ($planningRevenueOperatingAssumptions->third_year / 100) !!} },
                             @endforeach
                         ]
                     },

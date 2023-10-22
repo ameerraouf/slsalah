@@ -41,20 +41,20 @@ class VideoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'url' => 'required| starts_with:https://www.youtube.com/',
-            'description' => 'required',
-            'time' => 'required',
-            'isActive' => 'required',
+            'video_name' => 'required',
+            'video_url' => 'required| starts_with:https://www.youtube.com/',
+            'video_description' => 'required',
+            'video_time' => 'required',
+            'video_isActive' => 'required',
         ], [
-            'url.starts_with' => 'يجب ان يكون الحقل رابط من موقع اليوتيوب '
+            'video_url.starts_with' => 'يجب ان يكون الحقل رابط من موقع اليوتيوب '
         ]);
        $video = Video::create([
-            'name' => $request->name,
-            'url' => $request->url,
-            'description' => $request->description,
-            'time' => $request->time,
-            'isActive' => ($request->isActive == 1 ? 1 :0 ),
+            'name' => $request->video_name,
+            'url' => $request->video_url,
+            'description' => $request->video_description,
+            'time' => $request->video_time,
+            'isActive' => ($request->video_isActive == 1 ? 1 :0 ),
         ]);
         $users = User::query()->where('super_admin', 0)->get();
 

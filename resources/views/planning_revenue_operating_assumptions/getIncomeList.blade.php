@@ -62,7 +62,7 @@
                                     <td class="third_year">{{ $calc_total['third_year_operating_marketing_as_string'] }}</td>
                                 </tr>
                                 <tr style="border-bottom: 5px;">
-                                    <td style="text-align: center;">{{__('total')}}</td>
+                                    <td style="text-align: center;">{{__('إجمالى المصروفات')}}</td>
                                     <td id="first_year_total">{{$calc_total['total_cost_first_year_as_string']}}</td>
                                     <td id="second_year_total">{{$calc_total['total_cost_second_year_as_string']}}</td>
                                     <td id="third_year_total">{{$calc_total['total_cost_third_year_as_string']}}</td>
@@ -92,14 +92,14 @@
                                         @endif
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td style="text-align: center;">{{__('profit_before_zakat')}}</td>
-                                    <td style="text-align: center;" >
-                                        {{$calc_total['total_profit_before_zakat_as_string']}}
-                                    </td>
-                                    <td style="text-align: center;">{{__('zakat_percent_value')}}</td>
-                                    <td style="text-align: center;" id="zakat_percent_value">2.5%</td>
-                                </tr>
+{{--                                <tr>--}}
+{{--                                    <td style="text-align: center;">{{__('profit_before_zakat')}}</td>--}}
+{{--                                    <td style="text-align: center;" >--}}
+{{--                                        {{$calc_total['total_profit_before_zakat_as_string']}}--}}
+{{--                                    </td>--}}
+{{--                                    <td style="text-align: center;">{{__('zakat_percent_value')}}</td>--}}
+{{--                                    <td style="text-align: center;" id="zakat_percent_value">2.5%</td>--}}
+{{--                                </tr>--}}
                                 <tr>
                                     <td style="text-align: center;">{{__('net_zakat_value')}}</td>
                                     <td style="text-align: center;" >
@@ -113,9 +113,15 @@
                                     <td style="text-align: center;" id="third_year_profit_before_zakat_percent_value"></td>
                                 </tr>
                                 <tr>
-                                    <td style="text-align: center;" colspan="2">{{__('profit_after_zakat')}}</td>
-                                    <td style="text-align: center;" colspan="2" >
-                                        {{$calc_total['total_profit_after_zakat_as_string']}}
+                                    <td style="text-align: center;" >{{__('profit_after_zakat')}}</td>
+                                    <td style="text-align: center;"  >
+                                        {{$calc_total['first_year_profit_after_zakat']}}
+                                    </td>
+                                    <td style="text-align: center;"  >
+                                        {{$calc_total['second_year_profit_after_zakat']}}
+                                    </td>
+                                    <td style="text-align: center;"  >
+                                        {{$calc_total['third_year_profit_after_zakat']}}
                                     </td>
                                 </tr>
                             </tbody>
