@@ -25,8 +25,8 @@ class PlanningCostAssumptionsRequest extends FormRequest
     {
         return [
             'operational_costs'=>'required|numeric|min:1',
-            'general_expenses'=>'required|numeric|min:5|max:20',
-            'marketing_expenses'=>'required|numeric|min:5|max:20'
+            'general_expenses'=>'required|numeric',
+            'marketing_expenses'=>'required|numeric'
         ];
     }
     public function messages()
