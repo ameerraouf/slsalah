@@ -87,7 +87,7 @@
                         </div>
 
                             <div class="mb-3 mt-3">
-                                <label for="paypal_plan_id" class="form-label">{{__('وصف نصي ')}}</label>
+                                <label for="paypal_plan_id" class="form-label">{{__('وصف نصي ')}}</label><label class="text-danger">*</label>
                                 <input type="text" class="form-control" name="paypal_plan_id" value="{{$plan->paypal_plan_id ?? old('name') ?? ''}}" id="paypal_plan_id">
                             </div>
 

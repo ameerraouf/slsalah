@@ -624,7 +624,7 @@
                         showInLegend: true,
                         dataPoints:[
                             @foreach($revenue->sources as $source)
-                                { label:"{!! $source->name  !!}", y: {!! $source->total_revenue * ($planningRevenueOperatingAssumptions->first_year / 100) !!} },
+                                { label:"{!! $source->name  !!}", y:" SAR "+  {!! $source->total_revenue * ($planningRevenueOperatingAssumptions->first_year / 100) !!} },
                             @endforeach
                         ]
                     },
@@ -635,7 +635,7 @@
                         showInLegend: true,
                         dataPoints:[
                             @foreach($revenue->sources as $source)
-                                { label: "{!! $source->name !!}", y: {!! $source->total_second_revenue * ($planningRevenueOperatingAssumptions->second_year / 100) !!} },
+                                { label: "{!! $source->name !!}", y:" SAR "+  {!! $source->total_second_revenue * ($planningRevenueOperatingAssumptions->second_year / 100) !!} },
                             @endforeach
                         ]
                     },
@@ -646,7 +646,7 @@
                         showInLegend: true,
                         dataPoints:[
                             @foreach($revenue->sources as $source)
-                                { label: "{!! $source->name !!}", y: {!! $source->total_third_revenue * ($planningRevenueOperatingAssumptions->third_year / 100) !!} },
+                                { label: "{!! $source->name !!}", y:" SAR "+  {!! $source->total_third_revenue * ($planningRevenueOperatingAssumptions->third_year / 100) !!} },
                             @endforeach
                         ]
                     },
