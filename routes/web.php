@@ -435,3 +435,9 @@ Route::prefix('admin/chat')->middleware('auth')->group(function (){
     Route::get('/{chat}', [\App\Http\Controllers\AdminChatController::class,'getChat'])->name('admin.get.chat');
 });
 
+Route::post('set-offer_price_yearly', function (\Illuminate\Http\Request $request){
+    $value = $request->input('value');
+    session()->put('offer_price_yearly', $value);
+    return response()->json(['success' => true]);
+})->name('offer_price_yearly');
+

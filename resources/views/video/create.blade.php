@@ -29,12 +29,12 @@
                                         <div class="row mt-3">
                                             <div class="col-12 col-sm-6">
                                                 <label>{{ __('Name Video') }}</label><label class="text-danger">*</label>
-                                                <input name="name" class="multisteps-form__input form-control"
+                                                <input name="video_name" class="multisteps-form__input form-control"
                                                     type="text">
                                             </div>
                                             <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                                                 <label>{{ __('url Video') }}</label><label class="text-danger">*</label>
-                                                <input name="url" class="multisteps-form__input form-control"
+                                                <input name="video_url" class="multisteps-form__input form-control"
                                                     type="text">
                                                 
                                             </div>
@@ -42,7 +42,7 @@
                                         <div class="row mt-3">
                                             <div class="col-md-12">
                                                 <label>{{ __('Description_in_video') }}</label><label class="text-danger">*</label>
-                                                <input name="description" class="multisteps-form__input form-control"
+                                                <input name="video_description" class="multisteps-form__input form-control"
                                                     type="text">
                                                 
                                             </div>
@@ -51,7 +51,7 @@
                                         <div class="row mt-3">
                                             <div class="col-md-12">
                                                 <label>{{ __('Time_in_video') }}</label><label class="text-danger">*</label>
-                                                <input name="time" class="multisteps-form__input form-control"
+                                                <input name="video_time" class="multisteps-form__input form-control"
                                                     type="time">
                                                
                                             </div>
@@ -60,12 +60,12 @@
                                         <div class="row mt-3">
                                             <div class="col-12 col-sm-6">
                                                 <label>{{ __('View') }}</label><label class="text-danger">*</label>
-                                                <input name="isActive" type="radio" value="1">
+                                                <input name="video_isActive" type="radio" value="1">
                                                
                                             </div>
                                             <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                                                 <label>{{ __('isNotActive') }}</label><label class="text-danger">*</label>
-                                                <input name="isActive" type="radio" value="0">
+                                                <input name="video_isActive" type="radio" value="0">
                                                 
                                             </div>
                                         </div>

@@ -82,7 +82,7 @@
 
                             <div class="col-6">
                                 <label class="form-label">{{__('offer_price_yearly')}}</label><label class="text-danger">*</label>
-                                <input class="form-control datetimepicker" type="number" min="0" name="offer_price_yearly" value="{{$plan->offer_price_yearly ?? old('offer_price_yearly') ?? ''}}" data-input>
+                                <input class="form-control datetimepicker" type="number" disabled min="0" name="offer_price_yearly" value="{{$plan->offer_price_yearly ?? old('offer_price_yearly') ?? ''}}" data-input>
                             </div>
                         </div>
 
@@ -126,7 +126,7 @@
                             @endforeach
                         </ul>
 
-                        <label class="mt-4">{{__('Description')}}</label>
+                        <label class="mt-4">{{__('Description')}}</label><label class="text-danger">*</label>
 
                         <div class="form-group">
                             <textarea class="form-control" rows="10" id="description"
@@ -154,14 +154,14 @@
                                     @endforeach
                                 @endif
 
-                                <div class="row feature_row">
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" name="features[]">
-                                    </div>
-                                    <div class="col-md-3 text-end">
-                                        <button class="btn btn-sm btn-danger btn_remove_feature"><i class="fas fa-minus"></i> </button>
-                                    </div>
-                                </div>
+{{--                                <div class="row feature_row">--}}
+{{--                                    <div class="col-md-9">--}}
+{{--                                        <input type="text" class="form-control" name="features[]">--}}
+{{--                                    </div>--}}
+{{--                                    <div class="col-md-3 text-end">--}}
+{{--                                        <button class="btn btn-sm btn-danger btn_remove_feature"><i class="fas fa-minus"></i> </button>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                             </div>
                         </div>
                         <div class="mb-3">
@@ -250,6 +250,24 @@
                 let price = parseInt($('input[name=price_yearly]').val());
                 let value = price - (price * ($(this).val() / 100 ));
                 $('input[name=offer_price_yearly]').val(value);
+
+
+
+                $.ajax({
+                    url: '{{ route('offer_price_yearly') }}',
+                    method: 'POST',
+                     headers: {
+                          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                     },
+                    data: { value: value },
+
+                    success: function(response) {
+                        console.log('Session value set successfully');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error setting session value:', error);
+                    }
+                });
             });
         });
     </script>

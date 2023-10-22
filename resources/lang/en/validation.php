@@ -238,7 +238,12 @@ return [
         'file_space_limit' => ' نوع الملفات المسموح بها ',
         'paypal_plan_id' => 'وصف نصي',
         'subscription_type' => 'نوع الاشتراك',
-        'phone_number' => 'رقم الجوال'
+        'phone_number' => 'رقم الجوال',
+        'video_name' => 'اسم الفيديو',
+        'video_url' => 'رابط الفيديو',
+        'video_description' => 'وصف الفيديو',
+        'video_time' => 'وقت العرض للمستخدم',
+        'video_isActive' => 'عرض او حجب الفيديو'
     ],
 
 ];

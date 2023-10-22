@@ -17,6 +17,9 @@
             <div class="col-md-3  mb-4 ">
                 <div class="card " style="height: 460px; overflow-y:scroll">
                     <div class="card-header text-center ">
+                        @if($plan->active == 0)
+                        <h6 class="bg-danger text-white rounded w-50 mx-auto">معطلة</h6>
+                        @endif
                         <h5 class="text-purple opacity-8 text mb-2">{{$plan->name}}</h5>
                         <p>{!! $plan->description !!}</p>
                         <span>
