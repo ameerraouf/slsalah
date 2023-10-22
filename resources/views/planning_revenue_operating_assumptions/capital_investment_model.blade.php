@@ -34,10 +34,10 @@
                                 <td style="text-align: center">اجمالي التكاليف</td>
                                 <td>
 
-                                    {{ $calc_total['invest_total_cost_first_year_as_string'] }}
+                                    {{ $calc_total['total_cost_first_year_as_string'] }}
                                 </td>
-                                <td>{{ $calc_total['invest_total_cost_second_year_as_string'] }}</td>
-                                <td>{{ $calc_total['invest_total_cost_third_year_as_string'] }}</td>
+                                <td>{{ $calc_total['total_cost_second_year_as_string'] }}</td>
+                                <td>{{ $calc_total['total_cost_third_year_as_string'] }}</td>
 {{--                                <td>{{ $totalInvestedCapital }}</td>--}}
                                 <td></td>
                             </tr>
