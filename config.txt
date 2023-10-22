@@ -3,7 +3,7 @@ APP_NAME=CloudOnex
 APP_ENV=production
 APP_KEY=base64:xFdMvSpKeDGnmW75lMNZqvOBDBvvUZ5lcGPLanB0MTw=
 APP_DEBUG=true
-APP_URL="http://dev.slsalah.space"
+APP_URL="http://dev2.slsalah.space"
 
 LOCALE=en
 DATE_FORMAT="M d Y"
