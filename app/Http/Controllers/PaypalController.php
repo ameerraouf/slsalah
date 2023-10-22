@@ -91,29 +91,27 @@ class PaypalController extends BaseController
         $subscriptionType = $request->query('type');
         $price = $request->query('price');
 
-        userSubscribe($planId,$subscriptionType,$price,'حواله بنكية', null,null,'',0);
-        $subscription= Subscribe::query()->where('subscription_plan_id', $planId)->first();
-
-        $data = [
-            'subscribe' => $subscription,
-            'plan' => SubscriptionPlan::query()->find($planId),
-            'user' => $this->user,
-            'type' => 'اشتراك جديد'
-        ];
-
-        $admins = User::query()->where('super_admin', 1)->get();
-
-        foreach ($admins as $admin)
-        {
-            $admin->notify(new NewSubscriptionNotification($data));
-        }
 
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
+            $subscription= Subscribe::query()->where('subscription_plan_id', $planId)->first();
+
+            $data = [
+                'subscribe' => $subscription,
+                'plan' => SubscriptionPlan::query()->find($planId),
+                'user' => $this->user,
+                'type' => 'اشتراك جديد'
+            ];
             userSubscribe($planId,$subscriptionType,$price,'paypal', null,null,'',1);
+            $admins = User::query()->where('super_admin', 1)->get();
+
+            foreach ($admins as $admin)
+            {
+                $admin->notify(new NewSubscriptionNotification($data));
+            }
 
             return redirect()
                 ->route('user.package')
-                ->with('success', 'Transaction complete.');
+                ->with('success', 'تم الاشتراك في الباقة بنجاح.');
         } else {
 
             return redirect()
