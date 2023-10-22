@@ -120,18 +120,20 @@ class PlanningRevenueOperatingAssumption extends Model
 
          // المصروفات التسويقية
         // = نسبتها * الايرادات قبل افتراضات التشغيل
-        $firstYearMarketingExpenses = $planningCostAssumption->marketing_expenses / 100 * $totalRevenueFirstYear;
-        $secondYearMarketingExpenses = $planningCostAssumption->marketing_expenses / 100 * $totalRevenueSecondYear;
-        $thirdYearMarketingExpenses = $planningCostAssumption->marketing_expenses / 100 * $totalRevenueThirdYear;
+        $firstYearMarketingExpenses = $planningCostAssumption->marketing_expenses / 100 * $firstYearTotalAfterOperatingAssumption;
+        $secondYearMarketingExpenses = $planningCostAssumption->marketing_expenses / 100 * $secondYearTotalAfterOperatingAssumption;
+        $thirdYearMarketingExpenses = $planningCostAssumption->marketing_expenses / 100 * $thirdYearTotalAfterOperatingAssumption;
 
         $firstYearMarketingExpensesAsString = formatCurrency($firstYearMarketingExpenses ,getWorkspaceCurrency($settings));
         $secondYearMarketingExpensesAsString = formatCurrency($secondYearMarketingExpenses ,getWorkspaceCurrency($settings));
         $thirdYearMarketingExpensesAsString = formatCurrency($thirdYearMarketingExpenses ,getWorkspaceCurrency($settings));
 
+
         // مصروفات عمومية
-        $firstYearGeneralExpenses = $planningCostAssumption->general_expenses / 100 * $totalRevenueFirstYear;
-        $secondYearGeneralExpenses = $planningCostAssumption->general_expenses / 100 * $totalRevenueSecondYear;
-        $thirdYearGeneralExpenses = $planningCostAssumption->general_expenses / 100 * $totalRevenueThirdYear;
+        $firstYearGeneralExpenses = $planningCostAssumption->general_expenses / 100 * $firstYearTotalAfterOperatingAssumption;
+
+        $secondYearGeneralExpenses = $planningCostAssumption->general_expenses / 100 * $secondYearTotalAfterOperatingAssumption;
+        $thirdYearGeneralExpenses = $planningCostAssumption->general_expenses / 100 * $thirdYearTotalAfterOperatingAssumption;
 
         $firstYearGeneralExpensesAsString = formatCurrency($firstYearGeneralExpenses ,getWorkspaceCurrency($settings));
         $secondYearGeneralExpensesAsString = formatCurrency($secondYearGeneralExpenses ,getWorkspaceCurrency($settings));
