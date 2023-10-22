@@ -38,6 +38,7 @@ class RevenueAfterOperatingAssumptions extends Component
         $this->planningFinancialAssumption = PlanningFinancialAssumption::where('workspace_id', auth()->user()->workspace_id)
             ->first();
         $this->calc_total = $this->planningRevenueOperatingAssumptions->calc_total;
+
         $this->projectRevenuesPlanning = ProjectRevenuePlanning::with(['sources'])->where(['workspace_id' =>auth()->user()->workspace_id])->get();
 
     }
