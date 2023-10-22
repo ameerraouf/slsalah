@@ -47,8 +47,10 @@
                                     <td class="bg-danger">
                                     </td>
                                         @else
-                                            {!! $calc_total['first_year_capital_change'] !!}
-                                @endif
+                                          <td>
+                                              {!! $calc_total['first_year_capital_change'] !!}
+                                          </td>
+                                     @endif
 
                                 <td>{!! $calc_total['second_year_capital_change'] !!}</td>
                                 <td>{!! $calc_total['third_year_capital_change'] !!}</td>
