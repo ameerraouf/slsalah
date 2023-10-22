@@ -38,6 +38,9 @@
                         <div class="align-items-center mx-1">
                             <span class="d-block text-start">{{$chat->sender->first_name . ' '. $chat->sender->last_name}}</span>
                         </div>
+                        <div class="align-items-center ">
+                            <span class="text-danger mx-3" id="count{{$chat->sender_id}}"></span>
+                        </div>
                     </div>
                     <hr>
                 @endforeach
@@ -52,6 +55,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <script>
+    sessionStorage.setItem('chat_id',null)
     // Enable pusher logging - don't include this in production
     Pusher.logToConsole = true;
 
@@ -62,9 +66,28 @@
 
     var channel = pusher.subscribe('chat-channel');
     channel.bind('new-message', function(data) {
+        //if this sender id not found in the list create a new and click on it
+        // if chat exist and not open
+        console.log('session '+ sessionStorage.getItem('chat_id'));
 
+        if ($('#count'+ data.chat.sender_id).length && sessionStorage.getItem('chat_id') != data.chat.sender_id) {
+            var countElement = $('#count'+ data.chat.sender_id);
+            var countText = countElement.text().trim();
+            var count = parseInt(countText);
 
+            if (!isNaN(count)) { // Check if parsing was successful
+                count++;
+                countElement.text(count);
+            } else {
+                countElement.text(1);
+            }
+        }else{
+
+        }
+
+        //mean the chat is open
         if(sessionStorage.getItem('chat_id') == data.chat.sender_id) {
+        console.log('new mesage ');
             var timestamp = data.chat.created_at;
             var message = data.chat.message;
 
@@ -175,8 +198,10 @@
 $(document).ready(function() {
     // Handle chat click event
     $('.cursor-pointer').click(function() {
+
         var chatId = $(this).attr('id');
         sessionStorage.setItem('chat_id', chatId);
+    $('#count'+chatId).text('');
         $('.hide').css('display', 'block');
 
         $('.message-container').empty();

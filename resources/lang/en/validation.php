@@ -237,7 +237,8 @@ return [
         'features.*' => 'الميزة',
         'file_space_limit' => ' نوع الملفات المسموح بها ',
         'paypal_plan_id' => 'وصف نصي',
-        'subscription_type' => 'نوع الاشتراك'
+        'subscription_type' => 'نوع الاشتراك',
+        'phone_number' => 'رقم الجوال'
     ],
 
 ];
