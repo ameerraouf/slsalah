@@ -27,7 +27,6 @@ class ClickPayController extends BaseController
             "cart_currency" => "SAR",
             "cart_amount" => $price,
             "callback" => route('click_pay.fail',['plan' => $plan]),
-
             "return" => route('click_pay.success',  ['plan' => $plan, 'type' => $type, 'price' => $price]),
         ];
 
@@ -51,7 +50,7 @@ class ClickPayController extends BaseController
     }
 
 
-    public function clickPaySuccess(Request $request): \Illuminate\Http\RedirectResponse
+    public function clickPaySuccess(Request $request)
     {
         $planId = $request->input('plan');
         $subscriptionType = $request->input('type');
