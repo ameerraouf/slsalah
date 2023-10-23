@@ -45,10 +45,10 @@
                         <a class="text-info" href="{{route('paypalProcessTransaction', ['package' => $package->id, 'type' => 'yearly'])}}">Paypal (اشتراك سنوي)</a>
                     </div>
                     <div class="col-4">
-                        <a href="">Clickup (Monthly)</a>
+                        <a class="text-info" href="{{route('click_pay', ['package' => $package->id, 'type' => 'monthly'])}}">كليك باي (اشتراك شهري)</a>
                     </div>
                     <div class="col-4">
-                        <a href="">Clickup (Yearly)</a>
+                        <a class="text-info" href="{{route('click_pay', ['package' => $package->id, 'type' => 'yearly'])}}">كليك باي (اشتراك سنوي)</a>
                     </div>
                 </div>
                 <div class="col-12">
