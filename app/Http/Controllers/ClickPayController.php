@@ -51,12 +51,12 @@ class ClickPayController extends BaseController
     }
 
 
-    public function clickPaySuccess(Request $request)
+    public function clickPaySuccess(Request $request): \Illuminate\Http\RedirectResponse
     {
         $planId = $request->input('plan');
         $subscriptionType = $request->input('type');
         $price = $request->input('price');
-
+dd($request->all());
         $subscription= Subscribe::query()->where('subscription_plan_id', $planId)->first();
 
         $data = [
