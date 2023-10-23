@@ -72,10 +72,9 @@ class ClickPayController extends BaseController
             $admin->notify(new NewSubscriptionNotification($data));
         }
 
-        return redirect()
-            ->route('user.package')
-            ->with('success', 'تم الاشتراك في الباقة بنجاح.');
+        session()->flash('success', 'تم الاشتراك في الباقة بنجاح.');
 
+        return redirect()->to('/user/package');
     }
 
     public function clickPayFail(Request $request)
