@@ -80,9 +80,10 @@ dd($request->all());
     public function clickPayFail(Request $request)
     {
         session()->flash('error_message', 'يوجد مشكله في الدفع جرب مره اخري ف وقت لاحق');
-
-        return redirect()
-            ->route('packages.details', $request->plan)
-            ->with('error', $response['message'] ?? 'Something went wrong.');
+        dd('ok');
+//
+//        return redirect()
+//            ->route('packages.details', $request->plan)
+//            ->with('error', $response['message'] ?? 'Something went wrong.');
     }
 }
