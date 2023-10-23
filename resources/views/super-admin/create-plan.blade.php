@@ -138,7 +138,7 @@
                                 @endif</textarea>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">{{__('Features')}}</label>
+                            <label class="form-label">{{__('Features')}}</label><lable class="text-danger">*</lable>
                             <div id="div_features">
 
                                 @if(!empty($features))
