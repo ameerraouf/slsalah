@@ -52,7 +52,7 @@ class ClickPayController extends BaseController
 
     public function clickPaySuccess(Request $request)
     {
-        dd('fsdlkfjdsfjlsd');
+        dd('success');
         $planId = $request->input('plan');
         $subscriptionType = $request->input('type');
         $price = $request->input('price');
