@@ -404,6 +404,12 @@ Route::get("/textReport", [\App\Http\Controllers\FinncialReportController::class
 
 Route::get('/myPlan', [\App\Http\Controllers\MyPlanController::class, 'index'])->name('myPlan.index');
 
+
+Route::get('click-pay', [\App\Http\Controllers\ClickPayController::class,'pay'])->name('click_pay');
+Route::get('click-pay-success', [\App\Http\Controllers\ClickPayController::class, 'clickPaySuccess'])->name('click_pay.success');
+Route::get('click-pay-fail', [\App\Http\Controllers\ClickPayController::class, 'clickPayFail'])->name('click_pay.fail');
+
+
 Route::get('paypal/{package}', [PayPalController::class, 'createTransaction'])->name('paypal');
 Route::get('paypal-process/{package}', [PayPalController::class, 'processTransaction'])->name('paypalProcessTransaction');
 Route::get('paypal-success', [PayPalController::class, 'successTransaction'])->name('paypalSuccessTransaction');
@@ -440,7 +446,3 @@ Route::post('set-offer_price_yearly', function (\Illuminate\Http\Request $reques
     session()->put('offer_price_yearly', $value);
     return response()->json(['success' => true]);
 })->name('offer_price_yearly');
-
-Route::get('click-pay', [\App\Http\Controllers\ClickPayController::class,'pay'])->name('click_pay');
-Route::get('click-pay-fail', [\App\Http\Controllers\ClickPayController::class, 'clickPayFail'])->name('click_pay.fail');
-Route::get('click-pay-success', [\App\Http\Controllers\ClickPayController::class, 'clickPaySuccess'])->name('click_pay.success');
