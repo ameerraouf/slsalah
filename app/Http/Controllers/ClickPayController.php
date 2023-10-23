@@ -26,7 +26,7 @@ class ClickPayController extends BaseController
             "cart_description" => "Subscribe in plan",
             "cart_currency" => "SAR",
             "cart_amount" => $price,
-            "callback" => route('click_pay.fail',['plan' => $plan]),
+//            "callback" => route('click_pay.fail',['plan' => $plan]),
             "return" => route('click_pay.success',  ['plan' => $plan, 'type' => $type, 'price' => $price]),
         ];
 
