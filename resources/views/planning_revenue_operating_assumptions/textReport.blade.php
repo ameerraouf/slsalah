@@ -43,15 +43,20 @@
                             $first_year_net_cash_flow = $calc_total['first_year_net_cash_flow'];
                             $second_year_net_cash_flow = $calc_total['second_year_net_cash_flow'];
                             $third_year_net_cash_flow = $calc_total['third_year_net_cash_flow'];
-                            $firstYearProfit = $calc_total['first_year_profit_before_zakat'] < 0 ? "0 SAR" : $calc_total['first_year_profit_before_zakat'];
+                            $firstYearProfit = $calc_total['first_year_profit_before_zakat'] < 0 ? " وقيمة الزكاه ستكون ( 0 SAR )في السنة الاولي في حالة عدم وجود ربح" : "وقيمة الزكاة ستكون في السنة الاولي ( ". $calc_total['zakat_first_year_value_as_string'] .')' ;
+
                         @endphp
-                        <p>*يمكن تحقيق بواسطة {{ $revenues }} سيحقق في السنة الأولى (({{formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueFirstYear() * $first_year_percentage,getWorkspaceCurrency($settings)) }} وسيحقق في السنة الثانية ({{ formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueSecondYear() * $second_year_percentage,getWorkspaceCurrency($settings)) }}) وسيحقق في السنة الثالثة ({{ formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueFirstYear() * $first_year_percentage,getWorkspaceCurrency($settings) )  }})</p>
+                        <p>*يمكن تحقيق بواسطة {{ $revenues }} سيحقق في السنة الأولى (({{formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueFirstYear() * $first_year_percentage,getWorkspaceCurrency($settings)) }} وسيحقق في السنة الثانية ({{ formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueSecondYear() * $second_year_percentage,getWorkspaceCurrency($settings)) }}) وسيحقق في السنة الثالثة ({{ formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueFirstYear() * $third_year_percentage,getWorkspaceCurrency($settings) )  }})</p>
                         <p> **وسيكون هناك مصروفات إدارية وعمومية في السنة الأولى بقيمة ({{$calc_total['first_year_operating_general_as_string']}} ) والتي تمثل {{ $planningCostAssumption->general_expenses }}% من إجمالي الإيرادات وأيضا في السنة الثانية بقيمة ({{  $calc_total['second_year_operating_general_as_string'] }}) وأيضا في السنة الثالثة بقيمة ({{ $calc_total['third_year_operating_general_as_string'] }})</p>
                         <p> **وسيكون هناك مصروفات تشغيلية في السنة الأولى بقيمة ({{  $calc_total['first_year_operating_expenses_as_string']}}) والتي تمثل {{ $planningCostAssumption->operational_costs }}% من إجمالي الإيرادات وأيضا في السنة الثانية بقيمة ({{   $calc_total['second_year_operating_expenses_as_string'] }} ) وأيضا في السنة الثالثة بقيمة ({{ $calc_total['third_year_operating_expenses_as_string'] }})</p>
                         <p>***وسيكون هناك مصروفات تسويقية في السنة الأولى بقيمة ({{ $calc_total['first_year_operating_marketing_as_string']}} ) والتي تمثل {{ $planningCostAssumption->marketing_expenses }}% من إجمالي الإيرادات وأيضا في السنة الثانية بقيمة ({{  $calc_total['second_year_operating_marketing_as_string'] }}) وأيضا في السنة الثالثة بقيمة ({{ $calc_total['third_year_operating_marketing_as_string']}})</p>
                         <p>وبالتالي فإن إجمالي التكاليف في السنة الأولى سيكون ( {{ $calc_total['total_cost_first_year_as_string'] }}) وفي السنة الثانية سيكون ( {{ $calc_total['total_cost_second_year_as_string'] }}) وفي السنة الثالثة سيكون ( {{ $calc_total['total_cost_third_year_as_string'] }})</p>
                         <p>***بالنسبة للربح قبل الزكاة EBIT  سيكون في السنة الأولى ({{$calc_total['first_year_profit_before_zakat']}}) وفي السنة الثانية ({{$calc_total['second_year_profit_before_zakat']}}) وفي السنة الثالثة  ({{$calc_total['third_year_profit_before_zakat']}}).</p>
-                        <p>***وقيمة الزكاة ستكون {{$firstYearProfit}}  في السنة الأولى في حالة وجود عدم ربح وستكون ({{$calc_total['second_year_profit_before_zakat_percent_value']}}) في السنة الثانية و ستكون ({{$calc_total['third_year_profit_before_zakat_percent_value']}}) في السنة الثالثة .</p>
+                        <p>***
+                            <span>{{$firstYearProfit}}</span>
+                            <span>وستكون ({{$calc_total['zakat_second_year_value_as_string']}} ) في السنة الثانية</span>
+                            <span>وستكون ({{$calc_total['zakat_third_year_value_as_string']}} ) في السنة الثالثة</span>
+                        </p>
 
 
                         <p>***بالنسبة لصافي الربح  EAT فستكون قيمتة في السنة الأولى ( {{$calc_total['net_profit_first_year_as_string'] }}) وفي السنة الثانية ( {{ $calc_total['net_profit_second_year_as_string'] }}) وفي السنة الثالثة ( {{ $calc_total['net_profit_third_year_as_string'] }}) .</p>
