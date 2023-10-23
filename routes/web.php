@@ -445,4 +445,4 @@ Route::post('set-offer_price_yearly', function (\Illuminate\Http\Request $reques
 
 Route::get('click-pay', [\App\Http\Controllers\ClickPayController::class,'pay'])->name('click_pay');
 Route::post('click-pay-success', [\App\Http\Controllers\ClickPayController::class, 'clickPaySuccess'])->name('click_pay.success');
-Route::get('click-pay-fail', [\App\Http\Controllers\ClickPayController::class, 'clickPayFail'])->name('click_pay.fail');
+Route::post('click-pay-fail', [\App\Http\Controllers\ClickPayController::class, 'clickPayFail'])->name('click_pay.fail');
