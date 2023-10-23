@@ -27,8 +27,7 @@ class ClickPayController extends BaseController
             "cart_currency" => "SAR",
             "cart_amount" => $price,
             "callback" => route('click_pay.fail',['plan' => $plan]),
-//            route('click_pay.success',  ['plan' => $plan, 'type' => $type, 'price' => $price])
-            "return" => url("/click-pay-success?plan=$plan&type=$type&price=$price"),
+            "return" => url("/click-pay-success"),
         ];
 
         $response = Http::withHeaders([
@@ -53,6 +52,7 @@ class ClickPayController extends BaseController
 
     public function clickPaySuccess(Request $request)
     {
+        dd('sucuess');
         $planId = $request->input('plan');
         $subscriptionType = $request->input('type');
         $price = $request->input('price');
