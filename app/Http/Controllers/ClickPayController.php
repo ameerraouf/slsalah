@@ -62,7 +62,7 @@ class ClickPayController extends Controller
         $data = [
             'subscribe' => $subscription,
             'plan' => SubscriptionPlan::query()->find($planId),
-            'user' => $this->user,
+            'user' => auth()->user(),
             'type' => 'اشتراك جديد'
         ];
         userSubscribe($planId,$subscriptionType,$price,'click pay', null,null,'',1);
