@@ -17,6 +17,7 @@ class ClickPayController extends Controller
         $package = SubscriptionPlan::query()->find($plan);
         $price = $request->query('type') == 'monthly' ? $package->price_monthly : $package->price_yearly;
         $type = $request->query('type');
+        $user = $request->query('u');
 
         $data = [
             'profile_id' => env('CLICK_PAY_PROFILE_ID'),
@@ -26,8 +27,8 @@ class ClickPayController extends Controller
             "cart_description" => "Subscribe in plan",
             "cart_currency" => "SAR",
             "cart_amount" => $price,
-            "callback" => route('click_pay.success',  ['plan' => $plan, 'type' => $type, 'price' => $price]),
-            "return" => route('click_pay.success',  ['plan' => $plan, 'type' => $type, 'price' => $price]),
+            "callback" => route('click_pay.fail',  ['plan' => $plan, 'type' => $type, 'price' => $price]),
+            "return" => route('click_pay.success',  ['plan' => $plan, 'type' => $type, 'price' => $price,'u'=> $user]),
         ];
 
         $response = Http::withHeaders([
@@ -58,7 +59,8 @@ class ClickPayController extends Controller
         $price = $request->input('price');
 
         $subscription= Subscribe::query()->where('subscription_plan_id', $planId)->first();
-dd(auth()->user());
+        $user = User::find($request->input('u'));
+        dd($user);
         $data = [
             'subscribe' => $subscription,
             'plan' => SubscriptionPlan::query()->find($planId),
