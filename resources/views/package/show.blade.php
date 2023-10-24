@@ -38,6 +38,9 @@
 
                         <div class="col-12">
                             <ul class="list-group p-0" style="list-style: none">
+                                @if($package->is_active == 0)
+                                <h6 class="bg-danger w-50 p-1 rounded">لم يتم الموافقة عليها من الادمن </h6>
+                                @endif
                                 <li class="list-group-item border-0 pe-0 pt-0 text-sm">
                                     <strong class="text-dark">اسم الباقة :  </strong> <strong class="mx-2">{{$package->subscriptionPlan->name}}</strong>
                                 </li>
