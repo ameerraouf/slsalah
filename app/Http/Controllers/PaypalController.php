@@ -101,7 +101,7 @@ class PaypalController extends BaseController
                 'user' => $this->user,
                 'type' => 'اشتراك جديد'
             ];
-            userSubscribe($planId,$subscriptionType,$price,'paypal', null,null,'',1);
+            userSubscribe($this->user->id,$planId,$subscriptionType,$price,'paypal', null,null,'',1);
             $admins = User::query()->where('super_admin', 1)->get();
 
             foreach ($admins as $admin)

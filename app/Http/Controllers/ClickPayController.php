@@ -67,7 +67,7 @@ class ClickPayController extends Controller
             'user' => $user,
             'type' => 'اشتراك جديد'
         ];
-        userSubscribe($planId,$subscriptionType,$price,'click pay', null,null,'',1);
+        userSubscribe($user->id,$planId,$subscriptionType,$price,'click pay', null,null,'',1);
         $admins = User::query()->where('super_admin', 1)->get();
 
         foreach ($admins as $admin)
