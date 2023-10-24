@@ -58,7 +58,7 @@ class ClickPayController extends Controller
         $price = $request->input('price');
 
         $subscription= Subscribe::query()->where('subscription_plan_id', $planId)->first();
-
+dd(auth()->user());
         $data = [
             'subscribe' => $subscription,
             'plan' => SubscriptionPlan::query()->find($planId),
