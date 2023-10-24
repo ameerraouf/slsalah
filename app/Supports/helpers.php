@@ -60,12 +60,12 @@ function getClientIP()
 
     return 'UNKNOWN';
 }
-function userSubscribe($planId, $subscriptionType, $price,$paymentType,$bankName =null, $bankTransferImage =null, $transferNumber = null, $isActive = 1)
+function userSubscribe($userId, $planId, $subscriptionType, $price,$paymentType,$bankName =null, $bankTransferImage =null, $transferNumber = null, $isActive = 1)
 {
     $subscription_date_end = $subscriptionType == 'monthly' ? Carbon::parse(now())->addMonth() : Carbon::parse(now())->addYear();
 
     Subscribe::query()->create([
-        'user_id' => auth()->id(),
+        'user_id' => $userId,
         'subscription_plan_id' => $planId,
         'subscription_type' => $subscriptionType,
         'price' => $price,

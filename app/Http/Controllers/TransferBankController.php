@@ -7,7 +7,7 @@ use App\Models\SubscriptionPlan;
 use App\Models\User;
 use App\Notifications\NewSubscriptionNotification;
 use Illuminate\Http\Request;
-class TransferBankController extends Controller
+class TransferBankController extends BaseController
 {
     public function store(Request $request)
     {
@@ -36,7 +36,7 @@ class TransferBankController extends Controller
         $bankName = $request->input('bank_name');
         $transferNumber = $request->input('number_of_transfer');
 
-        userSubscribe($plan->id,$subscription_type,$price,'حوالة بنكية',$bankName,$imagePath,$transferNumber,0);
+        userSubscribe($this->user->id,$plan->id,$subscription_type,$price,'حوالة بنكية',$bankName,$imagePath,$transferNumber,0);
         $subscription = Subscribe::query()->where('subscription_plan_id', $plan->id)->where('user_id', auth()->id())->first();
 
         $admins = User::query()->where('super_admin', 1)->get();
