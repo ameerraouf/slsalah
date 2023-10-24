@@ -46,7 +46,7 @@
            aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand text-center m-0 id='dash'" href="{{config('app.url')}}/dashboard">
             @if(!empty($super_settings['logo']))
-                <img src="{{PUBLIC_DIR}}/uploads/{{$super_settings['logo']}}" class="navbar-brand-img h-100" alt="...">
+                <img style="max-height: 80px" src="{{PUBLIC_DIR}}/uploads/{{$super_settings['logo']}}" class="navbar-brand-img h-100" alt="...">
             @else
                 <span class="ms-1 font-weight-bold"> {{config('app.name')}}</span>
             @endif

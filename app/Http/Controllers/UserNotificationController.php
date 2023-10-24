@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Notification;
 
-class UserNotificationController extends Controller
+class UserNotificationController extends BaseController
 {
     public function index()
     {

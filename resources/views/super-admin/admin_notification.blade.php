@@ -40,7 +40,6 @@
                                       <span>مرئي</span>
                                   @endif
                                         </span>
-
                     </div>
                     </a>
                 @endforeach

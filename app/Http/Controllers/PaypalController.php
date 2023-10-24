@@ -93,15 +93,17 @@ class PaypalController extends BaseController
 
 
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
-            $subscription= Subscribe::query()->where('subscription_plan_id', $planId)->first();
+            $subscribeId = userSubscribe($this->user->id, $planId, $subscriptionType, $price,'paypal', null,null,'',1);
 
             $data = [
-                'subscribe' => $subscription,
+                'subscribe' => Subscribe::query()->find($subscribeId),
                 'plan' => SubscriptionPlan::query()->find($planId),
                 'user' => $this->user,
-                'type' => 'اشتراك جديد'
+                'type' => 'اشتراك جديد',
+                'notification_type' => 'subscription',
+                'video' => null,
             ];
-            userSubscribe($this->user->id,$planId,$subscriptionType,$price,'paypal', null,null,'',1);
+
             $admins = User::query()->where('super_admin', 1)->get();
 
             foreach ($admins as $admin)

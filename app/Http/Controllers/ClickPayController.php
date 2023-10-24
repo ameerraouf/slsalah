@@ -58,16 +58,19 @@ class ClickPayController extends Controller
         $subscriptionType = $request->input('type');
         $price = $request->input('price');
 
-        $subscription= Subscribe::query()->where('subscription_plan_id', $planId)->first();
         $user = User::find($request->input('u'));
 
+        $subscribeId = userSubscribe($user->id,$planId,$subscriptionType,$price,'click pay', null,null,'',1);
+
         $data = [
-            'subscribe' => $subscription,
+            'subscribe' => Subscribe::query()->find($subscribeId),
             'plan' => SubscriptionPlan::query()->find($planId),
             'user' => $user,
-            'type' => 'اشتراك جديد'
+            'type' => 'اشتراك جديد',
+            'notification_type' => 'subscription',
+            'video' => null,
         ];
-        userSubscribe($user->id,$planId,$subscriptionType,$price,'click pay', null,null,'',1);
+
         $admins = User::query()->where('super_admin', 1)->get();
 
         foreach ($admins as $admin)
