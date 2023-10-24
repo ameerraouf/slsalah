@@ -9,7 +9,7 @@ use App\Notifications\NewSubscriptionNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
-class ClickPayController extends BaseController
+class ClickPayController extends Controller
 {
     public function pay(Request $request)
     {
@@ -36,6 +36,7 @@ class ClickPayController extends BaseController
         ])->post(env('CLICK_PAY_ENDPOINT'), $data);
 
         $response = json_decode($response->body());
+
 
         if(!is_null($response->redirect_url))
         {
