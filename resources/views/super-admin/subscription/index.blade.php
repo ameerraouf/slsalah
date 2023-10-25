@@ -20,7 +20,7 @@
                         <table class="table align-items-center mb-0" id="cloudonex_table">
                             <div >
                                 <form action="{{route('all_subscriptions')}}">
-                                    <div class="row my-2 d-flex flex-wrap">
+                                    <div class="my-2 d-flex flex-wrap">
                                     <div class="col-3">
                                         <label>حالة الاشتراك : </label>
                                         <select class="px-2 " name="is_subscription_end">

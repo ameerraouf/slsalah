@@ -8,7 +8,7 @@
                 <div class="card">
                     <div class="card-body">
                                     - {{$key + 1}}
-                        
+
                         @if($package->is_active == 0)
                             <h6 class="bg-danger w-50 p-1 rounded">لم يتم الموافقة عليها من الادمن </h6>
                         @endif
