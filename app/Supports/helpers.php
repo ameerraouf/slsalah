@@ -107,7 +107,7 @@ function isSubscribptionIsValid($planId)
 function checkSubscribeIsExpire($subscribe)
 {
     $now = Carbon::now();
-    dd($subscribe);
+    
     $package = Subscribe::find($subscribe);
 
     $date = $package->subscription_date_end;
