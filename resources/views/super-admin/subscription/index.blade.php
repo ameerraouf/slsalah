@@ -24,7 +24,7 @@
                                     <div class="col-3">
                                         <label>حالة الاشتراك : </label>
                                         <select class="px-2 " name="is_subscription_end">
-                                            <option></option>
+                                            <option disabled selected> اختر</option>
                                             <option value="false" {{ request()->has('is_subscription_end') && request()->get('is_subscription_end') == 'false' ? 'selected' : '' }}>ساري</option>
                                             <option value="true" {{ request()->has('is_subscription_end') && request()->get('is_subscription_end') == 'true' ? 'selected' : '' }}>منتهي</option>
                                         </select>
@@ -32,7 +32,7 @@
                                     <div class="col-3">
                                         <label>الباقة : </label>
                                         <select class="px-2 " name="subscription_plan_id">
-                                            <option></option>
+                                            <option disabled selected> اختر</option>
                                             @foreach(\App\Models\SubscriptionPlan::query()->get() as $plan)
                                                 <option @if($plan->id == request()->subscription_plan_id) selected @endif value="{{$plan->id}}" >{{$plan->name}}</option>
                                             @endforeach
@@ -41,7 +41,7 @@
                                     <div class="col-3">
                                         <label>نوع الاشتراك : </label>
                                         <select class="px-2 " name="subscription_type">
-                                            <option></option>
+                                            <option disabled selected> اختر</option>
                                             <option value="monthly" {{ request()->has('subscription_type') && request()->get('subscription_type') == 'monthly' ? 'selected' : '' }}>شهري</option>
                                             <option value="yearly" {{ request()->has('subscription_type') && request()->get('subscription_type') == 'yearly' ? 'selected' : '' }}>سنوي</option>
                                         </select>
@@ -108,7 +108,14 @@
                                     </td>
 
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{$workspace->number_of_transfer}}</p>
+                                        <p class="text-xs font-weight-bold mb-0">
+                                            @if($workspace->number_of_transfer)
+                                                {{$workspace->number_of_transfer}}
+                                                @else
+                                                <span>---</span>
+                                            @endif
+
+                                        </p>
                                     </td>
                                     <td>
                                         @if($workspace->is_active == 0)
@@ -118,7 +125,7 @@
                                                 <button type="submit" class="btn btn-primary">تفعيل الاشتراك</button>
                                             </form>
                                         @endif
-                                        <a class="btn btn-info" href="{{route('admin.subscriptions.details', $workspace->id)}}">تفاصيل</a>
+                                        <a class="btn btn-info" href="{{route('admin.subscriptions.details', $workspace->id)}}">عرض التفاصيل</a>
                                     </td>
 
                                 </tr>

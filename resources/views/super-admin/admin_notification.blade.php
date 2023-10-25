@@ -22,25 +22,37 @@
         </di>
     </div>
         <div class="container">
-            <div class="row mt-lg-0 mt-4 d-flex">
+            <div class="mt-lg-0 mt-4">
                 @foreach($notifications as $notification)
-
                     <a href="{{route('admin.subscriptions.details',$notification['data']['subscribe']['id'])}}">
-                    <div class="col-12 border border mb-2 p-2 cursor-pointer @if(is_null($notification->read_at)) bg-secondary text-white @endif" onclick="readNotification(this)">
-
-                              <input type="hidden" name="notification_id" value="{{ $notification->id }}">
-                              <strong class="mx-1">{{ $notification->data['type'] }} |</strong>
-                              <strong class="mx-1">أسم المتسخدم : {{$notification['data']['user']['first_name'] . $notification['data']['user']['last_name'] }} |</strong>
-                              <strong>اسم الباقة : <strong>{{$notification->data['plan']? $notification->data['plan']['name']:""}}</strong> |</strong>
-                              <strong class="mx-1">تاريخ الاشتراك :{{\Carbon\Carbon::parse($notification['data']['subscribe']['created_at'])->format('Y-m-d m:h:s')}}</strong>
-                              <span> -
-                                            @if(is_null($notification->read_at))
-                                      <span class="mx-2">جديد</span>
-                                  @else
-                                      <span>مرئي</span>
-                                  @endif
-                                        </span>
-                    </div>
+                        <div class="d-flex p-2 rounded flex-wrap border align-content-between cursor-pointer @if(is_null($notification->read_at)) bg-secondary text-white @endif" onclick="readNotification(this)">
+                            <div class="col-2  ">
+                                <input type="hidden" name="notification_id" value="{{ $notification->id }}">
+                                <strong class="">{{ $notification->data['type'] }}</strong> |
+                            </div>
+                            <div class="col-3 ">
+                                @php
+                                    $user = \App\Models\User::find($notification['data']['user']['id']);
+                                    $plan = \App\Models\SubscriptionPlan::find($notification['data']['plan']['id']);
+                                @endphp
+                                <strong class="">اسم المستخدم: {{$user ? $user->first_name . " " . $user->last_name : ""}}</strong> |
+                            </div>
+                            <div class="col-2 ">
+                                <strong class="">اسم الباقة: <strong>{{$plan ? $plan->name : ""}}</strong></strong> |
+                            </div>
+                            <div class="col-4 ">
+                                <strong class="mx-1">تاريخ ووقت الاشتراك: {{\Carbon\Carbon::parse($notification['data']['subscribe']['created_at'])->format('Y-m-d H:i:s')}}</strong> |
+                            </div>
+                            <div class="col-1 ">
+                                <span>
+                                    @if(is_null($notification->read_at))
+                                        <span class="mx-2  ">اشعار جديد</span>
+                                    @else
+                                        <span class="">اشعار مرئي</span>
+                                    @endif
+                                </span>
+                            </div>
+                        </div>
                     </a>
                 @endforeach
             </div>
@@ -53,7 +65,7 @@
     function readNotification(element) {
         $(element).removeClass('bg-secondary');
         $(element).removeClass('text-white');
-        $(element).find('span').text(' - مرئي ');
+        $(element).find('span').text(' - اشعار مرئي ');
 
     var notificationId = $(element).find('input[name="notification_id"]').val();
 console.log('the id is '+ notificationId);

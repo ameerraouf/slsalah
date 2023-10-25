@@ -16,7 +16,7 @@
                             </ul>
                         </div>
                     @endif
-                        <form action="{{ route('video.update',$video->id) }}" method="post" class="multisteps-form__form mb-8">
+                        <form action="{{ route('video.update',$video->id) }}" method="post" class="multisteps-form__form mb-8"  enctype="multipart/form-data">
                             <!--single form panel-->
                             @csrf 
                             @method('put')
@@ -30,12 +30,12 @@
                                     <div class="row mt-3">
                                         <div class="col-12 col-sm-6">
                                             <label>{{ __('Name Video') }}</label><label class="text-danger">*</label>
-                                            <input name="name" class="multisteps-form__input form-control"
+                                            <input name="video_name" class="multisteps-form__input form-control"
                                                 type="text" value="{{ $video->name }}">
                                         </div>
                                         <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                                             <label>{{ __('url Video') }}</label><label class="text-danger">*</label>
-                                            <input name="url" class="multisteps-form__input form-control"
+                                            <input name="video_url" class="multisteps-form__input form-control"
                                                 type="text" value="{{ $video->url }}">
                                             
                                         </div>
@@ -43,7 +43,7 @@
                                     <div class="row mt-3">
                                         <div class="col-md-12">
                                             <label>{{ __('Description_in_video') }}</label><label class="text-danger">*</label>
-                                            <input name="description" class="multisteps-form__input form-control"
+                                            <input name="video_description" class="multisteps-form__input form-control"
                                                 type="text" value="{{ $video->description }}">
                                             
                                         </div>
@@ -52,7 +52,7 @@
                                     <div class="row mt-3">
                                         <div class="col-md-12">
                                             <label>{{ __('Time_in_video') }}</label><label class="text-danger">*</label>
-                                            <input name="time" class="multisteps-form__input form-control"
+                                            <input name="video_time" class="multisteps-form__input form-control"
                                                 type="time" value="{{ $video->time}}">
                                            
                                         </div>
@@ -61,14 +61,22 @@
                                     <div class="row mt-3">
                                         <div class="col-12 col-sm-6">
                                             <label>{{ __('View') }}</label><label class="text-danger">*</label>
-                                            <input name="isActive" type="radio" value="1" {{ ($video->isActive== 1 ? "checked" :'' ) }} >
+                                            <input name="video_isActive" type="radio" value="1" {{ ($video->isActive== 1 ? "checked" :'' ) }} >
                                            
                                         </div>
                                         <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                                             <label>{{ __('isNotActive') }}</label><label class="text-danger">*</label>
-                                            <input name="isActive" type="radio" value="0" {{ ($video->isActive== 0 ? "checked" :'' ) }}>
+                                            <input name="video_isActive" type="radio" value="0" {{ ($video->isActive== 0 ? "checked" :'' ) }}>
                                             
                                         </div>
+                                    </div>
+                                    <div class="row col-4">
+                                        <div class="form-group">
+                                            <label for="image">صورة كبرفيو للفيديو : </label>
+                                            <input type="file" class="form-control-file" id="image" name="video_image">
+                                            <img id="image-preview" src="{{'/uploads/'. $video->image}}" alt="Image Preview" style=" max-width: 100%; height: auto;">
+                                        </div>
+
                                     </div>
 
                                 </div>
@@ -86,3 +94,23 @@
     </div>
 </div>
 @endsection
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+    // Image preview
+    $("#image").change(function() {
+        readURL(this);
+    });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $("#image-preview").attr("src", e.target.result).show();
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+});
+</script>

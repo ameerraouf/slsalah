@@ -1,4 +1,5 @@
 @extends('layouts.primary')
+@if($calc_total)
 @section('content')
 
     <div class="row">
@@ -77,4 +78,11 @@
 @section('script')
 
 @endsection
+@else
+    @section('content')
+        <div class="row text-center container my-3 mx-auto">
+            لاتوجد بيانات للعرض
+        </div>
+    @endsection
+@endif
 

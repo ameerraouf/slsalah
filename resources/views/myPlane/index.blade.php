@@ -6,19 +6,28 @@
         }
     </style>
 @endsection
+@if($calc_total)
+
 @section('content')
 
-
-
         <div class="row">
+
             <div class="col-md-7 mx-auto text-center">
+
                 <h3 class="text-dark">{{__('خطتي : التقرير النهائي')}}</h3>
 {{--                <p class="text-secondary">{{__('Choose the plan that best fit for you.')}}</p>--}}
                 <button type="button" class="btn btn-success" id="generate_pdf"><i class="fas fa-file-pdf ms-2"></i>تصدير PDF</button>
             </div>
         </div>
 
-        <div class="row mt-4" id="content" dir="rtl">
+        <div class="row mt-4 " id="content" dir="rtl">
+            <div class="col-md-3 mb-4">
+                @if(!empty($super_settings['logo']))
+                    <img style="max-height: 80px" src="{{PUBLIC_DIR}}/uploads/{{$super_settings['logo']}}" class="navbar-brand-img h-100" alt="...">
+                @else
+                    <span class="ms-1 font-weight-bold"> {{config('app.name')}}</span>
+                @endif
+            </div>
             <div class="card">
                 <div class="card-body">
                     <h4>تخطيط إيرادات المشروع</h4>
@@ -426,9 +435,9 @@
                                     <tr>
                                         <td style="text-align: center">التدفق النقدي السنوي</td>
                                         <td></td>
-                                        <td @if($calc_total['pure_first_year_profit_after_zakat'] < \App\Models\ProjectRevenuePlanning::calcTotalRevenueFirstYear()) style="color: red;" @endif>{{ $calc_total['first_year_cash_flow'] }}</td>
-                                        <td @if($calc_total['pure_second_year_profit_after_zakat'] < \App\Models\ProjectRevenuePlanning::calcTotalRevenueSecondYear()) style="color: red;" @endif>{{ $calc_total['second_year_cash_flow'] }}</td>
-                                        <td @if($calc_total['pure_third_year_profit_after_zakat'] < \App\Models\ProjectRevenuePlanning::calcTotalRevenueThirdYear()) style="color: red;" @endif>{{ $calc_total['third_year_cash_flow'] }}</td>
+                                        <td @if($calc_total['first_year_net_cash_flow_number'] < 0) style="color: red;" @endif>{{ $first_year_net_cash_flow }}</td>
+                                        <td @if($calc_total['second_year_net_cash_flow_number'] < 0) style="color: red;" @endif>{{ $second_year_net_cash_flow }}</td>
+                                        <td @if($calc_total['third_year_net_cash_flow_number'] < 0) style="color: red;" @endif>{{ $third_year_net_cash_flow }}</td>
                                         {{--                                    <td>{{ $totalInvestedCapital }}</td>--}}
                                     </tr>
                                     <tr>
@@ -450,10 +459,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
 @endsection
 
 @section('script')
@@ -706,5 +711,11 @@
 
         });
         </script>
-
 @endsection
+@else
+    @section('content')
+        <div class="row text-center container my-3 mx-auto">
+            لاتوجد بيانات للعرض
+        </div>
+    @endsection
+@endif

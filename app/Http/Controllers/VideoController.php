@@ -46,15 +46,24 @@ class VideoController extends Controller
             'video_description' => 'required',
             'video_time' => 'required',
             'video_isActive' => 'required',
+            'video_image' => 'required',
         ], [
             'video_url.starts_with' => 'يجب ان يكون الحقل رابط من موقع اليوتيوب '
         ]);
+
+        if ($request->hasFile('video_image')) {
+            $image = $request->file('video_image');
+
+            $imagePath = $image->store("media", "uploads");
+        }
+
        $video = Video::create([
             'name' => $request->video_name,
             'url' => $request->video_url,
             'description' => $request->video_description,
             'time' => $request->video_time,
             'isActive' => ($request->video_isActive == 1 ? 1 :0 ),
+            'image' => $imagePath,
         ]);
         $users = User::query()->where('super_admin', 0)->get();
 
@@ -101,21 +110,35 @@ class VideoController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
-            'url' => 'required| starts_with:https://www.youtube.com/',
-            'description' => 'required',
-            'time' => 'required',
-            'isActive' => 'required',
+            'video_name' => 'required',
+            'video_url' => 'required| starts_with:https://www.youtube.com/',
+            'video_description' => 'required',
+            'video_time' => 'required',
+            'video_isActive' => 'required',
+            'video_image' => 'nullable',
         ], [
             'url.starts_with' => 'يجب ان يكون الحقل رابط من موقع اليوتيوب '
         ]);
+
+        if ($request->hasFile('video_image')) {
+            $image = $request->file('video_image');
+
+            $imagePath = $image->store("media", "uploads");
+        }
+
+
         $video = Video::findorFail($id);
-        $video->name = $request->name;
-        $video->url = $request->url;
-        $video->description = $request->description;
-        $video->time = $request->time;
-        $video->isActive = $request->isActive;
-        $video->save();
+
+        $data =[
+            'name' => $request->input('video_name'),
+            'url' => $request->input('video_url'),
+            'description' => $request->input('video_description'),
+            'time' => $request->input('video_time'),
+            'isActive' => $request->input('video_isActive'),
+            'image' => $imagePath?? $video->image,
+        ];
+
+        $video->update($data);
         return redirect()->route('video.index')->with('msg', 'تم تعديل الفيديو');
     }
 

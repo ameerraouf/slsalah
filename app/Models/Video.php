@@ -13,7 +13,8 @@ class Video extends Model
         'url',
         'description',
         'time',
-        'isActive'
+        'isActive',
+        'image'
     ]; 
     
 }
