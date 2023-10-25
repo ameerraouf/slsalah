@@ -716,5 +716,9 @@
     "control_video" : " التحكم في الفيديوهات ",
     "package_details" : "تفاصيل الاشتراك",
     "net_zakat_value" : " الزكاة",
-    "View_video" : "عرض الفيديو"
+    "View_video" : "عرض الفيديو",
+    "monthly" : "شهري",
+    "yearly" : "سنوي",
+    "paypal" : "بيبال",
+    "click pay" : "كليك باي"
 }

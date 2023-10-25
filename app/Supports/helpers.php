@@ -64,7 +64,7 @@ function userSubscribe($userId, $planId, $subscriptionType, $price,$paymentType,
 {
     $subscription_date_end = $subscriptionType == 'monthly' ? Carbon::parse(now())->addMonth() : Carbon::parse(now())->addYear();
 
-    Subscribe::query()->create([
+    $subscribe = Subscribe::query()->create([
         'user_id' => $userId,
         'subscription_plan_id' => $planId,
         'subscription_type' => $subscriptionType,
@@ -78,11 +78,18 @@ function userSubscribe($userId, $planId, $subscriptionType, $price,$paymentType,
         'number_of_transfer' => $transferNumber,
         'is_active' => $isActive,
     ]);
+
+    return $subscribe->id;
 }
 
 function isUserSubscribeInPlan($userId, $planId)
 {
     return Subscribe::query()->where('user_id', $userId)->where('subscription_plan_id', $planId)->exists();
+}
+
+function numberOfSubscriptionInPlan($planId)
+{
+    return Subscribe::query()->where('subscription_plan_id', $planId)->count();
 }
 
 function isSubscribptionIsValid($planId)

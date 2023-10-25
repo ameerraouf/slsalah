@@ -20,9 +20,30 @@ class SubscriptionController extends SuperAdminController
         return view('super-admin.subscription.list', compact('workspaces'));
     }
 
-    public function showAll()
+    public function showAll(Request $request)
     {
-        $workspaces = Subscribe::query()->latest()->get();
+        $workspaces = Subscribe::query();
+
+        if ($request->has('is_subscription_end') && !empty($request->input('is_subscription_end'))) {
+            if($request->input('is_subscription_end') == 'false'){
+                $workspaces->where('is_subscription_end', 0);
+            }else{
+                $workspaces->where('is_subscription_end', 1);
+            }
+        }
+
+        if ($request->has('subscription_plan_id') && !empty($request->input('subscription_plan_id'))) {
+            $workspaces->where('subscription_plan_id', $request->input('subscription_plan_id'));
+        }
+
+
+        if($request->has('subscription_type') && !empty($request->input('subscription_type'))){
+            $subscriptionType = $request->input('subscription_type');
+            $workspaces->where('subscription_type', 'LIKE', "%{$subscriptionType}%");
+        }
+
+        $workspaces = $workspaces->get();
+
         $plans = SubscriptionPlan::query()->get();
 
         return view('super-admin.subscription.index', compact('workspaces', 'plans'));
@@ -33,10 +54,12 @@ class SubscriptionController extends SuperAdminController
         $subscription = Subscribe::query()->find($subscription);
 
         $data = [
-            'type' => 'الموافقة علي الاشتراك',
-            'subscription' => $subscription,
+            'subscribe' => $subscription,
             'plan' => SubscriptionPlan::query()->find($subscription->subscription_plan_id),
+            'user' => auth()->user(),
+            'type' => 'الموافقة علي الاشتراك',
             'notification_type' => 'subscription',
+            'video' => null,
         ];
 
         $subscription->user->notify(new SubscriptionActiveByAdminNotitication($data));
@@ -49,7 +72,8 @@ class SubscriptionController extends SuperAdminController
   public function show($subscription)
   {
       $plan = Subscribe::query()->find($subscription);
+      $selected_navigation = 'show_details_of_subscription';
 
-      return view('super-admin.subscription.show', compact('plan'));
+      return view('super-admin.subscription.show', compact('plan', 'selected_navigation'));
   }
 }

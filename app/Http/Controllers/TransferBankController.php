@@ -36,16 +36,17 @@ class TransferBankController extends BaseController
         $bankName = $request->input('bank_name');
         $transferNumber = $request->input('number_of_transfer');
 
-        userSubscribe($this->user->id,$plan->id,$subscription_type,$price,'حوالة بنكية',$bankName,$imagePath,$transferNumber,0);
-        $subscription = Subscribe::query()->where('subscription_plan_id', $plan->id)->where('user_id', auth()->id())->first();
+        $subscribeId = userSubscribe($this->user->id,$plan->id,$subscription_type,$price,'حوالة بنكية',$bankName,$imagePath,$transferNumber,0);
 
         $admins = User::query()->where('super_admin', 1)->get();
 
         $data = [
-            'type' => 'أشتراك معلق',
-            'subscribe' => $subscription,
+            'subscribe' => Subscribe::query()->find($subscribeId),
             'plan' => $plan,
             'user' => auth()->user(),
+            'type' => 'أشتراك معلق',
+            'notification_type' => 'subscription',
+            'video' => null,
         ];
 
         foreach ($admins as $admin)

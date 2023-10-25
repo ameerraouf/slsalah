@@ -13,11 +13,48 @@
     <div class="row">
 
         <div class="col-12">
+
             <div class="card card-body mb-4">
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
                         <table class="table align-items-center mb-0" id="cloudonex_table">
+                            <div >
+                                <form action="{{route('all_subscriptions')}}">
+                                    <div class="row my-2 d-flex flex-wrap">
+                                    <div class="col-3">
+                                        <label>حالة الاشتراك : </label>
+                                        <select class="px-2 " name="is_subscription_end">
+                                            <option></option>
+                                            <option value="false" {{ request()->has('is_subscription_end') && request()->get('is_subscription_end') == 'false' ? 'selected' : '' }}>ساري</option>
+                                            <option value="true" {{ request()->has('is_subscription_end') && request()->get('is_subscription_end') == 'true' ? 'selected' : '' }}>منتهي</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-3">
+                                        <label>الباقة : </label>
+                                        <select class="px-2 " name="subscription_plan_id">
+                                            <option></option>
+                                            @foreach(\App\Models\SubscriptionPlan::query()->get() as $plan)
+                                                <option @if($plan->id == request()->subscription_plan_id) selected @endif value="{{$plan->id}}" >{{$plan->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-3">
+                                        <label>نوع الاشتراك : </label>
+                                        <select class="px-2 " name="subscription_type">
+                                            <option></option>
+                                            <option value="monthly" {{ request()->has('subscription_type') && request()->get('subscription_type') == 'monthly' ? 'selected' : '' }}>شهري</option>
+                                            <option value="yearly" {{ request()->has('subscription_type') && request()->get('subscription_type') == 'yearly' ? 'selected' : '' }}>سنوي</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-3">
+                                        <button class="btn btn-primary">فلتر</button>
+                                        <button type="button" class="btn btn-info" onclick="window.location.href='/subscriptions-all'">أعادة تعيين</button>
+                                    </div>
+                                    </div>
+                                </form>
 
+                            </div>
+                            <hr>
                             <thead>
 
                             <tr>
@@ -32,6 +69,7 @@
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('Transfer number')}}</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الأجراء</th>
                             </tr>
+
                             <tbody>
                             @foreach($workspaces as $workspace)
 
@@ -46,14 +84,14 @@
                                         <p class="text-xs font-weight-bold mb-0">{{isset($workspace->subscriptionPlan) ? $workspace->subscriptionPlan->name : ''}}</p>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{$workspace->subscription_type}}</p>
+                                        <p class="text-xs font-weight-bold mb-0">{{trans("$workspace->subscription_type")}}</p>
                                     </td>
                                     <td>
                                         <p class="text-xs font-weight-bold mb-0">{{$workspace->price}}</p>
                                     </td>
 
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{$workspace->payment_type}}</p>
+                                        <p class="text-xs font-weight-bold mb-0">{{trans("$workspace->payment_type")}}</p>
                                     </td>
 
                                     <td>
@@ -70,7 +108,7 @@
                                     </td>
 
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{$workspace->transfer_number}}</p>
+                                        <p class="text-xs font-weight-bold mb-0">{{$workspace->number_of_transfer}}</p>
                                     </td>
                                     <td>
                                         @if($workspace->is_active == 0)
@@ -87,6 +125,7 @@
                             @endforeach
                             </tbody>
                         </table>
+
                     </div>
                 </div>
             </div>

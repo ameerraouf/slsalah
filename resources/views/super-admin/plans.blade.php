@@ -51,7 +51,7 @@
 
                             <div class="justify-content-start d-flex px-2 py-1">
                                 <div class="ps-2 font-weight-bolder opacity-8">
-                                    عدد المشتركين في الباقة ( <span class="text-sm">{{ $plan->workspace_count }}</span> )
+                                    عدد المشتركين في الباقة ( <span class="text-sm">{{ numberOfSubscriptionInPlan($plan->id) }}</span> )
                                 </div>
                             </div>
                     </div>

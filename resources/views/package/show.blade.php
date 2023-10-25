@@ -32,43 +32,46 @@
             <div class="card mt-4">
 
                 <div class="card-body">
+                        @if($package)
+                            <h5 class="fw-bolder mb-4"> الباقة الحالية</h5>
+                            <div class="col-12">
+                                <ul class="list-group p-0" style="list-style: none">
+                                    @if($package->is_active == 0)
+                                        <h6 class="bg-danger w-50 p-1 rounded">لم يتم الموافقة عليها من الادمن </h6>
+                                    @endif
+                                    <li class="list-group-item border-0 pe-0 pt-0 text-sm">
+                                        <strong class="text-dark">اسم الباقة :  </strong> <strong class="mx-2">{{$package->subscriptionPlan->name??""}}</strong>
+                                    </li>
+                                    <li>
+                                        <strong class="text-dark">نوع الاشتراك :  </strong> <strong class="mx-2">{{$package->subscription_type??""}}</strong>
+                                    </li>
+                                    <li>
+                                        <strong class="text-dark"> تكلفة الاشتراك :  </strong> <strong class="mx-2">{{$package->price??""}}</strong>
+                                    </li>
+                                    <li>
+                                        <strong class="text-dark">طريقة الدفع :  </strong> <strong class="mx-2">{{$package->payment_type??""}}</strong>
+                                    </li>
 
-                    <h5 class="fw-bolder mb-4"> الباقة الحاليه</h5>
+                                    <li>
+                                        <strong class="text-dark">بداية الاشتراك :  </strong> <strong class="mx-2">{{$package->subscription_date_start??""}}</strong>
+                                    </li>
 
+                                    <li>
+                                        <strong class="text-dark">نهاية الاشتراك :  </strong> <strong class="mx-2">{{$package->subscription_date_end??""}}</strong>
+                                    </li>
 
-                        <div class="col-12">
-                            <ul class="list-group p-0" style="list-style: none">
-                                @if($package->is_active == 0)
-                                <h6 class="bg-danger w-50 p-1 rounded">لم يتم الموافقة عليها من الادمن </h6>
-                                @endif
-                                <li class="list-group-item border-0 pe-0 pt-0 text-sm">
-                                    <strong class="text-dark">اسم الباقة :  </strong> <strong class="mx-2">{{$package->subscriptionPlan->name}}</strong>
-                                </li>
-                                <li>
-                                    <strong class="text-dark">نوع الاشتراك :  </strong> <strong class="mx-2">{{$package->subscription_type}}</strong>
-                                </li>
-                                <li>
-                                    <strong class="text-dark"> تكلفة الاشتراك :  </strong> <strong class="mx-2">{{$package->price}}</strong>
-                                </li>
-                                <li>
-                                    <strong class="text-dark">طريقة الدفع :  </strong> <strong class="mx-2">{{$package->payment_type}}</strong>
-                                </li>
+                                    <li>
+                                        @if($showReSubscribe)
+                                            <a class="btn btn-primary my-4" href="{{route('packages.details', $plan->id)}}">أعادة الاشتراك</a>
+                                        @endif
+                                    </li>
+                                </ul>
+                            </div>
 
-                                <li>
-                                    <strong class="text-dark">بداية الاشتراك :  </strong> <strong class="mx-2">{{$package->subscription_date_start}}</strong>
-                                </li>
+                        @else
+                            <h5 class="fw-bolder mb-4">لايوجد باقة حالية</h5>
+                        @endif
 
-                                <li>
-                                    <strong class="text-dark">نهاية الاشتراك :  </strong> <strong class="mx-2">{{$package->subscription_date_end}}</strong>
-                                </li>
-
-                              <li>
-                                  @if($showReSubscribe)
-                                  <a class="btn btn-primary my-4" href="{{route('packages.details', $plan->id)}}">أعادة الاشتراك</a>
-                                  @endif
-                              </li>
-                            </ul>
-                        </div>
 
                 </div>
             </div>
