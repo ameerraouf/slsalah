@@ -103,3 +103,18 @@ function isSubscribptionIsValid($planId)
 
     return false;
 }
+
+function checkSubscribeIsExpire($subscribe)
+{
+    $now = Carbon::now();
+    $package = Subscribe::find($subscribe);
+
+    $date = $package->subscription_date_end;
+
+    $diffInDays = $now->diffInDays($date, false);
+    if($diffInDays < 0)
+    {
+        return true;
+    }
+    return false;
+}

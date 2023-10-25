@@ -23,16 +23,6 @@ class PackageController extends BaseController
         $settings = Setting::query()->first();
         $package = Subscribe::query()->where('user_id', auth()->id())->latest()->first();
 
-        $now = Carbon::now();
-        $date = $package->subscription_date_end;
-
-        $diffInDays = $now->diffInDays($date, false);
-        $showReSubscribe = false;
-        if($diffInDays < 0)
-        {
-            $showReSubscribe = true;
-        }
-        $plan = SubscriptionPlan::query()->find($package->subscription_plan_id);
-        return view('package.show', compact('plans', 'settings', 'package', 'showReSubscribe', 'plan'));
+        return view('package.show', compact('plans', 'settings', 'package'));
     }
 }

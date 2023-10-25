@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Pusher\Pusher;
 
-class UserChatController extends Controller
+class UserChatController extends BaseController
 {
     public function index()
     {

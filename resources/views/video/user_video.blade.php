@@ -1,4 +1,4 @@
-@extends('layouts.super-admin-portal')
+@extends('layouts.'.($layout ?? 'primary'))
 @section('content')
 
     <style>

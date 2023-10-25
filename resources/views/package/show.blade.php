@@ -37,7 +37,7 @@
 
                                         <div class="col-3">
                                             @if(\App\Models\SubscriptionPlan::query()->find($package->subscription_plan_id)->active != 0)
-                                                @if($showReSubscribe)
+                                                @if(checkSubscribeIsExpire($package))
                                                     <a class="btn btn-primary my-4" href="{{route('packages.details', $plan->id)}}">أعادة الاشتراك</a>
                                                 @endif
                                             @endif
