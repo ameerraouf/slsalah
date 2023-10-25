@@ -16,7 +16,7 @@
                                 </ul>
                             </div>
                         @endif
-                            <form action="{{ route('video.store') }}" method="post" class="multisteps-form__form mb-8">
+                            <form action="{{ route('video.store') }}" method="post" class="multisteps-form__form mb-8" enctype="multipart/form-data">
                                 <!--single form panel-->
                                 @csrf
                                 <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active"
@@ -69,6 +69,13 @@
                                                 
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="row col-4">
+                                        <div class="form-group">
+                                            <label for="image">صورة كبرفيو للفيديو : </label>
+                                            <input type="file" class="form-control-file" id="image" name="video_image">
+                                            <img id="image-preview" src="#" alt="Image Preview" style="display: none; max-width: 100%; height: auto;">
+                                        </div>
 
                                     </div>
                                 </div>
@@ -85,3 +92,23 @@
         </div>
     </div>
 @endsection
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+    // Image preview
+    $("#image").change(function() {
+        readURL(this);
+    });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $("#image-preview").attr("src", e.target.result).show();
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+});
+</script>

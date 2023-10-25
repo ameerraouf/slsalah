@@ -243,7 +243,8 @@ return [
         'video_url' => 'رابط الفيديو',
         'video_description' => 'وصف الفيديو',
         'video_time' => 'وقت العرض للمستخدم',
-        'video_isActive' => 'عرض او حجب الفيديو'
+        'video_isActive' => 'عرض او حجب الفيديو',
+        'video_image' => 'صورة كبرفيو للفيديو '
     ],
 
 ];

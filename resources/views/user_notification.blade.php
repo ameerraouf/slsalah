@@ -27,34 +27,55 @@
 
                 @if($notification['data']['notification_type'] == 'subscription')
                     <a href="{{route('user.package')}}">
-                        <div class="col-12 border border mb-2 p-2 cursor-pointer @if(is_null($notification->read_at)) bg-secondary text-white @endif" onclick="readNotification(this)">
+                        <div></div>
+                        <div class="d-flex p-2 rounded flex-wrap border align-content-between cursor-pointer @if(is_null($notification->read_at)) bg-secondary text-white @endif" onclick="readNotification(this)">
+                           <div class="col-3">
                             <input type="hidden" name="notification_id" value="{{ $notification->id }}">
                             <strong class="mx-1">{{ $notification['data']['type'] }} |</strong>
-                            <strong>اسم الباقة : <strong>{{$notification->data['plan']? $notification->data['plan']['name']:""}}</strong> |</strong>
-                            <strong class="mx-1">تاريخ الاشتراك :{{\Carbon\Carbon::parse($notification['data']['subscribe']['created_at'])->format('Y-m-d m:h:s')}}</strong>
-                            <span> -
-                                @if(is_null($notification->read_at))
-                                    <span class="mx-2">جديد</span>
-                                @else
-                                    <span>مرئي</span>
-                                @endif
-                            </span>
+                           </div>
+                            <div class="col-3">
+                                @php
+                                    $plan = \App\Models\SubscriptionPlan::find($notification['data']['plan']['id']);
+                                @endphp
+
+                                <strong>اسم الباقة : <strong>{{$plan? $plan->name:""}}</strong> |</strong>
+                            </div>
+
+                            <div class="col-4">
+                                <strong class="mx-1">تاريخ ووقت الاشتراك :{{\Carbon\Carbon::parse($notification['data']['subscribe']['created_at'])->format('Y-m-d m:h:s')}}</strong>
+                            </div>
+
+                            <div class="co-2">
+                                <span>
+                                    @if(is_null($notification->read_at))
+                                        <span class="mx-2">اشعار جديد</span>
+                                    @else
+                                        <span>اشعار مرئي</span>
+                                    @endif
+                                </span>
+                            </div>
+
                         </div>
                     </a>
                  @else
                     <a href="{{route('video.show', $notification['data']['video'])}}">
-                    <div class="col-12 border border mb-2 p-2 cursor-pointer @if(is_null($notification->read_at)) bg-secondary text-white @endif" onclick="readNotification(this)">
-                        <input type="hidden" name="notification_id" value="{{ $notification->id }}">
-                        <strong class="mx-1">{{ $notification['data']['type'] }} |</strong>
+                    <div class="d-flex p-2 rounded flex-wrap border align-content-between cursor-pointer @if(is_null($notification->read_at)) bg-secondary text-white @endif" onclick="readNotification(this)">
+                        <div class="col-3">
+                            <input type="hidden" name="notification_id" value="{{ $notification->id }}">
+                            <strong class="mx-1">{{ $notification['data']['type'] }} |</strong>
+                        </div>
+
 {{--                        <strong>اسم الباقة : <strong>{{$notification->data['plan']? $notification->data['plan']['name']:""}}</strong> |</strong>--}}
 {{--                        <strong class="mx-1">تاريخ الاشتراك :{{\Carbon\Carbon::parse($notification['data']['subscription']['created_at'])->format('Y-m-d m:h:s')}}</strong>--}}
-                        <span> -
+                        <div class="col-3">
+                            <span>
                                 @if(is_null($notification->read_at))
-                                <span class="mx-2">جديد</span>
-                            @else
-                                <span>مرئي</span>
-                            @endif
+                                    <span class="mx-2">اشعار جديد</span>
+                                @else
+                                    <span>اشعار مرئي</span>
+                                @endif
                             </span>
+                        </div>
                     </div>
                     </a>
                 @endif
@@ -69,7 +90,7 @@
     function readNotification(element) {
         $(element).removeClass('bg-secondary');
         $(element).removeClass('text-white');
-        $(element).find('span').text(' - مرئي ');
+        $(element).find('span').text('  اشعار مرئي ');
 
     var notificationId = $(element).find('input[name="notification_id"]').val();
 console.log('the id is '+ notificationId);

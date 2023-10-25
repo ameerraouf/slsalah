@@ -96,7 +96,13 @@ class FinncialReportController extends BaseController
         $workingInvestedTotal = WorkingInvestedCapital::select(DB::raw('SUM(investing_annual_cost) as investing_annual_cost_total'))->where("workspace_id", $this->user->workspace_id)->get()->pluck('investing_annual_cost_total');
         $fixedInvestedTotal = FixedInvestedCapital::select(DB::raw('SUM(investing_price) as investing_price_total'))->where("workspace_id", $this->user->workspace_id)->get()->pluck('investing_price_total');
         $totalInvestedCapital = (!empty($workingInvestedTotal) ? $workingInvestedTotal[0] : 0.0)+(!empty($fixedInvestedTotal) ? $fixedInvestedTotal[0] : 0.0);
-        $calc_total = $planningRevenueOperatingAssumptions->calc_total;
+        if($planningRevenueOperatingAssumptions){
+            $calc_total = $planningRevenueOperatingAssumptions->calc_total;
+        }else{
+            $calc_total = [];
+        }
+
+
 
         return view('planning_revenue_operating_assumptions.textReport',
             compact( 'selected_navigation',

@@ -71,6 +71,8 @@ class ClickPayController extends Controller
             'video' => null,
         ];
 
+        $user->notify(new NewSubscriptionNotification($data));
+
         $admins = User::query()->where('super_admin', 1)->get();
 
         foreach ($admins as $admin)

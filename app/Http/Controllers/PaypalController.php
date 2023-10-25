@@ -104,6 +104,8 @@ class PaypalController extends BaseController
                 'video' => null,
             ];
 
+            $this->user->notify(new NewSubscriptionNotification($data));
+
             $admins = User::query()->where('super_admin', 1)->get();
 
             foreach ($admins as $admin)

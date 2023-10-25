@@ -42,9 +42,9 @@ class SubscriptionController extends SuperAdminController
             $workspaces->where('subscription_type', 'LIKE', "%{$subscriptionType}%");
         }
 
-        $workspaces = $workspaces->get();
+        $workspaces = $workspaces->latest()->get();
 
-        $plans = SubscriptionPlan::query()->get();
+        $plans = SubscriptionPlan::query()->latest()->get();
 
         return view('super-admin.subscription.index', compact('workspaces', 'plans'));
     }
