@@ -8,10 +8,11 @@
                 <div class="card">
                     <div class="card-body">
                                     - {{$key + 1}}
+                        @if($package->is_active == 0)
+                            <h6 class="bg-danger w-50 p-1 rounded">لم يتم الموافقة عليها من الادمن </h6>
+                        @endif
                                     <div class="row d-flex flex-wrap px-2 p-2 " >
-                                        @if($package->is_active == 0)
-                                            <h6 class="bg-danger w-50 p-1 rounded">لم يتم الموافقة عليها من الادمن </h6>
-                                        @endif
+
                                             <div class="col-5 btn-info rounded my-2 ">
                                                 <strong class="text-dark">اسم الباقة :  </strong> <strong class="mx-2">{{$package->subscriptionPlan->name??""}}</strong>
                                             </div>
