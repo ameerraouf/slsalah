@@ -97,7 +97,7 @@ function isSubscribptionIsValid($planId)
     $subscribe = Subscribe::find($planId);
 
     if($subscribe){
-        dd(Carbon::parse($subscribe->subscription_date_end)->format('Y-m-d'));
+
         return Carbon::parse($subscribe->subscription_date_end)->format('Y-m-d');
     }
 
