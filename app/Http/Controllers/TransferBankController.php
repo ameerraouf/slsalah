@@ -44,7 +44,7 @@ class TransferBankController extends BaseController
             'subscribe' => Subscribe::query()->find($subscribeId),
             'plan' => $plan,
             'user' => auth()->user(),
-            'type' => 'أشتراك معلق',
+            'type' => 'اشتراك معلق',
             'notification_type' => 'subscription',
             'video' => null,
         ];

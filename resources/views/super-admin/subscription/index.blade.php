@@ -71,11 +71,11 @@
                             </tr>
 
                             <tbody>
-                            @foreach($workspaces as $workspace)
+                            @foreach($workspaces as $key=> $workspace)
 
                                 <tr>
                                     <td class="text-center">
-                                        {{$loop->iteration}}
+                                        {{$key}}
                                     </td>
                                     <td>
                                         <p class="text-xs font-weight-bold mb-0">{{isset($workspace->user) ? $workspace->user->first_name . ' ' . $workspace->user->last_name : ''}}</p>
@@ -148,10 +148,24 @@
             $('#cloudonex_table').DataTable({
                 language: {
                     url: 'https://cdn.datatables.net/plug-ins/1.10.24/i18n/Arabic.json'
-                }
+                },
+            });
+         $('input[type="search"]').on('input', function() {
+            var searchTerm = $(this).val().toLowerCase();
+            var rowCount = 0;
+
+            $('#cloudonex_table tbody tr').each(function(index) {
+              var rowData = $(this).text().toLowerCase();
+              if (rowData.includes(searchTerm) || searchTerm === '') {
+                rowCount++;
+                $(this).find('td:first-child').text(rowCount);
+              }
             });
 
+            console.log(rowCount);
+          });
         });
 
     </script>
+
 @endsection

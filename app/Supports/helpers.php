@@ -92,7 +92,7 @@ function numberOfSubscriptionInPlan($planId)
     return Subscribe::query()->where('subscription_plan_id', $planId)->count();
 }
 
-function isSubscribptionIsValid($planId)
+function isSubscriptionIsValid($planId)
 {
     $subscribe = Subscribe::find($planId);
 
@@ -107,9 +107,7 @@ function isSubscribptionIsValid($planId)
 function checkSubscribeIsExpire($subscribe)
 {
     $now = Carbon::now();
-
     $package = Subscribe::find($subscribe);
-
     $date = $package->subscription_date_end;
 
     $diffInDays = $now->diffInDays($date, false);
