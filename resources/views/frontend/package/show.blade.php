@@ -19,10 +19,27 @@
                <div class="alert alert-danger mt-4">{{session()->get('error_message')}}</div>
             @endif
             <div class="row d-flex">
-                <div class=""> <span> أسم الباقة : </span>  {{$package->name}}</div>
-                <div class=""> <span> الحد الأقصى للمستخدمين المسموح بهم : </span>  {{$package->maximum_allowed_users}}</div>
-                <div class=""> <span> الحد الأقصى لحجم الملفات المرفوعه (كيلوبايت) : </span>  {{$package->max_file_upload_size}}</div>
-                <div class=""> <span> حد مساحة الملف (ميجابايت) : </span>  {{$package->file_space_limit}}</div>
+                <div class="col-12">
+                    <div class="col-4">
+                        <strong class="btn btn-info w-100 text-start"><span class="mx-1"> أسم الباقة : </span>  {{$package->name}}</strong>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="col-4">
+                        <strong class="btn btn-info w-100 text-start"><span class="mx-1"> الحد الأقصى للمستخدمين المسموح بهم : </span>  {{$package->maximum_allowed_users}}</strong>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="col-4">
+                        <strong class="btn btn-info w-100 text-start"><span class="mx-1"> الحد الأقصى لحجم الملفات المرفوعه (كيلوبايت) : </span>  {{$package->max_file_upload_size}}</strong>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="col-4">
+                        <strong class="btn btn-info w-100 text-start"><span class="mx-1"> نوع الملفات المسموح بها  : </span>  {{$package->file_space_limit}}</strong>
+                    </div>
+
+                </div>
 {{--                <div class="mt-4">--}}
 {{--                    <h4>نوع الاشتراك</h4>--}}
 {{--                    <div class="d-flex">--}}
@@ -39,16 +56,16 @@
                 <h4 class="mt-4">وسائل الدفع</h4>
                 <div class="d-flex mb-5">
                     <div class="col-3">
-                        <a class="text-info" href="{{route('paypalProcessTransaction', ['package' => $package->id, 'type' => 'monthly'])}}">Paypal (اشتراك شهري)</a>
+                        <a class="btn btn-info p-3" href="{{route('paypalProcessTransaction', ['package' => $package->id, 'type' => 'monthly'])}}">Paypal (اشتراك شهري)</a>
                     </div>
-                    <div class="col-3">
-                        <a class="text-info" href="{{route('paypalProcessTransaction', ['package' => $package->id, 'type' => 'yearly'])}}">Paypal (اشتراك سنوي)</a>
-                    </div>
-                    <div class="col-4">
-                        <a class="text-info" href="{{route('click_pay', ['package' => $package->id, 'type' => 'monthly','u' => auth()->id()])}}">كليك باي (اشتراك شهري)</a>
+                    <div class="col-3 ">
+                        <a class="btn btn-info p-3" href="{{route('paypalProcessTransaction', ['package' => $package->id, 'type' => 'yearly'])}}">Paypal (اشتراك سنوي)</a>
                     </div>
                     <div class="col-4">
-                        <a class="text-info" href="{{route('click_pay', ['package' => $package->id, 'type' => 'yearly','u' => auth()->id()])}}">كليك باي (اشتراك سنوي)</a>
+                        <a class="btn btn-info p-3" href="{{route('click_pay', ['package' => $package->id, 'type' => 'monthly','u' => auth()->id()])}}">كليك باي (اشتراك شهري)</a>
+                    </div>
+                    <div class="col-4">
+                        <a class="btn btn-info p-3" href="{{route('click_pay', ['package' => $package->id, 'type' => 'yearly','u' => auth()->id()])}}">كليك باي (اشتراك سنوي)</a>
                     </div>
                 </div>
                 <div class="col-12">

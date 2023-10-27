@@ -1,6 +1,6 @@
 @extends('layouts.'.($layout ?? 'primary'))
 @section('content')
-    <div class="mx-4 mt-n5 overflow-hidden">
+    <div class="mt-n5 overflow-hidden">
         <div class="row gx-4 my-3">
 
             <div class="col-auto my-auto">
@@ -20,7 +20,7 @@
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="">
         <div class="row mt-lg-0 mt-4 d-flex">
 
             @foreach($notifications as $notification)
@@ -31,14 +31,14 @@
                         <div class="d-flex p-2 rounded flex-wrap border align-content-between cursor-pointer @if(is_null($notification->read_at)) bg-secondary text-white @endif" onclick="readNotification(this)">
                            <div class="col-3">
                             <input type="hidden" name="notification_id" value="{{ $notification->id }}">
-                            <strong class="mx-1">{{ $notification['data']['type'] }} |</strong>
+                            <strong class="mx-1">{{ $notification['data']['type'] }} </strong>
                            </div>
                             <div class="col-3">
                                 @php
                                     $plan = \App\Models\SubscriptionPlan::find($notification['data']['plan']['id']);
                                 @endphp
 
-                                <strong>اسم الباقة : <strong>{{$plan? $plan->name:""}}</strong> |</strong>
+                                <strong>اسم الباقة : <strong>{{$plan? $plan->name:""}}</strong> </strong>
                             </div>
 
                             <div class="col-4">
@@ -62,7 +62,7 @@
                     <div class="d-flex p-2 rounded flex-wrap border align-content-between cursor-pointer @if(is_null($notification->read_at)) bg-secondary text-white @endif" onclick="readNotification(this)">
                         <div class="col-3">
                             <input type="hidden" name="notification_id" value="{{ $notification->id }}">
-                            <strong class="mx-1">{{ $notification['data']['type'] }} |</strong>
+                            <strong class="mx-1">{{ $notification['data']['type'] }} </strong>
                         </div>
 
 {{--                        <strong>اسم الباقة : <strong>{{$notification->data['plan']? $notification->data['plan']['name']:""}}</strong> |</strong>--}}

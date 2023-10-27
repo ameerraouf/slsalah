@@ -14,7 +14,7 @@
 
     <div class="row">
         @foreach($plans as $plan)
-            <div class="col-md-3  mb-4 ">
+            <div class="col-md-4  mb-4 ">
                 <div class="card " style="height: 460px; overflow-y:scroll">
                     <div class="card-header text-center ">
                         @if($plan->active == 0)
@@ -23,15 +23,17 @@
                         <h5 class="text-purple opacity-8 text mb-2">{{$plan->name}}</h5>
                         <p>{!! $plan->description !!}</p>
                         <span>
-                            <h4 class="font-weight-bolder">
-                           {{formatCurrency($plan->price_monthly,getWorkspaceCurrency($settings))}} /<span><small
-                                        class=" text-sm text-warning text-uppercase">{{__(' month')}}</small></span>
-                            </h4>
+                            <h5 class="font-weight-bolder">
+                                {{formatCurrency($plan->price_monthly,getWorkspaceCurrency($settings))}} /
+                                <span>
+                                    <small class=" text-sm text-warning text-uppercase d-inline">{{__(' month')}}</small>
+                                </span>
+                            </h5>
                         </span>
-                        <h4 class="mt-0">
+                        <h5 class="mt-0">
                             {{formatCurrency($plan->price_yearly,getWorkspaceCurrency($settings))}} /<span><small
                                     class="text-sm  text-uppercase text-warning">{{__(' year')}}</small></span>
-                        </h4>
+                        </h5>
                     </div>
                     <div class="card-body mx-auto pt-0">
 

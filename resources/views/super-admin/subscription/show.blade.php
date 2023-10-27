@@ -21,7 +21,7 @@
 
                        </div>
 
-                       <div class="col-3 p-2 btn-info mx-5 rounded ">
+                       <div class="col-4 p-2 btn-info mx-3 rounded ">
                            <span class="mx-3  " >اسم الباقة</span>: {{$plan->subscriptionPlan->name}}
                        </div>
 
@@ -34,22 +34,20 @@
                        <div class="col-4 p-2 btn-info rounded">
                            <span class="mx-3">المبلغ</span>: {{$plan->price}}
                        </div>
-                       <div class="col-3 p-2 btn-info mx-5 rounded">
-                           <span class="mx-3 ">طريقة الدفع</span>: {{trans("$plan->payment_type")}}
-                       </div>
-
-                       <div class="col-3 p-2 btn-info rounded">
+                       <div class="col-4 p-2  mx-3 btn-info rounded">
                            <span class="mx-3">بدايه الاشتراك</span>: {{$plan->subscription_date_start}}
                        </div>
-
+                       <div class="col-3 p-2 btn-info rounded">
+                           <span class="mx-3 ">طريقة الدفع</span>: {{trans("$plan->payment_type")}}
+                       </div>
                    </div>
                 <div class="row rounded  my-4">
 
                     <div class="col-4 p-2 btn-info rounded">
-                        <span class="mx-3">نهاية الاشتراك</span>: {{$plan->subscription_date_end}}
+                        <span class="mx-3">انتهاء الاشتراك</span>: {{$plan->subscription_date_end}}
                     </div>
 
-                    <div class="col-3 p-2 mx-5 btn-info rounded">
+                    <div class="col-4 p-2 mx-3 btn-info rounded">
                         <span class="mx-3 ">حالة الاشتراك</span>:
                         @if($workspace->is_subscription_end == 0)
                             <span class="badge badge-sm bg-success-light text-success">ساري</span>
@@ -72,12 +70,12 @@
                         <div class="col-4 p-2 btn-info rounded">
                             <span class="mx-3  d-inline-block" style="width: 100px">رقم التحويل</span>:
                             @if($plan->bank_name)
-                                {{$plan->bank_name}}
+                                {{$plan->number_of_transfer}}
                             @else
                                 <span>لايوجد</span>
                             @endif
                         </div>
-                        <div class="col-3 p-2 btn-info rounded mx-5">
+                        <div class="col-4 p-2 btn-info rounded mx-3">
                             <span class="mx-3" >صوره التحويل</span> :
                             @if($plan->bank_name)
                                 <a target="_blank" href="{{'/uploads/' . $plan->image_bank_transfer}} ">

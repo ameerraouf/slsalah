@@ -1,7 +1,7 @@
 @extends('layouts.super-admin-portal')
 @section('content')
 
-    <div class="mx-4 mt-n5 overflow-hidden">
+    <div class=" mt-n5 overflow-hidden">
         <div class="row gx-4 my-3">
 
             <div class="col-auto my-auto">
@@ -21,7 +21,7 @@
             </div>
         </di>
     </div>
-        <div class="container">
+        <div class="">
             <div class="mt-lg-0 mt-4">
                 @foreach($notifications as $notification)
                     <a href="{{route('admin.subscriptions.details',$notification['data']['subscribe']['id'])}}">
@@ -35,13 +35,13 @@
                                     $user = \App\Models\User::find($notification['data']['user']['id']);
                                     $plan = \App\Models\SubscriptionPlan::find($notification['data']['plan']['id']);
                                 @endphp
-                                <strong class="">اسم المستخدم: {{$user ? $user->first_name . " " . $user->last_name : ""}}</strong> |
+                                <strong class="">اسم المستخدم: {{$user ? $user->first_name . " " . $user->last_name : ""}}</strong>
                             </div>
                             <div class="col-2 ">
-                                <strong class="">اسم الباقة: <strong>{{$plan ? $plan->name : ""}}</strong></strong> |
+                                <strong class="">اسم الباقة: <strong>{{$plan ? $plan->name : ""}}</strong></strong>
                             </div>
                             <div class="col-4 ">
-                                <strong class="mx-1">تاريخ ووقت الاشتراك: {{\Carbon\Carbon::parse($notification['data']['subscribe']['created_at'])->format('Y-m-d H:i:s')}}</strong> |
+                                <strong class="mx-1">تاريخ ووقت الاشتراك: {{\Carbon\Carbon::parse($notification['data']['subscribe']['created_at'])->format('Y-m-d H:i:s')}}</strong>
                             </div>
                             <div class="col-1 ">
                                 <span>
