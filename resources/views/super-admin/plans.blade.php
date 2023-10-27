@@ -52,7 +52,7 @@
                         @endif
 
                             <div class="justify-content-start d-flex px-2 py-1">
-                                <div class="ps-2 font-weight-bolder opacity-8">
+                                <div class="ps-2 font-weight-bolder opacity-8" style="font-size: 12px">
                                     عدد المشتركين في الباقة ( <span class="text-sm">{{ numberOfSubscriptionInPlan($plan->id) }}</span> )
                                 </div>
                             </div>
