@@ -54,7 +54,7 @@ class TransferBankController extends BaseController
             $admin->notify(new NewSubscriptionNotification($data));
         }
 
-        return redirect(route('user.package'));
+        return redirect(route('payment_successfully'));
         
     }
 }
