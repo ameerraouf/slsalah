@@ -435,6 +435,7 @@ Route::prefix('admin/chat')->middleware('auth')->group(function (){
     Route::get('/', [\App\Http\Controllers\AdminChatController::class, 'index'])->name('admin.chat.index');
     Route::post('/', [\App\Http\Controllers\AdminChatController::class,'send'])->name('admin.chat.send');
     Route::get('/{chat}', [\App\Http\Controllers\AdminChatController::class,'getChat'])->name('admin.get.chat');
+    Route::post('/disable/{chat}', [\App\Http\Controllers\AdminChatController::class, 'disableChat'])->name('admin.chat.disable');
 });
 
 Route::post('set-offer_price_yearly', function (\Illuminate\Http\Request $request){
@@ -448,3 +449,7 @@ Route::post('click-pay-success', [\App\Http\Controllers\ClickPayController::clas
 Route::post('click-pay-fail', [\App\Http\Controllers\ClickPayController::class, 'clickPayFail'])->name('click_pay.fail');
 
 Route::get('user/videos', [\App\Http\Controllers\UserVideoController::class,'index'])->name('user_video');
+Route::get('user/videos/{video}', [\App\Http\Controllers\UserVideoController::class,'show'])->name('user.video.show');
+
+Route::get('/pay-online/{package}', [\App\Http\Controllers\PayController::class, 'payOnline'])->name('user.pay_online');
+Route::get('/pay-bank/{package}', [\App\Http\Controllers\PayController::class, 'payWithBank'])->name('user.pay_bank');

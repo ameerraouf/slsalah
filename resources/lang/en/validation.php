@@ -244,7 +244,8 @@ return [
         'video_description' => 'وصف الفيديو',
         'video_time' => 'وقت العرض للمستخدم',
         'video_isActive' => 'عرض او حجب الفيديو',
-        'video_image' => 'صورة كبرفيو للفيديو '
+        'video_image' => 'صورة كبرفيو للفيديو ',
+        'video_type' => 'نوع الفيديو'
     ],
 
 ];

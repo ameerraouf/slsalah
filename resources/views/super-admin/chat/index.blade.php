@@ -12,10 +12,23 @@
             text-align: center;
             font-size: 20px;
         }
+        .custom-file-upload {
+            display: block;
+            padding: 6px 12px;
+            cursor: pointer;
+            background-color: #e9ecef;
+            color: #333;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+        }
+
+        .custom-file-upload i {
+            margin-right: 5px;
+        }
     </style>
     <div class="container mt-5">
 
-        <h3>جلسات دعم ومساعدة</h3>
+        <h3>جلسات دعم ومساعدة من قبل مختصين واستشاريين في مجال تخطيط وتنفيذ المشاريع</h3>
         <div class="row">
             <div class="col-8 border rounded">
                 <div class="hide" style="display: none">
@@ -23,28 +36,35 @@
                 <div id="chat-messages" class="mt-4 messages-container">
                 </div>
                 <form id="chat-form" class="mt-1" enctype="multipart/form-data">
-                    <input type="text" id="message-input" class="form-control" placeholder="Type your message">
-                    <input type="file" id="message-file" class="form-control my-2" >
-                    <button type="submit" class="btn btn-primary mt-2">Send</button>
+                    <input type="text" id="message-input" class="form-control" placeholder="الرسالة">
+                    <input type="file" id="message-file" class="form-control my-2" style="display: none;">
+                    <label for="message-file" class="custom-file-upload my-2">
+                        <i class="fas fa-cloud-upload-alt"></i> ارفاق ملف
+                    </label>
+                    <div id="file-preview" style="overflow: hidden"></div>
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary mt-2 my-2">ارسال</button>
+                        <button class="btn btn-info mt-2 my-2" id="finish">انهاء المحادثة</button>
+                    </div>
+
                 </form>
                 </div>
             </div>
             <div class="col-4  p-2">
                 @foreach($chats as $chat)
-                    <div class="d-flex align-items-center border-top pt-2 cursor-pointer" id="{{$chat->sender_id}}">
-                        <div style="height: 40px;width: 40px">
-                            <img class="rounded-circle h-100" src="{{url('uploads/' . $chat->sender->photo)}}">
+                    <div class="d-flex align-items-center border-top pt-2 cursor-pointer" id="{{$chat->chat_id}}">
+                        <div style="height: 40px;width: 40px" class="mx-3">
+                            <img class="rounded-circle h-100 w-100" src="{{$chat->sender->photo? url('uploads/' . $chat->sender->photo): url('/'. env('DEFAULT_PHOTO')??"")}}">
                         </div>
                         <div class="align-items-center mx-1">
                             <span class="d-block text-start">{{$chat->sender->first_name . ' '. $chat->sender->last_name}}</span>
                         </div>
                         <div class="align-items-center ">
-                            <span class="text-danger mx-3" id="count{{$chat->sender_id}}"></span>
+                            <span class="text-danger mx-3" id="count{{$chat->chat_id}}"></span>
                         </div>
                     </div>
                     <hr>
                 @endforeach
-
             </div>
         </div>
     </div>
@@ -64,14 +84,18 @@
         encrypted: true
     });
 
+    var channelReload = pusher.subscribe('reload-page-admin');
+          channelReload.bind('reload-page-admin', function(data) {
+                location.reload();
+         });
+
+
     var channel = pusher.subscribe('chat-channel');
     channel.bind('new-message', function(data) {
-        //if this sender id not found in the list create a new and click on it
-        // if chat exist and not open
-        console.log('session '+ sessionStorage.getItem('chat_id'));
 
-        if ($('#count'+ data.chat.sender_id).length && sessionStorage.getItem('chat_id') != data.chat.sender_id) {
-            var countElement = $('#count'+ data.chat.sender_id);
+
+        if ($('#count'+ data.chat.chat_id).length && sessionStorage.getItem('chat_id') != data.chat.chat_id) {
+            var countElement = $('#count'+ data.chat.chat_id);
             var countText = countElement.text().trim();
             var count = parseInt(countText);
 
@@ -85,27 +109,28 @@
 
         }
 
+
         //mean the chat is open
-        if(sessionStorage.getItem('chat_id') == data.chat.sender_id) {
-        console.log('new mesage ');
+        if(sessionStorage.getItem('chat_id') == data.chat.chat_id) {
+
             var timestamp = data.chat.created_at;
             var message = data.chat.message;
 
             var clearFix = $('<div>').addClass('clearfix');
             var messageContainer = $('<div>').addClass('d-flex align-items-center float-end my-2');
-
+            console.log(data)
             var contentContainer = $('<div>').addClass('align-items-center mx-1');
             var contentText = $('<span>').addClass('d-block text-end').text(message);
             var timestampText = $('<span>').addClass('d-block text-end').text(timestamp);
             var avatarContainer = $('<div>').css({ height: '40px', width: '40px' });
-            var avatarImage = $('<img>').addClass('rounded-circle h-100').attr('src', "{{$userPhoto}}");
+            var avatarImage = $('<img>').addClass('rounded-circle h-100 w-100').attr('src', data.userPhoto);
 
             $('#chat-messages').append(clearFix);
             messageContainer.append(contentContainer);
                         contentContainer.append(contentText);
             contentContainer.append(timestampText);
              if (data.chat.file != null) {
-                var fileLink = $('<a>').attr('href', data.chat.file).attr('target', '_blank').addClass('text-danger d-block text-end').text('show file');
+                var fileLink = $('<a>').attr('href', data.chat.file).attr('target', '_blank').addClass('text-danger d-block text-end').text('المرفق');
              }
 
             if (fileLink) {
@@ -165,7 +190,7 @@
 
 
                         if (response.data.file != null) {
-                             var fileLink = $('<a>').attr('href', response.data.file).attr('target', '_blank').addClass('text-danger').text('show file');
+                             var fileLink = $('<a>').attr('href', response.data.file).attr('target', '_blank').addClass('text-danger').text('المرفق');
                          }
 
 
@@ -185,6 +210,7 @@
                          $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
                          $('#message-input').val('');
                          $('#message-file').val('');
+                          $('#file-preview').empty().hide();
                      },
                      error: function(xhr, status, error) {
                          console.error(error);
@@ -193,7 +219,34 @@
              }
          });
      });
+$(document).ready(function() {
+    $('#finish').click(function() {
 
+       var chatId = sessionStorage.getItem('chat_id');
+       $.ajaxSetup({
+         headers: {
+             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+         }
+       });
+
+        $.ajax({
+            url: '/admin/chat/disable/'+ chatId,
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                chatId: chatId
+            },
+            success: function(response) {
+
+
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        });
+        $(this).parent().parent().hide()
+    });
+});
     // JavaScript/jQuery code
 $(document).ready(function() {
     // Handle chat click event
@@ -201,10 +254,11 @@ $(document).ready(function() {
 
         var chatId = $(this).attr('id');
         sessionStorage.setItem('chat_id', chatId);
-    $('#count'+chatId).text('');
+        $('#count'+chatId).text('');
         $('.hide').css('display', 'block');
 
-        $('.message-container').empty();
+        $('.messages-container').empty();
+        $("#chat-form").show();
         $.ajax({
             url: '/admin/chat/'+ chatId,
             type: 'GET',
@@ -212,9 +266,13 @@ $(document).ready(function() {
             data: {
                 chatId: chatId
             },
-            success: function(response) {
-                response.data.forEach(function(message) {
 
+            success: function(response) {
+                if(response.chatClosed){
+                    $("#chat-form").hide();
+                }
+
+                response.data.forEach(function(message) {
                     if(message.sender_id == {{auth()->id()}}) {
                       sender(message,response.adminPhoto)
                     }else{
@@ -233,7 +291,7 @@ $(document).ready(function() {
 
             var timestamp= message.created_at;
             if (message.file != null) {
-                 var fileLink = $('<a>').attr('href', message.file).attr('target', '_blank').addClass('text-danger').text('show file');
+                 var fileLink = $('<a>').attr('href', message.file).attr('target', '_blank').addClass('text-danger').text('المرفق');
              }
             var message = message.message;
 
@@ -265,7 +323,7 @@ $(document).ready(function() {
     function receiver(message, userPhoto) {
             var timestamp = message.created_at;
               if (message.file != null) {
-                 var fileLink = $('<a>').attr('href', message.file).attr('target', '_blank').addClass('text-danger d-block text-end').text('show file');
+                 var fileLink = $('<a>').attr('href', message.file).attr('target', '_blank').addClass('text-danger d-block text-end').text('المرفق');
              }
             var message = message.message;
 
@@ -295,4 +353,15 @@ $(document).ready(function() {
              $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
     }
 });
+    $(document).ready(function() {
+  $('#message-file').change(function() {
+    var file = this.files[0];
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      $('#file-preview').html('<img  src="' + e.target.result + '" height="50" width="50" style="margin-bottom:5px">');
+    }
+    reader.readAsDataURL(file);
+  });
+});
+
 </script>

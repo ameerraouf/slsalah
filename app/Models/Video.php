@@ -14,7 +14,8 @@ class Video extends Model
         'description',
         'time',
         'isActive',
-        'image'
+        'image',
+        'video_type'
     ]; 
     
 }

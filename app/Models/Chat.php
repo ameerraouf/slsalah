@@ -14,7 +14,8 @@ class Chat extends Model
         'created_at' => 'datetime:Y-m-d h:m:s',
     ];
 
-    protected $with = ['sender', 'receiver'];
+    protected $with = ['sender', 'receiver' ];
+
     public function sender()
     {
         return $this->belongsTo(User::class, 'sender_id');
@@ -24,13 +25,17 @@ class Chat extends Model
     {
         return $this->belongsTo(User::class, 'receiver_id');
     }
-
-
     public function getFileAttribute($value)
     {
         if($value){
             return url('uploads/'. $value);
         }
+
         return  null;
+    }
+
+    public function chats()
+    {
+        return $this->hasMany(Chat::class, 'chat_id');
     }
 }

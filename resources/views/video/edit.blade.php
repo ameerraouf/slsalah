@@ -51,6 +51,17 @@
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-md-12">
+                                            <label>{{ __('video_type') }}</label><label class="text-danger">*</label>
+                                            <select name="video_type" class="form-control" >
+                                                <option selected disabled>اختر</option>
+                                                <option @if($video->video_type == 'study_projects') selected @endif value="study_projects">  فيديوهات تعليمية حول دراسة المشاريع وإعداد الخطط اللازمة باستخدام الأدوات العلمية اللازمة</option>
+                                                <option @if($video->video_type == 'financial_planning') selected @endif value="financial_planning"> فيديوهات تعليمية حول التخطيط المالي للمشاريع باستخدام الأدوات العلمية اللازمة</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-12">
                                             <label>{{ __('Time_in_video') }}</label><label class="text-danger">*</label>
                                             <input name="video_time" class="multisteps-form__input form-control"
                                                 type="time" value="{{ $video->time}}">

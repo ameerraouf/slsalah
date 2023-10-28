@@ -153,7 +153,11 @@
                         <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
                         <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
                     </svg>
-                    <span class="nav-link-text ms-3">{{__('جلسات دعم ومساعدة')}}</span>
+
+                    <span class="nav-link-text ms-3">
+                        <strong class=" text-danger" id="admin_chat_count" >0</strong>
+                        <span class="nav-link-text ">{{__('جلسات دعم ومساعدة')}}</span>
+                    </span>
                 </a>
             </li>
 
@@ -352,7 +356,16 @@
         Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
 </script>
+<script>
+    var channelCount = pusher.subscribe('count-chat');
+          channelCount.bind('count-chat', function(data) {
+                $('#admin_chat_count').text(data.count)
+         });
+
+</script>
 @yield('script')
+
 </body>
 </html>
+
 

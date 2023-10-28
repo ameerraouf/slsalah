@@ -31,7 +31,7 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">{{ __('video_name') }}</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">{{ __('صورة كبرفيو للفيديو') }}</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">{{ __('video_url') }}</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-79ps-2">{{ __('Created at') }}</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-79ps-2">{{ __('تاريخ نشر الفيديو') }}</th>
                                 </tr>
                             <tbody>
                                 @foreach ($videos as $video)
