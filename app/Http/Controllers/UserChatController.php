@@ -34,11 +34,10 @@ class UserChatController extends BaseController
     public function index()
     {
         $chats = Chat::query()
+            ->where('is_open', false)
             ->where('sender_id', auth()->id())
-
-            ->groupBy('chat_id')
-            ->selectRaw('chat_id, MAX(id) as max_id, MAX(sender_id) as sender_id, MAX(receiver_id) as receiver_id')
-            ->get();
+            ->get()
+            ->unique('chat_id');
 
         $chatClosed = false;
 

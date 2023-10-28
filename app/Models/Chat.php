@@ -12,6 +12,7 @@ class Chat extends Model
     protected $guarded = [];
     protected $casts = [
         'created_at' => 'datetime:Y-m-d h:m:s',
+        'is_open' => "boolean"
     ];
 
     protected $with = ['sender', 'receiver' ];
