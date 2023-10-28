@@ -453,3 +453,5 @@ Route::get('user/videos/{video}', [\App\Http\Controllers\UserVideoController::cl
 
 Route::get('/pay-online/{package}', [\App\Http\Controllers\PayController::class, 'payOnline'])->name('user.pay_online');
 Route::get('/pay-bank/{package}', [\App\Http\Controllers\PayController::class, 'payWithBank'])->name('user.pay_bank');
+
+Route::view('payment-successfully', 'package.payment_successfully')->name('payment_successfully');

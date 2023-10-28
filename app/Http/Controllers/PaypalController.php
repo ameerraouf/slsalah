@@ -114,8 +114,8 @@ class PaypalController extends BaseController
             }
 
             return redirect()
-                ->route('user.package')
-                ->with('success', 'تم الاشتراك في الباقة بنجاح.');
+                ->route('payment_successfully')
+                ;
         } else {
 
             return redirect()

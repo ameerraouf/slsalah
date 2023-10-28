@@ -82,7 +82,7 @@ class ClickPayController extends Controller
 
         session()->flash('success', 'تم الاشتراك في الباقة بنجاح.');
 
-        return redirect()->to('/user/package');
+        return redirect()->route('payment_successfully');
     }
 
     public function clickPayFail(Request $request)
