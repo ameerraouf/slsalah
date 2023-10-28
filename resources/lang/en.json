@@ -720,5 +720,6 @@
     "monthly" : "شهري",
     "yearly" : "سنوي",
     "paypal" : "باي بال",
-    "click pay" : "كليك باي"
+    "click pay" : "كليك باي",
+    "video_type" : "نوع الفيديو"
 }

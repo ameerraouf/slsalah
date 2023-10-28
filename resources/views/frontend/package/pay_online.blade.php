@@ -40,16 +40,22 @@
                     </div>
 
                 </div>
-                <h4 class="mt-4">وسائل الدفع</h4>
+
+<hr>
                 <div class="d-flex mb-5">
                     <div class="col-3">
-                        <a class="btn btn-primary" href="{{route('user.pay_online', $package->id)}}"> الدفع أونلاين </a>
+                        <a class="btn btn-primary p-3" href="{{route('paypalProcessTransaction', ['package' => $package->id, 'type' => 'monthly'])}}">باي بال (اشتراك شهري)</a>
                     </div>
-                    <div class="col-3">
-                        <a class="btn btn-primary" href="{{route('user.pay_bank', $package->id)}}">حوالة بنكية</a>
+                    <div class="col-3 ">
+                        <a class="btn btn-primary p-3" href="{{route('paypalProcessTransaction', ['package' => $package->id, 'type' => 'yearly'])}}">باي بال (اشتراك سنوي)</a>
+                    </div>
+                    <div class="col-4">
+                        <a class="btn btn-primary p-3" href="{{route('click_pay', ['package' => $package->id, 'type' => 'monthly','u' => auth()->id()])}}">كليك باي (اشتراك شهري)</a>
+                    </div>
+                    <div class="col-4">
+                        <a class="btn btn-primary p-3" href="{{route('click_pay', ['package' => $package->id, 'type' => 'yearly','u' => auth()->id()])}}">كليك باي (اشتراك سنوي)</a>
                     </div>
                 </div>
-
             </div>
         </div>
 @endsection

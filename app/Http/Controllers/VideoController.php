@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Notifications\NewVideoNotification;
 use Illuminate\Http\Request;
 
-class VideoController extends Controller
+class VideoController extends SuperAdminController
 {
     /**
      * Display a listing of the resource.
@@ -47,6 +47,7 @@ class VideoController extends Controller
             'video_time' => 'required',
             'video_isActive' => 'required',
             'video_image' => 'required',
+            'video_type' => 'required',
         ], [
             'video_url.starts_with' => 'يجب ان يكون الحقل رابط من موقع اليوتيوب '
         ]);
@@ -64,6 +65,7 @@ class VideoController extends Controller
             'time' => $request->video_time,
             'isActive' => ($request->video_isActive == 1 ? 1 :0 ),
             'image' => $imagePath,
+           'video_type' => $request->input('video_type'),
         ]);
         $users = User::query()->where('super_admin', 0)->get();
 
@@ -116,6 +118,7 @@ class VideoController extends Controller
             'video_time' => 'required',
             'video_isActive' => 'required',
             'video_image' => 'nullable',
+            'video_type' => 'required',
         ], [
             'url.starts_with' => 'يجب ان يكون الحقل رابط من موقع اليوتيوب '
         ]);
@@ -136,6 +139,7 @@ class VideoController extends Controller
             'time' => $request->input('video_time'),
             'isActive' => $request->input('video_isActive'),
             'image' => $imagePath?? $video->image,
+            'video_type' => $request->input('video_type'),
         ];
 
         $video->update($data);

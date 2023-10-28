@@ -58,7 +58,7 @@
                         </div>
                     </a>
                  @else
-                    <a href="{{route('video.show', $notification['data']['video'])}}">
+                    <a href="{{route('user.video.show', $notification['data']['video'])}}">
                     <div class="d-flex p-2 rounded flex-wrap border align-content-between cursor-pointer @if(is_null($notification->read_at)) bg-secondary text-white @endif" onclick="readNotification(this)">
                         <div class="col-3">
                             <input type="hidden" name="notification_id" value="{{ $notification->id }}">

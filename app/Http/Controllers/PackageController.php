@@ -19,10 +19,16 @@ class PackageController extends BaseController
 
     public function showUserPackage()
     {
-        $plans = SubscriptionPlan::withCount(['workspace'])->get();
-        $settings = Setting::query()->first();
-        $package = Subscribe::query()->where('user_id', auth()->id())->latest()->first();
 
-        return view('package.show', compact('plans', 'settings', 'package'));
+        $subscribes = Subscribe::query()
+            ->where('user_id', auth()->id())
+            ->pluck('subscription_plan_id')->toArray();
+
+
+        $plans = SubscriptionPlan::withCount(['workspace'])->whereNotIn('id', $subscribes)->get();
+        $settings = Setting::query()->first();
+
+
+        return view('package.show', compact('plans', 'settings'));
     }
 }

@@ -13,4 +13,8 @@ class UserVideoController extends BaseController
 
         return view('video.user_video', compact('videos'));
     }
+    public function show(Video $video)
+    {
+        return  view('video.show', compact('video'));
+    }
 }
