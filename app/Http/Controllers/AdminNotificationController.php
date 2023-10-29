@@ -9,7 +9,7 @@ class AdminNotificationController extends SuperAdminController
 {
     public function index()
     {
-        $notifications = $this->user->notifications;
+        $notifications = $this->user->notifications()->latest()->get();
         return view('super-admin.admin_notification', compact('notifications'));
     }
 

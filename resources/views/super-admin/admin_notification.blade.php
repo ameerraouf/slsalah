@@ -1,4 +1,9 @@
 @extends('layouts.super-admin-portal')
+<style>
+    .font-size-12{
+        font-size: 12px;
+    }
+</style>
 @section('content')
 
     <div class=" mt-n5 overflow-hidden">
@@ -28,27 +33,27 @@
                         <div class="d-flex p-2 rounded flex-wrap border align-content-between cursor-pointer @if(is_null($notification->read_at)) bg-secondary text-white @endif" onclick="readNotification(this)">
                             <div class="col-2  ">
                                 <input type="hidden" name="notification_id" value="{{ $notification->id }}">
-                                <strong class="">{{ $notification->data['type'] }}</strong> |
+                                <strong class="font-size-12">{{ $notification->data['type'] }}</strong> |
                             </div>
                             <div class="col-3 ">
                                 @php
                                     $user = \App\Models\User::find($notification['data']['user']['id']);
                                     $plan = \App\Models\SubscriptionPlan::find($notification['data']['plan']['id']);
                                 @endphp
-                                <strong class="">اسم المستخدم: {{$user ? $user->first_name . " " . $user->last_name : ""}}</strong>
+                                <strong class="font-size-12">اسم المستخدم: {{$user ? $user->first_name . " " . $user->last_name : ""}}</strong>
                             </div>
                             <div class="col-2 ">
-                                <strong class="">اسم الباقة: <strong>{{$plan ? $plan->name : ""}}</strong></strong>
+                                <strong class="font-size-12">اسم الباقة: <strong class="font-size-12">{{$plan ? $plan->name : ""}}</strong></strong>
                             </div>
                             <div class="col-4 ">
-                                <strong class="mx-1">تاريخ ووقت الاشتراك: {{\Carbon\Carbon::parse($notification['data']['subscribe']['created_at'])->format('Y-m-d H:i:s')}}</strong>
+                                <strong class="mx-1 font-size-12">تاريخ ووقت الاشتراك: {{\Carbon\Carbon::parse($notification['data']['subscribe']['created_at'])->format('Y-m-d H:i:s')}}</strong>
                             </div>
                             <div class="col-1 ">
                                 <span>
                                     @if(is_null($notification->read_at))
-                                        <span class="mx-2  ">اشعار جديد</span>
+                                        <span class="mx-2 font-size-12 ">اشعار جديد</span>
                                     @else
-                                        <span class="">اشعار مرئي</span>
+                                        <span class="font-size-12">اشعار مرئي</span>
                                     @endif
                                 </span>
                             </div>
@@ -68,7 +73,7 @@
         $(element).find('span').text(' - اشعار مرئي ');
 
     var notificationId = $(element).find('input[name="notification_id"]').val();
-console.log('the id is '+ notificationId);
+
     $.ajax({
         url: "/admin/notifications/"+ notificationId,
         type: 'POST',
