@@ -77,10 +77,12 @@
                                         @endif
 
                                     @else
+                                        @if($plan->active == 1)
                                         <div class="card-footer text-center pt-0">
                                             <a href="{{route('packages.details',$plan->id)}}" type="button"
                                                class="btn  btn-white mb-0 ">{{__('اشتراك')}}</a>
                                         </div>
+                                        @endif
                                     @endif
 
                                 </div>

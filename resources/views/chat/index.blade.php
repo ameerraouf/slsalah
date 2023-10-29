@@ -148,7 +148,7 @@
                  }
              });
 
-                 if (message !== '') {
+
                      // Send the message to the backend
                      $.ajax({
                          url: '/user/chat',
@@ -174,17 +174,18 @@
 
                             $('#chat-messages').append(clearFix);
                             contentContainer.append(contentText);
-                            contentContainer.append(timestampText);
-
-                            messageContainer.append(avatarContainer);
-                            avatarContainer.append(avatarImage);
-                            messageContainer.append(contentContainer);
                             if (data.file != null) {
                                  var fileLink = $('<a>').attr('href', data.file).attr('target', '_blank').addClass('text-danger d-block').text('المرفق');
                              }
                              if (fileLink) {
                                contentContainer.append(fileLink);
                             }
+                            contentContainer.append(timestampText);
+
+                            messageContainer.append(avatarContainer);
+                            avatarContainer.append(avatarImage);
+                            messageContainer.append(contentContainer);
+
                             $('#chat-messages').append(messageContainer);
 
 
@@ -197,7 +198,7 @@
                              console.error(error);
                          }
                      });
-                 }
+
              });
          });
 
@@ -223,12 +224,14 @@
             $('#chat-messages').append(clearFix);
             messageContainer.append(contentContainer);
             contentContainer.append(contentText);
-            contentContainer.append(timestampText);
             if (fileLink) {
                contentContainer.append(fileLink);
             }
+            contentContainer.append(timestampText);
 
             messageContainer.append(avatarContainer);
+
+
             avatarContainer.append(avatarImage);
 
             $('#chat-messages').append(messageContainer);
