@@ -8,7 +8,7 @@ class UserNotificationController extends BaseController
 {
     public function index()
     {
-        $notifications = auth()->user()->notifications;
+        $notifications = auth()->user()->notifications()->latest()->get();
 
         return view('user_notification', compact('notifications'));
     }
