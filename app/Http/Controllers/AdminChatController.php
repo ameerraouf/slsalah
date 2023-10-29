@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Pusher\Pusher;
 
-class AdminChatController extends Controller
+class AdminChatController extends SuperAdminController
 {
     public function index()
     {
@@ -30,11 +30,14 @@ class AdminChatController extends Controller
             $userPhoto = url('/'. env('DEFAULT_PHOTO')??"");
         }
 
+
         $chats = Chat::query()
             ->latest()
             ->where('receiver_id', auth()->id())
+
             ->get()
             ->unique('chat_id');
+
 
         return view('super-admin.chat.index', compact('chats', 'userPhoto', 'adminPhoto'));
     }
@@ -109,7 +112,7 @@ class AdminChatController extends Controller
 
         $message = Chat::query()->create([
             'chat_id' =>$request->input('user_id'),
-            'message' => $request->input('message'),
+            'message' => $request->input('message')??null,
             'admin_read_at' => now(),
             'file' => $filePath??null,
             'sender_id' => $admin->id,

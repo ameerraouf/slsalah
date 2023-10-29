@@ -89,13 +89,13 @@ class UserChatController extends BaseController
             $filePath = $file->store("media", "uploads");
         }
 
-        $oldChat = Chat::query()->where('is_open', 1)
+        $oldChat = Chat::query()->where('is_open', true)
             ->where('sender_id', auth()->id())
             ->latest()
             ->first();
 
-        if($oldChat){
 
+        if($oldChat){
             if($oldChat->is_open == 1){
                 $chat = Chat::query()->create([
                     'is_open' => 1,

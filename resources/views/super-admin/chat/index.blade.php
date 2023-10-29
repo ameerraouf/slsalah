@@ -155,7 +155,10 @@
             var file = $('#message-file')[0].files[0]; // Get the file from the input
 
             var formData = new FormData(); // Create a FormData object
-            formData.append('message', message); // Append the message to the FormData
+            if(message){
+                formData.append('message', message); // Append the message to the FormData
+            }
+
             formData.append('file', file); // Append the file to the FormData
 
             formData.append('user_id', sessionStorage.getItem('chat_id'));
@@ -166,7 +169,7 @@
                  }
              });
 
-             if (message !== '') {
+
                  $.ajax({
                      url: '/admin/chat',
                      type: 'POST',
@@ -196,14 +199,15 @@
 
                         $('#chat-messages').append(clearFix);
                         contentContainer.append(contentText);
-                        contentContainer.append(timestampText);
-
                         if (fileLink) {
                           contentContainer.append(fileLink);
                         }
+                        contentContainer.append(timestampText);
+
                         messageContainer.append(avatarContainer);
                         avatarContainer.append(avatarImage);
                         messageContainer.append(contentContainer);
+
                         $('#chat-messages').append(messageContainer);
 
 
@@ -216,7 +220,7 @@
                          console.error(error);
                      }
                  });
-             }
+
          });
      });
 $(document).ready(function() {
@@ -305,11 +309,12 @@ $(document).ready(function() {
 
             $('#chat-messages').append(clearFix);
             contentContainer.append(contentText);
-            contentContainer.append(timestampText);
-
             if (fileLink) {
                 contentContainer.append(fileLink);
             }
+            contentContainer.append(timestampText);
+
+
 
             messageContainer.append(avatarContainer);
             avatarContainer.append(avatarImage);
@@ -339,7 +344,7 @@ $(document).ready(function() {
 
             $('#chat-messages').append(clearFix);
             messageContainer.append(contentContainer);
-                        contentContainer.append(contentText);
+           contentContainer.append(contentText);
             if (fileLink) {
                 contentContainer.append(fileLink);
             }
