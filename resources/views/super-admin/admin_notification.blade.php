@@ -33,7 +33,7 @@
                         <div class="d-flex p-2 rounded flex-wrap border align-content-between cursor-pointer @if(is_null($notification->read_at)) bg-secondary text-white @endif" onclick="readNotification(this)">
                             <div class="col-2  ">
                                 <input type="hidden" name="notification_id" value="{{ $notification->id }}">
-                                <strong class="font-size-12">{{ $notification->data['type'] }}</strong> |
+                                <strong class="font-size-12">{{ $notification->data['type'] }}</strong> 
                             </div>
                             <div class="col-3 ">
                                 @php
