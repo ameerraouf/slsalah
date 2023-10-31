@@ -130,7 +130,7 @@
                         contentContainer.append(contentText);
             contentContainer.append(timestampText);
              if (data.chat.file != null) {
-                var fileLink = $('<a>').attr('href', data.chat.file).attr('target', '_blank').addClass('text-danger d-block text-end').text('المرفق');
+                var fileLink = $('<a>').attr('href', data.chat.file).attr('target', '_blank').addClass('btn-primary px-2 rounded d-block w-50 text-end').text('المرفق');
              }
 
             if (fileLink) {
@@ -193,7 +193,7 @@
 
 
                         if (response.data.file != null) {
-                             var fileLink = $('<a>').attr('href', response.data.file).attr('target', '_blank').addClass('text-danger').text('المرفق');
+                             var fileLink = $('<a>').attr('href', response.data.file).attr('target', '_blank').addClass('btn-primary px-2 rounded').text('المرفق');
                          }
 
 
@@ -295,7 +295,7 @@ $(document).ready(function() {
 
             var timestamp= message.created_at;
             if (message.file != null) {
-                 var fileLink = $('<a>').attr('href', message.file).attr('target', '_blank').addClass('text-danger').text('المرفق');
+                 var fileLink = $('<a>').attr('href', message.file).attr('target', '_blank').addClass('btn-primary px-2 rounded').text('المرفق');
              }
             var message = message.message;
 
@@ -328,7 +328,7 @@ $(document).ready(function() {
     function receiver(message, userPhoto) {
             var timestamp = message.created_at;
               if (message.file != null) {
-                 var fileLink = $('<a>').attr('href', message.file).attr('target', '_blank').addClass('text-danger d-block text-end').text('المرفق');
+                 var fileLink = $('<a>').attr('href', message.file).attr('target', '_blank').addClass('w-50 mr-auto btn-primary px-2 rounded d-block text-end').text('المرفق').css('margin-right', 'auto');;
              }
             var message = message.message;
 

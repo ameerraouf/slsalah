@@ -1,4 +1,4 @@
-@extends('layouts.primary')
+@extends('layouts.'.($layout ?? 'primary'))
 @section('content')
         <style>
             .messages-container{
@@ -38,7 +38,7 @@
                                         <span class="d-block text-start">{{$message->message}}</span>
                                         @if($message->file)
                                             <span class="d-block">
-                                    <a href="{{$message->file}}" target="_blank" class="text-danger text-start">المرفق</a>
+                                    <a href="{{$message->file}}" target="_blank" class="btn-primary px-2 rounded text-start">المرفق</a>
                                 </span>
 
                                         @endif
@@ -51,7 +51,7 @@
                                         <span class="d-block text-end">{{$message->message}}</span>
                                         @if($message->file)
                                             <span class="d-block text-end">
-                                    <a href="{{$message->file}}" target="_blank" class="text-danger text-end">المرفق</a>
+                                    <a href="{{$message->file}}" target="_blank" class="text-end btn-primary px-2 rounded ">المرفق</a>
                                     </span>
                                         @endif
                                         <span class="d-block">{{$message->created_at}}</span>
@@ -166,7 +166,7 @@
                             var clearFix = $('<div>').addClass('clearfix');
                             var messageContainer = $('<div>').addClass('d-flex align-items-center my-2');
                             var avatarContainer = $('<div>').css({ height: '40px', width: '40px' });
-                            var avatarImage = $('<img>').addClass('rounded-circle h-100').attr('src',"{{$userPhoto}}" );
+                            var avatarImage = $('<img>').addClass('rounded-circle h-100 w-100').attr('src',"{{$userPhoto}}" );
                             var contentContainer = $('<div>').addClass('align-items-center mx-1');
 
                             var contentText = $('<span>').addClass('d-block text-start').text(message);
@@ -175,7 +175,7 @@
                             $('#chat-messages').append(clearFix);
                             contentContainer.append(contentText);
                             if (data.file != null) {
-                                 var fileLink = $('<a>').attr('href', data.file).attr('target', '_blank').addClass('text-danger d-block').text('المرفق');
+                                 var fileLink = $('<a>').attr('href', data.file).attr('target', '_blank').addClass('btn-primary px-2 rounded d-block w-50').text('المرفق');
                              }
                              if (fileLink) {
                                contentContainer.append(fileLink);
@@ -207,7 +207,7 @@
             var message = data.message.message;
 
               if (data.message.file != null) {
-                 var fileLink = $('<a>').attr('href', data.message.file).attr('target', '_blank').addClass('text-danger d-block text-end').text('المرفق');
+                 var fileLink = $('<a>').attr('href', data.message.file).attr('target', '_blank').addClass('btn-primary px-2 rounded d-block text-end w-50').text('المرفق').css('margin-right', 'auto');
              }
             var timestamp = data.message.created_at;
 

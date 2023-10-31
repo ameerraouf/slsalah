@@ -58,10 +58,12 @@
                 <img alt="" class="p-1" src="{{PUBLIC_DIR}}/uploads/{{$user->photo}}">
             </a>
         @else
-            <div class="avatar avatar-md  rounded-circle bg-purple-light  border-radius-md p-2">
-{{--                <h6 class="text-purple text-uppercase mt-1">{{$user->first_name[0]}}{{$user->last_name[0]}}</h6>--}}
-            </div>
 
+{{--            <div class="avatar avatar-md  rounded-circle bg-purple-light  border-radius-md p-2">--}}
+{{--                <h6 class="text-purple text-uppercase mt-1">{{$user->first_name[0]}}{{$user->last_name[0]}}</h6>--}}
+{{--            </div>--}}
+{{--            --}}
+            <img src="{{url('/img/useravatar.png')}}" height="50" width="50">
 
         @endif
         <a href="/profile" class=" nav-link text-white font-weight-bold px-0">
@@ -491,7 +493,11 @@
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
-                    <span class="nav-link-text ms-3"> <strong class="pr-2 text-danger" id="user_notification_count" style="padding-left: 5px">{{auth()->user()->notifications()->where('read_at', null)->count()}}</strong>الاشعارات</span>
+                    <span class="nav-link-text ms-3">
+                      <span class="nav-link-text ">{{__('الاشعارات')}}</span>
+                      <strong class="pr-2 text-danger" id="user_notification_count" style="padding-left: 5px">{{auth()->user()->notifications()->where('read_at', null)->count()}}</strong>
+                    </span>
+
                 </a>
             </li>
             <li class="nav-item">
@@ -532,7 +538,9 @@
                         <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
                         <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
                     </svg>
-                    <span class="nav-link-text ms-3">{{__('جلسات دعم ومساعدة')}}</span>
+
+                    <span class="nav-link-text ">{{__('جلسات دعم ومساعدة')}}</span>
+                    <strong class=" text-danger mx-2" id="user_chat_count" >0</strong>
                 </a>
             </li>
 
@@ -668,6 +676,21 @@
         title: '{!! \Illuminate\Support\Facades\Session::get('error') !!}'
     });
     @endif
+
+</script>
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+
+    var pusher = new Pusher('{{env('PUSHER_APP_KEY')}}', {
+        cluster: 'eu',
+        encrypted: true
+    });
+
+    var channelCount = pusher.subscribe('user-count-chat');
+          channelCount.bind('user-count-chat', function(data) {
+                $('#user_chat_count').text(data.count)
+         });
 
 </script>
 @yield('script')

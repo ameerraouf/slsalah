@@ -16,6 +16,7 @@ class UserChatController extends BaseController
     public $adminPhoto;
     public function __construct()
     {
+
         $this->adminPhoto = User::query()->where('super_admin', 1)->first()->photo;
         if($this->adminPhoto) {
             $this->adminPhoto = url('uploads/'. $this->adminPhoto);
@@ -23,12 +24,14 @@ class UserChatController extends BaseController
             $this->adminPhoto = url('/'. env('DEFAULT_PHOTO')??"");
         }
 
-        if(isset( $this->user->photo)){
-            $this->userPhoto = url('uploads/' .  $this->user->photo);
-        }else{
+        $user = User::query()->find(\auth()->id());
 
+        if(isset( $user->photo)){
+            $this->userPhoto = url('uploads/' .  $user->photo);
+        }else{
             $this->userPhoto = url('/'. env('DEFAULT_PHOTO')??"");
         }
+
     }
 
     public function index()
@@ -47,6 +50,24 @@ class UserChatController extends BaseController
             ->latest()
             ->first();
 
+        $pusher = new Pusher(
+            config('broadcasting.connections.pusher.key'),
+            config('broadcasting.connections.pusher.secret'),
+            config('broadcasting.connections.pusher.app_id'),
+            config('broadcasting.connections.pusher.options')
+        );
+
+        $unreadMessages = Chat::query()
+            ->where('sender_id', auth()->id())
+            ->whereNotNull('user_read_at')
+            ->get();
+
+        foreach ($unreadMessages as $message) {
+            $message->update(['user_read_at' => now()]);
+        }
+
+        $pusher->trigger('user-count-chat', 'user-count-chat', ['count' => 0]);
+
         if ($currentChat) {
             if($currentChat->is_open == 1){
                 $messages = Chat::query()
@@ -62,9 +83,16 @@ class UserChatController extends BaseController
         }
 
         $adminPhoto = $this->adminPhoto;
-        $userPhoto = $this->userPhoto;
 
-        return view('chat.index', compact('chats','currentChat', 'chatClosed' , 'messages', 'adminPhoto', 'userPhoto'));
+
+        $user = User::query()->find(\auth()->id());
+
+        if(isset( $user->photo)){
+            $userPhoto = url('uploads/' .  $user->photo);
+        }else{
+            $userPhoto = url('/'. env('DEFAULT_PHOTO')??"");
+        }
+        return view('chat.index', compact('chats','currentChat', 'chatClosed' , 'messages', 'adminPhoto', 'userPhoto', 'user'));
     }
 
 
@@ -79,6 +107,9 @@ class UserChatController extends BaseController
             config('broadcasting.connections.pusher.app_id'),
             config('broadcasting.connections.pusher.options')
         );
+
+
+        $pusher->trigger('user-count-chat', 'user-count-chat', ['count' => 0]);
 
         $admin = User::query()->where('super_admin' , 1)->first();
 
@@ -107,12 +138,24 @@ class UserChatController extends BaseController
                     'receiver_id' => $admin->id,
                 ]);
 
-                $userPhoto = $this->userPhoto;
+                $updateMessages = Chat::query()->where('chat_id', $oldChat->chat_id)->get();
+
+                foreach ($updateMessages as $updateMessage) {
+                    $updateMessage->update(['user_read_at' => now()]);
+                }
+
+                $user = User::query()->find(\auth()->id());
+
+                if(isset( $user->photo)){
+                    $userPhoto = url('uploads/' .  $user->photo);
+                }else{
+                    $userPhoto = url('/'. env('DEFAULT_PHOTO')??"");
+                }
+
                 $pusher->trigger('chat-channel', 'new-message', ['chat' => $chat, 'userPhoto' => $userPhoto]);
 
                 $messagesCount = Chat::query()
                     ->where('receiver_id' ,1)
-
                     ->where('admin_read_at', null)->count();
 
                 $pusher->trigger('count-chat', 'count-chat', ['count' => $messagesCount]);
@@ -132,7 +175,15 @@ class UserChatController extends BaseController
             ]);
             $chat->chat_id = $chat->id;
             $chat->save();
-            $userPhoto = $this->userPhoto;
+
+            $user = User::query()->find(\auth()->id());
+
+            if(isset( $user->photo)){
+                $userPhoto = url('uploads/' .  $user->photo);
+            }else{
+                $userPhoto = url('/'. env('DEFAULT_PHOTO')??"");
+            }
+
             $pusher->trigger('reload-page-admin', 'reload-page-admin', ['message' => 'disabled']);
             $pusher->trigger('chat-channel', 'new-message', ['chat' => $chat, 'userPhoto' => $userPhoto]);
 

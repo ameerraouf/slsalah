@@ -35,14 +35,14 @@
                                 <input type="hidden" name="notification_id" value="{{ $notification->id }}">
                                 <strong class="font-size-12">{{ $notification->data['type'] }}</strong>
                             </div>
-                            <div class="col-3 ">
+                            <div class="col-2 ">
                                 @php
                                     $user = \App\Models\User::find($notification['data']['user']['id']);
                                     $plan = \App\Models\SubscriptionPlan::find($notification['data']['plan']['id']);
                                 @endphp
                                 <strong class="font-size-12">اسم المستخدم: {{$user ? $user->first_name . " " . $user->last_name : ""}}</strong>
                             </div>
-                            <div class="col-2 ">
+                            <div class="col-3 ">
                                 <strong class="font-size-12">اسم الباقة: <strong class="font-size-12">{{$plan ? $plan->name : ""}}</strong></strong>
                             </div>
                             <div class="col-4 ">
