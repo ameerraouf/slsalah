@@ -386,7 +386,7 @@ $(document).ready(function() {
 console.log(message.audio);
             var timestamp= message.created_at;
             if (message.file != null) {
-                 var fileLink = $('<a>').attr('href', message.file).attr('target', '_blank').addClass('btn-primary px-2 rounded d-block w-25').text('المرفق');
+                 var fileLink = $('<a>').attr('href', message.file).attr('target', '_blank').addClass('btn-primary px-2 rounded d-block w-50').text('المرفق');
              }
              if (message.audio != null) {
                      var audioElement = $('<audio>').attr('controls', '').addClass('audio-element my-2 text-end');
