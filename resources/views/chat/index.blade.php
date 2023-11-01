@@ -1,4 +1,5 @@
 @extends('layouts.'.($layout ?? 'primary'))
+{{--<link rel="stylesheet" href="{{asset('audio/manage-audio.css')}}">--}}
 @section('content')
         <style>
             .messages-container{
@@ -20,8 +21,21 @@
             .custom-file-upload i {
                 margin-right: 5px;
             }
+            #progressBar {
+                width: 100%;
+                height: 10px;
+                background-color: #f1f1f1;
+            }
+
+            #progressBar div {
+                height: 100%;
+                background-color: #4caf50;
+            }
 
         </style>
+
+
+
         <div class="container mt-5">
             <h3>جلسات دعم ومساعدة من قبل مختصين واستشاريين في مجال تخطيط وتنفيذ المشاريع</h3>
 
@@ -38,9 +52,13 @@
                                         <span class="d-block text-start">{{$message->message}}</span>
                                         @if($message->file)
                                             <span class="d-block">
-                                    <a href="{{$message->file}}" target="_blank" class="btn-primary px-2 rounded text-start">المرفق</a>
-                                </span>
-
+                                             <a href="{{$message->file}}" target="_blank" class="btn-primary px-2 rounded text-start">المرفق</a>
+                                            </span>
+                                        @endif
+                                        @if($message->audio)
+                                            <span class="d-block my-2">
+                                                <audio src="{{$message->audio}}" controls ></audio>
+                                            </span>
                                         @endif
                                         <span class="d-block">{{$message->created_at}}</span>
                                     </div>
@@ -51,10 +69,15 @@
                                         <span class="d-block text-end">{{$message->message}}</span>
                                         @if($message->file)
                                             <span class="d-block text-end">
-                                    <a href="{{$message->file}}" target="_blank" class="text-end btn-primary px-2 rounded ">المرفق</a>
-                                    </span>
+                                                <a href="{{$message->file}}" target="_blank" class="text-end btn-primary px-2 rounded ">المرفق</a>
+                                            </span>
                                         @endif
-                                        <span class="d-block">{{$message->created_at}}</span>
+                                        @if($message->audio)
+                                            <span class="d-block text-end my-2">
+                                                <audio src="{{$message->audio}}" controls ></audio>
+                                            </span>
+                                        @endif
+                                        <span class="d-block text-end">{{$message->created_at}}</span>
                                     </div>
                                     <div style="height: 40px;width: 40px">
                                         <img class="rounded-circle h-100 w-100" src="{{$adminPhoto}}">
@@ -72,7 +95,24 @@
                                 <i class="fas fa-cloud-upload-alt"></i> ارفاق ملف
                             </label>
                             <div id="file-preview" style="overflow: hidden"></div>
+<hr>
+                            <div class="d-flex gap-2">
+                                <button type="button" id="recordButton" class="btn-primary border-0 rounded px-4">سجل</button>
+                                <button type="button" id="stopButton" disabled class="btn-primary border-0 rounded px-4">ايقاف</button>
+                                <audio id="audioPlayback" controls class="hidden"></audio>
+                                <button type="button" id="deleteButton" class="btn-primary border-0 rounded px-4 py-1">حذف</button>
+                            </div>
+                            <hr>
+{{--                            <div class="audio-record">--}}
+{{--                                <button type="button" id="recordButton">ابداء التسجيل</button>--}}
+{{--                                <button type="button" id="stopButton" class="inactive">انهاء التسجيل</button>--}}
+{{--                                <button type="button" id="deleteRecord" class="border-0 btn-primary rounded">حذف التسجيل</button>--}}
+{{--                            </div>--}}
+{{--                            <div class="playback">--}}
+{{--                                <audio src="" controls id="audio-playback" class="hidden"></audio>--}}
+{{--                            </div>--}}
                             <button type="submit" class="btn btn-primary mt-2">ارسال</button>
+
 
                         </form>
                     @endif
@@ -99,37 +139,84 @@
             </div>
         </div>
 
+{{--        <script src="{{asset('audio/manage-audio.js')}}"></script>--}}
+        <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 
-    @endsection
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
 
-    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function() {
+               $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
+            });
+            Pusher.logToConsole = true;
 
-    <script>
-        $(document).ready(function() {
-           $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
-        });
-        Pusher.logToConsole = true;
-
-        var pusher = new Pusher('{{env('PUSHER_APP_KEY')}}', {
-        cluster: 'eu',
-        encrypted: true
-    });
+            var pusher = new Pusher('{{env('PUSHER_APP_KEY')}}', {
+                cluster: 'eu',
+                encrypted: true
+            });
 
 
-    var channel = pusher.subscribe('chat-channel');
+            var channel = pusher.subscribe('chat-channel');
 
-    channel.bind('new-message', function(data) {
+         channel.bind('new-message', function(data) {
             if(data.message.receiver_id == {{auth()->id()}}) {
                 receiver(data)
             }
          });
+
          var channelReload = pusher.subscribe('reload-page');
           channelReload.bind('reload-page', function(data) {
                 location.reload();
          });
 
          $(document).ready(function() {
+                let audioStream;
+                let recorder;
+                let recordedAudio;
+
+                const recordButton = $("#recordButton");
+                const stopButton = $("#stopButton");
+                const sendButton = $("#sendButton");
+                const audioPlayback = $("#audioPlayback");
+                const deleteButton = $("#deleteButton");
+
+                recordButton.on("click", function() {
+                    recordButton.prop("disabled", true);
+                    stopButton.prop("disabled", false);
+
+                    navigator.mediaDevices.getUserMedia({ audio: true })
+                        .then(function(stream) {
+                            audioStream = stream;
+                            const audioContext = new AudioContext();
+                            const input = audioContext.createMediaStreamSource(stream);
+                            recorder = new Recorder(input, { numChannels: 1 });
+                            recorder.record();
+                        })
+                        .catch(function(err) {
+                            console.error("Error accessing microphone:", err);
+                        });
+                });
+
+                stopButton.on("click", function() {
+                    recordButton.prop("disabled", false);
+                    stopButton.prop("disabled", true);
+
+                    recorder.stop();
+                    audioStream.getAudioTracks()[0].stop();
+
+                    recorder.exportWAV(function(blob) {
+                        recordedAudio = blob;
+                        audioPlayback.attr("src", URL.createObjectURL(blob));
+                    });
+                });
+
+                deleteButton.on("click", function() {
+                   recordedAudio = null;
+                   audioPlayback.attr("src", "");
+                   deleteButton.prop("disabled", true);
+                });
+
              $('#chat-form').submit(function(e) {
                  e.preventDefault();
 
@@ -140,6 +227,9 @@
             formData.append('message', message); // Append the message to the FormData
             formData.append('file', file); // Append the file to the FormData
 
+            if (recordedAudio) {
+                  formData.append("audio", recordedAudio, "recording.wav");
+            }
             formData.append('user_id', sessionStorage.getItem('chat_id'));
 
              $.ajaxSetup({
@@ -177,8 +267,16 @@
                             if (data.file != null) {
                                  var fileLink = $('<a>').attr('href', data.file).attr('target', '_blank').addClass('btn-primary px-2 rounded d-block w-50').text('المرفق');
                              }
+
                              if (fileLink) {
                                contentContainer.append(fileLink);
+                            }
+                            if (data.audio != null) {
+                                 var audioElement = $('<audio>').attr('controls', '').addClass('audio-element my-2');
+                                 var sourceElement = $('<source>').attr('src', data.audio).attr('type', 'audio/mpeg');
+                                 audioElement.append(sourceElement);
+
+                                 contentContainer.append(audioElement);
                             }
                             contentContainer.append(timestampText);
 
@@ -191,8 +289,11 @@
 
                              $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
                              $('#message-input').val('');
-                              $('#message-file').val('');
-                              $('#file-preview').empty().hide();
+                             $('#message-file').val('');
+                             $('#file-preview').empty();
+                             recordedAudio = null;
+                             audioPlayback.attr("src", "");
+                             deleteButton.prop("disabled", true);
                          },
                          error: function(xhr, status, error) {
                              console.error(error);
@@ -209,6 +310,12 @@
               if (data.message.file != null) {
                  var fileLink = $('<a>').attr('href', data.message.file).attr('target', '_blank').addClass('btn-primary px-2 rounded d-block text-end w-50').text('المرفق').css('margin-right', 'auto');
              }
+             if (data.message.audio != null) {
+                 var audioElement = $('<audio>').attr('controls', '').addClass('audio-element my-2 text-end');
+                 var sourceElement = $('<source>').attr('src', data.message.audio).attr('type', 'audio/mpeg');
+                 audioElement.append(sourceElement);
+
+            }
             var timestamp = data.message.created_at;
 
             var clearFix = $('<div>').addClass('clearfix');
@@ -226,6 +333,11 @@
             contentContainer.append(contentText);
             if (fileLink) {
                contentContainer.append(fileLink);
+            }
+
+
+            if (audioElement) {
+               contentContainer.append(audioElement);
             }
             contentContainer.append(timestampText);
 
@@ -249,4 +361,7 @@
                 reader.readAsDataURL(file);
               });
             });
-    </script>
+
+        </script>
+
+@endsection

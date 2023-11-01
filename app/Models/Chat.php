@@ -35,6 +35,15 @@ class Chat extends Model
         return  null;
     }
 
+    public function getAudioAttribute($value)
+    {
+        if($value){
+            return url('uploads/'. $value);
+        }
+
+        return  null;
+    }
+
     public function chats()
     {
         return $this->hasMany(Chat::class, 'chat_id');

@@ -25,6 +25,16 @@
         .custom-file-upload i {
             margin-right: 5px;
         }
+        #progressBar {
+            width: 100%;
+            height: 10px;
+            background-color: #f1f1f1;
+        }
+
+        #progressBar div {
+            height: 100%;
+            background-color: #4caf50;
+        }
     </style>
     <div class="container mt-5">
 
@@ -42,6 +52,15 @@
                         <i class="fas fa-cloud-upload-alt"></i> ارفاق ملف
                     </label>
                     <div id="file-preview" style="overflow: hidden"></div>
+
+                    <hr>
+                    <div class="d-flex gap-2">
+                        <button type="button" id="recordButton" class="btn-primary border-0 rounded px-4">سجل</button>
+                        <button type="button" id="stopButton" disabled class="btn-primary border-0 rounded px-4">ايقاف</button>
+                        <audio id="audioPlayback" controls class="hidden"></audio>
+                        <button type="button" id="deleteButton" class="btn-primary border-0 rounded px-4 py-1">حذف</button>
+                    </div>
+                    <hr>
                     <div class="d-flex justify-content-between">
                         <button type="submit" class="btn btn-primary mt-2 my-2">ارسال</button>
                         <button class="btn btn-info mt-2 my-2" id="finish">انهاء المحادثة</button>
@@ -73,6 +92,7 @@
 
 <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
 
 <script>
     sessionStorage.setItem('chat_id',null)
@@ -128,15 +148,23 @@
             $('#chat-messages').append(clearFix);
             messageContainer.append(contentContainer);
                         contentContainer.append(contentText);
-            contentContainer.append(timestampText);
+
              if (data.chat.file != null) {
                 var fileLink = $('<a>').attr('href', data.chat.file).attr('target', '_blank').addClass('btn-primary px-2 rounded d-block w-50 text-end').text('المرفق');
              }
+
+            if (data.chat.audio != null) {
+                 var audioElement = $('<audio>').attr('controls', '').addClass('audio-element my-2 text-end');
+                 var sourceElement = $('<source>').attr('src', data.chat.audio).attr('type', 'audio/mpeg');
+                 audioElement.append(sourceElement);
+                 contentContainer.append(audioElement);
+            }
 
             if (fileLink) {
               contentContainer.append(fileLink);
             }
 
+            contentContainer.append(timestampText);
             messageContainer.append(avatarContainer);
             avatarContainer.append(avatarImage);
 
@@ -148,8 +176,55 @@
      });
 
      $(document).ready(function() {
+         let audioStream;
+                let recorder;
+                let recordedAudio;
+
+                const recordButton = $("#recordButton");
+                const stopButton = $("#stopButton");
+                const sendButton = $("#sendButton");
+                const audioPlayback = $("#audioPlayback");
+                const deleteButton = $("#deleteButton");
+
+                recordButton.on("click", function() {
+                    recordButton.prop("disabled", true);
+                    stopButton.prop("disabled", false);
+
+                    navigator.mediaDevices.getUserMedia({ audio: true })
+                        .then(function(stream) {
+                            audioStream = stream;
+                            const audioContext = new AudioContext();
+                            const input = audioContext.createMediaStreamSource(stream);
+                            recorder = new Recorder(input, { numChannels: 1 });
+                            recorder.record();
+                        })
+                        .catch(function(err) {
+                            console.error("Error accessing microphone:", err);
+                        });
+                });
+
+                stopButton.on("click", function() {
+                    recordButton.prop("disabled", false);
+                    stopButton.prop("disabled", true);
+
+                    recorder.stop();
+                    audioStream.getAudioTracks()[0].stop();
+
+                    recorder.exportWAV(function(blob) {
+                        recordedAudio = blob;
+                        audioPlayback.attr("src", URL.createObjectURL(blob));
+                    });
+                });
+
+                deleteButton.on("click", function() {
+                   recordedAudio = null;
+                   audioPlayback.attr("src", "");
+                   deleteButton.prop("disabled", true);
+                });
+
          $('#chat-form').submit(function(e) {
              e.preventDefault();
+
 
              var message = $('#message-input').val();
             var file = $('#message-file')[0].files[0]; // Get the file from the input
@@ -161,6 +236,9 @@
 
             formData.append('file', file); // Append the file to the FormData
 
+            if (recordedAudio) {
+                  formData.append("audio", recordedAudio, "recording.wav");
+            }
             formData.append('user_id', sessionStorage.getItem('chat_id'));
 
              $.ajaxSetup({
@@ -199,9 +277,17 @@
 
                         $('#chat-messages').append(clearFix);
                         contentContainer.append(contentText);
+                                                if (response.data.audio != null) {
+                             var audioElement = $('<audio>').attr('controls', '').addClass('audio-element my-2 text-end');
+                             var sourceElement = $('<source>').attr('src', response.data.audio).attr('type', 'audio/mpeg');
+                             audioElement.append(sourceElement);
+                             contentContainer.append(audioElement);
+                        }
+
                         if (fileLink) {
                           contentContainer.append(fileLink);
                         }
+
                         contentContainer.append(timestampText);
 
                         messageContainer.append(avatarContainer);
@@ -214,7 +300,11 @@
                          $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
                          $('#message-input').val('');
                          $('#message-file').val('');
-                          $('#file-preview').empty().hide();
+                          $('#file-preview').hide();
+                          recordedAudio = null;
+                             audioPlayback.attr("src", "");
+                             deleteButton.prop("disabled", true);
+
                      },
                      error: function(xhr, status, error) {
                          console.error(error);
@@ -293,10 +383,17 @@ $(document).ready(function() {
     });
     function sender(message, adminPhoto) {
 
+console.log(message.audio);
             var timestamp= message.created_at;
             if (message.file != null) {
-                 var fileLink = $('<a>').attr('href', message.file).attr('target', '_blank').addClass('btn-primary px-2 rounded').text('المرفق');
+                 var fileLink = $('<a>').attr('href', message.file).attr('target', '_blank').addClass('btn-primary px-2 rounded d-block w-25').text('المرفق');
              }
+             if (message.audio != null) {
+                     var audioElement = $('<audio>').attr('controls', '').addClass('audio-element my-2 text-end');
+                     var sourceElement = $('<source>').attr('src', message.audio).attr('type', 'audio/mpeg');
+                     audioElement.append(sourceElement);
+                }
+
             var message = message.message;
 
             var clearFix = $('<div>').addClass('clearfix');
@@ -312,6 +409,7 @@ $(document).ready(function() {
             if (fileLink) {
                 contentContainer.append(fileLink);
             }
+
             contentContainer.append(timestampText);
 
 
@@ -328,8 +426,14 @@ $(document).ready(function() {
     function receiver(message, userPhoto) {
             var timestamp = message.created_at;
               if (message.file != null) {
-                 var fileLink = $('<a>').attr('href', message.file).attr('target', '_blank').addClass('w-50 mr-auto btn-primary px-2 rounded d-block text-end').text('المرفق').css('margin-right', 'auto');;
+                 var fileLink = $('<a>').attr('href', message.file).attr('target', '_blank').addClass('w-25 mr-auto btn-primary px-2 rounded d-block text-end').text('المرفق').css('margin-right', 'auto');;
              }
+                if (message.audio != null) {
+                     var audioElement = $('<audio>').attr('controls', '').addClass('audio-element my-2 text-end');
+                     var sourceElement = $('<source>').attr('src', message.audio).attr('type', 'audio/mpeg');
+                     audioElement.append(sourceElement);
+                }
+
             var message = message.message;
 
             var clearFix = $('<div>').addClass('clearfix');
@@ -337,7 +441,7 @@ $(document).ready(function() {
 
             var contentContainer = $('<div>').addClass('align-items-center mx-1');
             var contentText = $('<span>').addClass('d-block text-end').text(message);
-            var timestampText = $('<span>').text(timestamp);
+            var timestampText = $('<span>').text(timestamp).addClass('d-block text-end');
             var avatarContainer = $('<div>').css({ height: '40px', width: '40px' });
             var avatarImage = $('<img>').addClass('rounded-circle h-100 w-100').attr('src', userPhoto);
 
@@ -348,6 +452,12 @@ $(document).ready(function() {
             if (fileLink) {
                 contentContainer.append(fileLink);
             }
+
+            if(audioElement){
+                contentContainer.append(audioElement);
+            }
+
+
             contentContainer.append(timestampText);
 
             messageContainer.append(avatarContainer);

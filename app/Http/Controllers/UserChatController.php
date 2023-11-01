@@ -119,6 +119,12 @@ class UserChatController extends BaseController
 
             $filePath = $file->store("media", "uploads");
         }
+        $audioPath ='';
+
+        if($request->has('audio') && $request->input('audio') !="undefined" ) {
+            $file = $request->file('audio');
+            $audioPath = $file->store("media", "uploads");
+        }
 
         $oldChat = Chat::query()->where('is_open', true)
             ->where('sender_id', auth()->id())
@@ -134,6 +140,7 @@ class UserChatController extends BaseController
                     'message' => $request->input('message'),
                     'user_read_at' => now(),
                     'file' => $filePath??null,
+                    'audio' => $audioPath??null,
                     'sender_id' => auth()->id(),
                     'receiver_id' => $admin->id,
                 ]);
@@ -172,6 +179,7 @@ class UserChatController extends BaseController
                 'file' => $filePath??null,
                 'sender_id' => auth()->id(),
                 'receiver_id' => $admin->id,
+                'audio' => $audioPath??null,
             ]);
             $chat->chat_id = $chat->id;
             $chat->save();
