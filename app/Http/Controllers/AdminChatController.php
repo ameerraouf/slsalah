@@ -44,6 +44,7 @@ class AdminChatController extends SuperAdminController
 
     public function getChat(Request $request)
     {
+
         $messages = Chat::query()->where('chat_id', $request->input('chatId'))->get();
 
         foreach ($messages as $message){
@@ -65,7 +66,7 @@ class AdminChatController extends SuperAdminController
             $adminPhoto = url('/'. env('DEFAULT_PHOTO')??"");
         }
 
-        $user = User::query()->find($request->input('chatId'));
+        $user = User::query()->find($messages->first()->sender_id);
 
         if($user->photo){
             $userPhoto = url('uploads/' . $user->photo);
@@ -74,8 +75,9 @@ class AdminChatController extends SuperAdminController
         }
 
         $messagesCount = Chat::query()
-            ->where('receiver_id' ,auth()->id())
-            ->where('admin_read_at', null)->count();
+            ->where('receiver_id' , auth()->id())
+            ->where('admin_read_at', null)
+            ->count();
 
         $pusher = new Pusher(
             config('broadcasting.connections.pusher.key'),
@@ -106,9 +108,17 @@ class AdminChatController extends SuperAdminController
 
             $filePath = $file->store("media", "uploads");
         }
+        $audioPath ='';
+
+        if($request->has('audio') && $request->input('audio') !="undefined" ) {
+            $file = $request->file('audio');
+            $audioPath = $file->store("media", "uploads");
+        }
+
 
         $row = Chat::query()->where('chat_id', $request->input('user_id'))->first();
         $chat = Chat::query()->where('receiver_id', $row->sender_id)->where('is_open', 1)->first();
+
 
         $message = Chat::query()->create([
             'chat_id' =>$request->input('user_id'),
@@ -118,10 +128,46 @@ class AdminChatController extends SuperAdminController
             'sender_id' => $admin->id,
             'receiver_id' => $row->sender_id,
             'is_open' => 1,
+            'user_read_at' => null,
+            'audio' => $audioPath??null
         ]);
+
+        $this->updateCountOfMessages($row->sender_id, $admin->id, $request->input('user_id'));
 
         $pusher->trigger('chat-channel', 'new-message', ['message' => $message]);
         return response()->json(['data' => $message]);
+    }
+    public function updateCountOfMessages($userId, $adminId, $chatId)
+    {
+        $pusher = new Pusher(
+            config('broadcasting.connections.pusher.key'),
+            config('broadcasting.connections.pusher.secret'),
+            config('broadcasting.connections.pusher.app_id'),
+            config('broadcasting.connections.pusher.options')
+        );
+
+        $messagesCount = Chat::query()
+            ->where('receiver_id' , $userId)
+            ->where('user_read_at', null)
+            ->count();
+
+        $adminMessages = Chat::query()
+            ->where('chat_id', $chatId)
+            ->where('admin_read_at', null)
+            ->get();
+
+
+        foreach ($adminMessages as $adminMessage){
+            $adminMessage->update(['admin_read_at' => now()]);
+        }
+
+        $adminMessages = Chat::query()->where('sender_id', $adminId)
+            ->where('admin_read_at',null)
+            ->count();
+
+        $pusher->trigger('user-count-chat', 'user-count-chat', ['count' => $messagesCount]);
+        $pusher->trigger('count-chat', 'count-chat', ['count' => $adminMessages]);
+
     }
 
     public function disableChat(Request $request)

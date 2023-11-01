@@ -40,15 +40,20 @@
                     </div>
 
                 </div>
-                <h4 class="mt-4">وسائل الدفع</h4>
-                <div class="d-flex mb-5">
-                    <div class="col-3">
-                        <a class="btn btn-primary" href="{{route('user.pay_online', $package->id)}}"> الدفع أونلاين </a>
+
+                @if(isUserSubscribeInPlan(auth()->id(), $package->id))
+                <div class="btn btn-primary">انت مشترك بالفعل في هذه الباقة</div>
+                @else
+                    <h4 class="mt-4">وسائل الدفع</h4>
+                    <div class="d-flex mb-5">
+                        <div class="col-3">
+                            <a class="btn btn-primary" href="{{route('user.pay_online', $package->id)}}"> الدفع أونلاين </a>
+                        </div>
+                        <div class="col-3">
+                            <a class="btn btn-primary" href="{{route('user.pay_bank', $package->id)}}">حوالة بنكية</a>
+                        </div>
                     </div>
-                    <div class="col-3">
-                        <a class="btn btn-primary" href="{{route('user.pay_bank', $package->id)}}">حوالة بنكية</a>
-                    </div>
-                </div>
+                @endif
 
             </div>
         </div>

@@ -140,7 +140,11 @@
                         <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
                         <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
                     </svg>
-                    <span class="nav-link-text ms-3"> <strong class="pr-2 text-danger" id="admin_notification_count" style="padding-left: 5px">{{auth()->user()->notifications()->where('read_at', null)->count()}}</strong>الاشعارات</span>
+
+                    <span class="nav-link-text ms-3 d-inline">
+                        الاشعارات
+                    </span>
+                    <strong class="pr-2 text-danger d-inline" id="admin_notification_count" >{{auth()->user()->notifications()->where('read_at', null)->count()}}</strong>
                 </a>
             </li>
             <li class="nav-item">
@@ -155,8 +159,8 @@
                     </svg>
 
                     <span class="nav-link-text ms-3">
-                        <strong class=" text-danger" id="admin_chat_count" >0</strong>
                         <span class="nav-link-text ">{{__('جلسات دعم ومساعدة')}}</span>
+                        <strong class=" text-danger mx-2" id="admin_chat_count" >0</strong>
                     </span>
                 </a>
             </li>
@@ -356,7 +360,15 @@
         Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
 </script>
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
+
+    var pusher = new Pusher('{{env('PUSHER_APP_KEY')}}', {
+        cluster: 'eu',
+        encrypted: true
+    });
+
     var channelCount = pusher.subscribe('count-chat');
           channelCount.bind('count-chat', function(data) {
                 $('#admin_chat_count').text(data.count)
