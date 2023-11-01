@@ -439,7 +439,7 @@ console.log(message.audio);
             var clearFix = $('<div>').addClass('clearfix');
             var messageContainer = $('<div>').addClass('d-flex align-items-center float-end my-2');
 
-            var contentContainer = $('<div>').addClass('align-items-center mx-1');
+            var contentContainer = $('<div>').addClass('align-items-center mx-1 text-end');
             var contentText = $('<span>').addClass('d-block text-end').text(message);
             var timestampText = $('<span>').text(timestamp).addClass('d-block text-end');
             var avatarContainer = $('<div>').css({ height: '40px', width: '40px' });
