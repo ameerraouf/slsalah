@@ -150,7 +150,7 @@
                         contentContainer.append(contentText);
 
              if (data.chat.file != null) {
-                var fileLink = $('<a>').attr('href', data.chat.file).attr('target', '_blank').addClass('btn-primary px-2 rounded d-block w-25 text-end').text('المرفق');
+                var fileLink = $('<a>').attr('href', data.chat.file).attr('target', '_blank').addClass('btn-primary px-2 rounded d-block w-50 text-end').text('المرفق');
              }
 
             if (data.chat.audio != null) {
