@@ -265,7 +265,7 @@
                             $('#chat-messages').append(clearFix);
                             contentContainer.append(contentText);
                             if (data.file != null) {
-                                 var fileLink = $('<a>').attr('href', data.file).attr('target', '_blank').addClass('btn-primary px-2 rounded d-block w-50').text('المرفق');
+                                 var fileLink = $('<a>').attr('href', data.file).attr('target', '_blank').addClass('btn-primary px-2 rounded d-block w-25').text('المرفق');
                              }
 
                              if (fileLink) {
