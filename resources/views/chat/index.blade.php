@@ -97,10 +97,10 @@
                             <div id="file-preview" style="overflow: hidden"></div>
 <hr>
                             <div class="d-flex gap-2">
-                                <button type="button" id="recordButton" class="btn-primary border-0 rounded px-4">سجل</button>
-                                <button type="button" id="stopButton" disabled class="btn-primary border-0 rounded px-4">ايقاف</button>
+                                <i id="recordButton"  class="fa fa-microphone" style="line-height: 4; cursor: pointer"  title="سجل"></i>
+                                <i id="stopButton" disabled  class="fa fa-stop"  style="line-height: 4; cursor: pointer"  title="ايقاف"></i>
                                 <audio id="audioPlayback" controls class="hidden"></audio>
-                                <button type="button" id="deleteButton" class="btn-primary border-0 rounded px-4 py-1">حذف</button>
+                                <i id="deleteButton" class="fa fa-trash" style="line-height: 4; cursor: pointer"></i>
                             </div>
                             <hr>
 {{--                            <div class="audio-record">--}}
