@@ -250,6 +250,10 @@ class PlanningRevenueOperatingAssumption extends Model
             'second_year_profit_before_zakat_percent_value' => formatCurrency($second_year_profit_before_zakat*0.025 ,getWorkspaceCurrency($settings)),
             'third_year_profit_before_zakat_percent_value' => formatCurrency($third_year_profit_before_zakat*0.025 ,getWorkspaceCurrency($settings)),
 
+            'first_year_profit_before_zakat_percent_number' => $first_year_profit_before_zakat*0.025,
+            'second_year_profit_before_zakat_percent_number' => $second_year_profit_before_zakat*0.025 ,
+            'third_year_profit_before_zakat_percent_number' => $third_year_profit_before_zakat*0.025,
+
             'first_year_profit_after_zakat' => formatCurrency(($first_year_profit_before_zakat - $first_year_profit_before_zakat*0.025) ,getWorkspaceCurrency($settings)),
             'second_year_profit_after_zakat' => formatCurrency(($second_year_profit_before_zakat - $second_year_profit_before_zakat*0.025) ,getWorkspaceCurrency($settings)),
             'third_year_profit_after_zakat' => formatCurrency(($third_year_profit_before_zakat - $third_year_profit_before_zakat*0.025) ,getWorkspaceCurrency($settings)),

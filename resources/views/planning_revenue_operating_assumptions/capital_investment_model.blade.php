@@ -34,10 +34,10 @@
                                 <td style="text-align: center">اجمالي التكاليف</td>
                                 <td>
 
-                                    {{ $calc_total['total_cost_first_year_as_string'] }}
+                                    {{  formatCurrency($calc_total['total_cost_first_year_as_number'] + $calc_total['first_year_profit_before_zakat_percent_number'],getWorkspaceCurrency($settings) ) }}
                                 </td>
-                                <td>{{ $calc_total['total_cost_second_year_as_string'] }}</td>
-                                <td>{{ $calc_total['total_cost_third_year_as_string'] }}</td>
+                                <td>{{  formatCurrency($calc_total['total_cost_second_year_as_number'] + $calc_total['second_year_profit_before_zakat_percent_number'],getWorkspaceCurrency($settings) ) }}</td>
+                                <td>{{  formatCurrency($calc_total['total_cost_third_year_as_number'] + $calc_total['third_year_profit_before_zakat_percent_number'],getWorkspaceCurrency($settings) ) }}</td>
 {{--                                <td>{{ $totalInvestedCapital }}</td>--}}
                                 <td></td>
                             </tr>
