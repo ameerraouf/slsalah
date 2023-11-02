@@ -64,6 +64,11 @@ function userSubscribe($userId, $planId, $subscriptionType, $price,$paymentType,
 {
     $subscription_date_end = $subscriptionType == 'monthly' ? Carbon::parse(now())->addMonth() : Carbon::parse(now())->addYear();
 
+    $subscribe = Subscribe::query()->where('user_id' , $userId)->where('subscription_plan_id', $planId)->first();
+    if($subscribe)
+    {
+        $subscribe->delete();
+    }
     $subscribe = Subscribe::query()->create([
         'user_id' => $userId,
         'subscription_plan_id' => $planId,
