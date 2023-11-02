@@ -58,7 +58,6 @@ class UserChatController extends BaseController
         );
 
         $unreadMessages = Chat::query()
-            ->where('chat_id', $currentChat->id)
             ->where('sender_id', auth()->id())
             ->whereNotNull('user_read_at')
             ->get();
