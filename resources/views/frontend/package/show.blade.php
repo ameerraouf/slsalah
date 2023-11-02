@@ -57,7 +57,7 @@
                             </div>
                         </div>
                     @else
-                        <div class="btn btn-primary">انت مشترك بالفعل في هذه الباقة</div>
+                        <div class="btn btn-primary w-50 mx-auto">انت مشترك بالفعل في هذه الباقة</div>
                     @endif
 
                 @else
