@@ -15,12 +15,12 @@
     <title>سلسلة &#8211; منصة سلسلة لريادة الأعمال</title>
 
 
-    <link id="pagestyle" href="{{PUBLIC_DIR}}/css/app.css?v=1128" rel="stylesheet"/> 
+    <link id="pagestyle" href="{{PUBLIC_DIR}}/css/app.css?v=1128" rel="stylesheet"/>
 
 
 {{--    <link rel="stylesheet" href="frappe-gantt.css">--}}
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/frappe-gantt@0.5.0/dist/frappe-gantt.css" />
-    
+
     {{-- START css file for change (direction|colors|font) --}}
     <link id="pagestyle" href="{{PUBLIC_DIR}}/css/custom.css" rel="stylesheet"/>
     {{-- END css file for change (direction|colors|font) --}}
@@ -542,7 +542,7 @@
                     <span class="nav-link-text ">{{__('جلسات دعم ومساعدة')}}</span>
                     <strong class=" text-danger mx-2" id="user_chat_count" >
                         {{\App\Models\Chat::query()
-            ->where('sender_id' , auth()->id())
+            ->where('receiver_id' , auth()->id())
             ->where('user_read_at', null)
             ->count()}}
                     </strong>
@@ -683,8 +683,9 @@
     @endif
 
 </script>
+
 <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 <script>
 
     var pusher = new Pusher('{{env('PUSHER_APP_KEY')}}', {
@@ -698,8 +699,8 @@
          });
 
 </script>
-@yield('script')
 
+@yield('script')
 </body>
 
 </html>
