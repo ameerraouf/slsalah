@@ -40,7 +40,7 @@
             <h3>جلسات دعم ومساعدة من قبل مختصين واستشاريين في مجال تخطيط وتنفيذ المشاريع</h3>
 
             <div class="row">
-                <div class="col-8">
+                <div class="col-10">
                     <div id="chat-messages" class="mt-4 messages-container">
                         @foreach($messages as $message)
                             @if($message->sender_id == auth()->id())
@@ -118,24 +118,24 @@
                     @endif
 
                 </div>
-                <div class="col-4">
-                    <h4>المحادثات السابقة</h4>
-                    @foreach($chats as $chat)
+{{--                <div class="col-4">--}}
+{{--                    <h4>المحادثات السابقة</h4>--}}
+{{--                    @foreach($chats as $chat)--}}
 
-                        <div class="d-flex align-items-center border-top pt-2 cursor-pointer" id="{{$chat->chat_id}}">
-                            <div style="height: 40px;width: 40px" class="mx-3">
-                                <img class="rounded-circle h-100 w-100" src="{{$chat->receiver->photo? url('uploads/' . $chat->receiver->photo): url('/'. env('DEFAULT_PHOTO')??"")}}">
-                            </div>
-                            <div class="align-items-center mx-1">
-                                <span class="d-block text-start">{{$chat->receiver->first_name . ' '. $chat->receiver->last_name}}</span>
-                            </div>
-                            <div class="align-items-center ">
-                                <span class="text-danger mx-3" id="count{{$chat->chat_id}}"></span>
-                            </div>
-                        </div>
-                        <hr>
-                    @endforeach
-                </div>
+{{--                        <div class="d-flex align-items-center border-top pt-2 cursor-pointer" id="{{$chat->chat_id}}">--}}
+{{--                            <div style="height: 40px;width: 40px" class="mx-3">--}}
+{{--                                <img class="rounded-circle h-100 w-100" src="{{$chat->receiver->photo? url('uploads/' . $chat->receiver->photo): url('/'. env('DEFAULT_PHOTO')??"")}}">--}}
+{{--                            </div>--}}
+{{--                            <div class="align-items-center mx-1">--}}
+{{--                                <span class="d-block text-start">{{$chat->receiver->first_name . ' '. $chat->receiver->last_name}}</span>--}}
+{{--                            </div>--}}
+{{--                            <div class="align-items-center ">--}}
+{{--                                <span class="text-danger mx-3" id="count{{$chat->chat_id}}"></span>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <hr>--}}
+{{--                    @endforeach--}}
+{{--                </div>--}}
             </div>
         </div>
 
