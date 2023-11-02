@@ -540,7 +540,12 @@
                     </svg>
 
                     <span class="nav-link-text ">{{__('جلسات دعم ومساعدة')}}</span>
-                    <strong class=" text-danger mx-2" id="user_chat_count" >0</strong>
+                    <strong class=" text-danger mx-2" id="user_chat_count" >
+                        {{\App\Models\Chat::query()
+            ->where('receiver_id' , auth()->id())
+            ->where('user_read_at', null)
+            ->count()}}
+                    </strong>
                 </a>
             </li>
 

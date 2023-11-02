@@ -47,7 +47,9 @@
 
                             </div>
                             <div>
+                                @if($plan->active == 1)
                                 <a class="btn btn-primary  mt-1 mx-2" href="{{route('packages.details', $plan->id)}}">اشتراك</a>
+                                @endif
                             </div>
                         </div>
 

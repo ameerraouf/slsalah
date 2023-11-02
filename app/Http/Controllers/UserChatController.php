@@ -131,9 +131,12 @@ class UserChatController extends BaseController
             ->latest()
             ->first();
 
-
+//        if(!empty($request->input('message') )&& !empty($filePath) && !empty($audioPath))){
+//
+//        }
         if($oldChat){
             if($oldChat->is_open == 1){
+
                 $chat = Chat::query()->create([
                     'is_open' => 1,
                     'chat_id' => $oldChat->chat_id,

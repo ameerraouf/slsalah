@@ -40,7 +40,7 @@
             <h3>جلسات دعم ومساعدة من قبل مختصين واستشاريين في مجال تخطيط وتنفيذ المشاريع</h3>
 
             <div class="row">
-                <div class="col-8">
+                <div class="col-10">
                     <div id="chat-messages" class="mt-4 messages-container">
                         @foreach($messages as $message)
                             @if($message->sender_id == auth()->id())
@@ -118,24 +118,24 @@
                     @endif
 
                 </div>
-                <div class="col-4">
-                    <h4>المحادثات السابقة</h4>
-                    @foreach($chats as $chat)
+{{--                <div class="col-4">--}}
+{{--                    <h4>المحادثات السابقة</h4>--}}
+{{--                    @foreach($chats as $chat)--}}
 
-                        <div class="d-flex align-items-center border-top pt-2 cursor-pointer" id="{{$chat->chat_id}}">
-                            <div style="height: 40px;width: 40px" class="mx-3">
-                                <img class="rounded-circle h-100 w-100" src="{{$chat->receiver->photo? url('uploads/' . $chat->receiver->photo): url('/'. env('DEFAULT_PHOTO')??"")}}">
-                            </div>
-                            <div class="align-items-center mx-1">
-                                <span class="d-block text-start">{{$chat->receiver->first_name . ' '. $chat->receiver->last_name}}</span>
-                            </div>
-                            <div class="align-items-center ">
-                                <span class="text-danger mx-3" id="count{{$chat->chat_id}}"></span>
-                            </div>
-                        </div>
-                        <hr>
-                    @endforeach
-                </div>
+{{--                        <div class="d-flex align-items-center border-top pt-2 cursor-pointer" id="{{$chat->chat_id}}">--}}
+{{--                            <div style="height: 40px;width: 40px" class="mx-3">--}}
+{{--                                <img class="rounded-circle h-100 w-100" src="{{$chat->receiver->photo? url('uploads/' . $chat->receiver->photo): url('/'. env('DEFAULT_PHOTO')??"")}}">--}}
+{{--                            </div>--}}
+{{--                            <div class="align-items-center mx-1">--}}
+{{--                                <span class="d-block text-start">{{$chat->receiver->first_name . ' '. $chat->receiver->last_name}}</span>--}}
+{{--                            </div>--}}
+{{--                            <div class="align-items-center ">--}}
+{{--                                <span class="text-danger mx-3" id="count{{$chat->chat_id}}"></span>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <hr>--}}
+{{--                    @endforeach--}}
+{{--                </div>--}}
             </div>
         </div>
 
@@ -227,6 +227,10 @@
             formData.append('message', message); // Append the message to the FormData
             formData.append('file', file); // Append the file to the FormData
 
+  if (!message && !file && !recordedAudio) {
+
+    return;
+  }
             if (recordedAudio) {
                   formData.append("audio", recordedAudio, "recording.wav");
             }
@@ -265,7 +269,7 @@
                             $('#chat-messages').append(clearFix);
                             contentContainer.append(contentText);
                             if (data.file != null) {
-                                 var fileLink = $('<a>').attr('href', data.file).attr('target', '_blank').addClass('btn-primary px-2 rounded d-block w-25').text('المرفق');
+                                 var fileLink = $('<a>').attr('href', data.file).attr('target', '_blank').addClass('btn-primary px-2 rounded d-block w-50').text('المرفق');
                              }
 
                              if (fileLink) {
@@ -352,14 +356,26 @@
         }
 
             $(document).ready(function() {
-              $('#message-file').change(function() {
-                var file = this.files[0];
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                  $('#file-preview').html('<img  src="' + e.target.result + '" height="50" width="50" style="margin-bottom:5px">');
-                }
-                reader.readAsDataURL(file);
-              });
+  $('#message-file').change(function() {
+    var file = this.files[0];
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var fileExtension = file.name.split('.').pop().toLowerCase();
+      var previewHtml = '';
+
+      if(fileExtension === 'pdf') {
+        previewHtml = '<i class="fa fa-file-pdf-o" style="font-size:35px"></i>'; // Replace "fa-file-pdf-o" with the appropriate class for your font awesome icon
+      } else if(fileExtension === 'doc' || fileExtension === 'docx') {
+        previewHtml = '<i class="fa fa-file-word-o"></i>'; // Replace "fa-file-word-o" with the appropriate class for your font awesome icon
+      } else {
+        previewHtml = '<img src="' + e.target.result + '" height="50" width="50" style="margin-bottom:5px">';
+      }
+
+      $('#file-preview').html(previewHtml);
+    }
+    reader.readAsDataURL(file);
+
+});
             });
 
         </script>
