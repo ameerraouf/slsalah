@@ -41,8 +41,25 @@
 
                 </div>
 
+
                 @if(isUserSubscribeInPlan(auth()->id(), $package->id))
-                <div class="btn btn-primary">انت مشترك بالفعل في هذه الباقة</div>
+                    @php
+                        $subscribe = \App\Models\Subscribe::query()->where('subscription_plan_id', $package->id)->where('user_id', auth()->id())->first();
+                    @endphp
+                    @if(checkSubscribeIsExpire($subscribe->id))
+                        <h4 class="mt-4">وسائل الدفع</h4>
+                        <div class="d-flex mb-5">
+                            <div class="col-3">
+                                <a class="btn btn-primary" href="{{route('user.pay_online', $package->id)}}"> الدفع أونلاين </a>
+                            </div>
+                            <div class="col-3">
+                                <a class="btn btn-primary" href="{{route('user.pay_bank', $package->id)}}">حوالة بنكية</a>
+                            </div>
+                        </div>
+                    @else
+                        <div class="btn btn-primary">انت مشترك بالفعل في هذه الباقة</div>
+                    @endif
+
                 @else
                     <h4 class="mt-4">وسائل الدفع</h4>
                     <div class="d-flex mb-5">

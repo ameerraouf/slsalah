@@ -160,7 +160,11 @@
 
                     <span class="nav-link-text ms-3">
                         <span class="nav-link-text ">{{__('جلسات دعم ومساعدة')}}</span>
-                        <strong class=" text-danger mx-2" id="admin_chat_count" >0</strong>
+                        <strong class=" text-danger mx-2" id="admin_chat_count" >
+                            {{\App\Models\Chat::query()
+                    ->where('receiver_id' ,1)
+                    ->where('admin_read_at', null)->count()}}
+                        </strong>
                     </span>
                 </a>
             </li>

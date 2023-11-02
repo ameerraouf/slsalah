@@ -240,7 +240,10 @@
                   formData.append("audio", recordedAudio, "recording.wav");
             }
             formData.append('user_id', sessionStorage.getItem('chat_id'));
+            if (!message && !file && !recordedAudio) {
 
+                return;
+              }
              $.ajaxSetup({
                  headers: {
                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -271,7 +274,7 @@
 
 
                         if (response.data.file != null) {
-                             var fileLink = $('<a>').attr('href', response.data.file).attr('target', '_blank').addClass('btn-primary px-2 rounded  d-block w-25').text('المرفق');
+                             var fileLink = $('<a>').attr('href', response.data.file).attr('target', '_blank').addClass('btn-primary px-2 rounded  d-block w-50').text('المرفق');
                          }
 
 
@@ -383,7 +386,6 @@ $(document).ready(function() {
     });
     function sender(message, adminPhoto) {
 
-console.log(message.audio);
             var timestamp= message.created_at;
             if (message.file != null) {
                  var fileLink = $('<a>').attr('href', message.file).attr('target', '_blank').addClass('btn-primary px-2 rounded d-block w-50').text('المرفق');
@@ -391,7 +393,6 @@ console.log(message.audio);
              if (message.audio != null) {
                      var audioElement = $('<audio>').attr('controls', '').addClass('audio-element my-2 text-end');
                      var sourceElement = $('<source>').attr('src', message.audio).attr('type', 'audio/mpeg');
-                     audioElement.append(sourceElement);
                 }
 
             var message = message.message;
@@ -408,6 +409,9 @@ console.log(message.audio);
             contentContainer.append(contentText);
             if (fileLink) {
                 contentContainer.append(fileLink);
+            }
+            if(audioElement){
+            contentContainer.append(audioElement);
             }
 
             contentContainer.append(timestampText);
@@ -426,7 +430,7 @@ console.log(message.audio);
     function receiver(message, userPhoto) {
             var timestamp = message.created_at;
               if (message.file != null) {
-                 var fileLink = $('<a>').attr('href', message.file).attr('target', '_blank').addClass('w-25 mr-auto btn-primary px-2 rounded d-block text-end').text('المرفق').css('margin-right', 'auto');;
+                 var fileLink = $('<a>').attr('href', message.file).attr('target', '_blank').addClass('w-50 mr-auto btn-primary px-2 rounded d-block text-end').text('المرفق').css('margin-right', 'auto');;
              }
                 if (message.audio != null) {
                      var audioElement = $('<audio>').attr('controls', '').addClass('audio-element my-2 text-end');
@@ -468,15 +472,27 @@ console.log(message.audio);
              $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
     }
 });
-    $(document).ready(function() {
+  $(document).ready(function() {
   $('#message-file').change(function() {
     var file = this.files[0];
     var reader = new FileReader();
     reader.onload = function(e) {
-      $('#file-preview').html('<img  src="' + e.target.result + '" height="50" width="50" style="margin-bottom:5px">');
+      var fileExtension = file.name.split('.').pop().toLowerCase();
+      var previewHtml = '';
+
+      if(fileExtension === 'pdf') {
+        previewHtml = '<i class="fa fa-file-pdf-o" style="font-size:35px"></i>'; // Replace "fa-file-pdf-o" with the appropriate class for your font awesome icon
+      } else if(fileExtension === 'doc' || fileExtension === 'docx') {
+        previewHtml = '<i class="fa fa-file-word-o"></i>'; // Replace "fa-file-word-o" with the appropriate class for your font awesome icon
+      } else {
+        previewHtml = '<img src="' + e.target.result + '" height="50" width="50" style="margin-bottom:5px">';
+      }
+
+      $('#file-preview').html(previewHtml);
     }
     reader.readAsDataURL(file);
-  });
+
+});
 });
 
 </script>
