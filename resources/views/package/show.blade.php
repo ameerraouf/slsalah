@@ -47,7 +47,7 @@
 
                             </div>
                             <div>
-                                <a class="btn btn-primary  mt-1 mx-2" href="{{route('packages.details', $plan->id)}}">اشترك</a>
+                                <a class="btn btn-primary  mt-1 mx-2" href="{{route('packages.details', $plan->id)}}">اشتراك</a>
                             </div>
                         </div>
 
