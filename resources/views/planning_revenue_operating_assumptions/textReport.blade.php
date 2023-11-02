@@ -44,7 +44,7 @@
                             $first_year_net_cash_flow = $calc_total['first_year_net_cash_flow'];
                             $second_year_net_cash_flow = $calc_total['second_year_net_cash_flow'];
                             $third_year_net_cash_flow = $calc_total['third_year_net_cash_flow'];
-                            $firstYearProfit = $calc_total['first_year_profit_before_zakat'] < 0 ? " وقيمة الزكاه ستكون ( 0 SAR )في السنة الاولي في حالة عدم وجود ربح" : "وقيمة الزكاة ستكون في السنة الاولي ( ". $calc_total['zakat_first_year_value_as_string'] .')' ;
+                            $firstYearProfit = $calc_total['first_year_profit_before_zakat'] > 0 ? " وقيمة الزكاه ستكون ( 0 SAR )في السنة الاولي في حالة عدم وجود ربح" : "وقيمة الزكاة ستكون في السنة الاولي ( ". $calc_total['zakat_first_year_value_as_string'] .')' ;
 
                         @endphp
                         <p>*يمكن تحقيق بواسطة {{ $revenues }} سيحقق في السنة الأولى (({{formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueFirstYear() * $first_year_percentage,getWorkspaceCurrency($settings)) }} وسيحقق في السنة الثانية ({{ formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueSecondYear() * $second_year_percentage,getWorkspaceCurrency($settings)) }}) وسيحقق في السنة الثالثة ({{ formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueThirdYear() * $third_year_percentage,getWorkspaceCurrency($settings) )  }})</p>
