@@ -13,6 +13,7 @@
     <div class="row">
 
         <div class="col-12">
+            @if($plan && isset($plan->user) && isset($plan->subscriptionPlan))
             <div class="card card-body mb-4">
                 <div class="card-body px-0 pt-0 pb-2 align-center">
                    <div class="row  rounded mb-2">
@@ -89,6 +90,9 @@
 
                 </div>
             </div>
+            @else
+                <div class="alert alert-danger ">هذا الخطاء بسبب مسح بعض البيانات من قاعدة البيانات , ولن يحدث في المستقبل لان هذه داتا للتجربه فقط</div>
+            @endif
         </div>
     </div>
 
