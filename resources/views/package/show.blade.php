@@ -47,7 +47,7 @@
 
                             </div>
                             <div>
-                                @if(isset($plan->active) && $plan->active == 1)
+                                @if($plan->active == 1)
                                 <a class="btn btn-primary  mt-1 mx-2" href="{{route('packages.details', $plan->id)}}">اشتراك</a>
                                 @endif
                             </div>
@@ -98,15 +98,16 @@
 
                                 <div class="col-12">
                                     @php
-                                        $plan =\App\Models\SubscriptionPlan::query()->find($package->subscription_plan_id) ;
-
+                                        $plan =\App\Models\SubscriptionPlan::query()->find($package->subscription_plan_id);
                                     @endphp
+                                    @if($plan)
                                     @if($plan->active == 1)
                                         @if(checkSubscribeIsExpire($package->id))
                                             <a class="btn btn-primary  mt-1" href="{{route('packages.details', $plan->id)}}">أعادة الاشتراك</a>
                                         @else
                                             <button class="btn btn-primary  mt-1" disabled >أعادة الاشتراك</button>
                                         @endif
+                                    @endif
                                     @endif
 
                                 </div>
