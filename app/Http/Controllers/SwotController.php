@@ -52,7 +52,11 @@ class SwotController extends BaseController
         $request->validate([
             "company_name" => "required|max:150",
             "id" => "nullable|integer",
-        ]);
+		],[
+			"company_name.required" => "حقل اسم الشركة مطلوب",
+			"company_name.max" => "يجب ألا يتجاوز حقل اسم الشركة 150 حرفًا",
+		
+		]);
 
         $model = false;
 

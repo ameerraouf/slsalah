@@ -15,7 +15,7 @@
     <div class="row">
         @foreach($plans as $plan)
             <div class="col-md-4  mb-4 ">
-                <div class="card " style="height: 460px; overflow-y:scroll">
+                <div class="card " style="height: 500px; ">
                     <div class="card-header text-center ">
                         @if($plan->active == 0)
                         <h6 class="bg-danger text-white rounded w-50 mx-auto">معطلة</h6>

@@ -170,7 +170,7 @@
 
                                             <a class="btn btn-link text-danger text-gradient px-3 mb-0"
                                                href="/delete-workspace/{{$workspace->id}}"><i
-                                                    class="far fa-trash-alt me-2"></i>{{__('Delete')}}</a>
+                                                    class="far fa-edit me-2"></i>{{__('Delete')}}</a>
                                         @endif
                                     </td>
                                 </tr>
@@ -265,7 +265,7 @@
                                             class="far fa-trash-alt me-2"></i>{{__('Edit')}}</a>
                                     <a href="/delete/subscription-plan/{{$plans->id}}"
                                        class="btn btn-link text-danger px-3 mb-0" href="javascript:"><i
-                                            class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>{{__('Delete')}}</a>
+										   class="fas fa-trash-alt text-dark me-2" aria-hidden="true"></i>{{__('Delete')}}</a>
                                 </div>
                             </li>
                         @endforeach

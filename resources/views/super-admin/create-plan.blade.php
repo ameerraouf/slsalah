@@ -5,8 +5,17 @@
         <div class="row">
             <div class="col-lg-9 col-12 mx-auto">
                 <div class="card card-body">
-                    <h6 class="mb-0">{{__('New Plan')}}</h6>
-                    <p class="text-sm mb-0">{{__('Create new plan')}}</p>
+                 
+                    
+					@if(request()->has('id'))
+					<h6 class="mb-0">{{__('edit Plan')}}</h6>
+					<p class="text-sm mb-0">{{__('edit Plan')}}</p>
+					@else
+<h6 class="mb-0">{{__('New Plan')}}</h6>
+<p class="text-sm mb-0">{{__('Create new plan')}}</p>
+					@endif
+					
+					
                     <form action="/save-subscription-plan" method="post">
                         @if ($errors->any())
                             <div class="alert bg-pink-light text-danger">
@@ -68,7 +77,7 @@
                         </div>
                         <div class="row mt-4">
                             <div class="col-6">
-                                <label class="form-label">{{__('percentage_discount_annual')}}</label><label class="text-danger">*</label>
+                                <label class="form-label">{{__('percentage_discount_annual')}}</label><label class="text-danger"></label>
                                 <input class="form-control" type="number" min="0" name="percentage_discount_annual" value="{{$plan->percentage_discount_annual ?? old('percentage_discount_annual') ?? ''}}" data-input>
                             </div>
                         </div>
@@ -92,7 +101,8 @@
                             </div>
 
                         <label
-                            class="text-uppercase text-body text-xs font-weight-bolder mt-4">{{__('Modules')}}</label>
+							class="text-uppercase text-body text-xs font-weight-bolder mt-4">{{__('Modules')}}
+							<label class="text-danger">*</label></label>
                         <ul class="list-group">
                             <li class="list-group-item border-0 px-0">
                                 <div class="form-check form-switch ps-0">

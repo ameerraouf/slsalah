@@ -104,7 +104,8 @@ Route::get("/super-admin-setting", [
     "adminSetting",
 ]);
 Route::get("/workspaces", [SuperAdminController::class, "workspaces"]);
-Route::get("/add-user", [SuperAdminController::class, "addUser"]);
+
+Route::get("/add-user", [SuperAdminController::class, "addUser"])->name('addUser');
 Route::get("/delete-workspace/{id}", [
     SuperAdminController::class,
     "deleteWorkspace",

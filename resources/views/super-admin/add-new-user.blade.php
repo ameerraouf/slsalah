@@ -20,7 +20,16 @@
                             <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active"
                                  data-animation="FadeIn">
                                 <h5 class="font-weight-bolder mb-0">
-                                    {{__('Add New User')}}
+                                
+								@if(Route::currentRouteName() == 'addUser')
+
+اضافة مستخدم جديد
+								<p>أنت الآن في الروت المحددة.</p>
+								@else
+
+							تعديل مستخدم
+								@endif
+
 
                                 </h5>
 
@@ -44,7 +53,7 @@
                                             <label>{{__('Username/Email')}}</label><label class="text-danger">*</label>
                                             <input name="email" class="multisteps-form__input form-control"
                                                    type="email"
-                                                   @if (!empty($selected_user)) value="{{$selected_user->email}}" @endif />
+												   value="" />
                                         </div>
 
                                     </div>
@@ -54,7 +63,7 @@
 
                                             <input name="password" type="password"
                                                    class="multisteps-form__input form-control"
-                                                   @if (!empty($selected_user)) value="" @endif/>
+												   value=""/>
                                             <p class="text-xs">
                                                 {{__('Keep blank if you do not want to change Password')}}
                                             </p>

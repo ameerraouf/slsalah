@@ -56,12 +56,21 @@ class BlogController extends BaseController
 
     public function blogPost(Request $request)
     {
-        $request->validate([
-            "title" => "required|max:150",
-            "id" => "nullable|integer",
-            "topic" => "required|string",
-            "cover_photo" => "nullable|file|mimes:jpeg,png,jpg,gif,svg",
-        ]);
+    $request->validate([
+    "title" => "required|max:150",
+    "id" => "nullable|integer",
+    "topic" => "required|string",
+    "cover_photo" => "nullable|file|mimes:jpeg,png,jpg,gif,svg",
+], [
+    "title.required" => "يرجى إدخال عنوان المقال",
+    "title.max" => "العنوان يجب ألا يتجاوز 150 حرفًا",
+    "id.integer" => "يجب أن يكون معرف صحيحًا",
+    "topic.required" => "يرجى تحديد الموضوع",
+    "topic.string" => "يجب أن يكون الموضوع نصًا",
+    "cover_photo.file" => "يرجى تحميل ملف صورة",
+    "cover_photo.mimes" => "نوع الملف يجب أن يكون jpeg أو png أو jpg أو gif أو svg",
+]);
+
 
         $blog = false;
 

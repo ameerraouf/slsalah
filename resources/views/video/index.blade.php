@@ -43,7 +43,7 @@
                                     <th
                                         class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
                                         {{ __('Status') }}</th>
-                                    <th class="text-secondary opacity-9"></th>
+                                    <th class="text-secondary opacity-9">{{__('procedures')}}</th>
                                 </tr>
                             <tbody>
                                 @foreach ($videos as $video)

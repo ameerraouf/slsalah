@@ -134,7 +134,7 @@ class ProfileController extends BaseController
         $request->validate([
             "first_name" => "required|string|max:100",
             "last_name" => "required|string|max:100",
-            "email" => "required|email",
+			'email' => 'required|email|unique:users,email',
             "phone" => "nullable|string|max:50",
             "password" => "nullable|string|max:255",
             "id" => "nullable|integer",
@@ -251,6 +251,7 @@ class ProfileController extends BaseController
             {
                 return \view('super-admin.add-new-user',[
                     'selected_user'=> $selected_user,
+ "selected_navigation" => "profile",
                     'countries'=> $countries,
 
 

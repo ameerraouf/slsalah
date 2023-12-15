@@ -241,8 +241,9 @@ class SuperAdminController extends SuperAdminBaseController
             "max_file_upload_size" => "required|integer|gt:0",
             "file_space_limit" => "required|string",
             "offer_price_monthly" => "nullable|numeric|min:0",
-            "percentage_discount_annual" => "required|numeric|min:0|max:100",
+            "percentage_discount_annual" => "numeric|min:0|max:100",
             "offer_price_yearly" => "nullable|numeric|gt:0",
+			'modules' => 'required|array'
         ]);
 
         $plan = false;
