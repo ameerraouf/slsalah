@@ -226,8 +226,6 @@ class ProfileController extends BaseController
 
     public function userEdit(Request $request,$id)
     {
-
-
         if($this->user->super_admin)
         {
             $selected_user = User::find($request->id);
