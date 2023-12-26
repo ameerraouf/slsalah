@@ -138,7 +138,8 @@
                                         </p>
 
                                     </td>
-                                    <td class="text-xs fw-bolder text-purple text-uppercase mb-0">    @if($workspace->id !== $user->workspace_id)
+                                    <td class="text-xs fw-bolder text-purple text-uppercase mb-0">
+                                        @if($workspace->id !== $user->workspace_id)
                                             @if(isset($plans[$workspace->plan_id]))
                                                 {{$plans[$workspace->plan_id]->name}}
                                             @endif

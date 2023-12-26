@@ -27,9 +27,7 @@ class SuperAdminController extends SuperAdminBaseController
         $total_workspaces = Workspace::count();
         $total_plans = SubscriptionPlan::count();
 
-        $recent_workspaces = Workspace::orderBy("id", "desc")
-            ->limit(5)
-            ->get();
+        $recent_workspaces = Workspace::orderBy("id", "desc")->get();
         $recent_users = User::orderBy("id", "desc")
             ->limit(5)
             ->get();
