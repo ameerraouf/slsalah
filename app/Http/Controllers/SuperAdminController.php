@@ -217,7 +217,6 @@ class SuperAdminController extends SuperAdminBaseController
         }
 
         $available_modules = SubscriptionPlan::availableModules();
-
         return \view("super-admin.create-plan", [
             "selected_navigation" => "saas-plans",
             "plan" => $plan,
