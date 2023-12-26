@@ -350,6 +350,7 @@ class SuperAdminController extends SuperAdminBaseController
 
             "layout" => "super-admin-portal",
             "focus_user" => $focus_user,
+            'selected_user' => false
         ]);
     }
     public function adminProfile(Request $request)
