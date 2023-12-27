@@ -26,7 +26,7 @@
                             </thead>
                             <tbody>
                             @foreach($workspaces as $workspace)
-                                <tr>
+                                <tr @if($user->super_admin && $workspace->id === $user->workspace_id) class = "bg-success" @endif>
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div class="d-flex flex-column justify-content-center">

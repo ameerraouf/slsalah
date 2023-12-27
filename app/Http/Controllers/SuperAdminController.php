@@ -101,10 +101,10 @@ class SuperAdminController extends SuperAdminBaseController
     {
         $users = User::all();
 
-        $workspaces = Workspace::all()
+        $workspaces = Workspace::orderBy('created_at' , 'desc')->get()
             ->keyBy("id")
             ->all();
-        $plans = SubscriptionPlan::all()
+        $plans = SubscriptionPlan::orderBy('created_at' , 'desc')->get()
             ->keyBy("id")
             ->all();
 
