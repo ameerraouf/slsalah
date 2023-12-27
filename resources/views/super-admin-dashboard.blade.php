@@ -278,11 +278,11 @@
                                 <div class="ms-auto text-end">
                                     <a href="/subscription-plan?id={{ $plans->id }}"
                                         class="btn btn-link text-dark text-gradient px-3 mb-0" href="javascript:"><i
-                                            class="far fa-trash-alt me-2"></i>{{ __('Edit') }}</a>
+                                            class="fas fa-pencil-alt text-dark me-2"></i>{{ __('Edit') }}</a>
                                     <a href="/delete/subscription-plan/{{ $plans->id }}"
                                         class="btn btn-link text-danger px-3 mb-0" href="javascript:"><i
-                                            class="fas fa-pencil-alt text-dark me-2"
-                                            aria-hidden="true"></i>{{ __('Delete') }}</a>
+                                            class="fas fa-ban text-dark me-2"
+                                            aria-hidden="true"></i>{{ __('Disable') }}</a>
                                 </div>
                             </li>
                         @endforeach
