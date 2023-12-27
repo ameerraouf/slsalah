@@ -130,7 +130,8 @@
                         </div>
 
                         <label
-                            class="text-uppercase text-body text-xs font-weight-bolder mt-4">{{ __('Modules') }}</label>
+                            class="text-uppercase text-body text-xs font-weight-bolder mt-4">{{ __('Modules') }}</label><label
+                            class="text-danger">*</label>
                         <ul class="list-group">
                             <li class="list-group-item border-0 px-0">
                                 <div class="form-check form-switch ps-0">
