@@ -129,7 +129,8 @@ class DeleteController extends BaseController
                 $plan = SubscriptionPlan::find($id);
 
                 if ($plan) {
-                    $plan->delete();
+                    $plan->active = 0;
+                    $plan->save();
                     return redirect("/subscription-plans");
                 }
 
