@@ -3,18 +3,19 @@
 namespace App\Http\Controllers;
 
 
-use App\Models\ContactSection;
-use App\Models\CookiePolicy;
-use App\Models\LandingPage;
-use App\Models\PaymentGateway;
-use App\Models\PrivacyPolicy;
-use App\Models\Setting;
-use App\Models\SubscriptionPlan;
-use App\Models\Terms;
+use App\Models\Chat;
 use App\Models\User;
+use App\Models\Terms;
+use App\Models\Setting;
 use App\Models\Workspace;
-use App\Supports\UpdateSupport;
+use App\Models\LandingPage;
+use App\Models\CookiePolicy;
 use Illuminate\Http\Request;
+use App\Models\PrivacyPolicy;
+use App\Models\ContactSection;
+use App\Models\PaymentGateway;
+use App\Supports\UpdateSupport;
+use App\Models\SubscriptionPlan;
 
 class SuperAdminController extends SuperAdminBaseController
 {
@@ -440,9 +441,13 @@ class SuperAdminController extends SuperAdminBaseController
             if ($this->workspace->id === $workspace->id) {
                 return redirect("/workspaces");
             }
-
-            User::where('workspace_id', $id)->delete();
-
+                
+            $user = User::where('workspace_id', $id)->first();
+            $chats = Chat::where('receiver_id' , $user->id)->get();
+            foreach ($chats as $chat) {
+                $chat->delete();
+            }
+            $user->delete();
             $workspace->delete();
             return redirect("/workspaces");
         }
