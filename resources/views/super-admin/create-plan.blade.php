@@ -98,8 +98,7 @@
                         </div>
                         <div class="row mt-4">
                             <div class="col-6">
-                                <label class="form-label">{{ __('percentage_discount_annual') }}</label><label
-                                    class="text-danger">*</label>
+                                <label class="form-label">{{ __('percentage_discount_annual') }}</label>
                                 <input class="form-control" type="number" min="0" name="percentage_discount_annual"
                                     value="{{ $plan->percentage_discount_annual ?? (old('percentage_discount_annual') ?? '') }}"
                                     data-input>
