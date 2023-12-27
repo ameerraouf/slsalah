@@ -24,9 +24,9 @@
                                 <th class=" text-uppercase text-secondary text-xxs opacity-7">{{__('Action')}}</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody class = "target-table">
                             @foreach($workspaces as $workspace)
-                                <tr @if($user->super_admin && $workspace->id === $user->workspace_id) class = "bg-success" @endif>
+                                <tr @if($user->super_admin && $workspace->id === $user->workspace_id) class = "bg-success" id="admin-wokspace-row" @endif>
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div class="d-flex flex-column justify-content-center">
@@ -90,6 +90,9 @@
     <script>
         "use strict";
         $(document).ready(function () {
+            if ($('#admin-wokspace-row').length > 0) {
+                $('.target-table').prepend($('#admin-wokspace-row').prop('outerHTML'))
+            }
             $('#cloudonex_table').DataTable({
                 language: {
                     url: 'https://cdn.datatables.net/plug-ins/1.10.24/i18n/Arabic.json'
