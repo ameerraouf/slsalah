@@ -3,7 +3,7 @@
     <div class="row mb-2">
         <div class="col">
             <h5 class=" text-secondary fw-bolder">
-                {{__('Subscription Plan List')}}
+                {{__('Plans List')}}
             </h5>
             <p class="text-muted">{{__('Create, edit or delete the plans')}}</p>
         </div>
