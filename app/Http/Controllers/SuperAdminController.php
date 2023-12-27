@@ -234,6 +234,8 @@ class SuperAdminController extends SuperAdminBaseController
             "percentage_discount_annual" => "nullable|numeric|min:0|max:100",
             "offer_price_yearly" => "nullable|numeric|gt:0",
             "modules" => 'required|array|min:1'
+        ] , [
+            "modules.required" => 'حقل الوحدات النمطية مطلوب' 
         ]);
         $plan = false;
 
