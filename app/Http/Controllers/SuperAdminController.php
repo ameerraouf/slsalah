@@ -62,13 +62,12 @@ class SuperAdminController extends SuperAdminBaseController
     public function updateSchema()
     {
 
-        $current_build_id = config('app.build_id',1);
+        $current_build_id = config('app.build_id', 1);
         UpdateSupport::updateSchema();
-        $setting = Setting::where('workspace_id',$this->user->workspace_id)
-            ->where('key','installed_build_id')
+        $setting = Setting::where('workspace_id', $this->user->workspace_id)
+            ->where('key', 'installed_build_id')
             ->first();
-        if(!$setting)
-        {
+        if (!$setting) {
             $setting = new Setting();
             $setting->workspace_id = $this->user->workspace_id;
             $setting->key = 'installed_build_id';
@@ -131,15 +130,12 @@ class SuperAdminController extends SuperAdminBaseController
 
         $workspace->name = $request->name;
         $workspace->plan_id = $request->plan_id;
-        if($request->plan_id)
-        {
+        if ($request->plan_id) {
             $workspace->subscribed = 1;
-        }
-        else{
+        } else {
             $workspace->subscribed = 0;
         }
-        if($request->next_renewal_date)
-        {
+        if ($request->next_renewal_date) {
             $workspace->next_renewal_date = $request->next_renewal_date;
         }
         $workspace->save();
@@ -167,7 +163,7 @@ class SuperAdminController extends SuperAdminBaseController
         $workspaces = Workspace::all()
             ->keyBy("id")
             ->all();
-        $workspace =false;
+        $workspace = false;
 
         if ($request->id) {
             $workspace = Workspace::find($request->id);
@@ -196,23 +192,18 @@ class SuperAdminController extends SuperAdminBaseController
     }
     public function createSaasPlan(Request $request)
     {
-        $plan= false;
+        $plan = false;
         $plan_modules = [];
         $features = [];
-        if($request->id)
-        {
+        if ($request->id) {
             $plan = SubscriptionPlan::find($request->id);
-            if($plan)
-            {
-                if($plan->modules)
-                {
+            if ($plan) {
+                if ($plan->modules) {
                     $plan_modules = json_decode($plan->modules);
                 }
-                if($plan->features)
-                {
+                if ($plan->features) {
                     $features = json_decode($plan->features);
                 }
-
             }
         }
 
@@ -227,14 +218,14 @@ class SuperAdminController extends SuperAdminBaseController
     }
     public function subscriptionPlanPost(Request $request)
     {
-        $request->validate([
+        $validator = $request->validate([
             "name" => "required|max:70",
             "id" => "nullable|integer",
             "features" => "required|array",
             'features.*' => 'string',
             "maximum_allowed_users" => "required|integer|gt:0",
             "description" => "required",
-//            "price_yearly" => "required|numeric|gt:0",
+            //            "price_yearly" => "required|numeric|gt:0",
             "price_monthly" => "required|numeric|min:0",
             "paypal_plan_id" => "required|string",
             "max_file_upload_size" => "required|integer|gt:0",
@@ -242,8 +233,8 @@ class SuperAdminController extends SuperAdminBaseController
             "offer_price_monthly" => "nullable|numeric|min:0",
             "percentage_discount_annual" => "nullable|numeric|min:0|max:100",
             "offer_price_yearly" => "nullable|numeric|gt:0",
+            "modules" => 'required|array|min:1'
         ]);
-
         $plan = false;
 
         if ($request->id) {
@@ -260,7 +251,7 @@ class SuperAdminController extends SuperAdminBaseController
         $plan->price_monthly = $request->price_monthly;
         $plan->offer_price_monthly = $request->offer_price_monthly;
         $plan->percentage_discount_annual = $request->percentage_discount_annual;
-        $plan->offer_price_yearly = $plan->price_yearly - ( $plan->price_yearly * ($request->percentage_discount_annual / 100 ));
+        $plan->offer_price_yearly = $plan->price_yearly - ($plan->price_yearly * ($request->percentage_discount_annual / 100));
 
         $plan->maximum_allowed_users = $request->maximum_allowed_users;
         $plan->max_file_upload_size = $request->max_file_upload_size;
@@ -285,16 +276,16 @@ class SuperAdminController extends SuperAdminBaseController
 
         $available_modules = SubscriptionPlan::availableModulesOriginal();
 
-//        foreach ($available_modules as $key => $value) {
-//            if ($request->$key) {
-//                $modules[] = $key;
-//            }
-//        }
+        //        foreach ($available_modules as $key => $value) {
+        //            if ($request->$key) {
+        //                $modules[] = $key;
+        //            }
+        //        }
 
         if ($request->modules) {
 
-            foreach ($request->modules as $key=> $value){
-                if (array_key_exists($key, $available_modules)){
+            foreach ($request->modules as $key => $value) {
+                if (array_key_exists($key, $available_modules)) {
                     $modules[] = $key;
                 }
             }
@@ -313,27 +304,23 @@ class SuperAdminController extends SuperAdminBaseController
         $skit_user_workspace = false;
         $plan = false;
 
-        if($request->id)
-        {
+        if ($request->id) {
             $skit_user = User::find($request->id);
 
             $skit_user_workspace = Workspace::find($skit_user->workspace_id);
 
-            if(  $skit_user_workspace->plan_id)
-            {
-                $plan = SubscriptionPlan::find( $skit_user_workspace->plan_id);
+            if ($skit_user_workspace->plan_id) {
+                $plan = SubscriptionPlan::find($skit_user_workspace->plan_id);
             }
-
-
         }
 
 
         return \view("super-admin.user-profile", [
             "selected_navigation" => "users",
             "layout" => "super-admin-portal",
-            "skit_user" => $skit_user ,
-            "skit_user_workspace"=>  $skit_user_workspace,
-            "plan"=> $plan,
+            "skit_user" => $skit_user,
+            "skit_user_workspace" =>  $skit_user_workspace,
+            "plan" => $plan,
         ]);
     }
     public function addUser(Request $request)
@@ -410,34 +397,29 @@ class SuperAdminController extends SuperAdminBaseController
 
     public function configurePaymentGatewayPost(Request $request)
     {
-        $api_name= $request->api_name;
+        $api_name = $request->api_name;
 
 
 
 
-        $payment_gateway = PaymentGateway::where("api_name",$api_name)->first();
+        $payment_gateway = PaymentGateway::where("api_name", $api_name)->first();
 
         if (!$payment_gateway) {
             $payment_gateway = new PaymentGateway();
             $payment_gateway->api_name = $api_name;
         }
 
-        if($api_name === 'paypal')
-        {
+        if ($api_name === 'paypal') {
             $payment_gateway->name = "Paypal";
             $payment_gateway->api_name = $api_name;
             $payment_gateway->username = $request->username;
             $payment_gateway->password = $request->password;
-        }
-        elseif ($api_name === 'stripe')
-        {
+        } elseif ($api_name === 'stripe') {
             $payment_gateway->name = "Stripe";
             $payment_gateway->api_name = $api_name;
             $payment_gateway->private_key = $request->private_key;
             $payment_gateway->public_key = $request->public_key;
-        }
-        elseif ($api_name === 'bank')
-        {
+        } elseif ($api_name === 'bank') {
             $payment_gateway->name = "bank";
             $payment_gateway->api_name = $api_name;
             $payment_gateway->instruction = $request->instruction;
@@ -457,7 +439,7 @@ class SuperAdminController extends SuperAdminBaseController
                 return redirect("/workspaces");
             }
 
-            User::where('workspace_id',$id)->delete();
+            User::where('workspace_id', $id)->delete();
 
             $workspace->delete();
             return redirect("/workspaces");
@@ -517,10 +499,10 @@ class SuperAdminController extends SuperAdminBaseController
             'smtp_port' => 'nullable|integer|max:65536',
         ]);
 
-        Setting::updateSettings($this->workspace->id,'smtp_host',$request->smtp_host);
-        Setting::updateSettings($this->workspace->id,'smtp_username',$request->smtp_username);
-        Setting::updateSettings($this->workspace->id,'smtp_password',$request->smtp_password);
-        Setting::updateSettings($this->workspace->id,'smtp_port',$request->smtp_port);
+        Setting::updateSettings($this->workspace->id, 'smtp_host', $request->smtp_host);
+        Setting::updateSettings($this->workspace->id, 'smtp_username', $request->smtp_username);
+        Setting::updateSettings($this->workspace->id, 'smtp_password', $request->smtp_password);
+        Setting::updateSettings($this->workspace->id, 'smtp_port', $request->smtp_port);
 
         return redirect("/email-setting");
     }
@@ -532,20 +514,19 @@ class SuperAdminController extends SuperAdminBaseController
 
         $landingpage = LandingPage::first();
 
-        return \view('super-admin.landing-page',[
+        return \view('super-admin.landing-page', [
             'selected_navigation' => 'landing-page',
             'selected_sub_navigation' => 'homepage',
 
             'landingpage' => $landingpage,
 
         ]);
-
     }
 
     public function pages()
     {
         $posts = Post::all();
-        return \view('super-admin.pages',[
+        return \view('super-admin.pages', [
             'selected_navigation' => 'page-editor',
             'posts' => $posts,
         ]);
@@ -557,11 +538,10 @@ class SuperAdminController extends SuperAdminBaseController
             'id' => 'nullable|integer',
         ]);
         $post = null;
-        if($request->id)
-        {
+        if ($request->id) {
             $post = Post::find($request->id);
         }
-        return \view('super-admin.page',[
+        return \view('super-admin.page', [
             'selected_navigation' => 'page-editor',
             'post' => $post,
         ]);
@@ -574,16 +554,12 @@ class SuperAdminController extends SuperAdminBaseController
         ]);
         $post = Post::find($request->id);
 
-        if($post)
-        {
-            return \view('super-admin.page-editor',[
+        if ($post) {
+            return \view('super-admin.page-editor', [
                 'selected_navigation' => 'page-editor',
                 'post' => $post,
             ]);
         }
-
-
-
     }
 
 
@@ -597,13 +573,11 @@ class SuperAdminController extends SuperAdminBaseController
         ]);
 
         $post = null;
-        if($request->id)
-        {
+        if ($request->id) {
             $post = Post::find($request->id);
         }
 
-        if(!$post)
-        {
+        if (!$post) {
             $post = new Post();
         }
 
@@ -613,8 +587,7 @@ class SuperAdminController extends SuperAdminBaseController
         $post->sort_order = $request->sort_order;
         $post->save();
 
-        return redirect(config('app.url').'/super-admin/pages');
-
+        return redirect(config('app.url') . '/super-admin/pages');
     }
 
     public function heroSection(Request $request)
@@ -628,16 +601,12 @@ class SuperAdminController extends SuperAdminBaseController
         ]);
         $post = LandingPage::first();
 
-        if(!$post)
-        {
+        if (!$post) {
             $post = new LandingPage();
         }
 
-        if($request->background_image)
-        {
+        if ($request->background_image) {
             $path = $request->file('background_image')->store('media', 'uploads');
-
-
         }
         if (!empty($path)) {
             $post->background_image = $path;
@@ -649,8 +618,7 @@ class SuperAdminController extends SuperAdminBaseController
 
         $post->save();
 
-        return redirect(config('app.url').'/landingpage');
-
+        return redirect(config('app.url') . '/landingpage');
     }
 
     public function feature1Section(Request $request)
@@ -660,15 +628,12 @@ class SuperAdminController extends SuperAdminBaseController
         ]);
         $post = LandingPage::first();
 
-        if(!$post)
-        {
+        if (!$post) {
             $post = new LandingPage();
         }
 
-        if($request->feature1_image)
-        {
+        if ($request->feature1_image) {
             $path = $request->file('feature1_image')->store('media', 'uploads');
-
         }
         if (!empty($path)) {
             $post->feature1_image = $path;
@@ -704,8 +669,7 @@ class SuperAdminController extends SuperAdminBaseController
 
         $post->save();
 
-        return redirect(config('app.url').'/landingpage');
-
+        return redirect(config('app.url') . '/landingpage');
     }
 
     public function feature2Section(Request $request)
@@ -714,8 +678,7 @@ class SuperAdminController extends SuperAdminBaseController
 
         $post = LandingPage::first();
 
-        if(!$post)
-        {
+        if (!$post) {
             $post = new LandingPage();
         }
 
@@ -751,8 +714,7 @@ class SuperAdminController extends SuperAdminBaseController
 
         $post->save();
 
-        return redirect(config('app.url').'/landingpage');
-
+        return redirect(config('app.url') . '/landingpage');
     }
 
     public function partnerSection(Request $request)
@@ -774,87 +736,63 @@ class SuperAdminController extends SuperAdminBaseController
         ]);
         $post = LandingPage::first();
 
-        if(!$post)
-        {
+        if (!$post) {
             $post = new LandingPage();
         }
 
 
 
-        if($request->partners_avatar2)
-        {
+        if ($request->partners_avatar2) {
             $path = $request->file('partners_avatar2')->store('media', 'uploads');
-
-
         }
         if (!empty($path)) {
             $post->partners_avatar2 = $path;
         }
 
 
-        if($request->partners_avatar3)
-        {
+        if ($request->partners_avatar3) {
             $path = $request->file('partners_avatar3')->store('media', 'uploads');
-
-
         }
         if (!empty($path)) {
             $post->partners_avatar3 = $path;
         }
 
-        if($request->partners_avatar4)
-        {
+        if ($request->partners_avatar4) {
             $path = $request->file('partners_avatar4')->store('media', 'uploads');
-
         }
 
         if (!empty($path)) {
             $post->partners_avatar4 = $path;
         }
-        if($request->partners_avatar5)
-        {
+        if ($request->partners_avatar5) {
             $path = $request->file('partners_avatar5')->store('media', 'uploads');
-
-
         }
         if (!empty($path)) {
             $post->partners_avatar5 = $path;
         }
 
-        if($request->partners_avatar6)
-        {
+        if ($request->partners_avatar6) {
             $path = $request->file('partners_avatar6')->store('media', 'uploads');
-
-
         }
         if (!empty($path)) {
             $post->partners_avatar6 = $path;
         }
 
-        if($request->partners_avatar7)
-        {
+        if ($request->partners_avatar7) {
             $path = $request->file('partners_avatar7')->store('media', 'uploads');
-
-
         }
         if (!empty($path)) {
             $post->partners_avatar7 = $path;
         }
-        if($request->partners_avatar8)
-        {
+        if ($request->partners_avatar8) {
             $path = $request->file('partners_avatar8')->store('media', 'uploads');
-
-
         }
         if (!empty($path)) {
             $post->partners_avatar8 = $path;
         }
 
-        if($request->partners_avatar1)
-        {
+        if ($request->partners_avatar1) {
             $path = $request->file('partners_avatar1')->store('media', 'uploads');
-
-
         }
         if (!empty($path)) {
             $post->partners_avatar1 = $path;
@@ -866,8 +804,7 @@ class SuperAdminController extends SuperAdminBaseController
 
         $post->save();
 
-        return redirect(config('app.url').'/landingpage');
-
+        return redirect(config('app.url') . '/landingpage');
     }
 
 
@@ -880,15 +817,12 @@ class SuperAdminController extends SuperAdminBaseController
 
         $post = LandingPage::first();
 
-        if(!$post)
-        {
+        if (!$post) {
             $post = new LandingPage();
         }
 
-        if($request->story1_image)
-        {
+        if ($request->story1_image) {
             $path = $request->file('story1_image')->store('media', 'uploads');
-
         }
         if (!empty($path)) {
             $post->story1_image = $path;
@@ -900,8 +834,7 @@ class SuperAdminController extends SuperAdminBaseController
 
         $post->save();
 
-        return redirect(config('app.url').'/landingpage');
-
+        return redirect(config('app.url') . '/landingpage');
     }
 
     public function story2Section(Request $request)
@@ -913,15 +846,12 @@ class SuperAdminController extends SuperAdminBaseController
 
         $post = LandingPage::first();
 
-        if(!$post)
-        {
+        if (!$post) {
             $post = new LandingPage();
         }
 
-        if($request->story2_image)
-        {
+        if ($request->story2_image) {
             $path = $request->file('story2_image')->store('media', 'uploads');
-
         }
         if (!empty($path)) {
             $post->story2_image = $path;
@@ -931,16 +861,14 @@ class SuperAdminController extends SuperAdminBaseController
         $post->story2_paragrapgh = $request->story2_paragrapgh;
         $post->save();
 
-        return redirect(config('app.url').'/landingpage');
-
+        return redirect(config('app.url') . '/landingpage');
     }
     public function newsletterSection(Request $request)
     {
 
         $post = LandingPage::first();
 
-        if(!$post)
-        {
+        if (!$post) {
             $post = new LandingPage();
         }
 
@@ -948,8 +876,7 @@ class SuperAdminController extends SuperAdminBaseController
         $post->newsletter_paragraph = $request->newsletter_paragraph;
         $post->save();
 
-        return redirect(config('app.url').'/landingpage');
-
+        return redirect(config('app.url') . '/landingpage');
     }
 
     public function numberSection(Request $request)
@@ -957,8 +884,7 @@ class SuperAdminController extends SuperAdminBaseController
 
         $post = LandingPage::first();
 
-        if(!$post)
-        {
+        if (!$post) {
             $post = new LandingPage();
         }
 
@@ -974,8 +900,7 @@ class SuperAdminController extends SuperAdminBaseController
 
         $post->save();
 
-        return redirect(config('app.url').'/landingpage');
-
+        return redirect(config('app.url') . '/landingpage');
     }
 
 
@@ -986,7 +911,7 @@ class SuperAdminController extends SuperAdminBaseController
         $landingpage = PricingPage::first();
         $plans = SubscriptionPlan::all();
 
-        return \view('super-admin.pricing-page-editor',[
+        return \view('super-admin.pricing-page-editor', [
             'selected_navigation' => 'landing-page',
             'selected_sub_navigation' => 'pricing-page-editor',
 
@@ -994,7 +919,6 @@ class SuperAdminController extends SuperAdminBaseController
             'plans' =>   $plans,
 
         ]);
-
     }
 
 
@@ -1003,8 +927,7 @@ class SuperAdminController extends SuperAdminBaseController
 
         $post = PricingPage::first();
 
-        if(!$post)
-        {
+        if (!$post) {
             $post = new PricingPage();
         }
 
@@ -1012,8 +935,7 @@ class SuperAdminController extends SuperAdminBaseController
         $post->hero_subtitle = $request->hero_subtitle;
         $post->save();
 
-        return redirect(config('app.url').'/pricingpage');
-
+        return redirect(config('app.url') . '/pricingpage');
     }
 
     public function calltoactionSection(Request $request)
@@ -1021,8 +943,7 @@ class SuperAdminController extends SuperAdminBaseController
 
         $post = LandingPage::first();
 
-        if(!$post)
-        {
+        if (!$post) {
             $post = new LandingPage();
         }
 
@@ -1033,32 +954,29 @@ class SuperAdminController extends SuperAdminBaseController
 
         $post->save();
 
-        return redirect(config('app.url').'/landingpage');
-
+        return redirect(config('app.url') . '/landingpage');
     }
     public function privacyPage()
     {
         $privacy = PrivacyPolicy::first();
 
-        return \view('super-admin.privacy-page-editor',[
+        return \view('super-admin.privacy-page-editor', [
             'selected_navigation' => 'privacy-page-editor',
 
             'privacy' => $privacy,
 
         ]);
-
     }
     public function termsPage()
     {
         $term = Terms::first();
 
-        return \view('super-admin.terms-page-editor',[
+        return \view('super-admin.terms-page-editor', [
             'selected_navigation' => 'terms',
 
             'term' => $term,
 
         ]);
-
     }
 
     public function savePrivacy(Request $request)
@@ -1066,8 +984,7 @@ class SuperAdminController extends SuperAdminBaseController
 
         $post = PrivacyPolicy::first();
 
-        if(!$post)
-        {
+        if (!$post) {
             $post = new PrivacyPolicy();
         }
 
@@ -1076,8 +993,7 @@ class SuperAdminController extends SuperAdminBaseController
         $post->description = $request->description;
         $post->save();
 
-        return redirect(config('app.url').'/privacypage');
-
+        return redirect(config('app.url') . '/privacypage');
     }
 
     public function saveTerms(Request $request)
@@ -1085,8 +1001,7 @@ class SuperAdminController extends SuperAdminBaseController
 
         $post = Terms::first();
 
-        if(!$post)
-        {
+        if (!$post) {
             $post = new Terms();
         }
 
@@ -1095,8 +1010,7 @@ class SuperAdminController extends SuperAdminBaseController
         $post->description = $request->description;
         $post->save();
 
-        return redirect(config('app.url').'/termspage');
-
+        return redirect(config('app.url') . '/termspage');
     }
 
 
@@ -1105,21 +1019,19 @@ class SuperAdminController extends SuperAdminBaseController
 
         $contact = ContactSection::first();
 
-        return \view('super-admin.footer',[
+        return \view('super-admin.footer', [
             'selected_navigation' => 'footer',
 
             'contact' => $contact,
 
         ]);
-
     }
 
     public function footerSection(Request $request)
     {
 
         $post = ContactSection::first();
-        if(!$post)
-        {
+        if (!$post) {
             $post = new ContactSection();
         }
 
@@ -1133,27 +1045,24 @@ class SuperAdminController extends SuperAdminBaseController
         $post->twitter = $request->twitter;
         $post->save();
 
-        return redirect(config('app.url').'/footer');
-
+        return redirect(config('app.url') . '/footer');
     }
     public function cookiePage()
     {
         $term = CookiePolicy::first();
 
-        return \view('super-admin.cookie-page-editor',[
+        return \view('super-admin.cookie-page-editor', [
             'selected_navigation' => 'cookie',
             'selected_sub_navigation' => 'cookie-page-editor',
             'term' => $term,
         ]);
-
     }
     public function saveCookie(Request $request)
     {
 
         $post = CookiePolicy::first();
 
-        if(!$post)
-        {
+        if (!$post) {
             $post = new CookiePolicy();
         }
 
@@ -1162,14 +1071,6 @@ class SuperAdminController extends SuperAdminBaseController
         $post->description = $request->description;
         $post->save();
 
-        return redirect(config('app.url').'/cookiepage');
-
+        return redirect(config('app.url') . '/cookiepage');
     }
-
-
-
-
-
 }
-
-
