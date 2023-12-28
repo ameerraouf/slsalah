@@ -86,7 +86,6 @@ class SuperAdminController extends SuperAdminBaseController
     public function users()
     {
         $users = User::all();
-
         $workspaces = Workspace::all()
             ->keyBy("id")
             ->all();
