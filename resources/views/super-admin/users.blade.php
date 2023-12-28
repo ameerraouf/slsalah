@@ -1,6 +1,6 @@
 @extends('layouts.super-admin-portal')
 @section('head')
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
 @endsection
 @section('content')
     <div class=" row mb-2">
@@ -87,7 +87,7 @@
                                                             aria-hidden="true"></i>{{ __('View') }}</a>
 
                                                     @if ($user->id != $workspace_user->id)
-                                                        <a class="btn btn-link text-danger text-gradient px-3 mb-0"
+                                                        <a class="btn btn-link text-danger delete-btn text-gradient px-3 mb-0"
                                                             href="/delete-user/{{ $workspace_user->id }}"><i
                                                                 class="far fa-trash-alt me-2"></i>{{ __('Delete') }}</a>
                                                     @endif
@@ -114,6 +114,15 @@
     <script>
         "use strict";
         $(document).ready(function() {
+            $('body').on('click', '.delete-btn', function(e) {
+                e.preventDefault()
+                var result = window.confirm("Are you sure you want to proceed?");
+                let targetLink = $(this).attr('href')
+                if (result) {
+                    window.location.href = targetLink;
+                }
+             
+            })
             $('#cloudonex_table').DataTable({
                 searching: true,
                 ordering: false,
