@@ -100,10 +100,10 @@ class SuperAdminController extends SuperAdminBaseController
     {
         $users = User::all();
 
-        $workspaces = Workspace::orderBy('created_at' , 'desc')->get()
+        $workspaces = Workspace::orderBy('created_at', 'desc')->get()
             ->keyBy("id")
             ->all();
-        $plans = SubscriptionPlan::orderBy('created_at' , 'desc')->get()
+        $plans = SubscriptionPlan::orderBy('created_at', 'desc')->get()
             ->keyBy("id")
             ->all();
 
@@ -234,8 +234,8 @@ class SuperAdminController extends SuperAdminBaseController
             "percentage_discount_annual" => "nullable|numeric|min:0|max:100",
             "offer_price_yearly" => "nullable|numeric|gt:0",
             "modules" => 'required|array|min:1'
-        ] , [
-            "modules.required" => 'حقل الوحدات النمطية مطلوب' 
+        ], [
+            "modules.required" => 'حقل الوحدات النمطية مطلوب'
         ]);
         $plan = false;
 
@@ -308,11 +308,16 @@ class SuperAdminController extends SuperAdminBaseController
 
         if ($request->id) {
             $skit_user = User::find($request->id);
+            if ($skit_user->workspace_id) {
+                $skit_user_workspace = Workspace::find($skit_user->workspace_id);
 
-            $skit_user_workspace = Workspace::find($skit_user->workspace_id);
-
-            if ($skit_user_workspace->plan_id) {
+            } else {
+                $skit_user_workspace = null;
+            }
+            if ($skit_user_workspace) {
                 $plan = SubscriptionPlan::find($skit_user_workspace->plan_id);
+            } else {
+                $plan = null;
             }
         }
 
@@ -440,9 +445,9 @@ class SuperAdminController extends SuperAdminBaseController
             if ($this->workspace->id === $workspace->id) {
                 return redirect("/workspaces");
             }
-                
+
             $user = User::where('workspace_id', $id)->first();
-            $chats = Chat::where('receiver_id' , $user->id)->get();
+            $chats = Chat::where('receiver_id', $user->id)->get();
             foreach ($chats as $chat) {
                 $chat->delete();
             }

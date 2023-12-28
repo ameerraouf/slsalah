@@ -179,7 +179,7 @@ class ProfileController extends BaseController
 
         if (!$user) {
             $user = new User();
-            $user->workspace_id = $this->user->workspace_id;
+            $user->workspace_id = 0;
         }
 
         $user->first_name = $request->first_name;
