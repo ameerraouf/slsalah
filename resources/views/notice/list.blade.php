@@ -4,7 +4,7 @@
     <div class=" row">
         <div class="col">
             <h5 class="mb-2 text-secondary fw-bolder">
-                {{__('Notice List')}}
+                {{__('Notice Board')}}
             </h5>
 
         </div>
