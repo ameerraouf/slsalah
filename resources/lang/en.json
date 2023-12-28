@@ -130,7 +130,7 @@
     "Database connection was successful! On the next step, system will import the primary data.": "تم الاتصال بقاعدة البيانات بنجاح! في الخطوة التالية ، سيقوم النظام باستيراد البيانات الأولية.",
     "While importing the database, it might take some time depending on your system. Click Continue Once!": "أثناء استيراد قاعدة البيانات ، قد يستغرق الأمر بعض الوقت حسب نظامك. انقر فوق متابعة مرة واحدة!",
     "Set your Admin Profile": "قم بتعيين بيانات ملف المسؤول",
-    "First Name": "الأسم الأول",
+    "First Name": "الاسم الأول",
     "Last Name": "الاسم الأخير",
     "Email (Username)": "البريد الإلكتروني (اسم المستخدم)",
     "Password": "كلمة المرور",
