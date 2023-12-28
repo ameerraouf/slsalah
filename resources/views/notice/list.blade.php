@@ -4,7 +4,7 @@
     <div class=" row">
         <div class="col">
             <h5 class="mb-2 text-secondary fw-bolder">
-                {{__('Notice List')}}
+                {{__('Notice Board')}}
             </h5>
 
         </div>
@@ -24,14 +24,13 @@
                             <thead>
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('Name')}}</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start">{{__('Modified Name')}}</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">{{__('Created at')}}</th>
-                                <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('Status')}}</th>
-                                <th class="text-secondary opacity-7"></th>
+                                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">{{__('Status')}}</th>
+                                <th class="text-secondary text-center opacity-7">{{__('Actions')}}</th>
                             </tr>
                             <tbody>
                             @foreach($notices as $notice)
-
                                 <tr>
                                     <td class="text-center">
                                         {{$loop->iteration}}
@@ -65,10 +64,10 @@
                                         </h6>
                                     </td>
 
-                                    <td class="align-middle text-right">
+                                    <td class="align-middle text-center">
                                         <div class="ms-auto">
 
-                                            <a class="btn btn-link text-danger text-gradient px-3 mb-0"
+                                            <a class="btn btn-link text-danger delete-btn text-gradient px-3 mb-0"
                                                href="/delete/notice/{{$notice->id}}"><i
                                                     class="far fa-trash-alt me-2"></i>{{__('Delete')}}</a>
 
@@ -94,6 +93,15 @@
     <script>
         "use strict";
         $(document).ready(function () {
+            $('body').on('click', '.delete-btn', function(e) {
+                e.preventDefault()
+                var result = window.confirm("Are you sure you want to proceed?");
+                let targetLink = $(this).attr('href')
+                if (result) {
+                    window.location.href = targetLink;
+                }
+             
+            })
             $('#cloudonex_table').DataTable({
                 language: {
                     url: 'https://cdn.datatables.net/plug-ins/1.10.24/i18n/Arabic.json'

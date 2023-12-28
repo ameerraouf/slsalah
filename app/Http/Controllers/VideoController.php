@@ -99,7 +99,8 @@ class VideoController extends SuperAdminController
     public function edit($id)
     {
         $video = Video::findorFail($id);
-        return view('video.edit', compact('video'));
+        $selected_navigation = "videos_edit";
+        return view('video.edit', compact('video' , 'selected_navigation'));
     }
 
     /**

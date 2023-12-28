@@ -40,7 +40,6 @@ class ProfileController extends BaseController
         $path = null;
         if ($request->photo) {
             $path = $request->file("photo")->store("media", "uploads");
-
         }
         if (!empty($path)) {
             $user->photo = $path;
@@ -62,8 +61,7 @@ class ProfileController extends BaseController
 
         $user->phone_number = $request->phone_number;
 
-        if($request->timezone)
-        {
+        if ($request->timezone) {
             $user->timezone = $request->timezone;
             $user->save();
         }
@@ -101,8 +99,7 @@ class ProfileController extends BaseController
         $maximum_allowed_users = Workspace::getMaximumAllowedUsers($this->workspace);
         $users_count_on_this_workspace = Workspace::usersCount($this->workspace->id);
 
-        if($users_count_on_this_workspace >= $maximum_allowed_users)
-        {
+        if ($users_count_on_this_workspace >= $maximum_allowed_users) {
             abort(401);
         }
         $request->validate([
@@ -134,9 +131,9 @@ class ProfileController extends BaseController
         $request->validate([
             "first_name" => "required|string|max:100",
             "last_name" => "required|string|max:100",
-            "email" => "required|email",
+            "email" => "required|email|unique:users,email",
             "phone" => "nullable|string|max:50",
-            "password" => "nullable|string|max:255",
+            "password" => "required|string|max:255",
             "id" => "nullable|integer",
         ]);
 
@@ -146,35 +143,29 @@ class ProfileController extends BaseController
         $users_count_on_this_workspace = Workspace::usersCount($this->workspace->id);
 
 
-        if($users_count_on_this_workspace >= $maximum_allowed_users)
-        {
-//            if(!$this->user->super_admin)
-//            {
-//                abort(401);
-//            }
+        if ($users_count_on_this_workspace >= $maximum_allowed_users) {
+            //            if(!$this->user->super_admin)
+            //            {
+            //                abort(401);
+            //            }
         }
 
         $user = false;
 
         if ($request->id) {
 
-            if($this->user->super_admin)
-            {
+            if ($this->user->super_admin) {
                 $user = User::find($request->id);
-            }
-            else{
+            } else {
                 $user = User::where("workspace_id", $this->user->workspace_id)
                     ->where("id", $request->id)
                     ->first();
             }
 
-            if($user)
-            {
-                if($user->email !== $request->email)
-                {
-                    $exist = User::where('email',$request->email)->first();
-                    if($exist)
-                    {
+            if ($user) {
+                if ($user->email !== $request->email) {
+                    $exist = User::where('email', $request->email)->first();
+                    if ($exist) {
                         return redirect()->back()->with([
                             'errors' => [
                                 'user_exist' => __('User already exist with this email id.')
@@ -183,20 +174,18 @@ class ProfileController extends BaseController
                     }
                 }
             }
-
         }
 
 
         if (!$user) {
             $user = new User();
-            $user->workspace_id = $this->user->workspace_id;
+            $user->workspace_id = 0;
         }
 
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
 
-        if($request->input('password'))
-        {
+        if ($request->input('password')) {
             $user->password = Hash::make($request->input('password'));
         }
 
@@ -224,15 +213,11 @@ class ProfileController extends BaseController
         return redirect("/staff");
     }
 
-    public function userEdit(Request $request,$id)
+    public function userEdit(Request $request, $id)
     {
-
-
-        if($this->user->super_admin)
-        {
+        if ($this->user->super_admin) {
             $selected_user = User::find($request->id);
-        }
-        else{
+        } else {
             $selected_user = User::where("workspace_id", $this->user->workspace_id)
                 ->where("id", $request->id)
                 ->first();
@@ -245,27 +230,25 @@ class ProfileController extends BaseController
         $countries = countries();
 
 
-        if ($selected_user){
+        if ($selected_user) {
 
-            if($this->user->super_admin)
-            {
-                return \view('super-admin.add-new-user',[
-                    'selected_user'=> $selected_user,
-                    'countries'=> $countries,
+            if ($this->user->super_admin) {
+                return \view('super-admin.add-new-user', [
+                    'selected_user' => $selected_user,
+                    'countries' => $countries,
+                    'selected_navigation' => 'userEdit'
 
 
                 ]);
             }
 
-            return \view('profile.new-user',[
-                'selected_user'=> $selected_user,
-                'countries'=> $countries,
-
+            return \view('profile.new-user', [
+                'selected_user' => $selected_user,
+                'countries' => $countries,
+                'selected_navigation' => 'userEdit'
 
             ]);
-
         }
-
     }
 
     public function userChangePasswordPost(Request $request)

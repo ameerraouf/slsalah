@@ -16,6 +16,7 @@ class SettingController extends BaseController
 {
     public function settings(Request $request)
     {
+
         $workspace = Workspace::find($this->user->workspace_id);
         $available_languages = User::$available_languages;
 

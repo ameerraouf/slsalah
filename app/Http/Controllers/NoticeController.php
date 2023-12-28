@@ -36,25 +36,25 @@ class NoticeController extends BaseController
         ]);
     }
 
-//    public function viewBlog(Request $request)
-//    {
-//        $notice = false;
-//        $users = User::all()
-//            ->keyBy("id")
-//            ->all();
-//
-//        if ($request->id) {
-//            $notice = NoticeBoard::where("workspace_id", $this->user->workspace_id)
-//                ->where("id", $request->id)
-//                ->first();
-//        }
-//
-//        return \view("blog.view-blog", [
-//            "selected_navigation" => "blogs",
-//            "blog" => $notice,
-//            "users" => $users,
-//        ]);
-//    }
+    //    public function viewBlog(Request $request)
+    //    {
+    //        $notice = false;
+    //        $users = User::all()
+    //            ->keyBy("id")
+    //            ->all();
+    //
+    //        if ($request->id) {
+    //            $notice = NoticeBoard::where("workspace_id", $this->user->workspace_id)
+    //                ->where("id", $request->id)
+    //                ->first();
+    //        }
+    //
+    //        return \view("blog.view-blog", [
+    //            "selected_navigation" => "blogs",
+    //            "blog" => $notice,
+    //            "users" => $users,
+    //        ]);
+    //    }
 
     public function noticePost(Request $request)
     {
@@ -97,7 +97,11 @@ class NoticeController extends BaseController
         $notice->admin_id = $this->user->id;
         $notice->notes = clean($request->notes);
         $notice->save();
-
+        if ($request->status === 'Draft') {
+            $previous_notification = NoticeBoard::where('created_at', "<", $notice->created_at)->latest()->first();
+            $previous_notification->status = 'Published';
+            $previous_notification->save();
+        }
         return redirect("/notice-list");
     }
 }

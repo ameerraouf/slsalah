@@ -11,7 +11,7 @@
     <div class=" row">
         <div class="col">
             <h5 class="mb-2 text-secondary fw-bolder">
-                {{ __('video') }}
+                {{ __('control_video') }}
             </h5>
 
         </div>
@@ -43,7 +43,7 @@
                                     <th
                                         class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-9">
                                         {{ __('Status') }}</th>
-                                    <th class="text-secondary opacity-9"></th>
+                                    <th class="text-secondary opacity-9"> {{ __('Actions') }}</th>
                                 </tr>
                             <tbody>
                                 @foreach ($videos as $video)

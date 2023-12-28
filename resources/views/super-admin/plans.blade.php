@@ -3,7 +3,7 @@
     <div class="row mb-2">
         <div class="col">
             <h5 class=" text-secondary fw-bolder">
-                {{__('Subscription Plan List')}}
+                {{__('Plans List')}}
             </h5>
             <p class="text-muted">{{__('Create, edit or delete the plans')}}</p>
         </div>
@@ -15,7 +15,7 @@
     <div class="row">
         @foreach($plans as $plan)
             <div class="col-md-4  mb-4 ">
-                <div class="card " style="height: 460px; overflow-y:scroll">
+                <div class="card " style="height: 460px; overflow-y:hidden">
                     <div class="card-header text-center ">
                         @if($plan->active == 0)
                         <h6 class="bg-danger text-white rounded w-50 mx-auto">معطلة</h6>
@@ -57,7 +57,7 @@
                                 </div>
                             </div>
                     </div>
-                    <div class="card-footer pt-0">
+                    <div class="card-footer pt-0 d-flex justify-content-center">
                         <a href="/subscription-plan?id={{$plan->id}}" type="button" style="position: absolute;bottom: 0px;"
                            class="btn btn-info mt-3 btn-md ">{{__('Edit')}}</a>
 {{--                        <a href="/delete/subscription-plan/{{$plan->id}}" type="button"--}}

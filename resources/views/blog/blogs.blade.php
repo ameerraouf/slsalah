@@ -29,21 +29,20 @@
 
     @else
 
-    <div class="row" data-masonry='{"percentPosition": true }'>
+    <div class="row">
         @foreach($blogs as $blog)
-            <div class="col-md-4 mb-4">
-                <div class="card">
+            <div class="col-md-4 mb-4" style="height: 400px;">
+                <div class="card h-100">
                     @if(!empty($blog->cover_photo))
                         <img src="{{PUBLIC_DIR}}/uploads/{{$blog->cover_photo}}" class="card-img-top">
                     @endif
 
-                    <div class="card-body ">
+                    <div class="card-body">
                         <p class="mb-1 pt-2 text-bold">{{$blog->topic}}</p>
                         <h5 class="card-title">{{$blog->title}}</h5>
 
                         <div class="mt-3">
                             <a href="/view-blog?id={{$blog->id}}" class="btn btn-success btn-xs mb-0">{{__('Read')}}</a>
-
                             <a href="/write-blog?id={{$blog->id}}" class="btn btn-info btn-xs mb-0">{{__('Edit')}}</a>
                             <a href="/delete/blog/{{$blog->id}}" class="btn btn-warning btn-xs mb-0">{{__('Delete')}}</a>
                         </div>
