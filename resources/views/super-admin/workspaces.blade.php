@@ -33,7 +33,7 @@
                             </thead>
                             <tbody class = "target-table">
                                 @foreach ($workspaces as $workspace)
-                                    <tr @if ($user->super_admin && $workspace->id === $user->workspace_id) class = "bg-success admin-wokspace-row" @endif>
+                                    <tr @if ($user->super_admin == 1) class = "bg-success admin-wokspace-row" @endif>
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">

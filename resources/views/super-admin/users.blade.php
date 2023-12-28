@@ -36,7 +36,7 @@
                                         <th class="text-secondary opacity-7"></th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="target-table">
 
                                     @foreach ($users as $workspace_user)
                                         <tr>

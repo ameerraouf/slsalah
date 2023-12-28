@@ -85,11 +85,12 @@ class SuperAdminController extends SuperAdminBaseController
 
     public function users()
     {
-        $users = User::all();
+        $users = User::orderBy('created_at' , 'desc')->get();
         $workspaces = Workspace::all()
             ->keyBy("id")
             ->all();
-
+        $lastElement = $users->pop();
+        $users->prepend($lastElement);
         return \view("super-admin.users", [
             "selected_navigation" => "users",
             "users" => $users,
