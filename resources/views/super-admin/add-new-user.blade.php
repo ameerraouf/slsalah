@@ -53,7 +53,7 @@
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-md-12">
-                                            <label>{{ __('Password') }}</label>
+                                            <label>{{ __('Password') }}</label><label class="text-danger">*</label>
 
                                             <input name="password" type="password"
                                                 class="multisteps-form__input form-control"

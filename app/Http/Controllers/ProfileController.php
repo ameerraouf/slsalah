@@ -133,7 +133,7 @@ class ProfileController extends BaseController
             "last_name" => "required|string|max:100",
             "email" => "required|email|unique:users,email",
             "phone" => "nullable|string|max:50",
-            "password" => "nullable|string|max:255",
+            "password" => "required|string|max:255",
             "id" => "nullable|integer",
         ]);
 
