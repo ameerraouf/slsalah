@@ -35,43 +35,45 @@
                                 </tr>
                             <tbody>
                                 @foreach ($videos as $video)
-                                    <tr>
-                                        <td class="text-center">
-                                            <span class="d-block text-center">{{ $loop->iteration }}</span>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="">
+                                  @if (now() > Carbon\Carbon::createFromFormat('H:i:s' , $video->time))
+                                  <tr>
+                                    <td class="text-center">
+                                        <span class="d-block text-center">{{ $loop->iteration }}</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="">
 
-                                                <div class="d-flex flex-column justify-content-center px-3">
-                                                    <h6 class="mb-0 text-sm"> {{ $video->name }} </h6>
-                                                    <p class="text-xs text-secondary mb-0"></p>
-                                                </div>
+                                            <div class="d-flex flex-column justify-content-center px-3">
+                                                <h6 class="mb-0 text-sm"> {{ $video->name }} </h6>
+                                                <p class="text-xs text-secondary mb-0"></p>
                                             </div>
-                                        </td>
-                                        <td>
-                                            <div class="">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="">
 
-                                                <div class="d-flex flex-column justify-content-center px-3">
-                                                    <h6 class="mb-0 text-sm">
-                                                    <img class="rounded" src="{{'/uploads/'. $video->image}}" height="60" width="60">
-                                                    </h6>
-                                                    <p class="text-xs text-secondary mb-0"></p>
-                                                </div>
+                                            <div class="d-flex flex-column justify-content-center px-3">
+                                                <h6 class="mb-0 text-sm">
+                                                <img class="rounded" src="{{'/uploads/'. $video->image}}" height="60" width="60">
+                                                </h6>
+                                                <p class="text-xs text-secondary mb-0"></p>
                                             </div>
-                                        </td>
-                                        <td>
+                                        </div>
+                                    </td>
+                                    <td>
 
-                                                <div class="text-center mr-3">
-                                                    <a target="_blank" class="d-block text-center mx-auto" href="{{ $video->url }}"
-                                                        style="width: 60px; background-color: rgb(104, 210, 220); border-radius: 7px; margin-right: 60px">
-                                                        {{ __('View') }}</a>
-                                                </div>
+                                            <div class="text-center mr-3">
+                                                <a target="_blank" class="d-block text-center mx-auto" href="{{ $video->url }}"
+                                                    style="width: 60px; background-color: rgb(104, 210, 220); border-radius: 7px; margin-right: 60px">
+                                                    {{ __('View') }}</a>
+                                            </div>
 
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ $video->created_at }}</p>
-                                        </td>
-                                    </tr>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">{{ $video->created_at }}</p>
+                                    </td>
+                                </tr>
+                                  @endif
                                 @endforeach
                             </tbody>
                         </table>
