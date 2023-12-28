@@ -67,7 +67,7 @@
                                     <td class="align-middle text-center">
                                         <div class="ms-auto">
 
-                                            <a class="btn btn-link text-danger text-gradient px-3 mb-0"
+                                            <a class="btn btn-link text-danger delete-btn text-gradient px-3 mb-0"
                                                href="/delete/notice/{{$notice->id}}"><i
                                                     class="far fa-trash-alt me-2"></i>{{__('Delete')}}</a>
 
@@ -93,6 +93,15 @@
     <script>
         "use strict";
         $(document).ready(function () {
+            $('body').on('click', '.delete-btn', function(e) {
+                e.preventDefault()
+                var result = window.confirm("Are you sure you want to proceed?");
+                let targetLink = $(this).attr('href')
+                if (result) {
+                    window.location.href = targetLink;
+                }
+             
+            })
             $('#cloudonex_table').DataTable({
                 language: {
                     url: 'https://cdn.datatables.net/plug-ins/1.10.24/i18n/Arabic.json'
