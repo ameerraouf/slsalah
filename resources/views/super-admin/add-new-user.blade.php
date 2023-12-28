@@ -46,7 +46,7 @@
                                     <div class="row mt-3">
                                         <div class="col-md-12">
                                             <label>{{__('Username/Email')}}</label><label class="text-danger">*</label>
-                                            <input name="email" class="multisteps-form__input form-control"
+                                            <input name="email" class="multisteps-form__input form-control" value=" "
                                                    type="email"
                                                    @if (!empty($selected_user)) value="{{$selected_user->email}}" @endif />
                                         </div>
@@ -58,7 +58,7 @@
 
                                             <input name="password" type="password"
                                                    class="multisteps-form__input form-control"
-                                                   @if (!empty($selected_user)) value="" @endif/>
+                                                   @if (!empty($selected_user)) value="" @endif value=" "/>
                                             <p class="text-xs">
                                                 {{__('Keep blank if you do not want to change Password')}}
                                             </p>
