@@ -696,10 +696,9 @@
     "DeleteElement": "حذف العنصر",
     "DeleteCost": "حذف التكلفة",
     "cost": "التكلفة",
+    
     "invested capital plan": "خطة رأس المال المستثمر",
-
-
-
+    "Modified Name": "الاسم ",
     "username": "اسم المستخدم ",
     "plan_name": "اسم الباقة",
     "amount": "المبلغ",

@@ -24,10 +24,10 @@
                             <thead>
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start">{{__('Name')}}</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start">{{__('Modified Name')}}</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">{{__('Created at')}}</th>
                                 <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">{{__('Status')}}</th>
-                                <th class="text-secondary opacity-7"></th>
+                                <th class="text-secondary text-center opacity-7">{{__('Actions')}}</th>
                             </tr>
                             <tbody>
                             @foreach($notices as $notice)
@@ -64,7 +64,7 @@
                                         </h6>
                                     </td>
 
-                                    <td class="align-middle text-right">
+                                    <td class="align-middle text-center">
                                         <div class="ms-auto">
 
                                             <a class="btn btn-link text-danger text-gradient px-3 mb-0"
