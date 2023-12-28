@@ -24,14 +24,13 @@
                             <thead>
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('Name')}}</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-start">{{__('Name')}}</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">{{__('Created at')}}</th>
-                                <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('Status')}}</th>
+                                <th class="text-uppercase text-center text-secondary text-xxs font-weight-bolder opacity-7">{{__('Status')}}</th>
                                 <th class="text-secondary opacity-7"></th>
                             </tr>
                             <tbody>
                             @foreach($notices as $notice)
-
                                 <tr>
                                     <td class="text-center">
                                         {{$loop->iteration}}
