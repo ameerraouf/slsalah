@@ -16,7 +16,6 @@ class SettingController extends BaseController
 {
     public function settings(Request $request)
     {
-
         $workspace = Workspace::find($this->user->workspace_id);
         $available_languages = User::$available_languages;
 
@@ -46,53 +45,45 @@ class SettingController extends BaseController
             $workspace->name = $request->workspace_name;
             $workspace->save();
 
-            Setting::updateSettings($this->workspace->id,'landingpage',$request->landingpage);
-            Setting::updateSettings($this->workspace->id,'language',$request->language);
+            Setting::updateSettings($this->workspace->id, 'landingpage', $request->landingpage);
+            Setting::updateSettings($this->workspace->id, 'language', $request->language);
 
-            Setting::updateSettings($this->workspace->id,'currency',$request->currency);
-            Setting::updateSettings($this->workspace->id,'custom_script',$request->custom_script);
-            Setting::updateSettings($this->workspace->id,'meta_description',$request->meta_description);
+            Setting::updateSettings($this->workspace->id, 'currency', $request->currency);
+            Setting::updateSettings($this->workspace->id, 'custom_script', $request->custom_script);
+            Setting::updateSettings($this->workspace->id, 'meta_description', $request->meta_description);
 
 
-            if($request->logo)
-            {
+            if ($request->logo) {
                 $path = $request->file('logo')->store('media', 'uploads');
-                Setting::updateSettings($this->workspace->id,'logo',$path);
+                Setting::updateSettings($this->workspace->id, 'logo', $path);
             }
 
 
-            if($request->favicon)
-            {
+            if ($request->favicon) {
                 $path = $request->file('favicon')->store('media', 'uploads');
-                Setting::updateSettings($this->workspace->id,'favicon',$path);
+                Setting::updateSettings($this->workspace->id, 'favicon', $path);
             }
 
 
-            if($this->user->super_admin)
-            {
+            if ($this->user->super_admin) {
                 $free_trial_days = $request->free_trial_days ?? 0;
-                Setting::updateSettings($this->workspace->id,'free_trial_days',$free_trial_days);
+                Setting::updateSettings($this->workspace->id, 'free_trial_days', $free_trial_days);
                 return redirect('/super-admin-setting');
             }
 
             return redirect("/settings");
-
-
         }
-
-
     }
 
     public function billing()
     {
-        $plans= SubscriptionPlan::all();
+        $plans = SubscriptionPlan::all();
 
         $workspace = Workspace::find($this->user->workspace_id);
 
         $plan = null;
 
-        if($workspace->plan_id)
-        {
+        if ($workspace->plan_id) {
             $plan = SubscriptionPlan::find($workspace->plan_id);
         }
 
@@ -111,45 +102,41 @@ class SettingController extends BaseController
             'purchase_code' => 'required'
         ]);
 
-        Setting::updateSettings($this->workspace->id,'purchase_code',$request->purchase_code);
+        Setting::updateSettings($this->workspace->id, 'purchase_code', $request->purchase_code);
 
         //Verify purchase code
         $purchase_code = $request->purchase_code;
         $response = Http::withOptions([
             'verify' => false,
         ])
-            ->post('https://app.stackpie.com/v4/verify-envato-purchase/1/1767534b-a674-4925-a316-2305050198e7',[
-            'purchase_code' => $purchase_code,
-            'app_url' => config('app.url'),
-            'item_id' => '36660668',
-            'client_ip' => getClientIP(),
-        ])
+            ->post('https://app.stackpie.com/v4/verify-envato-purchase/1/1767534b-a674-4925-a316-2305050198e7', [
+                'purchase_code' => $purchase_code,
+                'app_url' => config('app.url'),
+                'item_id' => '36660668',
+                'client_ip' => getClientIP(),
+            ])
             ->json();
 
-        if(empty($response))
-        {
-            return redirect('/activate')->with('error','An error occurred while trying to verify your purchase code. Please try again later, or contact support if the problem persists.');
+        if (empty($response)) {
+            return redirect('/activate')->with('error', 'An error occurred while trying to verify your purchase code. Please try again later, or contact support if the problem persists.');
         }
 
-        if(!empty($response['success']))
-        {
+        if (!empty($response['success'])) {
             $license_data = $response['license_data'];
-            foreach ($license_data as $key => $value)
-            {
-                Setting::updateSettings($this->workspace->id,$key,$value);
+            foreach ($license_data as $key => $value) {
+                Setting::updateSettings($this->workspace->id, $key, $value);
             }
 
-            return redirect(config('app.url').'/super-admin/dashboard')->with('success','Your license has been activated successfully.');
+            return redirect(config('app.url') . '/super-admin/dashboard')->with('success', 'Your license has been activated successfully.');
         }
 
-        if(!empty($response['errors']))
-        {
+        if (!empty($response['errors'])) {
             return redirect('/activate')->withErrors($response['errors']);
         }
 
         return redirect("/activate");
     }
-//
+    //
 
 
     public function settingsStore(Request $request, $action)
@@ -221,9 +208,33 @@ class SettingController extends BaseController
                 return redirect('/super-admin-setting');
 
                 break;
-
-
+            case "save-openai-api-keys":
+                $request->validate([
+                    "openai_api_keys" => "required|string",
+                    "api_module" => "required",
+                ], [
+                    "openai_api_keys.required" => 'حقل مفاتيح الapi مطلوب'
+                ]);
+                foreach (json_decode($request->openai_api_keys, true) as $api_key_array) {
+                    $api_keys[] = $api_key_array["value"];
+                }
+                Setting::updateSettings(
+                    $this->workspace->id,
+                    "api_keys",
+                    json_encode($api_keys)
+                );
+                Setting::updateSettings(
+                    $this->workspace->id,
+                    "api_module",
+                    $request->api_module
+                );
+                return redirect('/super-admin-setting');
+                break;
         }
     }
 
+    public function openAiSaveSettings(Request $request)
+    {
+        dd('save');
+    }
 }

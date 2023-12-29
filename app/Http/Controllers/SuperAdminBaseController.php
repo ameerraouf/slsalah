@@ -22,7 +22,6 @@ class SuperAdminBaseController extends Controller
 
         $this->middleware(function ($request, $next) {
             $this->user = Auth::user();
-
             $this->workspace = Workspace::find($this->user->workspace_id);
 
             $settings_data = Setting::where(
