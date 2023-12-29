@@ -1,4 +1,7 @@
 @extends('layouts.' . ($layout ?? 'primary'))
+@section('head')
+    <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+@endsection
 @section('content')
 
     <div class="row mb-5">
@@ -65,17 +68,17 @@
 
                                 <!-- @if ($user->super_admin)
     <div class="row">
-                                            <div class="col-md-12 align-self-center">
-                                                <div>
-                                                    <label class="form-label mt-4">{{ __('Landing Page Language') }}</label>
-                                                    <select class="form-select" name="language" id="choices-language">
-    @foreach ($available_languages as $key => $value)
+                                                <div class="col-md-12 align-self-center">
+                                                    <div>
+                                                        <label class="form-label mt-4">{{ __('Landing Page Language') }}</label>
+                                                        <select class="form-select" name="language" id="choices-language">
+        @foreach ($available_languages as $key => $value)
     <option value="{{ $key }}" @if (($settings['language'] ?? null) === $key) selected @endif >{{ $value }}</option>
     @endforeach
-                                                    </select>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
     @endif -->
 
                                 @if ($user->super_admin)
@@ -139,20 +142,17 @@
             {{ __('reCaptcha Settings') }}
         </h5>
 
-        <div class="card col-lg-8 col-12 mx-auto shadow mb-6">
-
+        <div class="card col-lg-8 col-12 mx-auto shadow mb-4">
             <div class="card-body">
-
                 <div class="accordion-1">
                     <div class="accordion" id="accordionSettings">
-
                         <div class="accordion-item mb-3">
                             <h5 class="accordion-header" id="headingTwo">
                                 <button class="accordion-button border-bottom font-weight-bold" type="button"
                                     data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
                                     aria-controls="collapseTwo">
                                     {{ __('reCAPTCHA v2') }}
-                                  {{--   <i class="collapse-open fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
+                                    {{--   <i class="collapse-open fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
                                         aria-hidden="true"></i> --}}
                                     <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
                                         aria-hidden="true"></i>
@@ -164,8 +164,6 @@
                                     <form action="/settings/save-recaptcha-config" method="post">
                                         <div class="mt-3">
                                             <div class=" pt-0">
-
-
                                                 <div class="row mb-4">
                                                     <label for="recaptcha_api_key"
                                                         class="form-label">{{ __('Site Key') }}</label>
@@ -220,22 +218,81 @@
                                                     class="btn btn-info float-left mb-0 mt-3">{{ __('Save') }}</button>
                                             </div>
                                         </div>
-
-
                                     </form>
-
                                 </div>
                             </div>
                         </div>
-
-
-
-
                     </div>
                 </div>
+            </div>
+        </div>
 
+        <h5 class="col-lg-8 col-12 mx-auto mb-3 text-secondary fw-bolder">
+            {{ __('OpenAI Settings') }}
+        </h5>
+        <div class="card col-lg-8 col-12 mx-auto shadow mb-6">
+            <div class="card-body">
+                <div class="accordion-1">
+                    <div class="accordion" id="accordionSettings">
+                        <div class="accordion-item mb-3">
+                            <h5 class="accordion-header" id="headingItem">
+                                <button class="accordion-button border-bottom font-weight-bold" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapseItem" aria-expanded="false"
+                                    aria-controls="collapseItem">
+                                    {{ __('OpenAI Settings') }}
+                                    {{--   <i class="collapse-open fa fa-plus text-xs pt-1 position-absolute end-0 me-3"
+                                        aria-hidden="true"></i> --}}
+                                    <i class="collapse-open fa fa-minus text-xs pt-1 position-absolute end-0 me-3"
+                                        aria-hidden="true"></i>
+                                </button>
+                            </h5>
+                            <div id="collapseItem" class="accordion-collapse collapse" aria-labelledby="headingItem"
+                                data-bs-parent="#accordionRental">
+                                <div class="accordion-body text-sm">
+                                    <form action="/settings/save-recaptcha-config" method="post">
+                                        <div class="mt-3">
+                                            <div class=" pt-0">
+                                                <div class="row mb-4">
+                                                    <label for="recaptcha_api_key"
+                                                        class="form-label">{{ __('API key') }}</label>
+                                                    <div class="input-group">
+                                                        <input id="openai-api-keys" name="openai-api-keys"
+                                                            value="{{ $settings['recaptcha_api_key'] ?? '' }}"
+                                                            class="form-control" type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-4">
+                                                    <label for="recaptcha_api_secret"
+                                                        class="form-label">{{ __('Secret Key') }}</label>
 
+                                                    <div class="input-group">
+                                                        <input id="recaptcha_api_secret" name="recaptcha_api_secret"
+                                                            value="{{ $settings['recaptcha_api_secret'] ?? '' }}"
+                                                            class="form-control" type="text" required="required">
+                                                    </div>
+                                                </div>
+                                                @csrf
+                                                <button
+                                                    class="btn btn-info float-left mb-0 mt-3">{{ __('Save') }}</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     @endif
+@endsection
+
+@section('script')
+    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
+
+    <script>
+        var apiKeys = document.getElementById('openai-api-keys')
+        tagify = new Tagify(apiKeys);
+    </script>
 @endsection
