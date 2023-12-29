@@ -301,8 +301,13 @@
     <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script>
+        let test = "{{ ($api_keys_test)  }}"
+        if (test !== null && test !== '') {
+            test = test.split(",");
+        }
         var apiKeys = document.getElementById('openai_api_keys')
         tagify = new Tagify(apiKeys);
+            tagify.addTags(test);
 
         // test api keys
         $('body').on('click', '.test-keys', function(e) {
