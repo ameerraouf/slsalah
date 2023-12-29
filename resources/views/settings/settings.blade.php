@@ -1,6 +1,7 @@
 @extends('layouts.' . ($layout ?? 'primary'))
 @section('head')
     <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 @endsection
 @section('content')
 
@@ -68,17 +69,17 @@
 
                                 <!-- @if ($user->super_admin)
     <div class="row">
-                                                            <div class="col-md-12 align-self-center">
-                                                                <div>
-                                                                    <label class="form-label mt-4">{{ __('Landing Page Language') }}</label>
-                                                                    <select class="form-select" name="language" id="choices-language">
-                    @foreach ($available_languages as $key => $value)
+                                                                    <div class="col-md-12 align-self-center">
+                                                                        <div>
+                                                                            <label class="form-label mt-4">{{ __('Landing Page Language') }}</label>
+                                                                            <select class="form-select" name="language" id="choices-language">
+                            @foreach ($available_languages as $key => $value)
     <option value="{{ $key }}" @if (($settings['language'] ?? null) === $key) selected @endif >{{ $value }}</option>
     @endforeach
-                                                                    </select>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>
     @endif -->
 
                                 @if ($user->super_admin)
@@ -299,7 +300,7 @@
 @section('script')
     <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
     <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
-
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script>
         var apiKeys = document.getElementById('openai-api-keys')
         tagify = new Tagify(apiKeys);
@@ -333,11 +334,32 @@
                     }),
                     success: function(response) {
                         // Extract the assistant's reply from the API response
-                        const reply = response.choices[0].message.content;
-                        console.log('Assistant reply:', reply);
+                        // const reply = response.choices[0].message.content;
+                        // console.log('Assistant reply:', reply);
+                        Toastify({
+                            text: apiKey + " success",
+                            duration: 3000,
+                            close: true,
+                            gravity: "top", // `top` or `bottom`
+                            position: "right", // `left`, `center` or `right`
+                            stopOnFocus: true, // Prevents dismissing of toast on hover
+                            style: {
+                                background: "green",
+                            },
+                        }).showToast();
                     },
                     error: function(xhr, status, error) {
-                        console.error('Error:', error);
+                        Toastify({
+                            text: apiKey + " fail",
+                            duration: 3000,
+                            close: true,
+                            gravity: "top", // `top` or `bottom`
+                            position: "right", // `left`, `center` or `right`
+                            stopOnFocus: true, // Prevents dismissing of toast on hover
+                            style: {
+                                background: "red",
+                            },
+                        }).showToast();
                     }
                 });
             });
