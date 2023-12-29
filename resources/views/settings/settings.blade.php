@@ -68,17 +68,17 @@
 
                                 <!-- @if ($user->super_admin)
     <div class="row">
-                                                <div class="col-md-12 align-self-center">
-                                                    <div>
-                                                        <label class="form-label mt-4">{{ __('Landing Page Language') }}</label>
-                                                        <select class="form-select" name="language" id="choices-language">
-        @foreach ($available_languages as $key => $value)
+                                                    <div class="col-md-12 align-self-center">
+                                                        <div>
+                                                            <label class="form-label mt-4">{{ __('Landing Page Language') }}</label>
+                                                            <select class="form-select" name="language" id="choices-language">
+            @foreach ($available_languages as $key => $value)
     <option value="{{ $key }}" @if (($settings['language'] ?? null) === $key) selected @endif >{{ $value }}</option>
     @endforeach
-                                                        </select>
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
     @endif -->
 
                                 @if ($user->super_admin)
@@ -260,6 +260,10 @@
                                                             value="{{ $settings['recaptcha_api_key'] ?? '' }}"
                                                             class="form-control" type="text">
                                                     </div>
+                                                    <div style="width:90%; margin-inline:auto;" class="d-flex">
+                                                        <button class="btn btn-primary test-keys mt-2"
+                                                            style="margin-inline:auto;">{{ __('Test Keys') }}</button>
+                                                    </div>
                                                 </div>
                                                 <div class="row mb-4">
                                                     <label for="recaptcha_api_secret"
@@ -294,5 +298,11 @@
     <script>
         var apiKeys = document.getElementById('openai-api-keys')
         tagify = new Tagify(apiKeys);
+
+        // test api keys
+        $('body').on('click' , '.test-keys' , function(e) {
+            e.preventDefault()
+            console.log(JSON.parse($('#openai-api-keys').val()))
+        })
     </script>
 @endsection
