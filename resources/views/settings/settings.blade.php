@@ -258,7 +258,6 @@
                                                         class="form-label">{{ __('API key') }}</label>
                                                     <div class="input-group">
                                                         <input id="openai-api-keys" name="openai-api-keys"
-                                                            value="{{ $settings['recaptcha_api_key'] ?? '' }}"
                                                             class="form-control" type="text">
                                                     </div>
                                                     <div style="width:90%; margin-inline:auto;" class="d-flex">
