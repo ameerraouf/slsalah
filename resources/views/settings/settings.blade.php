@@ -267,12 +267,13 @@
                                                 </div>
                                                 <div class="row mb-4">
                                                     <label for="recaptcha_api_secret"
-                                                        class="form-label">{{ __('Secret Key') }}</label>
-
+                                                        class="form-label">{{ __('API Module') }}</label>
                                                     <div class="input-group">
-                                                        <input id="recaptcha_api_secret" name="recaptcha_api_secret"
-                                                            value="{{ $settings['recaptcha_api_secret'] ?? '' }}"
-                                                            class="form-control" type="text" required="required">
+                                                      <select name="api_module" id="api_module" class="form-select">
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                      </select>
                                                     </div>
                                                 </div>
                                                 @csrf
