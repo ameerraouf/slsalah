@@ -250,14 +250,14 @@
                             <div id="collapseItem" class="accordion-collapse collapse" aria-labelledby="headingItem"
                                 data-bs-parent="#accordionRental">
                                 <div class="accordion-body text-sm">
-                                    <form action="{{ route('openai.save') }}" method="post">
+                                    <form action="/settings/save-openai-api-keys" method="post">
                                         <div class="mt-3">
                                             <div class=" pt-0">
                                                 <div class="row mb-4">
                                                     <label for="recaptcha_api_key"
                                                         class="form-label">{{ __('API key') }}</label>
                                                     <div class="input-group">
-                                                        <input id="openai-api-keys" name="openai-api-keys"
+                                                        <input id="openai_api_keys" name="openai_api_keys"
                                                             class="form-control" type="text">
                                                     </div>
                                                     <div style="width:90%; margin-inline:auto;" class="d-flex">
@@ -301,14 +301,14 @@
     <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script>
-        var apiKeys = document.getElementById('openai-api-keys')
+        var apiKeys = document.getElementById('openai_api_keys')
         tagify = new Tagify(apiKeys);
 
         // test api keys
         $('body').on('click', '.test-keys', function(e) {
             e.preventDefault()
 
-            let apiKeys = JSON.parse($('#openai-api-keys').val())
+            let apiKeys = JSON.parse($('#openai_api_keys').val())
             apiKeys.forEach(key => {
                 let apiKey = key.value;
                 // Send the prompt to the OpenAI API
