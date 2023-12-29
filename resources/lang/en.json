@@ -324,6 +324,7 @@
     "Test Keys" : "تجربة مفاتيح الAPI",
     "API Module" : "نموذج الـ API الافتراضي",
     "OpenAI Settings" : "إعدادات OpanAI",
+    "Api Message" : " من فضلك .. لاحظ أن  شات GPT لا يعمل مع كل أنواع الـ API .. لذا يتعين عليك اختيار API مناسب ",
     "Write Blog Post": "اكتب منشور مدونة",
     "Slug": "عنوان المقال في الرابط",
     "Topic\/Subject": "الموضوع",

@@ -269,11 +269,14 @@
                                                     <label for="recaptcha_api_secret"
                                                         class="form-label">{{ __('API Module') }}</label>
                                                     <div class="input-group">
-                                                      <select name="api_module" id="api_module" class="form-select">
+                                                      <select name="api_module" id="api_module" class="form-select mb-2">
                                                         <option value="1">1</option>
                                                         <option value="2">2</option>
                                                         <option value="3">3</option>
                                                       </select>
+                                                    </div>
+                                                    <div class="alert alert-info text-white">
+                                                        {{ __('Api Message') }}
                                                     </div>
                                                 </div>
                                                 @csrf
