@@ -341,6 +341,10 @@ Route::post('/save-terms-section', [SuperAdminController::class,'saveTerms']);
 
 Route::post("/settings/{action}", [SettingController::class, "settingsStore"]);
 
+// openai routes for super admin crud
+Route::post('/openai-settings' , [SettingController::class, 'openAiSaveSettings'])->name('openai.save');
+
+
 Route::prefix("admin")
     ->name("admin.")
     ->group(function () {

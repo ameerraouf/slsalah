@@ -226,4 +226,8 @@ class SettingController extends BaseController
         }
     }
 
+    public function openAiSaveSettings(Request $request) {
+        dd('save');
+    }
+
 }
