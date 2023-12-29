@@ -69,17 +69,17 @@
 
                                 <!-- @if ($user->super_admin)
     <div class="row">
-                                                                    <div class="col-md-12 align-self-center">
-                                                                        <div>
-                                                                            <label class="form-label mt-4">{{ __('Landing Page Language') }}</label>
-                                                                            <select class="form-select" name="language" id="choices-language">
-                            @foreach ($available_languages as $key => $value)
+                                                                                <div class="col-md-12 align-self-center">
+                                                                                    <div>
+                                                                                        <label class="form-label mt-4">{{ __('Landing Page Language') }}</label>
+                                                                                        <select class="form-select" name="language" id="choices-language">
+                                        @foreach ($available_languages as $key => $value)
     <option value="{{ $key }}" @if (($settings['language'] ?? null) === $key) selected @endif >{{ $value }}</option>
     @endforeach
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
     @endif -->
 
                                 @if ($user->super_admin)
@@ -271,9 +271,12 @@
                                                     <div class="input-group">
                                                         <select name="api_module" id="api_module"
                                                             class="form-select mb-2">
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
+                                                            <option value="1">1
+                                                            </option>
+                                                            <option value="2">2
+                                                            </option>
+                                                            <option value="3">3
+                                                            </option>
                                                         </select>
                                                     </div>
                                                     <div class="alert alert-info text-white">
@@ -301,14 +304,20 @@
     <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script>
-        let test = "{{ ($api_keys_test)  }}"
+        let test = "{{ $api_keys_test }}"
         if (test !== null && test !== '') {
             test = test.split(",");
         }
         var apiKeys = document.getElementById('openai_api_keys')
         tagify = new Tagify(apiKeys);
-            tagify.addTags(test);
+        tagify.addTags(test);
 
+
+        // api module 
+        let apiModule = "{{ $api_module }}"
+        if (apiModule) {
+            $('#api_module').val(apiModule)
+        }
         // test api keys
         $('body').on('click', '.test-keys', function(e) {
             e.preventDefault()

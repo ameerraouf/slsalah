@@ -365,16 +365,17 @@ class SuperAdminController extends SuperAdminBaseController
         $workspace = Workspace::find($this->user->workspace_id);
         $available_languages = User::$available_languages;
         $api_keys = $this->settings['api_keys'] ?? null;
-
         if ($api_keys) {
             $api_keys = implode(',' , json_decode($api_keys));
         }
+        $api_module = $this->settings['api_module'] ?? null;
         return \view("settings.settings", [
             "selected_navigation" => "settings",
             "layout" => "super-admin-portal",
             "workspace" => $workspace,
             "available_languages" => $available_languages,
-            "api_keys_test" => $api_keys
+            "api_keys_test" => $api_keys,
+            "api_module" => $api_module
         ]);
     }
 
