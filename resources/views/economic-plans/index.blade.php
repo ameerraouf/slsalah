@@ -45,17 +45,19 @@
         .step.active {
             opacity: 1;
         }
+
         button {
-            background-color : #077ebf;
+            background-color: #077ebf;
             color: #ffffff;
             outline: 0;
             padding: .5rem 1rem;
             border-radius: 14px;
             border: 0;
         }
+
         /* Mark the steps that are finished and valid: */
         .step.finish {
-            background-color: #04AA6D;
+            background-color: #077ebf;
         }
     </style>
 @endsection
@@ -69,48 +71,167 @@
     </div>
 
     <div class="main-page-content">
-         <form id="regForm" action="">
-
-            <h1>Register:</h1>
-            
+        <form id="regForm" action="">
             <!-- One "tab" for each step in the form: -->
-            <div class="tab">Name:
-              <p><input placeholder="First name..." oninput="this.className = ''"></p>
-              <p><input placeholder="Last name..." oninput="this.className = ''"></p>
+            <div class="tab mb-3">
+                {{ __('industry') }}
+                <div class="">
+                    <input type="radio"name="radio-input-choice" value="technology" style="width: auto;">
+                    <label>{{ __('technology') }}</label><br>
+                </div>
+                <div class="">
+                    <input type="radio"name="radio-input-choice" value="health" style="width: auto;">
+                    <label>{{ __('health') }}</label><br>
+                </div>
+                <div class="">
+                    <input type="radio"name="radio-input-choice" value="retail" style="width: auto;">
+                    <label>{{ __('retail') }}</label><br>
+                </div>
+                <div class="">
+                    <input type="radio"name="radio-input-choice" value="finance" style="width: auto;">
+                    <label>{{ __('finance') }}</label><br>
+                </div>
             </div>
-            
-            <div class="tab">Contact Info:
-              <p><input placeholder="E-mail..." oninput="this.className = ''"></p>
-              <p><input placeholder="Phone..." oninput="this.className = ''"></p>
+
+            <div class="tab mb-3">
+                {{ __('business_size') }}
+                <div class="">
+                    <input type="radio"name="business_size" value="micro" style="width: auto;">
+                    <label>{{ __('micro') }}</label><br>
+                </div>
+                <div class="">
+                    <input type="radio"name="business_size" value="small" style="width: auto;">
+                    <label>{{ __('small') }}</label><br>
+                </div>
+                <div class="">
+                    <input type="radio"name="business_size" value="medium" style="width: auto;">
+                    <label>{{ __('medium') }}</label><br>
+                </div>
+                <div class="">
+                    <input type="radio"name="business_size" value="large" style="width: auto;">
+                    <label>{{ __('large') }}</label><br>
+                </div>
             </div>
-            
-            <div class="tab">Birthday:
-              <p><input placeholder="dd" oninput="this.className = ''"></p>
-              <p><input placeholder="mm" oninput="this.className = ''"></p>
-              <p><input placeholder="yyyy" oninput="this.className = ''"></p>
+
+            <div class="tab mb-3">
+                {{ __('audience') }}
+                <div class="">
+                    <input type="radio" name="audience" value="b2c" style="width: auto;">
+                    <label>{{ __('b2c') }}</label><br>
+                </div>
+                <div class="">
+                    <input type="radio" name="audience" value="b2b" style="width: auto;">
+                    <label>{{ __('b2b') }}</label><br>
+                </div>
+                <div class="">
+                    <input type="radio" name="audience" value="Government agencies and institutions" style="width: auto;">
+                    <label>{{ __('governate') }}</label><br>
+                </div>
+                <div class="">
+                    <input type="radio" name="audience" value="b2b b2c and Government agencies " style="width: auto;">
+                    <label>{{ __('all') }}</label><br>
+                </div>
             </div>
-            
-            <div class="tab">Login Info:
-              <p><input placeholder="Username..." oninput="this.className = ''"></p>
-              <p><input placeholder="Password..." oninput="this.className = ''"></p>
+
+            <div class="tab mb-3">
+                {{ __('product_nature') }}
+                <div class="">
+                    <input type="radio" name="product_nature" value="phyiscal products" style="width: auto;">
+                    <label>{{ __('Physical products') }}</label><br>
+                </div>
+                <div class="">
+                    <input type="radio" name="product_nature" value="digital products" style="width: auto;">
+                    <label>{{ __('Digital Products') }}</label><br>
+                </div>
+                <div class="">
+                    <input type="radio" name="product_nature" value="services" style="width: auto;">
+                    <label>{{ __('Services') }}</label><br>
+                </div>
+                <div class="">
+                    <input type="radio" name="product_nature" value="phyiscal and digital products and services" style="width: auto;">
+                    <label>{{ __('all') }}</label><br>
+                </div>
             </div>
-            
+
+            <div class="tab mb-3">
+                {{ __('Technology Focus') }}
+                <div class="">
+                    <input type="radio" name="tech_focus" value="Artifical Intelligence" style="width: auto;">
+                    <label>{{ __('Ai') }}</label><br>
+                </div>
+                <div class="">
+                    <input type="radio" name="tech_focus" value="Renewable Energy" style="width: auto;">
+                    <label>{{ __('Renewable Energy') }}</label><br>
+                </div>
+                <div class="">
+                    <input type="radio" name="tech_focus" value="Online Trading" style="width: auto;">
+                    <label>{{ __('Online Trading') }}</label><br>
+                </div>
+                <div class="">
+                    <input type="radio" name="tech_focus" value="FinTech" style="width: auto;">
+                    <label>{{ __('FinTech') }}</label><br>
+                </div>
+            </div>
+
+
+            <div class="tab mb-3">
+                {{ __('Market Position') }}
+                <div class="">
+                    <input type="radio" name="market_position" value="lowers the cost" style="width: auto;">
+                    <label>{{ __('Lowering The Cost') }}</label><br>
+                </div>
+                <div class="">
+                    <input type="radio" name="market_position" value="special" style="width: auto;">
+                    <label>{{ __('Special') }}</label><br>
+                </div>
+                <div class="">
+                    <input type="radio" name="market_position" value="spcialized markers" style="width: auto;">
+                    <label>{{ __('Special Market') }}</label><br>
+                </div>
+                <div class="">
+                    <input type="radio" name="market_position" value="all markets" style="width: auto;">
+                    <label>{{ __('all') }}</label><br>
+                </div>
+            </div>
+
+            <div class="tab mb-3">
+                {{ __('Geo Location') }}
+                <div class="">
+                    <input type="radio" name="location" value="Modern Citites" style="width: auto;">
+                    <label>{{ __('Modern') }}</label><br>
+                </div>
+                <div class="">
+                    <input type="radio" name="location" value="Suburbs" style="width: auto;">
+                    <label>{{ __('Suberns') }}</label><br>
+                </div>
+                <div class="">
+                    <input type="radio" name="location" value="country side" style="width: auto;">
+                    <label>{{ __('Country Side') }}</label><br>
+                </div>
+                <div class="">
+                    <input type="radio" name="location" value="global" style="width: auto;">
+                    <label>{{ __('Global') }}</label><br>
+                </div>
+            </div>
+
             <div style="overflow:auto;">
-              <div style="float:right;">
-                <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
-                <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
-              </div>
+                <div style="float:right;">
+                    <button type="button" id="prevBtn" onclick="nextPrev(-1)"> {{ __('Previous_button') }}</button>
+                    <button type="button" id="nextBtn" onclick="nextPrev(1)"> {{ __('test') }}</button>
+                </div>
             </div>
-            
+
             <!-- Circles which indicates the steps of the form: -->
             <div style="text-align:center;margin-top:40px;">
-              <span class="step"></span>
-              <span class="step"></span>
-              <span class="step"></span>
-              <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
             </div>
-            
-            </form> 
+
+        </form>
         <!-- /.MultiStep Form -->
     </div>
 @endsection
@@ -131,9 +252,9 @@
                 document.getElementById("prevBtn").style.display = "inline";
             }
             if (n == (x.length - 1)) {
-                document.getElementById("nextBtn").innerHTML = "Submit";
+                document.getElementById("nextBtn").innerHTML = "{{ __('submit') }}";
             } else {
-                document.getElementById("nextBtn").innerHTML = "Next";
+                document.getElementById("nextBtn").innerHTML = "{{ __('Next_button_test') }}";
             }
             // ... and run a function that displays the correct step indicator:
             fixStepIndicator(n)
