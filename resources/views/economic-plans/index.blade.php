@@ -76,19 +76,19 @@
             <div class="tab mb-3">
                 {{ __('industry') }}
                 <div class="">
-                    <input type="radio"name="radio-input-choice" value="technology" style="width: auto;">
+                    <input type="radio"name="industry" value="technology" style="width: auto;">
                     <label>{{ __('technology') }}</label><br>
                 </div>
                 <div class="">
-                    <input type="radio"name="radio-input-choice" value="health" style="width: auto;">
+                    <input type="radio"name="industry" value="health" style="width: auto;">
                     <label>{{ __('health') }}</label><br>
                 </div>
                 <div class="">
-                    <input type="radio"name="radio-input-choice" value="retail" style="width: auto;">
+                    <input type="radio"name="industry" value="retail" style="width: auto;">
                     <label>{{ __('retail') }}</label><br>
                 </div>
                 <div class="">
-                    <input type="radio"name="radio-input-choice" value="finance" style="width: auto;">
+                    <input type="radio"name="industry" value="finance" style="width: auto;">
                     <label>{{ __('finance') }}</label><br>
                 </div>
             </div>
@@ -148,7 +148,8 @@
                     <label>{{ __('Services') }}</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="product_nature" value="phyiscal and digital products and services" style="width: auto;">
+                    <input type="radio" name="product_nature" value="phyiscal and digital products and services"
+                        style="width: auto;">
                     <label>{{ __('all') }}</label><br>
                 </div>
             </div>
@@ -310,5 +311,12 @@
             //... and adds the "active" class to the current step:
             x[n].className += " active";
         }
+
+        let data;
+        $('body').on('change', 'input[type="radio"]',function() {
+            data = new FormData(regForm);
+            console.log(data)
+        });
+        // add the event listen on the radios
     </script>
 @endsection
