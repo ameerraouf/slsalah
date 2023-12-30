@@ -12,4 +12,7 @@ class EconomicPlanController extends Controller
             "selected_navigation" => "economic-plan",
         ]);
     }
+    public function create(Request $request) {
+        return $request->all();
+    }
 }

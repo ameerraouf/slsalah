@@ -219,7 +219,8 @@
                 <div style="float:right;">
                     <button type="button" id="prevBtn" onclick="nextPrev(-1)"> {{ __('Previous_button') }}</button>
                     <button type="button" id="nextBtn" onclick="nextPrev(1)"> {{ __('test') }}</button>
-                    <button type="button" id = "submitBtn" class="submit-btn" style="display: none"> {{ __('submit') }}</button>
+                    <button type="button" id = "submitBtn" class="submit-btn" style="display: none">
+                        {{ __('submit') }}</button>
                 </div>
             </div>
 
@@ -314,16 +315,26 @@
             x[n].className += " active";
         }
 
-        // add the event listen on the radios
-        let data;
-        $('body').on('change', 'input[type="radio"]',function() {
-            data = new FormData(regForm);
-        });
-
 
         // submitting the form 
-        $('body').on('click', '.submit-btn',function(e) {
-            e.preventDefault();
+        $('body').on('click', '.submit-btn', function(e) {
+        let data = new FormData(regForm);
+            $.ajax({
+                method: "POST",
+                url: "{{ route('economiccPlan.create') }}",
+                data:data,
+                processData: false,
+                    contentType: false,
+                headers: {
+                    'X-CSRF-Token': "{{ csrf_token() }}"
+                },
+                success: function(response) {
+                    console.log(response)
+                },
+                error: function(response) {
+
+                }
+            })
             alert('send requet');
         });
     </script>

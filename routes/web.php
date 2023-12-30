@@ -376,6 +376,7 @@ Route::prefix("admin")
 
     //economic plan routes 
     Route::get('/economic-plan' , [EconomicPlanController::class , 'index'])->name('economiccPlan.index');
+    Route::post('/economic-plan-save' , [EconomicPlanController::class , 'create'])->name('economiccPlan.create');
 
 
 
