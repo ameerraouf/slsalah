@@ -72,6 +72,7 @@
 
     <div class="main-page-content">
         <form id="regForm" action="">
+            <div class="alert alert-danger text-white d-none" id="error-alert">{{ __('All Fields Are Required') }}</div>
             <!-- One "tab" for each step in the form: -->
             <div class="tab mb-3">
                 {{ __('industry') }}
@@ -80,7 +81,7 @@
                     <label>{{ __('technology') }}</label><br>
                 </div>
                 <div class="">
-                    <input type="radio"name="industry" value="health" style="width: auto;">
+                    <input type="radio"name="industry" value="health care" style="width: auto;">
                     <label>{{ __('health') }}</label><br>
                 </div>
                 <div class="">
@@ -318,24 +319,24 @@
 
         // submitting the form 
         $('body').on('click', '.submit-btn', function(e) {
-        let data = new FormData(regForm);
+            $('#error-alert').addClass('d-none');
+            let data = new FormData(regForm);
             $.ajax({
                 method: "POST",
                 url: "{{ route('economiccPlan.create') }}",
-                data:data,
+                data: data,
                 processData: false,
-                    contentType: false,
+                contentType: false,
                 headers: {
                     'X-CSRF-Token': "{{ csrf_token() }}"
                 },
                 success: function(response) {
-                    console.log(response)
+                    alert('successfull');
                 },
                 error: function(response) {
-
+                    $('#error-alert').removeClass('d-none');
                 }
             })
-            alert('send requet');
         });
     </script>
 @endsection

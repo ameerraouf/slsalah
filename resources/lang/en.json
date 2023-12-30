@@ -253,6 +253,7 @@
     "An optional section that includes résumés and permits": "قسم اختياري يتضمن السير الذاتية والتصاريح",
     "Upload file": "تحميل ملف",
     "Next_button_test" : "التالي",
+    "All Fields Are Required" : "جميع الحقول مطلوبة , الرجاء التأكد من تعبئتها جميعها.",
     "Previous_button" : "السابق",
     "submit" : "حفظ",
     "industry" : " اختر صناعة لمشروعك أو عملك:",
