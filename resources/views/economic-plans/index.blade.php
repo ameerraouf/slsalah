@@ -219,6 +219,7 @@
                 <div style="float:right;">
                     <button type="button" id="prevBtn" onclick="nextPrev(-1)"> {{ __('Previous_button') }}</button>
                     <button type="button" id="nextBtn" onclick="nextPrev(1)"> {{ __('test') }}</button>
+                    <button type="button" id = "submitBtn" class="submit-btn" style="display: none"> {{ __('submit') }}</button>
                 </div>
             </div>
 
@@ -253,7 +254,8 @@
                 document.getElementById("prevBtn").style.display = "inline";
             }
             if (n == (x.length - 1)) {
-                document.getElementById("nextBtn").innerHTML = "{{ __('submit') }}";
+                document.getElementById("nextBtn").style.display = "none";
+                document.getElementById("submitBtn").style.display = "inline";
             } else {
                 document.getElementById("nextBtn").innerHTML = "{{ __('Next_button_test') }}";
             }
@@ -273,7 +275,7 @@
             // if you have reached the end of the form... :
             if (currentTab >= x.length) {
                 //...the form gets submitted:
-                document.getElementById("regForm").submit();
+                // document.getElementById("regForm").submit();
                 return false;
             }
             // Otherwise, display the correct tab:
@@ -312,11 +314,17 @@
             x[n].className += " active";
         }
 
+        // add the event listen on the radios
         let data;
         $('body').on('change', 'input[type="radio"]',function() {
             data = new FormData(regForm);
-            console.log(data)
         });
-        // add the event listen on the radios
+
+
+        // submitting the form 
+        $('body').on('click', '.submit-btn',function(e) {
+            e.preventDefault();
+            alert('send requet');
+        });
     </script>
 @endsection
