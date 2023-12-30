@@ -37,6 +37,12 @@ class EconomicPlanController extends Controller
             "location.required'" => 'حقل المناطق الجغرافية مطلوب',
         ]);
 
+        return $this->swotAnalysis($request);
+    }
+
+
+    private function swotAnalysis($request)
+    {
         $swot_message = "I want to write a swot analysis based on the answers of the following questions . <br />
                 question 1 : Choose an industry for your project or business <br/>
                 answer for question 1 : {$request->industry} <br/>
@@ -89,6 +95,25 @@ class EconomicPlanController extends Controller
         ])->post('https://api.openai.com/v1/chat/completions', $payload);
         $responseData = json_decode($response, true);
         $message = $responseData['choices'][0]['message']['content'];
-        return $message;
+
+        
+        // Regular expression pattern to extract threats
+        if (preg_match('/Threats:(.*?)(?=Strengths:|Weaknesses:|Opportunities:|$)/s', $message, $matches)) {
+            $threatLines = explode(PHP_EOL, $matches[1]);
+            $threatLines = array_map('trim', $threatLines);
+            $threatLines = array_filter($threatLines);
+            $threats = array_values($threatLines);
+        }
+
+        // Output the extracted threats
+        foreach ($threats as $threat) {
+            $threats = array_merge($threats, preg_split('/\R/', $threat));
+        }
+        $threats = array_map('trim', $threats);
+
+        // Remove any empty elements
+        $threats = array_filter($threats);
+
+        return $threats;
     }
 }
