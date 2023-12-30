@@ -99,7 +99,15 @@
             <li class="nav-item mt-3 mb-2">
                 <h6 class="ps-4 ms-2 text-uppercase text-muted text-xs opacity-6">{{__('marketing_and_economic_plan')}} </h6>
             </li>
-
+            {{-- New Content --}}
+            <li class="nav-item ">
+                <a class="nav-link @if(($selected_navigation ?? '') === 'economic-plan') active @endif "
+                   href="/economic-plan">
+                    <i class="fas fa-file"></i>
+                    <span class="nav-link-text ms-3">{{__('marketing_and_economic_plan')}}</span>
+                </a>
+            </li>
+            {{-- End New Content --}}
             @if(empty($modules) || in_array('projects',$modules))
                 <li class="nav-item ">
                     <a class="nav-link @if(($selected_navigation ?? '') === 'projects') active @endif "
