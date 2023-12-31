@@ -9,6 +9,7 @@ use App\Models\SwotAnalysis;
 use Illuminate\Http\Request;
 use App\Models\PestelAnalysis;
 use App\Http\Controllers\Controller;
+use App\Models\PorterModel;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Validation\ValidationException;
 
@@ -40,8 +41,9 @@ class EconomicPlanController extends Controller
             "location.required'" => 'حقل المناطق الجغرافية مطلوب',
         ]);
 
-        $this->swotAnalysis($request);
-        $this->pestelAnalysis($request);
+        return $this->porterAnalysis($request);
+        // $this->swotAnalysis($request);
+        // $this->pestelAnalysis($request);
     }
 
     private function pestelAnalysis($request)
@@ -273,6 +275,97 @@ class EconomicPlanController extends Controller
             "weaknesses" => json_encode($swot_data['weaknesses']),
             "opportunities" => json_encode($swot_data['opportunities']),
             "threats" => json_encode($swot_data['threats']),
+        ]);
+    }
+
+    private function porterAnalysis($request)
+    {
+        $pestel_message = "I want to write a porter-5 analysis based on the answers of the following questions . <br />
+                question 1 : Choose an industry for your project or business <br/>
+                answer for question 1 : {$request->industry} <br/>
+                question 2 : Specify the size of your business/project. <br/>
+                answer for question 2 : {$request->business_size} <br/>
+                question 3 : Specify the primary target audience for your project/business. <br/>
+                answer for question 3 : {$request->audience} <br/>
+                question 4 : Specify the nature of your product/service. <br/>
+                answer for question 4 : {$request->product_nature} <br/>
+                question 5 : Choose the primary technological focus for your project/business. <br/>
+                answer for question 5 : {$request->tech_focus} <br/>
+                question 6 : Specify the primary market location for your project/business. <br/>
+                answer for question 6 : {$request->market_position} <br/>
+                question 7 : Choose the geographical regions in which your project/business operates. <br/>
+                answer for question 7 : {$request->location} <br/>
+
+                the answer must contain the following forces : <br />
+                entrants , rivals , suppliers , customers , substitute <br />
+        ";
+        $workspace = Workspace::find(1);
+        $settings_data = Setting::where('workspace_id', $workspace->id)->get();
+        $settings = [];
+        foreach ($settings_data as $setting) {
+            $settings[$setting->key] = $setting->value;
+        }
+        if (array_key_exists('api_keys', $settings)) {
+            $api_keys = $settings['api_keys'];
+        } else {
+            throw ValidationException::withMessages([
+                'api_keys' => 'does not exist',
+            ]);
+        }
+
+        // send to openai api 
+        $payload = [
+            'messages' => [
+                [
+                    'role' => 'system',
+                    'content' => 'You can start the conversation.',
+                ],
+                [
+                    'role' => 'user',
+                    'content' => $pestel_message,
+                ],
+            ],
+            "model" => 'gpt-3.5-turbo'
+        ];
+        $response = Http::withHeaders([
+            'Authorization' => "Bearer " .  json_decode($api_keys)[1],
+            'Content-Type' => 'application/json',
+        ])->post('https://api.openai.com/v1/chat/completions', $payload);
+        $responseData = json_decode($response, true);
+        $message = $responseData['choices'][0]['message']['content'];
+        // return $message;
+        $text = trim($message);
+
+        // Initialize an empty array to store the Porter's Five Forces analysis
+        $forces = array();
+
+        // Extract forces using regular expressions
+        // Extract force names using regular expressions
+        $pattern = "/(\d+\.[^\n:]+):\n((?:.+\n)+)/";
+        preg_match_all($pattern, $text, $matches);
+
+        // Remove leading numbers and whitespace from force names
+        $forces = array_map(function ($match) {
+            return trim(preg_replace("/^\d+\.\s*/", '', $match));
+        }, $matches[1]);
+
+        // Extract force descriptions
+        $descriptions = $matches[2];
+
+        // Create an array with force names as keys and descriptions as values
+        $forcesArray = array_combine($forces, $descriptions);
+        return $forcesArray;
+        // write the swot analysis 
+        $porter_analysis = PorterModel::create([
+            "uuid" => Str::uuid(),
+            "workspace_id" => auth()->user()->workspace_id,
+            "admin_id" => 0,
+            "company_name" => $settings['company_name'],
+            "rivals " => json_encode($forcesArray['Rivals']) ?? null,
+            "entrants" => json_encode($forcesArray['Entrants']) ?? null,
+            "suppliers" => json_encode($forcesArray['Suppliers']) ?? null,
+            "customers" => json_encode($forcesArray['Customers']) ?? null,
+            "substitute" => json_encode($forcesArray['Substitute']) ?? null,
         ]);
     }
 }
