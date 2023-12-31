@@ -62,7 +62,7 @@ class EconomicPlanController extends Controller
                 answer for question 7 : {$request->location} <br/>
 
                  <br />
-                make sure to include these factors : political factors , economic factors , social factors ,technology factors . and enviromental factors and legal factors
+                make sure to include these factors and dont't leave any of them empty at all : political factors , economic factors , social factors ,technology factors . and enviromental factors and legal factors
         ";
         $workspace = Workspace::find(1);
         $settings_data = Setting::where('workspace_id', $workspace->id)->get();
