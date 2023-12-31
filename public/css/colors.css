@@ -1,0 +1,52 @@
+:root {
+    --app-dark-color-2: #222222;
+    --app-dark-color-5: #515151;
+    --app-blue-color: #077ebf;
+    --app-black-color: #000000;
+    --app-white-color: #FFFFFF;
+}
+/*  */
+.form-check-input:checked[type="checkbox"] {
+    background-image: linear-gradient(310deg, var(--app-blue-color) 0%, #2c7be5 100%);
+    border-color: var(--app-blue-color);
+    background-color: var(--app-blue-color);
+}
+.btn-check:focus + .btn-info, .btn-info:focus {
+    background-color: var(--app-blue-color);
+}
+.bg-dark-alt {
+    background-color: var(--app-blue-color) !important;
+}
+.fc .fc-button-primary, .fc .fc-button-primary:hover {
+    color: #fff;
+    background-color: var(--app-blue-color);
+    border-color: var(--app-blue-color);
+}
+.bg-gradient-dark {
+    /* background-image: linear-gradient(310deg, var(--app-dark-color-2) 0%, var(--app-blue-color) 100%); */
+    background-image: linear-gradient(310deg, var(--app-blue-color) 0%, var(--app-blue-color) 100%);
+}
+.btn-dark {
+    background-color: var(--app-dark-color-2);
+    border-color: var(--app-dark-color-2);
+}
+.btn-dark:hover, .btn.bg-gradient-dark:hover {
+    background-color: var(--app-dark-color-2);
+    border-color: var(--app-dark-color-2);
+}
+.btn-success {
+    background-color: var(--app-blue-color);
+}
+/* .bg-success {
+    background-color: var(--app-blue-color) !important;
+} */
+.text-success {
+    color: var(--app-blue-color) !important;
+}
+.btn-success:hover, .btn.bg-gradient-success:hover {
+    background-color: var(--app-blue-color);
+    border-color: var(--app-blue-color);
+}
+.bg-purple-light {
+    background-color: #e6f6ff !important;
+}

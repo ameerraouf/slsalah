@@ -1,0 +1,174 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&display=swap');
+body {
+    --app-font-family: sans-serif;
+    --app-font-family: 'Cairo';
+}
+
+/* ------------ margin ------------ */
+html[dir="rtl"] .me-5 {
+    margin-left: 3rem !important;
+    margin-right: 0 !important;
+}
+html[dir="rtl"] .me-3 {
+    margin-left: 1rem !important;
+    margin-right: 0 !important;
+}
+html[dir="rtl"] .me-2 {
+    margin-left: 0.5rem !important;
+    margin-right: 0 !important;
+}
+html[dir="rtl"] .me-1 {
+    margin-left: 0.25rem !important;
+    margin-right: auto !important;
+}
+html[dir="rtl"] .ms-5 {
+    margin-right: 3rem !important;
+    margin-left: auto !important;
+}
+html[dir="rtl"] .ms-3 {
+    margin-right: 1rem !important;
+    margin-left: auto !important;
+}
+html[dir="rtl"] .ms-auto {
+    margin-right: auto !important;
+    margin-left: 0 !important;
+}
+html[dir="rtl"] .ms-n7 {
+    margin-right: -6rem !important;
+    margin-left: 0 !important;
+}
+html[dir="rtl"] .ms-n3 {
+    margin-right: -1rem !important;
+    margin-left: 0 !important;
+}
+html[dir="rtl"] div.dataTables_wrapper div.dataTables_filter input {
+    margin-right: 0.5em;
+    margin-left: 0em;
+}
+@media (min-width: 1200px) {
+    html[dir="rtl"] .sidenav.fixed-left + .main-content {
+        margin-right: 17.125rem;
+        margin-left: 0;
+    }
+}
+@media (min-width: 992px) {
+    /* html[dir="rtl"] .ms-lg-auto {
+        margin-right: auto !important;
+    } */
+    html[dir="rtl"] .ms-lg-12 {
+        margin-right: 16rem !important;
+        margin-left: auto !important;
+    }
+}
+/* ------------ padding ------------ */
+html[dir="rtl"] .ps-4 {
+    padding-right: 1.5rem !important;
+    padding-left: 0 !important;
+}
+html[dir="rtl"] .ps-2 {
+    padding-right: 0.5rem !important;
+    /* padding-left: auto !important; */
+}
+/* ------------ direction ------------ */
+html[dir="rtl"] .oblique {
+    right: auto;
+    left: -10rem;
+    transform: skewX(10deg);
+}
+html[dir="rtl"] .oblique .oblique-image {
+    transform: skewX(-10deg);
+}
+html[dir="rtl"] .text-start {
+    text-align: right !important;
+}
+html[dir="rtl"] .text-end {
+    text-align: left !important;
+}
+html[dir="rtl"] .navbar-vertical.navbar-expand-xs.fixed-left {
+    right: 0;
+    left: auto;
+}
+html[dir="rtl"] div.dataTables_wrapper div.dataTables_filter {
+    text-align: left;
+}
+html[dir="rtl"] .form-switch {
+    padding-right: 3rem;
+}
+html[dir="rtl"] .form-switch .form-check-input {
+    margin-right: -3rem;
+}
+html[dir="rtl"] .form-check .form-check-input {
+    float: right;
+}
+html[dir="rtl"] .form-switch .form-check-input:checked:after {
+    transform: translateX(-21px);
+}
+html[dir="rtl"] label, .form-label {
+    margin-right: 0.25rem;
+    margin-left: 0rem;
+}
+html[dir="rtl"] .form-select {
+    background-position: left 0.25rem center;
+}
+html[dir="rtl"] .end-0 {
+    left: 0% !important;
+    right: auto !important;
+}
+html[dir="rtl"] .float-end {
+    float: left !important;
+}
+html[dir="rtl"] .page-item:last-child .page-link {
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    border-top-right-radius: 0rem;
+    border-bottom-right-radius: 0rem;
+}
+html[dir="rtl"] .page-item:first-child .page-link {
+    border-top-left-radius: 0rem;
+    border-bottom-left-radius: 0rem;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+html[dir="rtl"] .btn-group > .btn:not(:last-child):not(.dropdown-toggle), .btn-group > .btn-group:not(:last-child) > .btn {
+    border-radius: 0.5rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+html[dir="rtl"] .btn-group > .btn:nth-child(n + 3), .btn-group > :not(.btn-check) + .btn, .btn-group > .btn-group:not(:first-child) > .btn {
+    border-radius: 0.5rem;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+html[dir="rtl"] .dropdown .dropdown-menu.dropdown-menu-end {
+    left: 0;
+    right: auto;
+}
+html[dir="rtl"] .text-right {
+    text-align: left !important;
+}
+html[dir="rtl"] .text-left {
+    text-align: right !important;
+}
+html[dir="rtl"] table.dataTable thead th, table.dataTable thead td, table.dataTable tfoot th, table.dataTable tfoot td {
+    text-align: right;
+}
+@media (max-width: 1199.98px) {
+    html[dir="rtl"] .g-sidenav-show:not(.rtl) .sidenav {
+        transform: translateX(17.125rem);
+    }
+    html[dir="rtl"] .g-sidenav-show.g-sidenav-pinned .sidenav {
+        transform: translateX(0);
+    }
+}
+@media (min-width: 768px) {
+    html[dir="rtl"] .text-md-start {
+        text-align: right !important;
+    }
+}
+
+/* ------------ others ---------------- */
+.navbar-vertical .navbar-brand-img, .navbar-vertical .navbar-brand > img {
+    max-width: 100%;
+    max-height: initial;
+}
