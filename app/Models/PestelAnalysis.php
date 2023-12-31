@@ -15,7 +15,7 @@ class PestelAnalysis extends Model
         "economic",
         "social",
         "technological",
-        "enviromental",
+        "environmental",
         "legal",
         "admin_id",
         "workspace_id"

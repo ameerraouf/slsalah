@@ -40,8 +40,8 @@ class EconomicPlanController extends Controller
             "location.required'" => 'حقل المناطق الجغرافية مطلوب',
         ]);
 
-        return $this->pestelAnalysis($request);
-        // return $this->swotAnalysis($request);
+        $this->swotAnalysis($request);
+        $this->pestelAnalysis($request);
     }
 
     private function pestelAnalysis($request)
@@ -63,7 +63,7 @@ class EconomicPlanController extends Controller
                 answer for question 7 : {$request->location} <br/>
 
                  <br />
-                make sure to include these factors and dont't leave any of them empty at all : political factors , economic factors , social factors ,technology factors . and enviromental factors and legal factors
+                include all the following factors and please make sure they are present in your answer : political factors , economic factors , social factors , technological factors . and enviromental factors and legal factors
         ";
         $workspace = Workspace::find(1);
         $settings_data = Setting::where('workspace_id', $workspace->id)->get();
@@ -117,7 +117,7 @@ class EconomicPlanController extends Controller
             $factors[$factorKey] = $descriptions;
         }
 
-        // return $factors;
+        // return $factors['Environmental Factors'];
         // write the swot analysis 
         $pestel_analysis = PestelAnalysis::create([
             "uuid" => Str::uuid(),
