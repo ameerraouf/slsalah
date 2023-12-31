@@ -39,10 +39,92 @@ class EconomicPlanController extends Controller
             "location.required'" => 'حقل المناطق الجغرافية مطلوب',
         ]);
 
-        return $this->swotAnalysis($request);
+        return $this->pestelAnalysis($request);
+        // return $this->swotAnalysis($request);
     }
 
+    private function pestelAnalysis($request)
+    {
+        $pestel_message = "I want to write a pestel analysis based on the answers of the following questions . <br />
+                question 1 : Choose an industry for your project or business <br/>
+                answer for question 1 : {$request->industry} <br/>
+                question 2 : Specify the size of your business/project. <br/>
+                answer for question 2 : {$request->business_size} <br/>
+                question 3 : Specify the primary target audience for your project/business. <br/>
+                answer for question 3 : {$request->audience} <br/>
+                question 4 : Specify the nature of your product/service. <br/>
+                answer for question 4 : {$request->product_nature} <br/>
+                question 5 : Choose the primary technological focus for your project/business. <br/>
+                answer for question 5 : {$request->tech_focus} <br/>
+                question 6 : Specify the primary market location for your project/business. <br/>
+                answer for question 6 : {$request->market_position} <br/>
+                question 7 : Choose the geographical regions in which your project/business operates. <br/>
+                answer for question 7 : {$request->location} <br/>
 
+                 <br />
+                make sure to include these factors : political factors , economic factors , social factors ,technology factors . and enviromental factors and legal factors
+        ";
+        $workspace = Workspace::find(1);
+        $settings_data = Setting::where('workspace_id', $workspace->id)->get();
+        $settings = [];
+        foreach ($settings_data as $setting) {
+            $settings[$setting->key] = $setting->value;
+        }
+        if (array_key_exists('api_keys', $settings)) {
+            $api_keys = $settings['api_keys'];
+        } else {
+            throw ValidationException::withMessages([
+                'api_keys' => 'does not exist',
+            ]);
+        }
+
+        // send to openai api 
+        $payload = [
+            'messages' => [
+                [
+                    'role' => 'system',
+                    'content' => 'You can start the conversation.',
+                ],
+                [
+                    'role' => 'user',
+                    'content' => $pestel_message,
+                ],
+            ],
+            "model" => 'gpt-3.5-turbo'
+        ];
+        $response = Http::withHeaders([
+            'Authorization' => "Bearer " .  json_decode($api_keys)[1],
+            'Content-Type' => 'application/json',
+        ])->post('https://api.openai.com/v1/chat/completions', $payload);
+        $responseData = json_decode($response, true);
+        $message = $responseData['choices'][0]['message']['content'];
+        $pestelText = trim($message);
+
+        // Initialize an empty array to store the factors
+        $factors = array();
+
+        // Extract factors using regular expressions
+        $pattern = '/([A-Za-z ]+ Factors):/m';
+        preg_match_all($pattern, $pestelText, $matches);
+
+        // Iterate through the matched factors
+        foreach ($matches[1] as $factor) {
+            $factorKey = trim($factor); // Remove leading/trailing whitespace
+            $factors[$factorKey] = array();
+        }
+        return $factors;
+        // write the swot analysis 
+        // $swot_analysis = SwotAnalysis::create([
+        //     "uuid" => Str::uuid(),
+        //     "workspace_id" => auth()->user()->workspace_id,
+        //     "admin_id" => 0,
+        //     "company_name" => $settings['company_name'],
+        //     "strengths" => json_encode($swot_data['strengths']),
+        //     "weaknesses" => json_encode($swot_data['weaknesses']),
+        //     "opportunities" => json_encode($swot_data['opportunities']),
+        //     "threats" => json_encode($swot_data['threats']),
+        // ]);
+    }
     private function swotAnalysis($request)
     {
         $swot_message = "I want to write a swot analysis based on the answers of the following questions . <br />
