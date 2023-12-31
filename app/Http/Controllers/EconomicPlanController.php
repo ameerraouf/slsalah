@@ -7,6 +7,7 @@ use App\Models\Workspace;
 use Illuminate\Support\Str;
 use App\Models\SwotAnalysis;
 use Illuminate\Http\Request;
+use App\Models\PestelAnalysis;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Validation\ValidationException;
@@ -116,18 +117,20 @@ class EconomicPlanController extends Controller
             $factors[$factorKey] = $descriptions;
         }
 
-        return $factors;
+        // return $factors;
         // write the swot analysis 
-        // $swot_analysis = SwotAnalysis::create([
-        //     "uuid" => Str::uuid(),
-        //     "workspace_id" => auth()->user()->workspace_id,
-        //     "admin_id" => 0,
-        //     "company_name" => $settings['company_name'],
-        //     "strengths" => json_encode($swot_data['strengths']),
-        //     "weaknesses" => json_encode($swot_data['weaknesses']),
-        //     "opportunities" => json_encode($swot_data['opportunities']),
-        //     "threats" => json_encode($swot_data['threats']),
-        // ]);
+        $pestel_analysis = PestelAnalysis::create([
+            "uuid" => Str::uuid(),
+            "workspace_id" => auth()->user()->workspace_id,
+            "admin_id" => 0,
+            "company_name" => $settings['company_name'],
+            "political" => json_encode($factors['Political Factors']) ?? [],
+            "economic" => json_encode($factors['Economic Factors']) ?? [],
+            "social" => json_encode($factors['Social Factors']) ?? [],
+            "technological" => json_encode($factors['Technological Factors']) ?? [],
+            "environmental" => json_encode($factors['Environmental Factors']) ?? [],
+            "legal" => json_encode($factors['Legal Factors']) ?? [],
+        ]);
     }
     private function swotAnalysis($request)
     {
