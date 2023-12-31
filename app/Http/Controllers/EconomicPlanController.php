@@ -100,18 +100,22 @@ class EconomicPlanController extends Controller
         $message = $responseData['choices'][0]['message']['content'];
         $pestelText = trim($message);
 
-        // Initialize an empty array to store the factors
+        // Initialize an empty array to store the factors and their descriptions
         $factors = array();
 
         // Extract factors using regular expressions
-        $pattern = '/([A-Za-z ]+ Factors):/m';
-        preg_match_all($pattern, $pestelText, $matches);
+        $pattern = '/([A-Za-z ]+ Factors):\s*\n((?:- .+\n)+)/';
+        preg_match_all($pattern, $pestelText, $matches, PREG_SET_ORDER);
 
-        // Iterate through the matched factors
-        foreach ($matches[1] as $factor) {
-            $factorKey = trim($factor); // Remove leading/trailing whitespace
-            $factors[$factorKey] = array();
+        // Iterate through the matched factors and their descriptions
+        foreach ($matches as $match) {
+            $factorKey = trim($match[1]); // Remove leading/trailing whitespace
+            $factorText = trim($match[2]); // Remove leading/trailing whitespace
+            $descriptions = explode("\n- ", $factorText);
+            array_shift($descriptions); // Remove empty first element
+            $factors[$factorKey] = $descriptions;
         }
+
         return $factors;
         // write the swot analysis 
         // $swot_analysis = SwotAnalysis::create([
