@@ -297,6 +297,11 @@ class AuthController extends Controller
             "first_name" => ["required"],
             "last_name" => ["required"],
             "password" => ["required"],
+            'account_type' => 'required|in:1,2',
+            'company_name' => 'required_if:account_type,1',
+            'count_startup_company' => 'required_if:account_type,2|integer',
+            'from' => 'required_if:account_type,2|integer',
+            'to' => 'required_if:account_type,2|integer',
         ]);
 
         if (!empty($super_settings['config_recaptcha_in_user_signup'])) {
@@ -333,6 +338,12 @@ class AuthController extends Controller
 
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
+
+        $user->account_type = $request->account_type;
+        $user->company_name = $request->company_name ?? null;
+        $user->count_startup_company = $request->count_startup_company??null;
+        $user->from = $request->from ?? 0;
+        $user->to = $request->to?? 0;
 
         $user->email = $request->input("email");
 

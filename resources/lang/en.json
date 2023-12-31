@@ -486,7 +486,7 @@
     "Phone Number:": "رقم الجوال:",
     "Email\/Username": "البريد الإلكتروني \/ اسم المستخدم",
     "Language": "اللغة",
-    "Upload photo": "تحميل الصورة",
+    "Upload photo": "شعار الشركة",
     "Timezone": "المنطقة الزمنية",
     "Time": "الوقت", 
     "isNotActive":"حجب",  
@@ -721,5 +721,15 @@
     "yearly" : "سنوي",
     "paypal" : "باي بال",
     "click pay" : "كليك باي",
-    "video_type" : "نوع الفيديو"
+    "video_type" : "نوع الفيديو",
+    "Account_type" : "نوع الحساب",
+    "select_account_type" : "اختار نوع الحساب",
+    "company_name" : "اسم الشركة",
+    "How many startups are in your portfolio?" : "كم عدد الشركات الناشئة فى محفظتك",
+    "Investment term": "المدى الاستماري",
+    "from" : "من",
+    "to" : "الى",
+    "work_field" : "مجال العمل",
+    "company_description" : "وصف الشركة"
+
 }

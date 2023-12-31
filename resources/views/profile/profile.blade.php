@@ -141,6 +141,35 @@
                             </div>
                         </div>
 
+
+
+
+                        {{-- start new attr--}}
+
+                        <div class="align-self-center">
+                            <div>
+                                <label for="company_name" class="form-label mt-3">{{__('company_name')}}</label>
+                                <input class="form-control" name="company_name" type="text" id="company_name" value="{{$user->company_name}}">
+                            </div>
+                        </div>
+
+                        <div class="align-self-center">
+                            <div>
+                                <label for="work_field" class="form-label mt-3">{{__('work_field')}}</label>
+                                <input class="form-control" name="work_field" type="text" id="cover_photo_file" value="{{$user->work_field}}">
+                            </div>
+                        </div>
+
+                        <div class="align-self-center">
+                            <div>
+                                <label for="company_description" class="form-label mt-3">{{__('company_description')}}</label>
+                                <input class="form-control" name="company_description" type="text" id="cover_photo_file" value="{{$user->company_description}}">
+                            </div>
+                        </div>
+                        {{-- end new attr--}}
+
+
+
                         <div class="mt-3">
                             <label for="timezone">{{__('Timezone')}}</label>
                             <select class="form-control select2" id="timezone" name="timezone">
@@ -160,6 +189,11 @@
                                 <input class="form-control" name="cover_photo" type="file" id="cover_photo_file">
                             </div>
                         </div>
+
+
+
+
+
                         @csrf
                         <button type="submit" class="btn btn-info btn-sm float-left mt-4 mb-0">
                             {{__('Update info')}}

@@ -37,6 +37,9 @@ class ProfileController extends BaseController
         $user->last_name = $request->last_name;
         $user->email = $request->email;
         $user->language = $request->language;
+        $user->company_name = $request->company_name ?? null;
+        $user->work_field = $request->work_field ?? null;
+        $user->company_description = $request->company_description ?? null;
         $path = null;
         if ($request->photo) {
             $path = $request->file("photo")->store("media", "uploads");
