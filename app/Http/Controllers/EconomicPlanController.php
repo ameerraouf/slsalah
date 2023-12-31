@@ -96,7 +96,7 @@ class EconomicPlanController extends Controller
         $responseData = json_decode($response, true);
         $message = $responseData['choices'][0]['message']['content'];
 
-        
+
         // Regular expression pattern to extract threats
         if (preg_match('/Threats:(.*?)(?=Strengths:|Weaknesses:|Opportunities:|$)/s', $message, $matches)) {
             $threatLines = explode(PHP_EOL, $matches[1]);
@@ -114,6 +114,64 @@ class EconomicPlanController extends Controller
         // Remove any empty elements
         $threats = array_filter($threats);
 
-        return $threats;
+        $swot_data['threats'] = $threats;
+
+        // Regular expression pattern to extract opportunities
+        if (preg_match('/Opportunities:(.*?)(?=Strengths:|Weaknesses:|Threats:|$)/s', $message, $matches)) {
+            $opportunitLines = explode(PHP_EOL, $matches[1]);
+            $opportunitLines = array_map('trim', $opportunitLines);
+            $opportunitLines = array_filter($opportunitLines);
+            $opportunities = array_values($opportunitLines);
+        }
+
+        // Output the extracted threats
+        foreach ($opportunities as $Opportunity) {
+            $opportunities = array_merge($opportunities, preg_split('/\R/', $Opportunity));
+        }
+        $opportunities = array_map('trim', $opportunities);
+        // Remove any empty elements
+        $opportunities = array_filter($opportunities);
+        $swot_data['opportunities'] = $opportunities;
+
+
+        // Regular expression pattern to extract strengths
+        if (preg_match('/Strengths:(.*?)(?=Opportunities:|Weaknesses:|Threats:|$)/s', $message, $matches)) {
+            $StrengthsLines = explode(PHP_EOL, $matches[1]);
+            $StrengthsLines = array_map('trim', $StrengthsLines);
+            $StrengthsLines = array_filter($StrengthsLines);
+            $strengths = array_values($StrengthsLines);
+        }
+
+        // Output the extracted threats
+        foreach ($strengths as $strength) {
+            $strengths = array_merge($strengths, preg_split('/\R/', $strength));
+        }
+        $strengths = array_map('trim', $strengths);
+
+        // Remove any empty elements
+        $strengths = array_filter($strengths);
+        $swot_data['strengths'] = $strengths;
+
+
+
+         // Regular expression pattern to extract weaknesses
+         if (preg_match('/Weaknesses:(.*?)(?=Opportunities:|Strengths:|Threats:|$)/s', $message, $matches)) {
+            $WeaknessesLines = explode(PHP_EOL, $matches[1]);
+            $WeaknessesLines = array_map('trim', $WeaknessesLines);
+            $WeaknessesLines = array_filter($WeaknessesLines);
+            $weaknesses = array_values($WeaknessesLines);
+        }
+
+        // Output the extracted threats
+        foreach ($weaknesses as $weaknesse) {
+            $weaknesses = array_merge($weaknesses, preg_split('/\R/', $weaknesse));
+        }
+        $weaknesses = array_map('trim', $weaknesses);
+
+        // Remove any empty elements
+        $weaknesses = array_filter($weaknesses);
+        return $weaknesses;
+        $swot_data['weaknesses'] = $weaknesses;
+        return $swot_data;
     }
 }
