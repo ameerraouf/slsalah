@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Setting;
 use App\Models\Workspace;
+use Illuminate\Support\Str;
+use App\Models\SwotAnalysis;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
@@ -66,7 +68,6 @@ class EconomicPlanController extends Controller
         foreach ($settings_data as $setting) {
             $settings[$setting->key] = $setting->value;
         }
-
         if (array_key_exists('api_keys', $settings)) {
             $api_keys = $settings['api_keys'];
         } else {
@@ -154,8 +155,8 @@ class EconomicPlanController extends Controller
 
 
 
-         // Regular expression pattern to extract weaknesses
-         if (preg_match('/Weaknesses:(.*?)(?=Opportunities:|Strengths:|Threats:|$)/s', $message, $matches)) {
+        // Regular expression pattern to extract weaknesses
+        if (preg_match('/Weaknesses:(.*?)(?=Opportunities:|Strengths:|Threats:|$)/s', $message, $matches)) {
             $WeaknessesLines = explode(PHP_EOL, $matches[1]);
             $WeaknessesLines = array_map('trim', $WeaknessesLines);
             $WeaknessesLines = array_filter($WeaknessesLines);
@@ -170,8 +171,19 @@ class EconomicPlanController extends Controller
 
         // Remove any empty elements
         $weaknesses = array_filter($weaknesses);
-        return $weaknesses;
         $swot_data['weaknesses'] = $weaknesses;
-        return $swot_data;
+
+
+        // write the swot analysis 
+        $swot_analysis = SwotAnalysis::create([
+            "uuid" => Str::uuid(),
+            "workspace_id" => auth()->user()->workspace_id,
+            "admin_id" => 0,
+            "company_name" => $settings['company_name'],
+            "strengths" => json_encode($swot_data['strengths']),
+            "weaknesses" => json_encode($swot_data['weaknesses']),
+            "opportunities" => json_encode($swot_data['opportunities']),
+            "threats" => json_encode($swot_data['threats']),
+        ]);
     }
 }
