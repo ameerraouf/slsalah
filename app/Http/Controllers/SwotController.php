@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\SwotAnalysis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+
 class SwotController extends BaseController
 {
     public function writeSwot(Request $request)
@@ -98,7 +99,6 @@ class SwotController extends BaseController
                 ->where("id", $request->id)
                 ->first();
         }
-
         return \view("swot.view-swot", [
             "selected_navigation" => "swot",
             "model" => $model,
