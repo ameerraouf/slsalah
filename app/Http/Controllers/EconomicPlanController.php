@@ -41,9 +41,9 @@ class EconomicPlanController extends Controller
             "location.required'" => 'حقل المناطق الجغرافية مطلوب',
         ]);
 
-        // $this->porterAnalysis($request);
+        return $this->porterAnalysis($request);
         // $this->swotAnalysis($request);
-        return $this->pestelAnalysis($request);
+        // $this->pestelAnalysis($request);
     }
 
     private function pestelAnalysis($request)
@@ -140,7 +140,6 @@ class EconomicPlanController extends Controller
                 $final_factors['Legal Factors'] = $value;
             }
         }
-        return $final_factors;
         // write the swot analysis 
         $pestel_analysis = PestelAnalysis::create([
             "uuid" => Str::uuid(),
@@ -317,7 +316,7 @@ class EconomicPlanController extends Controller
                 question 7 : Choose the geographical regions in which your project/business operates. <br/>
                 answer for question 7 : {$request->location} <br/>
 
-                include the following words as the forces in the answer and please make sure that they are present in the text in the same style and syntax <br />
+                include the following words as the forces in the answer and please make sure that they are present in the text in the same style and syntax and make sure each force is on a new line <br />
                 entrants , rivals , suppliers , customers , substitute <br />
         ";
         $workspace = Workspace::find(1);
@@ -375,9 +374,9 @@ class EconomicPlanController extends Controller
 
         // Create an array with force names as keys and descriptions as values
         $forcesArray = array_combine($forces, $descriptions);
-
+        // return $forcesArray;
         foreach ($forcesArray as $key => $value) {
-            if (str_contains($key, 'Rivals')) {
+            if (str_contains($key, 'Rivals') || str_contains($key, 'Rivalary') || str_contains($key, 'Rivalry')) {
                 $final_forces['Rivals'] = $value;
             }
             if (str_contains($key, 'Entrants')) {
@@ -394,7 +393,6 @@ class EconomicPlanController extends Controller
             }
         }
         // return $final_forces;
-        // return $forcesArray;
         // write the swot analysis 
         $porter_analysis = PorterModel::create([
             "uuid" => Str::uuid(),
@@ -407,5 +405,6 @@ class EconomicPlanController extends Controller
             "customers" => ($final_forces['Customers']) ?? null,
             "substitute" => ($final_forces['Substitute']) ?? null,
         ]);
+        return $message;
     }
 }
