@@ -296,7 +296,7 @@ class EconomicPlanController extends Controller
                 question 7 : Choose the geographical regions in which your project/business operates. <br/>
                 answer for question 7 : {$request->location} <br/>
 
-                the answer must contain the following forces : <br />
+                the answer must contain the following forces , please make sure they are present in a clear way : <br />
                 entrants , rivals , suppliers , customers , substitute <br />
         ";
         $workspace = Workspace::find(1);
@@ -354,18 +354,37 @@ class EconomicPlanController extends Controller
 
         // Create an array with force names as keys and descriptions as values
         $forcesArray = array_combine($forces, $descriptions);
-        return $forcesArray;
+
+        foreach ($forcesArray as $key => $value) {
+            if (str_contains($key, 'Rivals')) {
+                $final_forces['Rivals'] = $value;
+            }
+            if (str_contains($key, 'Entrants')) {
+                $final_forces['Entrants'] = $value;
+            }
+            if (str_contains($key, 'Suppliers')) {
+                $final_forces['Suppliers'] = $value;
+            }
+            if (str_contains($key, 'Customers')) {
+                $final_forces['Customers'] = $value;
+            }
+            if (str_contains($key, 'Substitute')) {
+                $final_forces['Substitute'] = $value;
+            }
+        }
+        // return $final_forces;
+        // return $forcesArray;
         // write the swot analysis 
         $porter_analysis = PorterModel::create([
             "uuid" => Str::uuid(),
             "workspace_id" => auth()->user()->workspace_id,
             "admin_id" => 0,
             "company_name" => $settings['company_name'],
-            "rivals " => json_encode($forcesArray['Rivals']) ?? null,
-            "entrants" => json_encode($forcesArray['Entrants']) ?? null,
-            "suppliers" => json_encode($forcesArray['Suppliers']) ?? null,
-            "customers" => json_encode($forcesArray['Customers']) ?? null,
-            "substitute" => json_encode($forcesArray['Substitute']) ?? null,
+            "rivals" => ($final_forces['Rivals']) ?? null,
+            "entrants" => ($final_forces['Entrants']) ?? null,
+            "suppliers" => ($final_forces['Suppliers']) ?? null,
+            "customers" => ($final_forces['Customers']) ?? null,
+            "substitute" => ($final_forces['Substitute']) ?? null,
         ]);
     }
 }
