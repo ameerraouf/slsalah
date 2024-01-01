@@ -73,6 +73,8 @@
     <div class="main-page-content">
         <form id="regForm" action="">
             <div class="alert alert-danger text-white d-none" id="error-alert">{{ __('All Fields Are Required') }}</div>
+            <div class="alert alert-success text-white d-none" id="success-alert">تم إنشاء تحليل عن طريق الذكاء الاصطناعي و
+                يمكنك مشاهدة كل تحليل بالمكان المخصص له</div>
             <!-- One "tab" for each step in the form: -->
             <div class="tab mb-3">
                 {{ __('industry') }}
@@ -320,6 +322,10 @@
         // submitting the form 
         $('body').on('click', '.submit-btn', function(e) {
             $('#error-alert').addClass('d-none');
+            $(this).prop('disabled', true)
+            $(this).css({
+                "opacity": "0.5"
+            })
             let data = new FormData(regForm);
             $.ajax({
                 method: "POST",
@@ -331,10 +337,13 @@
                     'X-CSRF-Token': "{{ csrf_token() }}"
                 },
                 success: function(response) {
-                    alert('successfull');
+                    $('#success-alert').removeClass('d-none');
+                    $('.submit-btn').css({"opacity": "1"})
+                    $('.submit-btn').prop('disabled', false)
                 },
                 error: function(response) {
                     $('#error-alert').removeClass('d-none');
+                    $(this).prop('disabled', false)
                 }
             })
         });
