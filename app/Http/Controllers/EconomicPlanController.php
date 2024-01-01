@@ -41,9 +41,9 @@ class EconomicPlanController extends Controller
             "location.required'" => 'حقل المناطق الجغرافية مطلوب',
         ]);
 
-        $this->porterAnalysis($request);
-        $this->swotAnalysis($request);
-        $this->pestelAnalysis($request);
+        // $this->porterAnalysis($request);
+        // $this->swotAnalysis($request);
+        return $this->pestelAnalysis($request);
     }
 
     private function pestelAnalysis($request)
@@ -65,7 +65,7 @@ class EconomicPlanController extends Controller
                 answer for question 7 : {$request->location} <br/>
 
                  <br />
-                The answer must have each factor of the following on a new line but with same representation and style <br />
+                The answer must have each factor of the following on a new line but with same representation and style<br />
                 political factors , economic factors , social factors , technological factors . and enviromental factors and legal factors
         ";
         $workspace = Workspace::find(1);
@@ -108,7 +108,7 @@ class EconomicPlanController extends Controller
         $factors = array();
 
         // Extract factors using regular expressions
-        $pattern = '/([A-Za-z ]+ Factors):\s*\n((?:- .+\n)+)/';
+        $pattern = '/([A-Za-z ]+ factors):\s*\n((?:- .+\n)+)/';
         preg_match_all($pattern, $pestelText, $matches, PREG_SET_ORDER);
 
         // Iterate through the matched factors and their descriptions
@@ -119,27 +119,28 @@ class EconomicPlanController extends Controller
             array_shift($descriptions); // Remove empty first element
             $factors[$factorKey] = $descriptions;
         }
+        $final_factors = [];
         foreach ($factors as $key => $value) {
-            if (str_contains($key, 'Political Factors')) {
+            if (str_contains($key, 'Political')) {
                 $final_factors['Political Factors'] = $value;
             }
-            if (str_contains($key, 'Economic Factors')) {
+            if (str_contains($key, 'Economic')) {
                 $final_factors['Economic Factors'] = $value;
             }
-            if (str_contains($key, 'Social Factors')) {
+            if (str_contains($key, 'Social')) {
                 $final_factors['Social Factors'] = $value;
             }
-            if (str_contains($key, 'Technological Factors')) {
+            if (str_contains($key, 'Technological')) {
                 $final_factors['Technological Factors'] = $value;
             }
-            if (str_contains($key, 'Environmental Factors')) {
+            if (str_contains($key, 'Environmental')) {
                 $final_factors['Environmental Factors'] = $value;
             }
-            if (str_contains($key, 'Legal Factors')) {
+            if (str_contains($key, 'Legal')) {
                 $final_factors['Legal Factors'] = $value;
             }
         }
-        // return $factors['Environmental Factors'];
+        return $final_factors;
         // write the swot analysis 
         $pestel_analysis = PestelAnalysis::create([
             "uuid" => Str::uuid(),
