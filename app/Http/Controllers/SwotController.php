@@ -99,6 +99,7 @@ class SwotController extends BaseController
                 ->where("id", $request->id)
                 ->first();
         }
+
         return \view("swot.view-swot", [
             "selected_navigation" => "swot",
             "model" => $model,
