@@ -322,6 +322,7 @@
         // submitting the form 
         $('body').on('click', '.submit-btn', function(e) {
             $('#error-alert').addClass('d-none');
+            $('#success-alert').addClass('d-none');
             $(this).prop('disabled', true)
             $(this).css({
                 "opacity": "0.5"
@@ -343,7 +344,8 @@
                 },
                 error: function(response) {
                     $('#error-alert').removeClass('d-none');
-                    $(this).prop('disabled', false)
+                    $('.submit-btn').prop('disabled', false)
+                    $('.submit-btn').css({"opacity": "1"})
                 }
             })
         });

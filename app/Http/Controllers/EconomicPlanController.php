@@ -65,7 +65,8 @@ class EconomicPlanController extends Controller
                 answer for question 7 : {$request->location} <br/>
 
                  <br />
-                include all the following factors and please make sure they are present in your answer : political factors , economic factors , social factors , technological factors . and enviromental factors and legal factors
+                The answer must have each factor of the following on a new line but with same representation and style <br />
+                political factors , economic factors , social factors , technological factors . and enviromental factors and legal factors
         ";
         $workspace = Workspace::find(1);
         $settings_data = Setting::where('workspace_id', $workspace->id)->get();
@@ -118,7 +119,26 @@ class EconomicPlanController extends Controller
             array_shift($descriptions); // Remove empty first element
             $factors[$factorKey] = $descriptions;
         }
-
+        foreach ($factors as $key => $value) {
+            if (str_contains($key, 'Political Factors')) {
+                $final_factors['Political Factors'] = $value;
+            }
+            if (str_contains($key, 'Economic Factors')) {
+                $final_factors['Economic Factors'] = $value;
+            }
+            if (str_contains($key, 'Social Factors')) {
+                $final_factors['Social Factors'] = $value;
+            }
+            if (str_contains($key, 'Technological Factors')) {
+                $final_factors['Technological Factors'] = $value;
+            }
+            if (str_contains($key, 'Environmental Factors')) {
+                $final_factors['Environmental Factors'] = $value;
+            }
+            if (str_contains($key, 'Legal Factors')) {
+                $final_factors['Legal Factors'] = $value;
+            }
+        }
         // return $factors['Environmental Factors'];
         // write the swot analysis 
         $pestel_analysis = PestelAnalysis::create([
@@ -126,12 +146,12 @@ class EconomicPlanController extends Controller
             "workspace_id" => auth()->user()->workspace_id,
             "admin_id" => 0,
             "company_name" => $settings['company_name'],
-            "political" => json_encode($factors['Political Factors']) ?? [],
-            "economic" => json_encode($factors['Economic Factors']) ?? [],
-            "social" => json_encode($factors['Social Factors']) ?? [],
-            "technological" => json_encode($factors['Technological Factors']) ?? [],
-            "environmental" => json_encode($factors['Environmental Factors']) ?? [],
-            "legal" => json_encode($factors['Legal Factors']) ?? [],
+            "political" => json_encode($final_factors['Political Factors']) ?? [],
+            "economic" => json_encode($final_factors['Economic Factors']) ?? [],
+            "social" => json_encode($final_factors['Social Factors']) ?? [],
+            "technological" => json_encode($final_factors['Technological Factors']) ?? [],
+            "environmental" => json_encode($final_factors['Environmental Factors']) ?? [],
+            "legal" => json_encode($final_factors['Legal Factors']) ?? [],
         ]);
     }
     private function swotAnalysis($request)
@@ -296,7 +316,7 @@ class EconomicPlanController extends Controller
                 question 7 : Choose the geographical regions in which your project/business operates. <br/>
                 answer for question 7 : {$request->location} <br/>
 
-                the answer must contain the following forces , please make sure they are present in a clear way : <br />
+                include the following words as the forces in the answer and please make sure that they are present in the text in the same style and syntax <br />
                 entrants , rivals , suppliers , customers , substitute <br />
         ";
         $workspace = Workspace::find(1);
