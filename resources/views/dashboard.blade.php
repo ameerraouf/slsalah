@@ -73,7 +73,7 @@
             <div class=" ">
                 <div class="">
                     <div class="row">
-                        <div class="col-md-6 mb-4">
+                        <div class="col-md-6 mb-4" onclick="window.location.href='/projects'" style="cursor: pointer;">
                             <div class="card">
                                 <div class="card-body p-3">
                                     <div class="row">
@@ -117,7 +117,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6 mb-4">
+                        <div class="col-md-6 mb-4" onclick="window.location.href='/notes'" style="cursor: pointer;">
                             <div class="card bg-info">
                                 <div class="card-body p-3">
                                     <div class="row">
@@ -154,7 +154,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6" onclick="window.location.href='/business-models'" style="cursor: pointer;">
                             <div class="card bg-gradient-dark">
                                 <div class="card-body p-3">
                                     <div class="row">
@@ -185,7 +185,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-6 mb-xl-0 mb-4">
+                        <div class="col-md-6 col-sm-6 mb-xl-0 mb-4" onclick="window.location.href='/staff'" style="cursor: pointer;">
                             <div class="card">
                                 <div class="card-body  p-3">
                                     <div class="row">
