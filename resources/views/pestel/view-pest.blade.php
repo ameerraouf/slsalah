@@ -110,7 +110,6 @@
                             @if (!empty($model))
                             {!!clean(json_decode($model->legal))[0]!!}
                             @endif
-
                         </p>
                     </div>
                 </div>
