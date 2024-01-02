@@ -28,6 +28,7 @@ use App\Http\Controllers\MarketingController;
 use App\Http\Controllers\SubscribeController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\EconomicPlanController;
+use App\Http\Controllers\FinancialEvaluationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -377,6 +378,10 @@ Route::prefix("admin")
     //economic plan routes 
     Route::get('/economic-plan' , [EconomicPlanController::class , 'index'])->name('economiccPlan.index');
     Route::post('/economic-plan-save' , [EconomicPlanController::class , 'create'])->name('economiccPlan.create');
+
+    //finanical evaluation routes
+    Route::get('/financial-evaluation' , [FinancialEvaluationController::class , 'index'])->name('financial_evaluation.index');
+    Route::post('/economic-plan-save' , [FinancialEvaluationController::class , 'create'])->name('economiccPlan.create');
 
 
 
