@@ -65,7 +65,7 @@
     <div class=" row">
         <div class="col">
             <h5 class="mb-2 text-secondary fw-bolder">
-                {{ __('Financial Evaluation') }}
+                {{ __('Finanical Evaluation') }}
             </h5>
         </div>
     </div>
@@ -78,41 +78,121 @@
             <!-- One "tab" for each step in the form: -->
             <div class="tab mb-3">
                 {{ __('Company Buisness') }}
-                <div class="">
-                    <input type="radio"name="industry" value="technology" style="width: auto;">
-                    <label>{{ __('technology') }}</label><br>
-                </div>
-                <div class="">
-                    <input type="radio"name="industry" value="health care" style="width: auto;">
-                    <label>{{ __('health') }}</label><br>
-                </div>
-                <div class="">
-                    <input type="radio"name="industry" value="retail" style="width: auto;">
-                    <label>{{ __('retail') }}</label><br>
-                </div>
-                <div class="">
-                    <input type="radio"name="industry" value="finance" style="width: auto;">
-                    <label>{{ __('finance') }}</label><br>
+                <div class="row">
+                    <div class="col-4 p-0">
+                        <div class="">
+                            <input type="radio"name="industry" value="2.4" style="width: auto;">
+                            <label>{{ __('Martech') }}</label><br>
+                        </div>
+                        <div class="">
+                            <input type="radio"name="industry" value="6.4" style="width: auto;">
+                            <label>{{ __('FinTechNew') }}</label><br>
+                        </div>
+                        <div class="">
+                            <input type="radio"name="industry" value="3" style="width: auto;">
+                            <label>{{ __('EdTech') }}</label><br>
+                        </div>
+                        <div class="">
+                            <input type="radio"name="industry" value="3.3" style="width: auto;">
+                            <label>{{ __('RegTech') }}</label><br>
+                        </div>
+                        <div class="">
+                            <input type="radio"name="industry" value="3.8" style="width: auto;">
+                            <label>{{ __('ERP Software') }}</label><br>
+                        </div>
+                        <div class="">
+                            <input type="radio"name="industry" value="3.7" style="width: auto;">
+                            <label>{{ __('HRM Software') }}</label><br>
+                        </div>
+                        <div class="">
+                            <input type="radio"name="industry" value="3.3" style="width: auto;">
+                            <label>{{ __('LMS Software') }}</label><br>
+                        </div>
+                        <div class="">
+                            <input type="radio"name="industry" value="2.6" style="width: auto;">
+                            <label>{{ __('General SaaS') }}</label><br>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="">
+                            <input type="radio"name="industry" value="0.2" style="width: auto;">
+                            <label>{{ __('AgriTech') }}</label><br>
+                        </div>
+                        <div class="">
+                            <input type="radio"name="industry" value="1" style="width: auto;">
+                            <label>{{ __('InsurTech') }}</label><br>
+                        </div>
+                        <div class="">
+                            <input type="radio"name="industry" value="4" style="width: auto;">
+                            <label>{{ __('PropTech') }}</label><br>
+                        </div>
+                        <div class="">
+                            <input type="radio"name="industry" value="1.7" style="width: auto;">
+                            <label>{{ __('InfraTech') }}</label><br>
+                        </div>
+                        <div class="">
+                            <input type="radio"name="industry" value="2" style="width: auto;">
+                            <label>{{ __('DataTech') }}</label><br>
+                        </div>
+                        <div class="">
+                            <input type="radio"name="industry" value="2.6" style="width: auto;">
+                            <label>{{ __('BI & Analytics') }}</label><br>
+                        </div>
+                        <div class="">
+                            <input type="radio"name="industry" value="1.6" style="width: auto;">
+                            <label>{{ __('PM Software') }}</label><br>
+                        </div>
+                        <div class="">
+                            <input type="radio"name="industry" value="1.7" style="width: auto;">
+                            <label>{{ __('CRM Software') }}</label><br>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="">
+                            <input type="radio"name="industry" value="1.1" style="width: auto;">
+                            <label>{{ __('CleanTech') }}</label><br>
+                        </div>
+                        <div class="">
+                            <input type="radio"name="industry" value="-0.2" style="width: auto;">
+                            <label>{{ __('GovTech') }}</label><br>
+                        </div>
+                        <div class="">
+                            <input type="radio"name="industry" value="0.3" style="width: auto;">
+                            <label>{{ __('AdTech') }}</label><br>
+                        </div>
+                        <div class="">
+                            <input type="radio"name="industry" value="3.6" style="width: auto;">
+                            <label>{{ __('HealthTech') }}</label><br>
+                        </div>
+                        <div class="">
+                            <input type="radio"name="industry" value="2.8" style="width: auto;">
+                            <label>{{ __('LegalTech') }}</label><br>
+                        </div>
+                        <div class="">
+                            <input type="radio"name="industry" value="2.1" style="width: auto;">
+                            <label>{{ __('CommTech') }}</label><br>
+                        </div>
+                        <div class="">
+                            <input type="radio"name="industry" value="1.2" style="width: auto;">
+                            <label>{{ __('E-Commerce') }}</label><br>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="tab mb-3">
                 {{ __('Customers Number') }}
                 <div class="">
-                    <input type="radio"name="business_size" value="micro" style="width: auto;">
-                    <label>{{ __('micro') }}</label><br>
+                    <input type="radio"name="business_size" value="0-1000" style="width: auto;">
+                    <label>0 - 1.000</label><br>
                 </div>
                 <div class="">
-                    <input type="radio"name="business_size" value="small" style="width: auto;">
-                    <label>{{ __('small') }}</label><br>
+                    <input type="radio"name="business_size" value="1000 - 10000" style="width: auto;">
+                    <label>1.000 - 10.000</label><br>
                 </div>
                 <div class="">
-                    <input type="radio"name="business_size" value="medium" style="width: auto;">
-                    <label>{{ __('medium') }}</label><br>
-                </div>
-                <div class="">
-                    <input type="radio"name="business_size" value="large" style="width: auto;">
-                    <label>{{ __('large') }}</label><br>
+                    <input type="radio"name="business_size" value="10000" style="width: auto;">
+                    <label>أكثر من 10.000</label><br>
                 </div>
             </div>
 
@@ -139,102 +219,125 @@
             <div class="tab mb-3">
                 {{ __('Last Year Growth') }}
                 <div class="">
-                    <input type="radio" name="product_nature" value="phyiscal products" style="width: auto;">
-                    <label>{{ __('Physical products') }}</label><br>
+                    <input type="radio" name="product_nature" value="0 - 10%" style="width: auto;">
+                    <label>0 - 10%</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="product_nature" value="digital products" style="width: auto;">
-                    <label>{{ __('Digital Products') }}</label><br>
+                    <input type="radio" name="product_nature" value="10 - 20%" style="width: auto;">
+                    <label>10 - 20%</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="product_nature" value="services" style="width: auto;">
-                    <label>{{ __('Services') }}</label><br>
+                    <input type="radio" name="product_nature" value="20 - 40%" style="width: auto;">
+                    <label>20 - 40%</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="product_nature" value="phyiscal and digital products and services"
+                    <input type="radio" name="product_nature" value="40 - 60%"
                         style="width: auto;">
-                    <label>{{ __('all') }}</label><br>
+                    <label>40 - 50%</label><br>
+                </div>
+                <div class="">
+                    <input type="radio" name="product_nature" value="60 - 100%"
+                        style="width: auto;">
+                    <label>60 - 100%</label><br>
+                </div>
+                <div class="">
+                    <input type="radio" name="product_nature" value="100"
+                        style="width: auto;">
+                    <label>أكثر من 100%</label><br>
                 </div>
             </div>
 
             <div class="tab mb-3">
                 {{ __('Investements Till Now') }}
                 <div class="">
-                    <input type="radio" name="tech_focus" value="Artifical Intelligence" style="width: auto;">
-                    <label>{{ __('Ai') }}</label><br>
+                    <input type="radio" name="market_position" value="0 - 500.000" style="width: auto;">
+                    <label>من 0 الى 500 ألف ريال</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="tech_focus" value="Renewable Energy" style="width: auto;">
-                    <label>{{ __('Renewable Energy') }}</label><br>
+                    <input type="radio" name="market_position" value="500.000 - 1.000.000" style="width: auto;">
+                    <label>من 500 ألف ريال - 1 مليون ريال</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="tech_focus" value="Online Trading" style="width: auto;">
-                    <label>{{ __('Online Trading') }}</label><br>
+                    <input type="radio" name="market_position" value="1.000.000 - 10.000.000" style="width: auto;">
+                    <label>من 1 مليون ريال - 10 مليون ريال</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="tech_focus" value="FinTech" style="width: auto;">
-                    <label>{{ __('FinTech') }}</label><br>
+                    <input type="radio" name="market_position" value="10.000.000" style="width: auto;">
+                    <label>أكثر من 10 مليون ريال</label><br>
                 </div>
             </div>
 
 
             <div class="tab mb-3">
                 {{ __('Average Experience') }}
+                
                 <div class="">
-                    <input type="radio" name="market_position" value="lowers the cost" style="width: auto;">
-                    <label>{{ __('Lowering The Cost') }}</label><br>
+                    <input type="radio" name="tech_focus" value="none" style="width: auto;">
+                    <label>لا يوجد خبرة</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="market_position" value="special" style="width: auto;">
-                    <label>{{ __('Special') }}</label><br>
+                    <input type="radio" name="tech_focus" value="1 - 3" style="width: auto;">
+                    <label>1 ل 3</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="market_position" value="spcialized markers" style="width: auto;">
-                    <label>{{ __('Special Market') }}</label><br>
+                    <input type="radio" name="tech_focus" value="3 - 5" style="width: auto;">
+                    <label>3 ل 5</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="market_position" value="all markets" style="width: auto;">
-                    <label>{{ __('all') }}</label><br>
+                    <input type="radio" name="tech_focus" value="5 - 10" style="width: auto;">
+                    <label>5 ل 10</label><br>
+                </div>
+                <div class="">
+                    <input type="radio" name="tech_focus" value="10" style="width: auto;">
+                    <label>أكثر من 10</label><br>
                 </div>
             </div>
 
             <div class="tab mb-3">
                 {{ __('Number Of Rivals') }}
                 <div class="">
-                    <input type="radio" name="location" value="Modern Citites" style="width: auto;">
-                    <label>{{ __('Modern') }}</label><br>
+                    <input type="radio" name="location" value="dont know" style="width: auto;">
+                    <label>لا أعرف</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="location" value="Suburbs" style="width: auto;">
-                    <label>{{ __('Suberns') }}</label><br>
+                    <input type="radio" name="location" value="1 -3" style="width: auto;">
+                    <label>1 ل 3</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="location" value="country side" style="width: auto;">
-                    <label>{{ __('Country Side') }}</label><br>
+                    <input type="radio" name="location" value="3 - 5" style="width: auto;">
+                    <label>3 ل 5</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="location" value="global" style="width: auto;">
-                    <label>{{ __('Global') }}</label><br>
+                    <input type="radio" name="location" value="5 - 10" style="width: auto;">
+                    <label>5 ل 10</label><br>
+                </div>
+                <div class="">
+                    <input type="radio" name="location" value="10" style="width: auto;">
+                    <label>10+</label><br>
                 </div>
             </div>
 
             <div class="tab mb-3">
                 {{ __('Targeted Market') }}
                 <div class="">
-                    <input type="radio" name="location" value="Modern Citites" style="width: auto;">
-                    <label>{{ __('Modern') }}</label><br>
+                    <input type="radio" name="location" value="1" style="width: auto;">
+                    <label>أقل من 1 مليار ريال </label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="location" value="Suburbs" style="width: auto;">
-                    <label>{{ __('Suberns') }}</label><br>
+                    <input type="radio" name="location" value="1 - 3" style="width: auto;">
+                    <label>1 ل 3 مليار ريال</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="location" value="country side" style="width: auto;">
-                    <label>{{ __('Country Side') }}</label><br>
+                    <input type="radio" name="location" value="3 - 5" style="width: auto;">
+                    <label>3 ل 5 مليار ريال</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="location" value="global" style="width: auto;">
-                    <label>{{ __('Global') }}</label><br>
+                    <input type="radio" name="location" value="5 - 10" style="width: auto;">
+                    <label>5 ل 10 مليار ريال </label><br>
+                </div>
+                <div class="">
+                    <input type="radio" name="location" value="10" style="width: auto;">
+                    <label>أكثر من 10 مليار ريال</label><br>
                 </div>
             </div>
 
@@ -342,34 +445,33 @@
 
 
         // submitting the form 
-        // $('body').on('click', '.submit-btn', function(e) {
-        //     $('#error-alert').addClass('d-none');
-        //     $('#success-alert').addClass('d-none');
-        //     $(this).prop('disabled', true)
-        //     $(this).css({
-        //         "opacity": "0.5"
-        //     })
-        //     let data = new FormData(regForm);
-        //     $.ajax({
-        //         method: "POST",
-        //         url: "{{ route('economiccPlan.create') }}",
-        //         data: data,
-        //         processData: false,
-        //         contentType: false,
-        //         headers: {
-        //             'X-CSRF-Token': "{{ csrf_token() }}"
-        //         },
-        //         success: function(response) {
-        //             $('#success-alert').removeClass('d-none');
-        //             $('.submit-btn').css({"opacity": "1"})
-        //             $('.submit-btn').prop('disabled', false)
-        //         },
-        //         error: function(response) {
-        //             $('#error-alert').removeClass('d-none');
-        //             $('.submit-btn').prop('disabled', false)
-        //             $('.submit-btn').css({"opacity": "1"})
-        //         }
-        //     })
-        // });
+        $('body').on('click', '.submit-btn', function(e) {
+            
+            $('#error-alert').addClass('d-none');
+            $(this).prop('disabled', true)
+            $(this).css({
+                "opacity": "0.5"
+            })
+            let data = new FormData(regForm);
+            $.ajax({
+                method: "POST",
+                url: "{{ route('economiccPlan.create') }}",
+                data: data,
+                processData: false,
+                contentType: false,
+                headers: {
+                    'X-CSRF-Token': "{{ csrf_token() }}"
+                },
+                success: function(response) {
+                    $('.submit-btn').css({"opacity": "1"})
+                    $('.submit-btn').prop('disabled', false)
+                },
+                error: function(response) {
+                    $('#error-alert').removeClass('d-none');
+                    $('.submit-btn').prop('disabled', false)
+                    $('.submit-btn').css({"opacity": "1"})
+                }
+            })
+        });
     </script>
 @endsection
