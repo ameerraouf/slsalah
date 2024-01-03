@@ -81,99 +81,99 @@
                 <div class="row">
                     <div class="col-4 p-0">
                         <div class="">
-                            <input type="radio"name="industry" value="2.4" style="width: auto;">
+                            <input type="radio"name="industry" value="Martech" style="width: auto;">
                             <label>{{ __('Martech') }}</label><br>
                         </div>
                         <div class="">
-                            <input type="radio"name="industry" value="6.4" style="width: auto;">
+                            <input type="radio"name="industry" value="FinTech" style="width: auto;">
                             <label>{{ __('FinTechNew') }}</label><br>
                         </div>
                         <div class="">
-                            <input type="radio"name="industry" value="3" style="width: auto;">
+                            <input type="radio"name="industry" value="EdTech" style="width: auto;">
                             <label>{{ __('EdTech') }}</label><br>
                         </div>
                         <div class="">
-                            <input type="radio"name="industry" value="3.3" style="width: auto;">
+                            <input type="radio"name="industry" value="RegTech" style="width: auto;">
                             <label>{{ __('RegTech') }}</label><br>
                         </div>
                         <div class="">
-                            <input type="radio"name="industry" value="3.8" style="width: auto;">
+                            <input type="radio"name="industry" value="ERP Software" style="width: auto;">
                             <label>{{ __('ERP Software') }}</label><br>
                         </div>
                         <div class="">
-                            <input type="radio"name="industry" value="3.7" style="width: auto;">
+                            <input type="radio"name="industry" value="HRM Software" style="width: auto;">
                             <label>{{ __('HRM Software') }}</label><br>
                         </div>
                         <div class="">
-                            <input type="radio"name="industry" value="3.3" style="width: auto;">
+                            <input type="radio"name="industry" value="LMS Software" style="width: auto;">
                             <label>{{ __('LMS Software') }}</label><br>
                         </div>
                         <div class="">
-                            <input type="radio"name="industry" value="2.6" style="width: auto;">
+                            <input type="radio"name="industry" value="General SaaS" style="width: auto;">
                             <label>{{ __('General SaaS') }}</label><br>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="">
-                            <input type="radio"name="industry" value="0.2" style="width: auto;">
+                            <input type="radio"name="industry" value="AgriTech" style="width: auto;">
                             <label>{{ __('AgriTech') }}</label><br>
                         </div>
                         <div class="">
-                            <input type="radio"name="industry" value="1" style="width: auto;">
+                            <input type="radio"name="industry" value="InsurTech" style="width: auto;">
                             <label>{{ __('InsurTech') }}</label><br>
                         </div>
                         <div class="">
-                            <input type="radio"name="industry" value="4" style="width: auto;">
+                            <input type="radio"name="industry" value="PropTech" style="width: auto;">
                             <label>{{ __('PropTech') }}</label><br>
                         </div>
                         <div class="">
-                            <input type="radio"name="industry" value="1.7" style="width: auto;">
+                            <input type="radio"name="industry" value="InfraTech" style="width: auto;">
                             <label>{{ __('InfraTech') }}</label><br>
                         </div>
                         <div class="">
-                            <input type="radio"name="industry" value="2" style="width: auto;">
+                            <input type="radio"name="industry" value="DataTech" style="width: auto;">
                             <label>{{ __('DataTech') }}</label><br>
                         </div>
                         <div class="">
-                            <input type="radio"name="industry" value="2.6" style="width: auto;">
+                            <input type="radio"name="industry" value="BI & Analytics" style="width: auto;">
                             <label>{{ __('BI & Analytics') }}</label><br>
                         </div>
                         <div class="">
-                            <input type="radio"name="industry" value="1.6" style="width: auto;">
+                            <input type="radio"name="industry" value="PM Software" style="width: auto;">
                             <label>{{ __('PM Software') }}</label><br>
                         </div>
                         <div class="">
-                            <input type="radio"name="industry" value="1.7" style="width: auto;">
+                            <input type="radio"name="industry" value="CRM Software" style="width: auto;">
                             <label>{{ __('CRM Software') }}</label><br>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="">
-                            <input type="radio"name="industry" value="1.1" style="width: auto;">
+                            <input type="radio"name="industry" value="CleanTech" style="width: auto;">
                             <label>{{ __('CleanTech') }}</label><br>
                         </div>
                         <div class="">
-                            <input type="radio"name="industry" value="-0.2" style="width: auto;">
+                            <input type="radio"name="industry" value="GovTech" style="width: auto;">
                             <label>{{ __('GovTech') }}</label><br>
                         </div>
                         <div class="">
-                            <input type="radio"name="industry" value="0.3" style="width: auto;">
+                            <input type="radio"name="industry" value="AdTech" style="width: auto;">
                             <label>{{ __('AdTech') }}</label><br>
                         </div>
                         <div class="">
-                            <input type="radio"name="industry" value="3.6" style="width: auto;">
+                            <input type="radio"name="industry" value="HealthTech" style="width: auto;">
                             <label>{{ __('HealthTech') }}</label><br>
                         </div>
                         <div class="">
-                            <input type="radio"name="industry" value="2.8" style="width: auto;">
+                            <input type="radio"name="industry" value="LegalTech" style="width: auto;">
                             <label>{{ __('LegalTech') }}</label><br>
                         </div>
                         <div class="">
-                            <input type="radio"name="industry" value="2.1" style="width: auto;">
+                            <input type="radio"name="industry" value="CommTech" style="width: auto;">
                             <label>{{ __('CommTech') }}</label><br>
                         </div>
                         <div class="">
-                            <input type="radio"name="industry" value="1.2" style="width: auto;">
+                            <input type="radio"name="industry" value="E-Commerce" style="width: auto;">
                             <label>{{ __('E-Commerce') }}</label><br>
                         </div>
                     </div>
@@ -183,15 +183,15 @@
             <div class="tab mb-3">
                 {{ __('Customers Number') }}
                 <div class="">
-                    <input type="radio"name="business_size" value="0-1000" style="width: auto;">
+                    <input type="radio"name="customers_number" value="0-1000" style="width: auto;">
                     <label>0 - 1.000</label><br>
                 </div>
                 <div class="">
-                    <input type="radio"name="business_size" value="1000 - 10000" style="width: auto;">
+                    <input type="radio"name="customers_number" value="1000 - 10000" style="width: auto;">
                     <label>1.000 - 10.000</label><br>
                 </div>
                 <div class="">
-                    <input type="radio"name="business_size" value="10000" style="width: auto;">
+                    <input type="radio"name="customers_number" value="10000" style="width: auto;">
                     <label>أكثر من 10.000</label><br>
                 </div>
             </div>
@@ -219,29 +219,29 @@
             <div class="tab mb-3">
                 {{ __('Last Year Growth') }}
                 <div class="">
-                    <input type="radio" name="product_nature" value="0 - 10%" style="width: auto;">
+                    <input type="radio" name="revnue_rate" value="0 - 10%" style="width: auto;">
                     <label>0 - 10%</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="product_nature" value="10 - 20%" style="width: auto;">
+                    <input type="radio" name="revnue_rate" value="10 - 20%" style="width: auto;">
                     <label>10 - 20%</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="product_nature" value="20 - 40%" style="width: auto;">
+                    <input type="radio" name="revnue_rate" value="20 - 40%" style="width: auto;">
                     <label>20 - 40%</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="product_nature" value="40 - 60%"
+                    <input type="radio" name="revnue_rate" value="40 - 60%"
                         style="width: auto;">
                     <label>40 - 50%</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="product_nature" value="60 - 100%"
+                    <input type="radio" name="revnue_rate" value="60 - 100%"
                         style="width: auto;">
                     <label>60 - 100%</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="product_nature" value="100"
+                    <input type="radio" name="revnue_rate" value="100"
                         style="width: auto;">
                     <label>أكثر من 100%</label><br>
                 </div>
@@ -449,9 +449,7 @@
             
             $('#error-alert').addClass('d-none');
             $(this).prop('disabled', true)
-            $(this).css({
-                "opacity": "0.5"
-            })
+            $(this).css({"opacity": "0.5"})
             let data = new FormData(regForm);
             $.ajax({
                 method: "POST",
