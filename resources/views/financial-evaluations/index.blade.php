@@ -198,21 +198,8 @@
 
             <div class="tab mb-3">
                 {{ __('Yearly Income') }}
-                <div class="">
-                    <input type="radio" name="audience" value="b2c" style="width: auto;">
-                    <label>{{ __('b2c') }}</label><br>
-                </div>
-                <div class="">
-                    <input type="radio" name="audience" value="b2b" style="width: auto;">
-                    <label>{{ __('b2b') }}</label><br>
-                </div>
-                <div class="">
-                    <input type="radio" name="audience" value="Government agencies and institutions" style="width: auto;">
-                    <label>{{ __('governate') }}</label><br>
-                </div>
-                <div class="">
-                    <input type="radio" name="audience" value="b2b b2c and Government agencies " style="width: auto;">
-                    <label>{{ __('all') }}</label><br>
+                <div class="mt-2">
+                    <input type="number" name="yearly_income" class="form-control" placeholder="SAR">
                 </div>
             </div>
 

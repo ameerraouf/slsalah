@@ -15,6 +15,17 @@ class FinancialEvaluationController extends Controller
 
     public function create(Request $request)
     {
+        $request->validate([
+            "industry" => 'required',
+            "customers_number" => 'required',
+            "yearly_income" => 'required',
+            "revnue_rate" => 'required',
+            "investments" => 'required',
+            "experience" => 'required',
+            "rivals" => 'required',
+            "market" => 'required',
+        ]);
+
         $industries = [
             "MarTech" => 2.4,
             "FinTech" => 6.4,
