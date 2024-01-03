@@ -276,23 +276,23 @@
                 {{ __('Average Experience') }}
                 
                 <div class="">
-                    <input type="radio" name="tech_focus" value="none" style="width: auto;">
+                    <input type="radio" name="experience" value="0" style="width: auto;">
                     <label>لا يوجد خبرة</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="tech_focus" value="1 - 3" style="width: auto;">
+                    <input type="radio" name="experience" value="1 - 3" style="width: auto;">
                     <label>1 ل 3</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="tech_focus" value="3 - 5" style="width: auto;">
+                    <input type="radio" name="experience" value="3 - 5" style="width: auto;">
                     <label>3 ل 5</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="tech_focus" value="5 - 10" style="width: auto;">
+                    <input type="radio" name="experience" value="5 - 10" style="width: auto;">
                     <label>5 ل 10</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="tech_focus" value="10" style="width: auto;">
+                    <input type="radio" name="experience" value="10" style="width: auto;">
                     <label>أكثر من 10</label><br>
                 </div>
             </div>

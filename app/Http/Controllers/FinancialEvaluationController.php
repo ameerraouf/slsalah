@@ -206,20 +206,33 @@ class FinancialEvaluationController extends Controller
         $rrr = $revenue_rate[$request->revnue_rate][$request->industry];
 
         // m3 (investments)
-        $m3 = 0;
+        $m5 = 0;
         if ($request->investments == '0') {
-            $m3 = 0.25 + $m1;
+            $m5 = 0.25 + $m1;
         } elseif ($request->investments == '0 - 500.000') {
-            $m3 = 0.75 + $m1;
+            $m5 = 0.75 + $m1;
         } elseif ($request->investments == '500.000 - 1.000.000') {
-            $m3 = 1 + $m1;
+            $m5 = 1 + $m1;
         } elseif ($request->investments == '1.000.000 - 10.000.000') {
-            $m3 = 1.25 + $m1;
+            $m5 = 1.25 + $m1;
         } elseif ($request->investments == '10.000.000') {
-            $m3 = 1.75 + $m1;
+            $m5 = 1.75 + $m1;
+        }
+        // m3 (investments)
+        $m6 = 0;
+        if ($request->experience == '0') {
+            $m6 = 0.25 + $m1;
+        } elseif ($request->experience == '1 - 3') {
+            $m6 = 1 + $m1;
+        } elseif ($request->experience == '3 - 5') {
+            $m6 = 1.25 + $m1;
+        } elseif ($request->experience == '5 - 10') {
+            $m6 = 1.5 + $m1;
+        } elseif ($request->experience == '10') {
+            $m6 = 2 + $m1;
         }
 
-
+        return $m6;
         return $request->all();
     }
 }
