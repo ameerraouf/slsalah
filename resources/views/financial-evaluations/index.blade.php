@@ -250,19 +250,23 @@
             <div class="tab mb-3">
                 {{ __('Investements Till Now') }}
                 <div class="">
-                    <input type="radio" name="market_position" value="0 - 500.000" style="width: auto;">
+                    <input type="radio" name="investments" value="0" style="width: auto;">
+                    <label>لا يوجد</label><br>
+                </div>
+                <div class="">
+                    <input type="radio" name="investments" value="0 - 500.000" style="width: auto;">
                     <label>من 0 الى 500 ألف ريال</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="market_position" value="500.000 - 1.000.000" style="width: auto;">
+                    <input type="radio" name="investments" value="500.000 - 1.000.000" style="width: auto;">
                     <label>من 500 ألف ريال - 1 مليون ريال</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="market_position" value="1.000.000 - 10.000.000" style="width: auto;">
+                    <input type="radio" name="investments" value="1.000.000 - 10.000.000" style="width: auto;">
                     <label>من 1 مليون ريال - 10 مليون ريال</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="market_position" value="10.000.000" style="width: auto;">
+                    <input type="radio" name="investments" value="10.000.000" style="width: auto;">
                     <label>أكثر من 10 مليون ريال</label><br>
                 </div>
             </div>

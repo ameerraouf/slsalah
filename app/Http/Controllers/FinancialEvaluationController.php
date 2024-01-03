@@ -50,8 +50,6 @@ class FinancialEvaluationController extends Controller
         ];
         $m2 = $m1 + $customers[$request->customers_number];
 
-
-
         // rrr 
         $revenue_rate = [
             "0 - 10%" => [
@@ -205,8 +203,23 @@ class FinancialEvaluationController extends Controller
                 "General SaaS" => "60.00%",
             ],
         ];
+        $rrr = $revenue_rate[$request->revnue_rate][$request->industry];
 
-        $m3 = $revenue_rate[$request->revnue_rate][$request->industry];
+        // m3 (investments)
+        $m3 = 0;
+        if ($request->investments == '0') {
+            $m3 = 0.25 + $m1;
+        } elseif ($request->investments == '0 - 500.000') {
+            $m3 = 0.75 + $m1;
+        } elseif ($request->investments == '500.000 - 1.000.000') {
+            $m3 = 1 + $m1;
+        } elseif ($request->investments == '1.000.000 - 10.000.000') {
+            $m3 = 1.25 + $m1;
+        } elseif ($request->investments == '10.000.000') {
+            $m3 = 1.75 + $m1;
+        }
+
+
         return $request->all();
     }
 }
