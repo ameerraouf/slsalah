@@ -205,7 +205,7 @@ class FinancialEvaluationController extends Controller
         ];
         $rrr = $revenue_rate[$request->revnue_rate][$request->industry];
 
-        // m3 (investments)
+        // m5 (investments)
         $m5 = 0;
         if ($request->investments == '0') {
             $m5 = 0.25 + $m1;
@@ -218,7 +218,7 @@ class FinancialEvaluationController extends Controller
         } elseif ($request->investments == '10.000.000') {
             $m5 = 1.75 + $m1;
         }
-        // m3 (investments)
+        // m6 (experience)
         $m6 = 0;
         if ($request->experience == '0') {
             $m6 = 0.25 + $m1;
@@ -232,7 +232,34 @@ class FinancialEvaluationController extends Controller
             $m6 = 2 + $m1;
         }
 
-        return $m6;
+        // m6 (rivals)
+        $m7 = 0;
+        if ($request->rivals == '0') {
+            $m7 = 0.25 + $m1;
+        } elseif ($request->rivals == '1 -3') {
+            $m7 = 1.15 + $m1;
+        } elseif ($request->rivals == '3 - 5') {
+            $m7 = 1.4 + $m1;
+        } elseif ($request->rivals == '5 - 10') {
+            $m7 = 1.65 + $m1;
+        } elseif ($request->rivals == '10') {
+            $m7 = 2.15 + $m1;
+        }
+
+        // m6 (market)
+        $m8 = 0;
+        if ($request->market == '1') {
+            $m8 = 0.5 + $m1;
+        } elseif ($request->market == '1 - 3') {
+            $m8 = 1.4 + $m1;
+        } elseif ($request->market == '3 - 5') {
+            $m8 = 1.65 + $m1;
+        } elseif ($request->market == '5 - 10') {
+            $m8 = 1.9 + $m1;
+        } elseif ($request->market == '10') {
+            $m8 = 2.4 + $m1;
+        }
+        return $m8;
         return $request->all();
     }
 }

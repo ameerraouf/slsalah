@@ -300,23 +300,23 @@
             <div class="tab mb-3">
                 {{ __('Number Of Rivals') }}
                 <div class="">
-                    <input type="radio" name="location" value="dont know" style="width: auto;">
+                    <input type="radio" name="rivals" value="0" style="width: auto;">
                     <label>لا أعرف</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="location" value="1 -3" style="width: auto;">
+                    <input type="radio" name="rivals" value="1 -3" style="width: auto;">
                     <label>1 ل 3</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="location" value="3 - 5" style="width: auto;">
+                    <input type="radio" name="rivals" value="3 - 5" style="width: auto;">
                     <label>3 ل 5</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="location" value="5 - 10" style="width: auto;">
+                    <input type="radio" name="rivals" value="5 - 10" style="width: auto;">
                     <label>5 ل 10</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="location" value="10" style="width: auto;">
+                    <input type="radio" name="rivals" value="10" style="width: auto;">
                     <label>10+</label><br>
                 </div>
             </div>
@@ -324,23 +324,23 @@
             <div class="tab mb-3">
                 {{ __('Targeted Market') }}
                 <div class="">
-                    <input type="radio" name="location" value="1" style="width: auto;">
+                    <input type="radio" name="market" value="1" style="width: auto;">
                     <label>أقل من 1 مليار ريال </label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="location" value="1 - 3" style="width: auto;">
+                    <input type="radio" name="market" value="1 - 3" style="width: auto;">
                     <label>1 ل 3 مليار ريال</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="location" value="3 - 5" style="width: auto;">
+                    <input type="radio" name="market" value="3 - 5" style="width: auto;">
                     <label>3 ل 5 مليار ريال</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="location" value="5 - 10" style="width: auto;">
+                    <input type="radio" name="market" value="5 - 10" style="width: auto;">
                     <label>5 ل 10 مليار ريال </label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="location" value="10" style="width: auto;">
+                    <input type="radio" name="market" value="10" style="width: auto;">
                     <label>أكثر من 10 مليار ريال</label><br>
                 </div>
             </div>
