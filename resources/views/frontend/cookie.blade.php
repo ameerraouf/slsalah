@@ -9,7 +9,7 @@
                     <div class="col-md-8 mx-auto text-center mt-4">
                         @if (!empty($term))
                             <h2 class="text-dark">
-                                {{$term->title}}
+                                {{ __('Cookie Policy') }}
                             </h2>
                         @endif
                         <p class="text-muted">
