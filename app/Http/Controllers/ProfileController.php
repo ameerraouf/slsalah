@@ -17,7 +17,7 @@ class ProfileController extends BaseController
         $available_languages = User::$available_languages;
 
         return \view("profile.profile", [
-            "selected_navigation" => "profile",
+            "selected_navigation" => "userEdit",
             "available_languages" => $available_languages,
         ]);
     }
