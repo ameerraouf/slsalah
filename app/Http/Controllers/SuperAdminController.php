@@ -1027,7 +1027,7 @@ class SuperAdminController extends SuperAdminBaseController
         $post->description = $request->description;
         $post->save();
 
-        return redirect(config('app.url') . '/termspage');
+        return redirect('/termspage');
     }
 
 
