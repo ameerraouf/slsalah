@@ -1,6 +1,6 @@
 @extends('layouts.super-admin-portal')
 @section('head')
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
 @endsection
 @section('content')
     <div class=" row mb-2">
@@ -94,7 +94,7 @@
     </div>
 @endsection
 @section('script')
-<script type="text/javascript" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 
     <script>
         "use strict";
@@ -105,7 +105,7 @@
 
             }
             $('#cloudonex_table').DataTable({
-                searching: true ,
+                searching: true,
                 ordering: false,
                 language: {
                     url: 'https://cdn.datatables.net/plug-ins/1.10.24/i18n/Arabic.json'
