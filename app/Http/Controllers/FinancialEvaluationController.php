@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\FinancialEvaluation;
 use Illuminate\Http\Request;
 
 class FinancialEvaluationController extends Controller
@@ -272,8 +273,18 @@ class FinancialEvaluationController extends Controller
         }
         $r = $request->yearly_income;
         $AVGM = ($m1 * 0.05) + ($m2 * 0.05) + ($m5 * 0.05) + ($m6 * 0.05) + ($m7 * 0.3) * ($m8 * 0.5);
-        return $AVGM;
         $result = ($r * $AVGM) / pow((1 + ($rrr / 100)) , 5);
+
+        $evaluation = FinancialEvaluation::where('workspace_id' , auth()->user()->workspace_id)->first();
+
+        if ($evaluation) {
+            $evaluation->update(["value" => $result]);
+        } else {
+            FinancialEvaluation::create([
+                'workspace_id' => auth()->user()->workspace_id,
+                "value" => $result
+            ]);
+        }
         return $result;
     }
 }
