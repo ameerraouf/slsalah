@@ -128,7 +128,6 @@ class FrontendController extends Controller
 
     public function blogs()
     {
-        dd('here');
         Carbon::setLocale('ar');
         $blogs = Blog::all();
         $users = User::all()

@@ -999,7 +999,6 @@ class SuperAdminController extends SuperAdminBaseController
 
     public function savePrivacy(Request $request)
     {
-
         $post = PrivacyPolicy::first();
 
         if (!$post) {
@@ -1011,7 +1010,7 @@ class SuperAdminController extends SuperAdminBaseController
         $post->description = $request->description;
         $post->save();
 
-        return redirect(config('app.url') . '/privacypage');
+        return redirect('/privacypage');
     }
 
     public function saveTerms(Request $request)
