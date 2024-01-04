@@ -1062,7 +1062,7 @@ class SuperAdminController extends SuperAdminBaseController
         $post->twitter = $request->twitter;
         $post->save();
 
-        return redirect(config('app.url') . '/footer');
+        return redirect('/footer');
     }
     public function cookiePage()
     {
