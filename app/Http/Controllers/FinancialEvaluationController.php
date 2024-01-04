@@ -270,7 +270,9 @@ class FinancialEvaluationController extends Controller
         } elseif ($request->market == '10') {
             $m8 = 2.4 + $m1;
         }
-        return $m8;
+
+        $r = $request->yearly_income;
+        $AVGM = ($m1 * 0.05) + ($m2 * 0.05) + ($m5 * 0.05) + ($m6 * 0.05) + ($m7 * 0.3) + ($m8 * 0.5);
         return $request->all();
     }
 }

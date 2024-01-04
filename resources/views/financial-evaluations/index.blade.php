@@ -81,7 +81,7 @@
                 <div class="row">
                     <div class="col-4 p-0">
                         <div class="">
-                            <input type="radio"name="industry" value="Martech" style="width: auto;">
+                            <input type="radio"name="industry" value="MarTech" style="width: auto;">
                             <label>{{ __('Martech') }}</label><br>
                         </div>
                         <div class="">
