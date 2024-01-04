@@ -1088,6 +1088,6 @@ class SuperAdminController extends SuperAdminBaseController
         $post->description = $request->description;
         $post->save();
 
-        return redirect(config('app.url') . '/cookiepage');
+        return redirect('/cookiepage');
     }
 }

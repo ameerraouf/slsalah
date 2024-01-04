@@ -2888,6 +2888,13 @@
                                                     {{__('Terms')}}
                                                 </a>
                                             </li>
+											<li id="menu-header_2-1297"
+												class="menu-item menu-item-type-custom menu-item-object-custom cz"
+												data-sub-menu="">
+                                                <a class="fw-bolder h6 ps-2 d-flex justify-content-between cursor-pointer align-items-center mb-0 me-2" href="/cookiePolicy" target="_blank">
+                                                    {{__('Cookie Policy')}}
+                                                </a>
+                                            </li>
 											
 										</ul><i class="fa czico-198-cancel cz_close_popup xtra-close-icon hide"
 											aria-hidden="true"></i>

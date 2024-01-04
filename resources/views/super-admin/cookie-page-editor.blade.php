@@ -2,16 +2,26 @@
 
 @section('content')
 
-    <h5 class="mb-3">{{__('Cookie Policy Page Text Editor')}}</h5>
+    <h5 class="mb-3">{{ __('Cookie Policy Page Text Editor') }}</h5>
     <div class="btn-group mt-2">
-        <button type="button" class="btn ms-auto btn-dark btn-icon-only " data-bs-toggle="offcanvas" data-bs-target="#hero" aria-controls="offcanvasRight">
-        <span class="btn-inner--icon">
-<svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class=" mb-2 feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
-        </span>
+        <button type="button" class="btn ms-auto btn-dark btn-icon-only " data-bs-toggle="offcanvas" data-bs-target="#hero"
+            aria-controls="offcanvasRight">
+            <span class="btn-inner--icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class=" mb-2 feather feather-edit">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                </svg>
+            </span>
         </button>
         <a href="/cookie-policy" target="_blank" type="button" class="btn btn-success btn-icon-only">
             <span class="btn-inner--icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-eye">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
                 </svg>
             </span>
         </a>
@@ -22,7 +32,7 @@
 
     <div class="offcanvas offcanvas-end" tabindex="-1" id="hero" aria-labelledby="offcanvasRightLabel">
         <div class="offcanvas-header">
-            <h5 id="offcanvasRightLabel">{{__('Hero Section ')}}</h5>
+            <h5 id="offcanvasRightLabel">{{ __('Hero Section ') }}</h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <form action="/save-cookie-section" method="post" enctype="multipart/form-data">
@@ -39,33 +49,33 @@
             <div class="offcanvas-body">
 
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">{{__('Title')}}</label>
-                    <input type="text" name="title" class="form-control" id="title"  value="{{$term->title ?? old('title') ?? ''}}">
+                    <label for="exampleFormControlInput1" class="form-label">{{ __('Title') }}</label>
+                    <input type="text" name="title" class="form-control" id="title"
+                        value="{{ $term->title ?? (old('title') ?? '') }}">
                 </div>
                 <div class="form-group">
                     <label for="example-date-input" class="form-control-label">
-                        {{__('Date')}}
+                        {{ __('Date') }}
 
                     </label>
                     <span class="text-danger">*</span>
-                    <input class="form-control"  name="date" type="date" value="{{date('Y-m-d')}}" id="date"
-                           @if(!empty($term))
-                           value="{{$term->date}}"
+                    <input class="form-control" name="date" type="date" value="{{ date('Y-m-d') }}" id="date"
+                        @if (!empty($term)) value="{{ $term->date }}"
                            @else
-                           value="{date('Y/m/d')}"
-                            @endif>
+                           value="{date('Y/m/d')}" @endif>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">{{__('Cookie Policy')}}</label>
-                    <textarea class="form-control" name="description" id="privacy" rows="8">{{$term->description ?? old('description') ?? ''}}</textarea>
+                    <label for="exampleFormControlTextarea1" class="form-label">{{ __('Cookie Policy') }}</label>
+                    <textarea class="form-control" name="description" id="privacy" rows="8">{{ $term->description ?? (old('description') ?? '') }}</textarea>
                 </div>
                 @csrf
 
                 @if (!empty($term))
-                    <input type="hidden" name="id" value="{{$term->id}}">
+                    <input type="hidden" name="id" value="{{ $term->id }}">
                 @endif
                 <div class="button-row text-left mt-4">
-                    <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" type="submit" title="Next">{{__('Save')}}</button>
+                    <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" type="submit"
+                        title="Next">{{ __('Save') }}</button>
                 </div>
 
             </div>
@@ -81,13 +91,13 @@
 
                         @if (!empty($term))
                             <h1 class="text-dark">
-                                {{$term->title}}
+                                {{ __('Cookie Policy') }}
                             </h1>
                         @endif
 
                         <p class="text-muted">
-                            {{__('updated')}} @if (!empty($term))
-                                {{$term->date}}
+                            {{ __('updated') }} @if (!empty($term))
+                                {{ $term->date }}
                             @endif
 
                         </p>
@@ -128,11 +138,10 @@
 
 
 @section('script')
-
     <script>
         "use strict";
 
-        $(function () {
+        $(function() {
 
             flatpickr("#date", {
 
@@ -140,7 +149,6 @@
             });
 
         });
-
     </script>
     <script>
         tinymce.init({
@@ -152,9 +160,4 @@
 
         });
     </script>
-
 @endsection
-
-
-
-
