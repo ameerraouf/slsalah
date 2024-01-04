@@ -10,8 +10,9 @@ class FinancialEvaluationController extends Controller
 {
     public function index()
     {
+        $evaluation = FinancialEvaluation::where('workspace_id' , auth()->user()->workspace_id)->first();
         $selected_navigation = 'f e';
-        return view('financial-evaluations.index', ["selected_navigation" => $selected_navigation]);
+        return view('financial-evaluations.index', ["selected_navigation" => $selected_navigation , "evaluation" => $evaluation]);
     }
 
     public function create(Request $request)

@@ -218,18 +218,15 @@
                     <label>20 - 40%</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="revnue_rate" value="40 - 60%"
-                        style="width: auto;">
+                    <input type="radio" name="revnue_rate" value="40 - 60%" style="width: auto;">
                     <label>40 - 50%</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="revnue_rate" value="60 - 100%"
-                        style="width: auto;">
+                    <input type="radio" name="revnue_rate" value="60 - 100%" style="width: auto;">
                     <label>60 - 100%</label><br>
                 </div>
                 <div class="">
-                    <input type="radio" name="revnue_rate" value="100"
-                        style="width: auto;">
+                    <input type="radio" name="revnue_rate" value="100" style="width: auto;">
                     <label>أكثر من 100%</label><br>
                 </div>
             </div>
@@ -261,7 +258,7 @@
 
             <div class="tab mb-3">
                 {{ __('Average Experience') }}
-                
+
                 <div class="">
                     <input type="radio" name="experience" value="0" style="width: auto;">
                     <label>لا يوجد خبرة</label><br>
@@ -352,7 +349,14 @@
                 <span class="step"></span>
                 <span class="step"></span>
             </div>
-
+            <div class="alert alert-success d-none text-white mt-3" id="success-message">
+                {{ __('Finanical Evaluation') }} : <span id="result"></span>
+            </div>
+            @if ($evaluation)
+                <div class="alert alert-success text-white mt-3" id="success-message-existing">
+                    {{ __('Finanical Evaluation') }} : {{ $evaluation->value }}<span id="result"></span>
+                </div>
+            @endif
         </form>
         <!-- /.MultiStep Form -->
     </div>
@@ -437,10 +441,14 @@
 
         // submitting the form 
         $('body').on('click', '.submit-btn', function(e) {
-            
+
             $('#error-alert').addClass('d-none');
+            $('#success-message').addClass('d-none');
+            $('#success-message-existing').addClass('d-none');
             $(this).prop('disabled', true)
-            $(this).css({"opacity": "0.5"})
+            $(this).css({
+                "opacity": "0.5"
+            })
             let data = new FormData(regForm);
             $.ajax({
                 method: "POST",
@@ -452,13 +460,20 @@
                     'X-CSRF-Token': "{{ csrf_token() }}"
                 },
                 success: function(response) {
-                    $('.submit-btn').css({"opacity": "1"})
+                    $('.submit-btn').css({
+                        "opacity": "1"
+                    })
                     $('.submit-btn').prop('disabled', false)
+                    $('#success-message').removeClass('d-none');
+                    $('#success-message-existing').remove();
+                    $('#result').html(response)
                 },
                 error: function(response) {
                     $('#error-alert').removeClass('d-none');
                     $('.submit-btn').prop('disabled', false)
-                    $('.submit-btn').css({"opacity": "1"})
+                    $('.submit-btn').css({
+                        "opacity": "1"
+                    })
                 }
             })
         });
