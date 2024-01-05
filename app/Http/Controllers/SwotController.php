@@ -53,6 +53,8 @@ class SwotController extends BaseController
         $request->validate([
             "company_name" => "required|max:150",
             "id" => "nullable|integer",
+        ] , [
+            "company_name.required" => 'الحقل اسم الشركة أو العمل مطلوب'
         ]);
 
         $model = false;
