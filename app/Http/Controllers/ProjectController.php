@@ -146,7 +146,8 @@ class ProjectController extends BaseController
             "id" => "nullable|integer",
             "members" => "required",
         ] , [
-            "members.required" => 'الحقل أعضاء الفريق مطلوب'
+            "members.required" => 'الحقل أعضاء الفريق مطلوب',
+            "title.required" => "الحقل اسم المنتج مطلوب."
         ]);
 
         $project = false;
