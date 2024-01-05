@@ -5,7 +5,7 @@
     <div class=" row">
         <div class="col">
             <h5 class=" text-secondary fw-bolder">
-                {{__('Ideation Canvas List')}}
+                {{__('Ideation Canvas')}}
             </h5>
         </div>
         <div class="col text-end">
