@@ -3,7 +3,7 @@
     <div class=" row">
         <div class="col">
             <h5 class=" text-secondary fw-bolder">
-                {{ __('Product Ideas') }}
+                {{ __('product planning') }}
             </h5>
         </div>
         <div class="col text-end">
@@ -42,7 +42,7 @@
                             </td>
 
                             <td class="">
-                                <div class="avatar-group d-flex mt-2">
+                                <div class="avatar-group d-flex mt-2 justify-content-center">
                                     @if ($project->members)
                                         @foreach (json_decode($project->members) as $member)
                                             @if (isset($users[$member]))
