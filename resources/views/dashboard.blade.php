@@ -419,7 +419,7 @@
                                             </span>
                                         </td>
                                         <td class="align-middle text-center text-xs">
-                                            <span class="badge bg-info-light fw-bolder">{{ $project->status }}</span>
+                                            <span class="badge bg-{{ ['Pending' => 'info', 'Started' => 'success', 'Finished' => 'primary'][$project->status] }} fw-bolder">{{ __($project->status) }}</span>
                                         </td>
                                         <td>
                                             <div>
