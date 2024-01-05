@@ -101,7 +101,7 @@
                                                 <hr class="dropdown-divider">
                                             </li>
                                             <li>
-                                                <a class="dropdown-item border-radius-md text-danger"
+                                                <a class="dropdown-item border-radius-md text-danger delete-btn"
                                                     href="/delete/project/{{ $project->id }}">{{ __('Delete') }}
                                                 </a>
                                             </li>
@@ -127,6 +127,16 @@
                     url: 'https://cdn.datatables.net/plug-ins/1.10.24/i18n/Arabic.json'
                 }
             });
+
+            $('body').on('click', '.delete-btn', function(e) {
+            e.preventDefault()
+            var result = window.confirm("Are you sure you want to proceed?");
+            let targetLink = $(this).attr('href')
+            if (result) {
+                window.location.href = targetLink;
+            }
+
+        })
 
         });
     </script>
