@@ -15,15 +15,15 @@
     <div class="row mt-3">
         <div class="col-lg-1 col-md-1 pt-5 pt-lg-0 ms-lg-2 text-center d-print-none">
             <a href="/write-swot?id={{ $model->id }}" class="btn btn-white border-radius-lg p-2 mt-2" type="button"
-                data-bs-toggle="tooltip" data-bs-placement="right" title="Edit">
+                data-bs-toggle="tooltip" data-bs-placement="right" title="{{ __('Edit') }}">
                 <i class="fas fa-pen p-2"></i>
             </a>
             <a href="#" onclick="window.print()" class="btn btn-white border-radius-lg p-2 mt-2" type="button"
-                data-bs-toggle="tooltip" data-bs-placement="left" title="Print">
+                data-bs-toggle="tooltip" data-bs-placement="left" title="{{ __('Print') }}">
                 <i class="fas fa-print p-2"></i>
             </a>
             <a href="/swot-list" class="btn btn-white border-radius-lg p-2 mt-2" type="button" data-bs-toggle="tooltip"
-                data-bs-placement="left" title="List">
+                data-bs-placement="left" title="{{ __('List') }}">
                 <i class="fas fa-ellipsis-h p-2"></i>
             </a>
         </div>
