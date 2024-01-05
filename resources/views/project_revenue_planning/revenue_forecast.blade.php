@@ -41,17 +41,17 @@
                         @foreach($revenue->sources as $source)
                             <tr>
                                 <td> @if($revenue->main_unit ==0) {{ $source->name }} @endif</td>
-                                <td>{{ formatCurrency($source->total_revenue,getWorkspaceCurrency($settings)) }}</td>
-                                <td>{{ formatCurrency($source->total_second_revenue,getWorkspaceCurrency($settings)) }}</td>
-                                <td>{{ formatCurrency($source->total_third_revenue,getWorkspaceCurrency($settings)) }}</td>
+                                <td>{{ formatCurrency($source->total_revenue,$currency) }}</td>
+                                <td>{{ formatCurrency($source->total_second_revenue,$currency) }}</td>
+                                <td>{{ formatCurrency($source->total_third_revenue,$currency) }}</td>
                             </tr>
                         @endforeach
                     @endforeach
                         <tr>
                             <th>{{ __('total') }}</th>
-                            <th class="text-muted">{{ formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueFirstYear() ,getWorkspaceCurrency($settings))}}</th>
-                            <th class="text-muted">{{ formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueSecondYear(),getWorkspaceCurrency($settings)) }}</th>
-                            <th class="text-muted">{{ formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueThirdYear() ,getWorkspaceCurrency($settings))}}</th>
+                            <th class="text-muted text-center">{{ formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueFirstYear() ,$currency)}}</th>
+                            <th class="text-muted text-center">{{ formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueSecondYear(),$currency) }}</th>
+                            <th class="text-muted text-center">{{ formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueThirdYear() ,$currency)}}</th>
                         </tr>
                     @endif
                 </tbody>

@@ -7,7 +7,9 @@ use App\Http\Requests\ProjectPlanning\newProjectRevenuePlanningRequest;
 use App\Http\Requests\ProjectPlanning\updateProjectRevenuePlanningRequest;
 use App\Models\ProjectRevenuePlanning;
 use App\Models\ProjectRevenueSource;
+use App\Models\Setting;
 use App\Models\User;
+use App\Models\Workspace;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -82,8 +84,14 @@ class ProjectRevenuePlanningController extends BaseController
             ->where('workspace_id', $this->user->workspace_id)
             ->get();
         $selected_navigation = "project_revenue_planning";
-
-        return view('project_revenue_planning.revenue_forecast', compact('projectRevenues', 'selected_navigation'));
+        $user = User::where('super_admin' , 1)->first();
+        $settings_mod = Setting::where('workspace_id' , $user->workspace_id)->get()->keyBy('key');
+        if (isset($settings_mod['currency'])) {
+            $currency = $settings_mod['currency']->value;
+        } else {
+            $currency = config('app.currency');
+        }
+        return view('project_revenue_planning.revenue_forecast', compact('projectRevenues', 'selected_navigation' , 'currency'));
     }
 
     public function create()
