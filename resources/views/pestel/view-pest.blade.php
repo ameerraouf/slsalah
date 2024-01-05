@@ -18,13 +18,13 @@
         <div class="col-md-1 text-center d-print-none">
 
 
-            <a href="/write-pestle?id={{$model->id}}" class="btn btn-white border-radius-lg p-2 mt-2" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="Edit">
+            <a href="/write-pestle?id={{$model->id}}" class="btn btn-white border-radius-lg p-2 mt-2" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="{{ __('Edit') }}">
                 <i class="fas fa-pen p-2"></i>
             </a>
-            <a href="#" onclick="window.print()" class="btn btn-white border-radius-lg p-2 mt-2" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Print">
+            <a href="#" onclick="window.print()" class="btn btn-white border-radius-lg p-2 mt-2" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="{{ __('Print') }}">
                 <i class="fas fa-print p-2"></i>
             </a>
-            <a href="/pestle-list" class="btn btn-white border-radius-lg p-2 mt-2" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="List">
+            <a href="/pestle-list" class="btn btn-white border-radius-lg p-2 mt-2" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="{{ __('List') }}">
                 <i class="fas fa-ellipsis-h p-2"></i>
             </a>
         </div>
