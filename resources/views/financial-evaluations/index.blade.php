@@ -452,7 +452,7 @@
             let data = new FormData(regForm);
             $.ajax({
                 method: "POST",
-                url: "{{ route('economiccPlan.create') }}",
+                url: "{{ route('financial_evaluation.create') }}",
                 data: data,
                 processData: false,
                 contentType: false,
