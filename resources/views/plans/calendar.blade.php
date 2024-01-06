@@ -15,8 +15,22 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-12 mb-2">
+            @if ($errors->any())
+                <div class="alert bg-pink-light text-danger">
+                    <ul class="list-unstyled">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+        </div>
         <div class="col-xl-3">
             <div class="row">
+                <div class="col-12">
+                    
+                </div>
                 <div class="col-xl-12 col-md-6 mt-xl-0 mt-4">
 
                     <div class="card">
