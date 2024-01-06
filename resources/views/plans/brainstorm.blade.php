@@ -11,6 +11,11 @@
                 <li>الحقل العنوان مطلوب</li>
             </ul>
         </div>
+        <div class="alert bg-success text-white d-none" id="success-alert">
+            <ul class="list-unstyled">
+                <li>تم الحفظ بنجاح</li>
+            </ul>
+        </div>
 
         <div class="row">
             <div class="col">
@@ -77,7 +82,7 @@
                         _token: '{{ csrf_token() }}',
                     })
                     .done(function(data) {
-                        window.location = data.url;
+                        $('#success-alert').removeClass('d-none')
                     }).fail(function(response) {
                         $('#validation-alert').removeClass('d-none')
                     });
