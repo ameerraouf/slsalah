@@ -96,9 +96,9 @@
                 <div class="d-flex px-2 py-1">
                     <div>
                         <div class="avatar avatar-xxl rounded-circle  bg-gradient-dark shadow text-center">
-                            {{__('Shared')}}
-                            <br>
                             {{__('Values')}}
+                            <br>
+                            {{__('Shared')}}
                         </div>
 
 
