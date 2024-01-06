@@ -44,7 +44,7 @@
                                             <li>
                                                 <hr class="dropdown-divider">
                                             </li>
-                                            <li><a class="dropdown-item border-radius-md text-danger"
+                                            <li><a class="dropdown-item border-radius-md text-danger delete-btn"
                                                    href="/delete/mckinsey/{{$model->id}}">{{__('Delete')}}</a></li>
                                         </ul>
                                     </div>
@@ -57,4 +57,17 @@
             @endforeach
         </div>
     </div>
+@endsection
+@section('script')
+    <script>
+        $('body').on('click', '.delete-btn', function(e) {
+            e.preventDefault()
+            var result = window.confirm("Are you sure you want to proceed?");
+            let targetLink = $(this).attr('href')
+            if (result) {
+                window.location.href = targetLink;
+            }
+
+        })
+    </script>
 @endsection
