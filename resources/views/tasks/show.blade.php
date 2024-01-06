@@ -1,9 +1,10 @@
 @extends('layouts.primary')
 @section('content')
     <style>
-        .tooltip-inner{
+        .tooltip-inner {
             background-color: #fff;
         }
+
         .tooltip[data-active='true'] .tooltiptext {
             visibility: visible;
             opacity: 1;
@@ -12,14 +13,14 @@
     <div class=" row">
         <div class="col">
             <h5 class=" text-secondary fw-bolder">
-                {{__('Tasks')}}
+                {{ __('Tasks') }}
             </h5>
         </div>
     </div>
     <div class="card ">
         <div class=" card-body table-responsive">
             <div class="row">
-                <h6 >{{__('strategic_objective')}} </h6>
+                <h6>{{ __('strategic_objective') }} </h6>
                 <p>{{ isset($taskGoal) ? $taskGoal->description : '' }}</p>
             </div>
             <div class="row">
@@ -28,19 +29,25 @@
             </div>
             <table class="table align-items-center mb-0" id="cloudonex_table">
                 <thead>
-                <tr>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{ __('Subject/Task') }}</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{ __('Assigned To') }}</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('Start Date')}}</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('Due Date')}}</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('Status')}}</th>
-                </tr>
+                    <tr>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            {{ __('Subject/Task') }}</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            {{ __('Assigned To') }}</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            {{ __('Start Date') }}</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{ __('Due Date') }}
+                        </th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{ __('Status') }}
+                        </th>
+                    </tr>
                 </thead>
                 <tbody>
-                    @foreach($tasks as $task)
+                    @foreach ($tasks as $task)
                         <tr>
                             <td>{{ $task->subject }}</td>
-                            <td>{{ \App\Models\User::find($task->contact_id) ?  \App\Models\User::find($task->contact_id)->first_name : '' }}</td>
+                            <td>{{ \App\Models\User::find($task->contact_id) ? (\App\Models\User::find($task->contact_id)->first_name). ' ' .(\App\Models\User::find($task->contact_id)->last_name)  : '' }}
+                            </td>
                             <td>
                                 @if (!empty($task->start_date))
                                     {{ \App\Supports\DateSupport::parse($task->start_date)->format(config('app.date_time_format')) }}
@@ -54,7 +61,7 @@
                             <td>
 
                                 <span
-                                        class="text-xs btn btn-sm
+                                    class="text-xs btn btn-sm
                                          @if ($task->status === 'Not Started') btn-info
 @elseif($task->status === 'done')
                                                 btn-success
@@ -65,7 +72,7 @@
 @else
                                                 btn-secondary @endif
                                                 "
-                                        type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                                     {{ $task->status ?? 'todo' }}
                                 </span>
                             </td>
@@ -81,7 +88,6 @@
             </div>
         </div>
     </div>
-
 @endsection
 
 
@@ -100,5 +106,4 @@
             }
         })
     </script>
-
 @endsection
