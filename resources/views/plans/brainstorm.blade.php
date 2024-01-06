@@ -67,12 +67,13 @@
 
             let $save_canvas = $('#save_cavas');
             $save_canvas.on('submit', function(event) {
+                console.log('test')
                 event.preventDefault();
                 $.post("/save-canvas", {
                         title: $('#title').val(),
                         id: $('#input_id').val(),
                         src: JSON.stringify(lc.getSnapshot()),
-                        image: lc.getImage().toDataURL(),
+                        image: lc.getImage() ? lc.getImage().toDataURL() : null,
                         _token: '{{ csrf_token() }}',
                     })
                     .done(function(data) {
