@@ -138,9 +138,13 @@
                         <!--begin::Menu-->
                         <div class="menu-item px-3">
                             <a href="#" class="btn btn-link text-dark px-3 mb-0 category_edit"
-                                data-id="{{ $task->id }}">{{ __('Edit') }}</a>
+                                data-id="{{ $task->id }}">
+                                <i class="fas fa-edit"></i>
+                                {{ __('Edit') }}</a>
                             <a href="/delete/task/{{ $task->id }}" class="btn btn-link text-danger px-3 mb-0"
-                                data-kt-users-table-filter="delete_row">{{ __('Delete') }}</a>
+                                data-kt-users-table-filter="delete_row">
+                                <i class="fas fa-trash"></i>
+                                {{ __('Delete') }}</a>
                         </div>
                         <!--end::Menu-->
                     </td>
