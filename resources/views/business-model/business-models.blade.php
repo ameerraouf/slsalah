@@ -22,7 +22,7 @@
 
                         <div class="input-group input-group-merge mb-3">
 
-                            <input type="text" name="company_name" class="form-control form-control-lg" id="searchJobCareers" placeholder="Search business model" aria-label="Search business model">
+                            <input type="text" name="company_name" class="form-control form-control-lg" id="searchJobCareers" placeholder="{{ __('Search Buisness Model') }}" aria-label="Search business model">
 
                         </div>
                         <!-- End Form -->
