@@ -153,7 +153,7 @@
 
                         {
                             id: '{{ $event->id }}',
-                            title: '{{ $event->title }}',
+                            title: "{{ $event->title }} {{ $event->start_date->format('d-m-Y H:i') }}  -  {{ $event->end_date->format('d-m-Y H:i') }}",
                             start: '{{ $event->start_date }}',
                             end: '{{ $event->end_date }}',
 
