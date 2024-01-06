@@ -28,7 +28,7 @@
                             <div class="card-body position-relative ">
 
                                 <div class="d-flex mt-7">
-                                    <a href="/brainstorming?id={{$canvas->id}}" class="btn btn-info btn-round p-2 mb-0" type="button" >
+                                    <a href="/brainstorming?id={{$canvas->id}}" class="btn btn-info btn-round p-2 me-2 mb-0" type="button" >
                                         {{__('Edit Canvas')}}
                                     </a>
                                     <a href="/delete/canvas/{{$canvas->id}}" class="btn btn-round btn-outline-dark p-2  ms-2 mb-0" type="button" >
