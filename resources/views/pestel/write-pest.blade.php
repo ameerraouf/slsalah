@@ -55,7 +55,7 @@
                                     </label>
                                     <p class="form-text text-muted text-xs ms-1">
                                         {{ __('What are the economic factors include economic growth, exchange rates, inflation rate, and interest rates. ') }}
-
+                                        ؟
                                     </p>
                                     <textarea class="form-control mt-4" rows="10" id="economic" name="economic">
 @if (!empty($model))

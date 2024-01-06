@@ -5,13 +5,13 @@
 
        <div class="row d-print-none">
            <div class=" text-center">
-               <a href="/new-mckinsey-model?id={{$model->id}}" class="btn btn-white border-radius-lg p-2 mt-2" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="Edit">
+               <a href="/new-mckinsey-model?id={{$model->id}}" class="btn btn-white border-radius-lg p-2 mt-2" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="{{ __('Edit') }}">
                    <i class="fas fa-pen p-2"></i>
                </a>
-               <a href="#" onclick="window.print()" class="btn btn-white border-radius-lg p-2 mt-2" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Print">
+               <a href="#" onclick="window.print()" class="btn btn-white border-radius-lg p-2 mt-2" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="{{ __('Print') }}">
                    <i class="fas fa-print p-2"></i>
                </a>
-               <a href="/mckinsey-models" class="btn btn-white border-radius-lg p-2 mt-2" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="List">
+               <a href="/mckinsey-models" class="btn btn-white border-radius-lg p-2 mt-2" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="{{ __('List') }}">
                    <i class="fas fa-ellipsis-h p-2"></i>
                </a>
 
@@ -96,9 +96,9 @@
                 <div class="d-flex px-2 py-1">
                     <div>
                         <div class="avatar avatar-xxl rounded-circle  bg-gradient-dark shadow text-center">
-                            {{__('Shared')}}
-                            <br>
                             {{__('Values')}}
+                            <br>
+                            {{__('Shared')}}
                         </div>
 
 

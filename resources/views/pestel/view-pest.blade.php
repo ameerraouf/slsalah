@@ -18,13 +18,13 @@
         <div class="col-md-1 text-center d-print-none">
 
 
-            <a href="/write-pestle?id={{$model->id}}" class="btn btn-white border-radius-lg p-2 mt-2" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="Edit">
+            <a href="/write-pestle?id={{$model->id}}" class="btn btn-white border-radius-lg p-2 mt-2" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="{{ __('Edit') }}">
                 <i class="fas fa-pen p-2"></i>
             </a>
-            <a href="#" onclick="window.print()" class="btn btn-white border-radius-lg p-2 mt-2" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Print">
+            <a href="#" onclick="window.print()" class="btn btn-white border-radius-lg p-2 mt-2" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="{{ __('Print') }}">
                 <i class="fas fa-print p-2"></i>
             </a>
-            <a href="/pestle-list" class="btn btn-white border-radius-lg p-2 mt-2" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="List">
+            <a href="/pestle-list" class="btn btn-white border-radius-lg p-2 mt-2" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="{{ __('List') }}">
                 <i class="fas fa-ellipsis-h p-2"></i>
             </a>
         </div>
@@ -40,7 +40,7 @@
                     <div class="card-body">
                         <p class="card-text">
                             @if (!empty($model))
-                                {!!clean($model->political)!!}
+                            {!!clean(json_decode($model->political))[0]!!}
                             @endif
 
                         </p>
@@ -54,7 +54,7 @@
                     <div class="card-body">
                         <p class="card-text">
                             @if (!empty($model))
-                                {!!clean($model->economic)!!}
+                                {!!clean(json_decode($model->economic))[0]!!}
                             @endif
 
                         </p>
@@ -68,7 +68,7 @@
                     <div class="card-body">
                         <p class="card-text">
                             @if (!empty($model))
-                                {!!clean($model->social)!!}
+                                {!!clean(json_decode($model->social))[0]!!}
                             @endif
 
                         </p>
@@ -81,21 +81,7 @@
                     </div>
                     <div class="card-body">
                         <p>  @if (!empty($model))
-                                {!!clean($model->technological)!!}
-                            @endif
-
-                        </p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header fw-bolder text-center text-white bg-dark-alt">
-                        <h1 class="text-white">L</h1>
-                        {{__('Legal')}}
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">
-                            @if (!empty($model))
-                                {!!clean($model->legal)!!}
+                                {!!clean(json_decode($model->technological))[0]!!}
                             @endif
 
                         </p>
@@ -109,9 +95,21 @@
                     <div class="card-body">
                         <p class="card-text">
                             @if (!empty($model))
-                                {!!clean($model->environmental)!!}
+                            {!!clean(json_decode($model->environmental))[0]!!}                            
                             @endif
-
+                        </p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header fw-bolder text-center text-white bg-dark-alt">
+                        <h1 class="text-white">L</h1>
+                        {{__('Legal')}}
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            @if (!empty($model))
+                            {!!clean(json_decode($model->legal))[0]!!}
+                            @endif
                         </p>
                     </div>
                 </div>

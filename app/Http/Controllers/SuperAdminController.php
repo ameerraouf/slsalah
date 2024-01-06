@@ -365,16 +365,17 @@ class SuperAdminController extends SuperAdminBaseController
         $workspace = Workspace::find($this->user->workspace_id);
         $available_languages = User::$available_languages;
         $api_keys = $this->settings['api_keys'] ?? null;
-
         if ($api_keys) {
             $api_keys = implode(',' , json_decode($api_keys));
         }
+        $api_module = $this->settings['api_module'] ?? null;
         return \view("settings.settings", [
             "selected_navigation" => "settings",
             "layout" => "super-admin-portal",
             "workspace" => $workspace,
             "available_languages" => $available_languages,
-            "api_keys_test" => $api_keys
+            "api_keys_test" => $api_keys,
+            "api_module" => $api_module
         ]);
     }
 
@@ -998,7 +999,6 @@ class SuperAdminController extends SuperAdminBaseController
 
     public function savePrivacy(Request $request)
     {
-
         $post = PrivacyPolicy::first();
 
         if (!$post) {
@@ -1010,7 +1010,7 @@ class SuperAdminController extends SuperAdminBaseController
         $post->description = $request->description;
         $post->save();
 
-        return redirect(config('app.url') . '/privacypage');
+        return redirect('/privacypage');
     }
 
     public function saveTerms(Request $request)
@@ -1027,7 +1027,7 @@ class SuperAdminController extends SuperAdminBaseController
         $post->description = $request->description;
         $post->save();
 
-        return redirect(config('app.url') . '/termspage');
+        return redirect('/termspage');
     }
 
 
@@ -1062,7 +1062,7 @@ class SuperAdminController extends SuperAdminBaseController
         $post->twitter = $request->twitter;
         $post->save();
 
-        return redirect(config('app.url') . '/footer');
+        return redirect('/footer');
     }
     public function cookiePage()
     {
@@ -1088,6 +1088,6 @@ class SuperAdminController extends SuperAdminBaseController
         $post->description = $request->description;
         $post->save();
 
-        return redirect(config('app.url') . '/cookiepage');
+        return redirect('/cookiepage');
     }
 }

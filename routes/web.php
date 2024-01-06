@@ -1,32 +1,34 @@
 <?php
 
-use App\Http\Controllers\ActionsController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EconomicPlan;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PestController;
+use App\Http\Controllers\SwotController;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\PlansController;
+use App\Http\Controllers\VideoController;
 use App\Http\Controllers\DeleteController;
-use App\Http\Controllers\DocumentController;
-use App\Http\Controllers\DownloadController;
-
-use App\Http\Controllers\FrontendController;
-use App\Http\Controllers\MarketingController;
-use App\Http\Controllers\MckinseyController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\PaypalController;
-use App\Http\Controllers\PestController;
 use App\Http\Controllers\PestelController;
-use App\Http\Controllers\PlansController;
 use App\Http\Controllers\PorterController;
+use App\Http\Controllers\ActionsController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\DownloadController;
+use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\MckinseyController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MarketingController;
 use App\Http\Controllers\SubscribeController;
 use App\Http\Controllers\SuperAdminController;
-use App\Http\Controllers\SwotController;
-use App\Http\Controllers\TaskController;
-use App\Http\Controllers\VideoController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EconomicPlanController;
+use App\Http\Controllers\FinancialEvaluationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -372,6 +374,18 @@ Route::prefix("admin")
             "delete",
         ])->name("delete");
     });
+
+    //economic plan routes 
+    Route::get('/economic-plan' , [EconomicPlanController::class , 'index'])->name('economiccPlan.index');
+    Route::post('/economic-plan-save' , [EconomicPlanController::class , 'create'])->name('economiccPlan.create');
+
+    //finanical evaluation routes
+    Route::get('/financial-evaluation' , [FinancialEvaluationController::class , 'index'])->name('financial_evaluation.index');
+    Route::post('/economic-plan-save' , [FinancialEvaluationController::class , 'create'])->name('financial_evaluation.create');
+
+
+
+
 Route::get("/kanban", [TaskController::class, "kanban"]);
 Route::get("/gantt", [TaskController::class, "gantt"]);
 Route::post("/todo/set-status", [TaskController::class, "setStatus"]);

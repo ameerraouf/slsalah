@@ -1,15 +1,24 @@
 @extends('layouts.primary')
+@section('head')
+    <style>
+        .card-header {
+            min-height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+@endsection
 @section('content')
-
     <div class="row d-print-none">
 
 
         <div class="col text-center">
             <h5 class="mb-2 text-secondary fw-bolder">
-                {{__('Porter\'s Five Forces Model of')}}
-                @if (!empty($model))
-                    {{$model->company_name}}
-                @endif
+                <span class="d-inline-block me-2">{{ __('Porter 5-F Model') }}</span>
+                {{-- @if (!empty($model))
+                    {{ $model->company_name }}
+                @endif --}}
 
             </h5>
         </div>
@@ -19,13 +28,16 @@
         <div class="col-md-1 text-center d-print-none">
 
 
-            <a href="/new-porter?id={{$model->id}}" class="btn btn-white border-radius-lg p-2 mt-2" type="button" data-bs-toggle="tooltip" data-bs-placement="right" title="Edit">
+            <a href="/new-porter?id={{ $model->id }}" class="btn btn-white border-radius-lg p-2 mt-2" type="button"
+                data-bs-toggle="tooltip" data-bs-placement="right" title="{{ __('Edit') }}">
                 <i class="fas fa-pen p-2"></i>
             </a>
-            <a href="#" onclick="window.print()" class="btn btn-white border-radius-lg p-2 mt-2" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Print">
+            <a href="#" onclick="window.print()" class="btn btn-white border-radius-lg p-2 mt-2" type="button"
+                data-bs-toggle="tooltip" data-bs-placement="left" title="{{ __('Print') }}">
                 <i class="fas fa-print p-2"></i>
             </a>
-            <a href="/porter-models" class="btn btn-white border-radius-lg p-2 mt-2" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="List">
+            <a href="/porter-models" class="btn btn-white border-radius-lg p-2 mt-2" type="button" data-bs-toggle="tooltip"
+                data-bs-placement="left" title="{{ __('List') }}">
                 <i class="fas fa-ellipsis-h p-2"></i>
             </a>
         </div>
@@ -36,12 +48,12 @@
 
                     <div class="card-header fw-bolder text-center text-white bg-lightblue">
 
-                        {{__('Threat of New Entry')}}
+                        {{ __('Threat of New Entry') }}
                     </div>
                     <div class="card-body">
                         <p class="card-text">
                             @if (!empty($model))
-                                {!!clean($model->entrants)!!}
+                                {!! clean($model->entrants) !!}
                             @endif
 
                         </p>
@@ -50,12 +62,12 @@
                 <div class="card">
                     <div class="card-header fw-bolder text-center text-white bg-info">
 
-                        {{__(' Bargaining Power of Suppliers')}}
+                        {{ __(' Bargaining Power of Suppliers') }}
                     </div>
                     <div class="card-body">
                         <p class="card-text">
                             @if (!empty($model))
-                                {!!clean($model->suppliers)!!}
+                                {!! clean($model->suppliers) !!}
                             @endif
 
                         </p>
@@ -64,11 +76,12 @@
                 <div class="card">
                     <div class="card-header fw-bolder text-center text-white  bg-darkblue">
 
-                        {{__('Rivalry Among Existing Competitors')}}
+                        {{ __('Rivalry Among Existing Competitors') }}
                     </div>
                     <div class="card-body">
-                        <p>  @if (!empty($model))
-                                {!!clean($model->rivals)!!}
+                        <p>
+                            @if (!empty($model))
+                                {!! clean($model->rivals) !!}
                             @endif
 
                         </p>
@@ -77,12 +90,12 @@
                 <div class="card">
                     <div class="card-header fw-bolder  text-center bg-info text-white">
 
-                        {{__('Bargaining Power of Buyers')}}
+                        {{ __('Bargaining Power of Buyers') }}
                     </div>
                     <div class="card-body">
                         <p class="card-text">
                             @if (!empty($model))
-                                {!!clean($model->customers)!!}
+                                {!! clean($model->customers) !!}
                             @endif
 
                         </p>
@@ -91,11 +104,12 @@
                 <div class="card">
                     <div class="card-header fw-bolder text-center text-white  bg-lightblue">
 
-                        {{__('Threat of Substitute')}}
+                        {{ __('Threat of Substitute') }}
                     </div>
                     <div class="card-body">
-                        <p>  @if (!empty($model))
-                                {!!clean($model->substitute)!!}
+                        <p>
+                            @if (!empty($model))
+                                {!! clean($model->substitute) !!}
                             @endif
 
                         </p>

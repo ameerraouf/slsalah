@@ -8,7 +8,7 @@
             </h5>
         </div>
         <div class="col text-end">
-            <a href="/new-mckinsey-model" type="button" class="btn btn-info">
+            <a href="/new-mckinsey-model" type="button" class="btn btn-info" style="text-transform: capitalize;">
                 {{__('New mckinsey 7-S Model')}}
             </a>
         </div>

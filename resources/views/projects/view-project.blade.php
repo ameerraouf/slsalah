@@ -16,7 +16,10 @@
                         <h5 class="">
                             {{$project->title}}
                         </h5><span
-                            class="badge bg-purple-light  font-weight-bold">{{$project->status}}</span></span>
+                            class="badge bg-purple-light  font-weight-bold">
+                            {{__($project->status)}}
+                        </span>
+                    </span>
                 </div>
                 <div class=" ms-4">
                     <div class="pt-0">

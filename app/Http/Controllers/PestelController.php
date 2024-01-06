@@ -56,6 +56,8 @@ class PestelController extends BaseController
         $request->validate([
             "company_name" => "required|max:150",
             "id" => "nullable|integer",
+        ] , [
+            "company_name.required" => "حقل اسم الشركة او العمل مطلوب."
         ]);
 
         $model = false;

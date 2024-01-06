@@ -116,7 +116,7 @@
                                 <label class="form-label mt-4">{{__('Phone Number')}}</label>
                                 <div class="input-group">
                                     <input id="phone" name="phone_number"
-                                           @if (!empty($user)) value="{{$user->phone}}"
+                                           @if (!empty($user)) value="{{$user->phone_number}}"
                                            @endif class="form-control" type="number">
                                 </div>
                             </div>

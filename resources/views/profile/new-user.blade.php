@@ -19,7 +19,11 @@
                             @endif
                             <div class="multisteps-form__panel p-3  js-active" data-animation="FadeIn">
                                 <h5 class="font-weight-bolder mb-0">
-                                    {{__('Add New User')}}
+                                    @if ($selected_user)
+                                        {{ __('Edit User') }}
+                                    @else
+                                        {{ __('Add New User') }}
+                                    @endif
 
                                 </h5>
 

@@ -5,7 +5,7 @@
     <div class=" row">
         <div class="col">
             <h5 class=" text-secondary fw-bolder">
-                {{__('Ideation Canvas List')}}
+                {{__('Ideation Canvas')}}
             </h5>
         </div>
         <div class="col text-end">
@@ -28,10 +28,10 @@
                             <div class="card-body position-relative ">
 
                                 <div class="d-flex mt-7">
-                                    <a href="/brainstorming?id={{$canvas->id}}" class="btn btn-info btn-round p-2 mb-0" type="button" >
+                                    <a href="/brainstorming?id={{$canvas->id}}" class="btn btn-info btn-round p-2 me-2 mb-0" type="button" >
                                         {{__('Edit Canvas')}}
                                     </a>
-                                    <a href="/delete/canvas/{{$canvas->id}}" class="btn btn-round btn-outline-dark p-2  ms-2 mb-0" type="button" >
+                                    <a href="/delete/canvas/{{$canvas->id}}" class="delete-btn btn btn-round btn-outline-dark p-2  ms-2 mb-0" type="button" >
                                         {{__('Delete')}}
                                     </a>
                                 </div>
@@ -68,4 +68,17 @@
 
 
 
+@endsection
+@section('script')
+    <script>
+        $('body').on('click', '.delete-btn', function(e) {
+            e.preventDefault()
+            var result = window.confirm("Are you sure you want to proceed?");
+            let targetLink = $(this).attr('href')
+            if (result) {
+                window.location.href = targetLink;
+            }
+
+        })
+    </script>
 @endsection
