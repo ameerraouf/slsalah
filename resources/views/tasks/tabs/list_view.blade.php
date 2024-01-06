@@ -182,7 +182,7 @@
                                 <div>
                                     <label for="exampleFormControlInput1"
                                         class="required form-label">{{ __('Start Date') }}</label>
-                                    <input type="text" placeholder="Pick Date" id="start_date" name="start_date"
+                                    <input type="text" placeholder="اختر التاريخ" id="start_date" name="start_date"
                                         @if (!empty($task)) value="{{ $task->start_date }}" @else value="{{ old('start_date') }}" @endif
                                         class="form-control form-control-solid flatpickr-input" />
                                 </div>
@@ -194,7 +194,7 @@
                                     <input type="text" id="due_date" name="due_date"
                                         class="form-control form-control-solid"
                                         @if (!empty($task)) value="{{ $task->due_date }}"  @else value="{{ old('start_date') }}" @endif
-                                        placeholder="Pick Date" />
+                                        placeholder="اختر التاريخ" />
                                 </div>
                             </div>
 
