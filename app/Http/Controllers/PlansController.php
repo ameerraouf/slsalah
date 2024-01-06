@@ -78,6 +78,7 @@ class PlansController extends BaseController
         $request->validate([
             "title" => "required|max:150",
             "id" => "nullable|integer",
+            "start_date" => 'after:today'
         ]);
 
         $event = false;
