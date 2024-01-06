@@ -80,6 +80,8 @@ class ActionsController extends BaseController
             "id" => "nullable|integer",
             "topic" => "required|string",
             "cover_photo" => "nullable|file|mimes:jpeg,png,jpg,gif,svg",
+        ] , [
+            "topic.required" => 'الحقل الموضوع مطلوب.'
         ]);
 
         $note = false;

@@ -3,7 +3,7 @@
     <div class=" row">
         <div class="col">
             <h5 class="mb-2 text-secondary fw-bolder">
-                {{__('Notes')}}
+                {{__('Note Book')}}
             </h5>
         </div>
         <div class="col text-end">
