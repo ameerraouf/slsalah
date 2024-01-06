@@ -49,6 +49,9 @@
                                             <h6 class="mb-1 text-dark text-sm">{{ $event->title }}</h6>
                                             <span class="text-sm">
                                                 {{ \App\Supports\DateSupport::parse($event->start_date)->format(config('app.date_time_format')) }}
+                                            </span><br>
+                                            <span class="text-sm">
+                                                {{ \App\Supports\DateSupport::parse($event->end_date)->format(config('app.date_time_format')) }}
                                             </span>
                                             <a class="btn btn-link text-dark px-3 mb-0"
                                                 href="/delete/event/{{ $event->id }}"><i
