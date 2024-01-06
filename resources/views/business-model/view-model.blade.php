@@ -14,7 +14,7 @@
             <a href="/design-business-model?id={{ $model->id }}"
                 class="btn btn-sm btn-warning add_event waves-effect waves-light">{{ __('Edit') }}</a>
             <a href="/delete/business-model/{{ $model->id }}"
-                class="btn btn-sm btn-danger add_event waves-effect waves-light">{{ __('Delete') }}</a>
+                class="btn btn-sm btn-danger add_event waves-effect waves-light delete-btn">{{ __('Delete') }}</a>
         </div>
     </div>
     <div class="">
@@ -97,4 +97,17 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+<script>
+    $('body').on('click', '.delete-btn', function(e) {
+        e.preventDefault()
+        var result = window.confirm("Are you sure you want to proceed?");
+        let targetLink = $(this).attr('href')
+        if (result) {
+            window.location.href = targetLink;
+        }
+
+    })
+</script>
 @endsection
