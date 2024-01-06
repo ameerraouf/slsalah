@@ -105,7 +105,7 @@
                             btn-secondary @endif
                             dropdown-toggle"
                                 type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ $task->status ?? 'todo' }}
+                                {{ __($task->status) ?? 'todo' }}
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 @if ($task->status !== 'todo')
