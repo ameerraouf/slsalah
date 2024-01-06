@@ -53,10 +53,9 @@
                                             <span class="text-sm">
                                                 {{ \App\Supports\DateSupport::parse($event->end_date)->format(config('app.date_time_format')) }}
                                             </span>
-                                            <a class="btn btn-link text-dark px-3 mb-0"
+                                            <a class="btn btn-link text-dark px-3 mb-0 delete-btn"
                                                 href="/delete/event/{{ $event->id }}"><i
-                                                    class="fas fa-trash text-dark me-2"
-                                                    aria-hidden="true"></i>{{ __('Delete') }}</a>
+                                                    class="fas fa-trash text-dark me-2"></i>{{ __('Delete') }}</a>
                                         </div>
 
 
@@ -100,6 +99,15 @@
 @endsection
 @section('script')
     <script>
+        $('body').on('click', '.delete-btn', function(e) {
+            e.preventDefault()
+            var result = window.confirm("Are you sure you want to proceed?");
+            let targetLink = $(this).attr('href')
+            if (result) {
+                window.location.href = targetLink;
+            }
+
+        })
         $(function() {
             "use strict";
 
