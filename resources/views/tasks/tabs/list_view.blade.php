@@ -1,13 +1,13 @@
 <div class="card-body mt-4 table-responsive  pt-0">
-{{--    <div class="card bg-purple-light mb-3 mt-4">--}}
-{{--        <div class="card-header bg-purple-light pb-0 p-3">--}}
-{{--            <div class="row">--}}
-{{--                <div class="col-md-8 ">--}}
-{{--                    <p>{{ __('workplan') }}</p>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
+    {{--    <div class="card bg-purple-light mb-3 mt-4"> --}}
+    {{--        <div class="card-header bg-purple-light pb-0 p-3"> --}}
+    {{--            <div class="row"> --}}
+    {{--                <div class="col-md-8 "> --}}
+    {{--                    <p>{{ __('workplan') }}</p> --}}
+    {{--                </div> --}}
+    {{--            </div> --}}
+    {{--        </div> --}}
+    {{--    </div> --}}
     <!--begin::Table-->
     <table class="table align-items-center mb-0" id="cloudonex_table">
         <!--begin::Table head-->
@@ -141,7 +141,8 @@
                                 data-id="{{ $task->id }}">
                                 <i class="fas fa-edit"></i>
                                 {{ __('Edit') }}</a>
-                            <a href="/delete/task/{{ $task->id }}" class="btn btn-link text-danger px-3 mb-0"
+                            <a href="/delete/task/{{ $task->id }}"
+                                class="btn btn-link text-danger px-3 mb-0 delete-btn"
                                 data-kt-users-table-filter="delete_row">
                                 <i class="fas fa-trash"></i>
                                 {{ __('Delete') }}</a>
@@ -255,9 +256,8 @@
                         <div id="sp_result_div_main"></div>
                         <div class="">
                             <label for="exampleFormControlInput1"
-                                   class="required form-label">{{ __('strategic_objective') }}</label>
-                            <textarea type="text" id="main_goal" name="main_goal"
-                                      class="form-control form-control-solid" placeholder="" >{{ isset($tasksGoal) ? $tasksGoal->description : '' }}</textarea>
+                                class="required form-label">{{ __('strategic_objective') }}</label>
+                            <textarea type="text" id="main_goal" name="main_goal" class="form-control form-control-solid" placeholder="">{{ isset($tasksGoal) ? $tasksGoal->description : '' }}</textarea>
                         </div>
                     </div>
 
@@ -265,7 +265,7 @@
                         @csrf
                         <button type="submit" class="btn btn-info">{{ __('Save') }} </button>
                         <button type="button" class="btn bg-pink-light text-danger"
-                                data-bs-dismiss="modal">{{ __('Close') }}</button>
+                            data-bs-dismiss="modal">{{ __('Close') }}</button>
                     </div>
                     <input type="hidden" name="task_id" id="task_id" value="">
                 </form>
@@ -273,12 +273,15 @@
         </div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
-    // function addGoal(){
-    //     $('#goals_div').append('<div class="goal form-group">\n' +
-    //         '                                    <label for="exampleFormControlInput1"\n' +
-    //         '                                           class="required form-label">هدف</label>\n' +
-    //         '                                    <input type="text" class="form-control form-control-solid" name="goals[]">\n' +
-    //         '                                </div>')
-    // }
+    $('body').on('click', '.delete-btn', function(e) {
+        e.preventDefault()
+        var result = window.confirm("Are you sure you want to proceed?");
+        let targetLink = $(this).attr('href')
+        if (result) {
+            window.location.href = targetLink;
+        }
+
+    })
 </script>
