@@ -47,23 +47,23 @@
                                         <td>{{ $source->unit_price }} SAR</td>
                                         <td>
                                             @if($planningRevenueOperatingAssumptions->first_year != 100)
-                                                {{ formatCurrency(($source->total_revenue * ($planningRevenueOperatingAssumptions->first_year / 100)),getWorkspaceCurrency($settings)) }}
+                                                {{ formatCurrency(($source->total_revenue * ($planningRevenueOperatingAssumptions->first_year / 100)),$currency) }}
                                             @else
-                                                {{ formatCurrency($source->total_revenue,getWorkspaceCurrency($settings)) }}
+                                                {{ formatCurrency($source->total_revenue,$currency) }}
                                             @endif
                                         </td>
                                         <td>
                                             @if($planningRevenueOperatingAssumptions->second_year != 100)
-                                                {{ formatCurrency(($source->total_second_revenue * ($planningRevenueOperatingAssumptions->second_year / 100)),getWorkspaceCurrency($settings)) }}
+                                                {{ formatCurrency(($source->total_second_revenue * ($planningRevenueOperatingAssumptions->second_year / 100)),$currency) }}
                                             @else
-                                                {{ formatCurrency($source->total_second_revenue,getWorkspaceCurrency($settings)) }}
+                                                {{ formatCurrency($source->total_second_revenue,$currency) }}
                                             @endif
                                         </td>
                                         <td>
                                             @if($planningRevenueOperatingAssumptions->third_year != 100)
-                                                {{ formatCurrency(($source->total_third_revenue * ($planningRevenueOperatingAssumptions->third_year / 100)),getWorkspaceCurrency($settings)) }}
+                                                {{ formatCurrency(($source->total_third_revenue * ($planningRevenueOperatingAssumptions->third_year / 100)),$currency) }}
                                             @else
-                                                {{ formatCurrency($source->total_third_revenue,getWorkspaceCurrency($settings)) }}
+                                                {{ formatCurrency($source->total_third_revenue,$currency) }}
                                             @endif
                                         </td>
 
