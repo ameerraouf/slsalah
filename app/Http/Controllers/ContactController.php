@@ -31,11 +31,12 @@ class ContactController extends BaseController
             ->keyBy("id")
             ->all();
 
-
+        $selected_navigation = 'invested_capital_planning';
         return \view("investors.add", [
             "selected_navigation" => "investors",
             "investor" =>  $investor,
             "products" =>  $products,
+            "selected_navigation" => $selected_navigation
         ]);
     }
 
