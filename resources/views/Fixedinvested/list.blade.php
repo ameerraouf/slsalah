@@ -44,7 +44,7 @@
                                         </td>
                                         <td class="align-middle text-center">
                                         <span
-                                                class="text-secondary font-weight-bold">{{formatCurrency( ($investor->investing_price != 0 ? $investor->investing_price : ''),getWorkspaceCurrency($settings))}}</span>
+                                                class="text-secondary font-weight-bold">{{formatCurrency( ($investor->investing_price != 0 ? $investor->investing_price : ''), $currency)}}</span>
                                         </td>
                                         <td class="align-middle text-right">
                                             <div class="ms-auto">
