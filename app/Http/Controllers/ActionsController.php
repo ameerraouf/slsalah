@@ -48,6 +48,7 @@ class ActionsController extends BaseController
 
     public function viewNote(Request $request)
     {
+       
         if ($this->modules && !in_array("notes", $this->modules)) {
             abort(401);
         }

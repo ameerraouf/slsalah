@@ -2,7 +2,7 @@
 @section('content')
     <div class="row">
         <h5 class=" col fw-bolder">
-            {{$note->topic}}
+            {{$note->title}}
         </h5>
         <div class="col text-end mb-3">
             <a href="/add-note?id={{$note->id}}" class="btn btn-info btn-sm mb-0">{{__('Edit')}}</a>
@@ -12,7 +12,7 @@
     <div class="card">
         <div class="row">
             <div class="col-md-6 ms-auto text-center mt-3 ">
-                <h2 class="mt-6 ms-3">{{$note->title}}</h2>
+                <h2 class="mt-6 ms-3">{{$note->topic}}</h2>
                 @if(!empty($users[$note->admin_id]->photo))
                     <a href="javascript:" class=" mt-4 avatar rounded-circle border border-secondary">
                         <img alt="" class="p-1" src="{{PUBLIC_DIR}}/uploads/{{$users[$note->admin_id]->photo}}">
