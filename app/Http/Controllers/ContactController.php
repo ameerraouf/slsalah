@@ -187,12 +187,12 @@ class ContactController extends BaseController
             ->all();
 
 
-
+            $selected_navigation = 'invested_capital_planning';
         return \view("investors.view", [
             "selected_navigation" => "investors",
             "investor" => $investor,
             "products" => $products,
-
+            "selected_navigation" => $selected_navigation
         ]);
     }
 }
