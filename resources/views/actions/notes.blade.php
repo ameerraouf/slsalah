@@ -19,8 +19,8 @@
                     @endif
 
                     <div class="card-body">
-                        <p class="mb-1 pt-2 text-bold">{{$note->topic}}</p>
                         <h5 class="card-title">{{$note->title}}</h5>
+                        <p class="mb-1 pt-2 text-bold">{{$note->topic}}</p>
                         <p class="card-text"> {!!substr($note->notes,0,400)!!} </p>
                         <a class="text-body text-sm font-weight-bold mb-0 icon-move-right mt-auto"
                            href="/view-note?id={{$note->id}}">
