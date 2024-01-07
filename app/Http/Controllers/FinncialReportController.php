@@ -81,6 +81,13 @@ class FinncialReportController extends BaseController
 
     public function capital_investment_model()
     {
+        $user = User::where('super_admin', 1)->first();
+        $settings_mod = Setting::where('workspace_id', $user->workspace_id)->get()->keyBy('key');
+        if (isset($settings_mod['currency'])) {
+            $currency = $settings_mod['currency']->value;
+        } else {
+            $currency = config('app.currency');
+        }
         $planningRevenueOperatingAssumptions = PlanningRevenueOperatingAssumption::where('workspace_id', $this->user->workspace_id)
             ->first();
         $planningFinancialAssumption = PlanningFinancialAssumption::where('workspace_id', $this->user->workspace_id)
@@ -92,13 +99,14 @@ class FinncialReportController extends BaseController
         $workingInvestedTotal = WorkingInvestedCapital::select(DB::raw('SUM(investing_annual_cost) as investing_annual_cost_total'))->where("workspace_id", $this->user->workspace_id)->get()->pluck('investing_annual_cost_total');
         $fixedInvestedTotal = FixedInvestedCapital::select(DB::raw('SUM(investing_price) as investing_price_total'))->where("workspace_id", $this->user->workspace_id)->get()->pluck('investing_price_total');
         $totalInvestedCapital = (!empty($workingInvestedTotal) ? $workingInvestedTotal[0] : 0.0) + (!empty($fixedInvestedTotal) ? $fixedInvestedTotal[0] : 0.0);
-        $totalInvestedCapital = formatCurrency($totalInvestedCapital, getWorkspaceCurrency($this->settings));
+        $totalInvestedCapital = formatCurrency($totalInvestedCapital, $currency);
         $selected_navigation = 'capital_investment_model';
         $calc_total = $planningRevenueOperatingAssumptions->calc_total;
 
+
         return view(
             'planning_revenue_operating_assumptions.capital_investment_model',
-            compact('calc_total', 'planningRevenueOperatingAssumptions', 'planningFinancialAssumption', 'all_revenues_forecasting', 'all_revenues_costs_forecasting', 'totalInvestedCapital', 'selected_navigation')
+            compact('calc_total', 'planningRevenueOperatingAssumptions', 'planningFinancialAssumption', 'all_revenues_forecasting', 'all_revenues_costs_forecasting', 'totalInvestedCapital', 'selected_navigation', 'currency')
         );
     }
     public function textReport()
