@@ -88,7 +88,7 @@ class ContactController extends BaseController
             "last_name" => "required|string|max:100",
             "email" => "required|email",
             "phone_number" => "nullable|string|max:50",
-            "amount" => "nullable|gt:0",
+            "amount" => "required|gt:0",
             "id" => "nullable|integer",
         ] , [
             "first_name.required" => 'الحقل الاسم الأول مطلوب.',

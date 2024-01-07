@@ -82,7 +82,7 @@
 
                                     <div class="row mt-3">
                                         <div class="col-12 col-sm-6 mt-3 mt-sm-0">
-                                            <label>{{ __('Estimated Amount to be invested') }}</label>
+                                            <label>{{ __('Estimated Amount to be invested') }} <span class="text-danger">*</span></label>
                                             <input name="amount" class=" form-control" type="number"
                                                 value="{{ $investor->amount ?? (old('amount') ?? '') }}">
                                         </div>
