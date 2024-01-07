@@ -50,10 +50,7 @@
         </div>
     </div>
 
-    <div class="card ">
-        <div class="card-body" id="card_body">
-        </div>
-    </div>
+   
 @endsection
 
 
