@@ -86,8 +86,8 @@ class ContactController extends BaseController
         $request->validate([
             "first_name" => "required|string|max:100",
             "last_name" => "required|string|max:100",
-            "email" => "required|email|unique:investors,email",
-            "phone_number" => "nullable|string|max:50|unique:investors,phone_number",
+            "email" => "required|email",
+            "phone_number" => "nullable|string|max:50",
             "amount" => "nullable|gt:0",
             "id" => "nullable|integer",
         ] , [
