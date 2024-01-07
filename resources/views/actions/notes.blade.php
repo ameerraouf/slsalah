@@ -10,7 +10,7 @@
             <a href="/add-note" type="button" class="btn btn-info">{{__('Take New Note')}}</a>
         </div>
     </div>
-    <div class="row" data-masonry='{"percentPosition": true }'>
+    <div class="row">
         @foreach($notes as $note)
             <div class="col-md-4 mb-4">
                 <div class="card">
