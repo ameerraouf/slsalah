@@ -6,7 +6,7 @@
         </h5>
         <div class="col text-end mb-3">
             <a href="/add-note?id={{$note->id}}" class="btn btn-info btn-sm mb-0">{{__('Edit')}}</a>
-            <a href="/delete/note/{{$note->id}}" class="btn btn-warning btn-sm mb-0">{{__('Delete')}}</a>
+            <a href="/delete/note/{{$note->id}}" class="btn btn-warning btn-sm mb-0 delete-btn">{{__('Delete')}}</a>
         </div>
     </div>
     <div class="card">
@@ -60,4 +60,18 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        $('body').on('click', '.delete-btn', function(e) {
+            e.preventDefault()
+            var result = window.confirm("Are you sure you want to proceed?");
+            let targetLink = $(this).attr('href')
+            if (result) {
+                window.location.href = targetLink;
+            }
+
+        })
+    </script>
 @endsection
