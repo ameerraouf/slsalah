@@ -727,7 +727,7 @@
     "marketing_expenses": "مصروفات تسويقية",
     "marketing_expenses_hint": "نسبة المصاريف التسويقية تكون من 5% الى 20 %",
     "planningCostAssumptionsStored": "تم حفظ بيانات تخطيط افتراضات التكاليف بنجاح",
-    "planningFinancialAssumptionsStored": "تم حفظ بيانات تخطيط افتراضات مالية",
+    "planningFinancialAssumptionsStored": "تم حفظ بيانات تخطيط افتراضات المالية",
     "noUserWorkspaceFound": "لم يتم العثور على مساحة عمل للمستخدم",
     "totalMustLesserThan100": "المجموع يجب ان يكون اقل من 100 ، لان المجموع + صافي الربح = 100",
     "net_profit":"صافي الربح",
