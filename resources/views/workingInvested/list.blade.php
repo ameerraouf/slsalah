@@ -45,11 +45,11 @@
                                         </td>
                                         <td class="align-middle text-center">
                                         <span
-                                                class="text-secondary font-weight-bold">{{ formatCurrency( ($investor->investing_monthly_cost != 0 ? $investor->investing_monthly_cost : ''),getWorkspaceCurrency($settings)) }}</span>
+                                                class="text-secondary font-weight-bold">{{ formatCurrency( ($investor->investing_monthly_cost != 0 ? $investor->investing_monthly_cost : ''),$currency) }}</span>
                                         </td>
                                         <td class="align-middle text-center">
                                         <span
-                                                class="text-secondary font-weight-bold">{{formatCurrency(($investor->investing_annual_cost != 0 ? $investor->investing_annual_cost : ''),getWorkspaceCurrency($settings))}}</span>
+                                                class="text-secondary font-weight-bold">{{formatCurrency(($investor->investing_annual_cost != 0 ? $investor->investing_annual_cost : ''),$currency)}}</span>
                                         </td>
                                         <td class="align-middle text-right">
                                             <div class="ms-auto">
@@ -77,11 +77,11 @@
                                     </td>
                                     <td class="align-middle text-center">
                                         <span
-                                                class="text-secondary font-weight-bold">{{formatCurrency($workingInvested->sum('investing_monthly_cost'),getWorkspaceCurrency($settings))}}</span>
+                                                class="text-secondary font-weight-bold">{{formatCurrency($workingInvested->sum('investing_monthly_cost'),$currency)}}</span>
                                     </td>
                                     <td class="align-middle text-center">
                                         <span
-                                                class="text-secondary font-weight-bold">{{formatCurrency($workingInvested->sum('investing_annual_cost'),getWorkspaceCurrency($settings))}}</span>
+                                                class="text-secondary font-weight-bold">{{formatCurrency($workingInvested->sum('investing_annual_cost'),$currency)}}</span>
                                     </td>
                                 </tr>
                             @endif
