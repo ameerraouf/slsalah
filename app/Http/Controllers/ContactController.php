@@ -90,6 +90,10 @@ class ContactController extends BaseController
             "phone_number" => "nullable|string|max:50|unique:investors,phone_number",
             "amount" => "nullable|gt:0",
             "id" => "nullable|integer",
+        ] , [
+            "first_name.required" => 'الحقل الاسم الأول مطلوب.',
+            "last_name.required" => 'الحقل الأخير الأول مطلوب.',
+            "email.required" => 'الحقل اسم المستخدم / البريد الالكترونى مطلوب.'
         ]);
 
 
