@@ -515,14 +515,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link @if(($selected_navigation ?? '') === 'team') active @endif " href="/staff">
-
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                         class="feather feather-database">
-                        <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
-                        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
-                        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
-                    </svg>
+<i class="fas fa-users"></i>
                     <span class="nav-link-text ms-3">{{__('Users')}}</span>
                 </a>
             </li>
@@ -530,13 +523,7 @@
             <li class="nav-item">
                 <a class="nav-link @if(request()->path() === 'user/videos') active @endif " href="/user/videos">
 
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                         class="feather feather-database">
-                        <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
-                        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
-                        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
-                    </svg>
+                    <i class="fas fa-video"></i>
                     <span class="nav-link-text ms-3">{{__('فيديوهات تعليمية')}}</span>
                 </a>
             </li>
@@ -544,13 +531,7 @@
             <li class="nav-item">
                 <a class="nav-link @if(request()->path() === 'user/chat') active @endif " href="/user/chat">
 
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                         class="feather feather-database">
-                        <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
-                        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
-                        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
-                    </svg>
+                  <i class="fas fa-question"></i>
 
                     <span class="nav-link-text ">{{__('جلسات دعم ومساعدة')}}</span>
                     <strong class=" text-danger mx-2" id="user_chat_count" >
