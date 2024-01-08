@@ -629,7 +629,7 @@
                                                                     d="M1.06885 4.7541L0.0655738 5.5082L0.0721311 6.89836V8.29508L1.35738 9.27869C2.05902 9.81639 2.92459 10.4852 3.27213 10.7607C3.61967 11.0295 4.68852 11.8689 5.65902 12.6164L7.40983 13.9738V15.6393V17.3049L6.83934 17.7639C6.51803 18.0197 6.21639 18.2295 6.16393 18.223C6.11147 18.223 5.80984 18.0197 5.49508 17.7639L4.91803 17.3049V16.341V15.377L4.24918 14.8918C3.87541 14.623 3.08197 14.0525 2.47213 13.6197L1.37705 12.8262V12.2361L1.37049 11.6393L0.931147 11.3115C0.695082 11.1279 0.380328 10.8984 0.24918 10.7934L0 10.6098L0.0131148 12.0721L0.0327869 13.5344L1.77049 14.7869L3.5082 16.0328L3.52787 16.9967L3.54754 17.9607L4.83279 18.9836C5.54754 19.541 6.14426 20 6.16393 20C6.18361 20 6.52459 19.7443 6.92459 19.423C7.32459 19.1082 7.9082 18.6557 8.21639 18.4066L8.78688 17.9672V15.6525V13.3311L8.38033 13.0098C7.73115 12.4918 2.58361 8.49836 1.88852 7.97377L1.44918 7.63935V6.90492L1.44262 6.17705L1.77049 5.93443L2.09836 5.6918V4.8459C2.09836 4.38033 2.0918 4 2.08525 4.00656C2.07213 4.00656 1.61311 4.34754 1.06885 4.7541Z"
                                                                     fill="#1B8855"></path>
                                                             </svg> </span>
-                                                        <span class="elementor-icon-list-text">تفاصيل دقيقة
+                                                        <span class="elementor-icon-list-text mx-1" style="font-size:1.1rem">تفاصيل دقيقة
                                                             وواضحة.</span>
                                                     </li>
                                                     <li class="elementor-icon-list-item">
@@ -644,7 +644,7 @@
                                                                     d="M1.06885 4.7541L0.0655738 5.5082L0.0721311 6.89836V8.29508L1.35738 9.27869C2.05902 9.81639 2.92459 10.4852 3.27213 10.7607C3.61967 11.0295 4.68852 11.8689 5.65902 12.6164L7.40983 13.9738V15.6393V17.3049L6.83934 17.7639C6.51803 18.0197 6.21639 18.2295 6.16393 18.223C6.11147 18.223 5.80984 18.0197 5.49508 17.7639L4.91803 17.3049V16.341V15.377L4.24918 14.8918C3.87541 14.623 3.08197 14.0525 2.47213 13.6197L1.37705 12.8262V12.2361L1.37049 11.6393L0.931147 11.3115C0.695082 11.1279 0.380328 10.8984 0.24918 10.7934L0 10.6098L0.0131148 12.0721L0.0327869 13.5344L1.77049 14.7869L3.5082 16.0328L3.52787 16.9967L3.54754 17.9607L4.83279 18.9836C5.54754 19.541 6.14426 20 6.16393 20C6.18361 20 6.52459 19.7443 6.92459 19.423C7.32459 19.1082 7.9082 18.6557 8.21639 18.4066L8.78688 17.9672V15.6525V13.3311L8.38033 13.0098C7.73115 12.4918 2.58361 8.49836 1.88852 7.97377L1.44918 7.63935V6.90492L1.44262 6.17705L1.77049 5.93443L2.09836 5.6918V4.8459C2.09836 4.38033 2.0918 4 2.08525 4.00656C2.07213 4.00656 1.61311 4.34754 1.06885 4.7541Z"
                                                                     fill="#1B8855"></path>
                                                             </svg> </span>
-                                                        <span class="elementor-icon-list-text">رسومات
+                                                        <span class="elementor-icon-list-text mx-1" style="font-size:1.1rem">رسومات
                                                             توضيحية.</span>
                                                     </li>
                                                     <li class="elementor-icon-list-item">
@@ -659,7 +659,7 @@
                                                                     d="M1.06885 4.7541L0.0655738 5.5082L0.0721311 6.89836V8.29508L1.35738 9.27869C2.05902 9.81639 2.92459 10.4852 3.27213 10.7607C3.61967 11.0295 4.68852 11.8689 5.65902 12.6164L7.40983 13.9738V15.6393V17.3049L6.83934 17.7639C6.51803 18.0197 6.21639 18.2295 6.16393 18.223C6.11147 18.223 5.80984 18.0197 5.49508 17.7639L4.91803 17.3049V16.341V15.377L4.24918 14.8918C3.87541 14.623 3.08197 14.0525 2.47213 13.6197L1.37705 12.8262V12.2361L1.37049 11.6393L0.931147 11.3115C0.695082 11.1279 0.380328 10.8984 0.24918 10.7934L0 10.6098L0.0131148 12.0721L0.0327869 13.5344L1.77049 14.7869L3.5082 16.0328L3.52787 16.9967L3.54754 17.9607L4.83279 18.9836C5.54754 19.541 6.14426 20 6.16393 20C6.18361 20 6.52459 19.7443 6.92459 19.423C7.32459 19.1082 7.9082 18.6557 8.21639 18.4066L8.78688 17.9672V15.6525V13.3311L8.38033 13.0098C7.73115 12.4918 2.58361 8.49836 1.88852 7.97377L1.44918 7.63935V6.90492L1.44262 6.17705L1.77049 5.93443L2.09836 5.6918V4.8459C2.09836 4.38033 2.0918 4 2.08525 4.00656C2.07213 4.00656 1.61311 4.34754 1.06885 4.7541Z"
                                                                     fill="#1B8855"></path>
                                                             </svg> </span>
-                                                        <span class="elementor-icon-list-text">مخططات تنبؤ
+                                                        <span class="elementor-icon-list-text mx-1" style="font-size:1.1rem">مخططات تنبؤ
                                                             مالي تفصيلية.</span>
                                                     </li>
                                                 </ul>
@@ -677,9 +677,9 @@
                                                             <span
                                                                 class="elementor-button-icon elementor-align-icon-left">
                                                                 <i aria-hidden="true"
-                                                                    class="fas fa-long-arrow-alt-left"></i>
+                                                                    class="fas fa-long-arrow-alt-left mx-1"></i>
                                                             </span>
-                                                            <span class="elementor-button-text">بناء خطة
+                                                            <span class="elementor-button-text" style="font-size:1.1rem">بناء خطة
                                                                 العمل الأن</span>
                                                         </span>
                                                     </a>
@@ -796,7 +796,7 @@
                                                                     class="attachment-thumbnail size-thumbnail"
                                                                     alt="" decoding="async" /></span>
                                                             <div class="cz_wpe_content">
-                                                                <h3>
+                                                                <h3 class="mx-2">
                                                                     <span style="white-space: pre-wrap;">الخطة التسويقية</span>
                                                                 </h3>
                                                             </div>
@@ -811,7 +811,7 @@
                                             data-widget_type="text-editor.default">
                                             <div class="elementor-widget-container">
                                                 <p>
-                                                    <span style="white-space: pre-wrap;">العنصر الثاني من سلسلة أدواتك نحو النجاح هي الخطة التسويقية الدقيقة والمتنوعة في أساليبها وأدواتها وعناصرها لضمان وصول أفكارك وحملاتك لكل فردٍ تستهدفه.</span>
+                                                    <span style="white-space: pre-wrap;" >العنصر الثاني من سلسلة أدواتك نحو النجاح هي الخطة التسويقية الدقيقة والمتنوعة في أساليبها وأدواتها وعناصرها لضمان وصول أفكارك وحملاتك لكل فردٍ تستهدفه.</span>
                                                 </p>
                                             </div>
                                         </div>
@@ -832,7 +832,7 @@
                                                                     d="M1.06885 4.7541L0.0655738 5.5082L0.0721311 6.89836V8.29508L1.35738 9.27869C2.05902 9.81639 2.92459 10.4852 3.27213 10.7607C3.61967 11.0295 4.68852 11.8689 5.65902 12.6164L7.40984 13.9738V15.6393V17.3049L6.83934 17.7639C6.51803 18.0197 6.21639 18.2295 6.16393 18.223C6.11147 18.223 5.80984 18.0197 5.49508 17.7639L4.91803 17.3049V16.341V15.377L4.24918 14.8918C3.87541 14.623 3.08197 14.0525 2.47213 13.6197L1.37705 12.8262V12.2361L1.37049 11.6393L0.931147 11.3115C0.695082 11.1279 0.380328 10.8984 0.24918 10.7934L0 10.6098L0.0131148 12.0721L0.0327869 13.5344L1.77049 14.7869L3.5082 16.0328L3.52787 16.9967L3.54754 17.9607L4.83279 18.9836C5.54754 19.541 6.14426 20 6.16393 20C6.18361 20 6.52459 19.7443 6.92459 19.423C7.32459 19.1082 7.9082 18.6557 8.21639 18.4066L8.78688 17.9672V15.6525V13.3311L8.38033 13.0098C7.73115 12.4918 2.58361 8.49836 1.88852 7.97377L1.44918 7.63935V6.90492L1.44262 6.17705L1.77049 5.93443L2.09836 5.6918V4.8459C2.09836 4.38033 2.0918 4 2.08525 4.00656C2.07213 4.00656 1.61311 4.34754 1.06885 4.7541Z"
                                                                     fill="#FFC107"></path>
                                                             </svg> </span>
-                                                        <span class="elementor-icon-list-text">نستهدف زيادة
+                                                        <span class="elementor-icon-list-text mx-1" style="font-size:1.1rem">نستهدف زيادة
                                                             إيراداتك شهريًا وسنويًا.</span>
                                                     </li>
                                                     <li class="elementor-icon-list-item">
@@ -847,7 +847,7 @@
                                                                     d="M1.06885 4.7541L0.0655738 5.5082L0.0721311 6.89836V8.29508L1.35738 9.27869C2.05902 9.81639 2.92459 10.4852 3.27213 10.7607C3.61967 11.0295 4.68852 11.8689 5.65902 12.6164L7.40984 13.9738V15.6393V17.3049L6.83934 17.7639C6.51803 18.0197 6.21639 18.2295 6.16393 18.223C6.11147 18.223 5.80984 18.0197 5.49508 17.7639L4.91803 17.3049V16.341V15.377L4.24918 14.8918C3.87541 14.623 3.08197 14.0525 2.47213 13.6197L1.37705 12.8262V12.2361L1.37049 11.6393L0.931147 11.3115C0.695082 11.1279 0.380328 10.8984 0.24918 10.7934L0 10.6098L0.0131148 12.0721L0.0327869 13.5344L1.77049 14.7869L3.5082 16.0328L3.52787 16.9967L3.54754 17.9607L4.83279 18.9836C5.54754 19.541 6.14426 20 6.16393 20C6.18361 20 6.52459 19.7443 6.92459 19.423C7.32459 19.1082 7.9082 18.6557 8.21639 18.4066L8.78688 17.9672V15.6525V13.3311L8.38033 13.0098C7.73115 12.4918 2.58361 8.49836 1.88852 7.97377L1.44918 7.63935V6.90492L1.44262 6.17705L1.77049 5.93443L2.09836 5.6918V4.8459C2.09836 4.38033 2.0918 4 2.08525 4.00656C2.07213 4.00656 1.61311 4.34754 1.06885 4.7541Z"
                                                                     fill="#FFC107"></path>
                                                             </svg> </span>
-                                                        <span class="elementor-icon-list-text">نسوّق عبر
+                                                        <span class="elementor-icon-list-text mx-1" style="font-size:1.1rem">نسوّق عبر
                                                             جميع المنصات بشكلٍ فعّال يُناسب هوية
                                                             مشروعك.</span>
                                                     </li>
@@ -863,7 +863,7 @@
                                                                     d="M1.06885 4.7541L0.0655738 5.5082L0.0721311 6.89836V8.29508L1.35738 9.27869C2.05902 9.81639 2.92459 10.4852 3.27213 10.7607C3.61967 11.0295 4.68852 11.8689 5.65902 12.6164L7.40984 13.9738V15.6393V17.3049L6.83934 17.7639C6.51803 18.0197 6.21639 18.2295 6.16393 18.223C6.11147 18.223 5.80984 18.0197 5.49508 17.7639L4.91803 17.3049V16.341V15.377L4.24918 14.8918C3.87541 14.623 3.08197 14.0525 2.47213 13.6197L1.37705 12.8262V12.2361L1.37049 11.6393L0.931147 11.3115C0.695082 11.1279 0.380328 10.8984 0.24918 10.7934L0 10.6098L0.0131148 12.0721L0.0327869 13.5344L1.77049 14.7869L3.5082 16.0328L3.52787 16.9967L3.54754 17.9607L4.83279 18.9836C5.54754 19.541 6.14426 20 6.16393 20C6.18361 20 6.52459 19.7443 6.92459 19.423C7.32459 19.1082 7.9082 18.6557 8.21639 18.4066L8.78688 17.9672V15.6525V13.3311L8.38033 13.0098C7.73115 12.4918 2.58361 8.49836 1.88852 7.97377L1.44918 7.63935V6.90492L1.44262 6.17705L1.77049 5.93443L2.09836 5.6918V4.8459C2.09836 4.38033 2.0918 4 2.08525 4.00656C2.07213 4.00656 1.61311 4.34754 1.06885 4.7541Z"
                                                                     fill="#FFC107"></path>
                                                             </svg> </span>
-                                                        <span class="elementor-icon-list-text">نوائم بين
+                                                        <span class="elementor-icon-list-text mx-1" style="font-size:1.1rem">نوائم بين
                                                             مختلف مراحل المشروع وبين الخطط التسويقية
                                                             المُناسبة لكل منها.</span>
                                                     </li>
@@ -882,9 +882,9 @@
                                                             <span
                                                                 class="elementor-button-icon elementor-align-icon-left">
                                                                 <i aria-hidden="true"
-                                                                    class="fas fa-long-arrow-alt-left"></i>
+                                                                    class="fas fa-long-arrow-alt-left mx-1"></i>
                                                             </span>
-                                                            <span class="elementor-button-text">بناء خطة
+                                                            <span class="elementor-button-text" style="font-size:1.1rem">بناء خطة
                                                                 العمل الأن</span>
                                                         </span>
                                                     </a>
@@ -919,7 +919,7 @@
                                                                     class="attachment-thumbnail size-thumbnail"
                                                                     alt="" decoding="async" /></span>
                                                             <div class="cz_wpe_content">
-                                                                <h3>
+                                                                <h3 class="mx-2">
                                                                     <span style="white-space: pre-wrap;">دراسة الجدوى الاقتصاديةالخطة التسويقية</span>
                                                                 </h3>
                                                             </div>
@@ -951,9 +951,9 @@
                                                             <span
                                                                 class="elementor-button-icon elementor-align-icon-left">
                                                                 <i aria-hidden="true"
-                                                                    class="fas fa-long-arrow-alt-left"></i>
+                                                                    class="fas fa-long-arrow-alt-left mx-1"></i>
                                                             </span>
-                                                            <span class="elementor-button-text">بناء خطة
+                                                            <span class="elementor-button-text" style="font-size:1.1rem">بناء خطة
                                                                 العمل الأن</span>
                                                         </span>
                                                     </a>
@@ -1070,7 +1070,7 @@
                                                                     class="attachment-thumbnail size-thumbnail"
                                                                     alt="" decoding="async" /></span>
                                                             <div class="cz_wpe_content">
-                                                                <h3>
+                                                                <h3 class="mx-2">
                                                                     <span style="white-space: pre-wrap;">صناعة الهوية البصرية</span>
                                                                 </h3>
                                                             </div>
@@ -1084,7 +1084,7 @@
                                             data-id="f5a83f1" data-element_type="widget"
                                             data-widget_type="text-editor.default">
                                             <div class="elementor-widget-container">
-                                                <p>
+                                                <p class=>
                                                     <span style="white-space: pre-wrap;">القطعة الرابعة من أدوات سلسلة نحو النجاح هي جوهرة مشروعك، ويزيد اهتمامنا بإظهارها في أفضل شكل وأبهى حلّة وأقرب تصميم لهوية المشروع. أيدي مصممينا المبدعة تنتظر فكرتك!</span>
                                                 </p>
                                             </div>
@@ -1101,9 +1101,9 @@
                                                             <span
                                                                 class="elementor-button-icon elementor-align-icon-left">
                                                                 <i aria-hidden="true"
-                                                                    class="fas fa-long-arrow-alt-left"></i>
+                                                                    class="fas fa-long-arrow-alt-left mx-1"></i>
                                                             </span>
-                                                            <span class="elementor-button-text">بناء خطة
+                                                            <span class="elementor-button-text" style="font-size:1.1rem">بناء خطة
                                                                 العمل الأن</span>
                                                         </span>
                                                     </a>
@@ -1138,7 +1138,7 @@
                                                                     class="attachment-thumbnail size-thumbnail"
                                                                     alt="" decoding="async" /></span>
                                                             <div class="cz_wpe_content">
-                                                                <h3>
+                                                                <h3 class="mx-2">
                                                                     <span style="white-space: pre-wrap;">دراسة السوق</span>
                                                                 </h3>
                                                             </div>
@@ -1169,9 +1169,9 @@
                                                             <span
                                                                 class="elementor-button-icon elementor-align-icon-left">
                                                                 <i aria-hidden="true"
-                                                                    class="fas fa-long-arrow-alt-left"></i>
+                                                                    class="fas fa-long-arrow-alt-left mx-1"></i>
                                                             </span>
-                                                            <span class="elementor-button-text">بناء خطة
+                                                            <span class="elementor-button-text" style="font-size:1.1rem">بناء خطة
                                                                 العمل الأن</span>
                                                         </span>
                                                     </a>
@@ -1288,7 +1288,7 @@
                                                                     class="attachment-thumbnail size-thumbnail"
                                                                     alt="" decoding="async" /></span>
                                                             <div class="cz_wpe_content">
-                                                                <h3>
+                                                                <h3 class="mx-2">
                                                                     <span style="white-space: pre-wrap;">دراسة وتحليل المنافسين</span>
                                                                 </h3>
                                                             </div>
@@ -1317,9 +1317,9 @@
                                                             <span
                                                                 class="elementor-button-icon elementor-align-icon-left">
                                                                 <i aria-hidden="true"
-                                                                    class="fas fa-long-arrow-alt-left"></i>
+                                                                    class="fas fa-long-arrow-alt-left mx-1"></i>
                                                             </span>
-                                                            <span class="elementor-button-text">بناء خطة
+                                                            <span class="elementor-button-text" style="font-size:1.1rem">بناء خطة
                                                                 العمل الأن</span>
                                                         </span>
                                                     </a>
@@ -1354,7 +1354,7 @@
                                                                     class="attachment-thumbnail size-thumbnail"
                                                                     alt="" decoding="async" /></span>
                                                             <div class="cz_wpe_content">
-                                                                <h3>
+                                                                <h3 class="mx-2">
                                                                     <span style="white-space: pre-wrap;">إعادة تأهيل المشاريع المتعثرة</span>
                                                                 </h3>
                                                             </div>
@@ -1385,9 +1385,9 @@
                                                             <span
                                                                 class="elementor-button-icon elementor-align-icon-left">
                                                                 <i aria-hidden="true"
-                                                                    class="fas fa-long-arrow-alt-left"></i>
+                                                                    class="fas fa-long-arrow-alt-left mx-1"></i>
                                                             </span>
-                                                            <span class="elementor-button-text">بناء خطة
+                                                            <span class="elementor-button-text" style="font-size:1.1rem">بناء خطة
                                                                 العمل الأن</span>
                                                         </span>
                                                     </a>
@@ -1504,7 +1504,7 @@
                                                                     class="attachment-thumbnail size-thumbnail"
                                                                     alt="" decoding="async" /></span>
                                                             <div class="cz_wpe_content">
-                                                                <h3>
+                                                                <h3 class="mx-2">
                                                                     <span style="white-space: pre-wrap;">جهات داعمة ومستثمرين.</span>
                                                                 </h3>
                                                             </div>
@@ -1535,9 +1535,9 @@
                                                             <span
                                                                 class="elementor-button-icon elementor-align-icon-left">
                                                                 <i aria-hidden="true"
-                                                                    class="fas fa-long-arrow-alt-left"></i>
+                                                                    class="fas fa-long-arrow-alt-left mx-1"></i>
                                                             </span>
-                                                            <span class="elementor-button-text">بناء خطة
+                                                            <span class="elementor-button-text" style="font-size:1.1rem">بناء خطة
                                                                 العمل الأن</span>
                                                         </span>
                                                     </a>
