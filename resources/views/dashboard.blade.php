@@ -505,7 +505,7 @@
                                                         class="d-flex flex-column justify-content-center">
                                                         <div class="">
                                                             <h6 class="mb-0 text-sm">
-                                                                {{ $investor->first_name }}{{ $investor->last_name }}</h6>
+                                                                {{ $investor->first_name }} {{ $investor->last_name }}</h6>
                                                         </div>
                                                     </a>
                                                 </div>
