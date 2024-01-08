@@ -38,6 +38,12 @@
                                                     .elementor-widget-text-editor:not(.elementor-drop-cap-view-default) .elementor-drop-cap {
                                                         margin-top: 8px
                                                     }
+                                                    #button-sign {
+                                                        padding : 1rem;
+                                                        border-radius : 15px;
+                                                        background-color : #2386C8;
+                                                        color : #fff;
+                                                    }
 
                                                     .elementor-widget-text-editor:not(.elementor-drop-cap-view-default) .elementor-drop-cap-letter {
                                                         width: 1em;
@@ -497,7 +503,7 @@
                                                     <a href="{{ url('/') }}/signup"
                                                         class="elementor-button-link elementor-button elementor-size-sm"
                                                         role="button">
-                                                        <span class="elementor-button-content-wrapper">
+                                                        <span class="elementor-button-content-wrapper" id="button-sign">
                                                             <span
                                                                 class="elementor-button-icon elementor-align-icon-left">
                                                                 <i aria-hidden="true"
