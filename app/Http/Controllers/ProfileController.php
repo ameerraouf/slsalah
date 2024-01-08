@@ -202,6 +202,7 @@ class ProfileController extends BaseController
         $user->country = $request->country;
         $user->language = $request->language;
         $user->zip = $request->zip;
+        $user->workspace_id = $this->user->workspace_id;
         $user->save();
 
 
