@@ -391,13 +391,19 @@
                                                     @foreach (json_decode($project->members) as $member)
                                                         @if (isset($users[$member]))
                                                             @if (!empty($users[$member]->photo))
-                                                                <a href="javascript:"
+                                                                <div class="d-flex align-items-center">
+                                                                    <a href="javascript:"
                                                                     class="avatar avatar-sm rounded-circle"
                                                                     data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                                     title="{{ $users[$member]->first_name }}">
                                                                     <img src="{{ PUBLIC_DIR }}/uploads/{{ $users[$member]->photo }}"
                                                                         alt="team1">
+                                                                        
                                                                 </a>
+                                                                <span class="d-inline-block mx-1">
+                                                                    {{ $users[$member]->first_name }} {{ $users[$member]->last_name }}
+                                                                </span>
+                                                                </div>
                                                             @else
                                                                 <div
                                                                     class="avatar avatar-sm rounded-circle bg-purple-light">
