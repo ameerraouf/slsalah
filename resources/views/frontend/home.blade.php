@@ -594,7 +594,7 @@
                                                                     class="attachment-thumbnail size-thumbnail"
                                                                     alt="" decoding="async" /></span>
                                                             <div class="cz_wpe_content">
-                                                                <h3>خطة عمل</h3>
+                                                                <h3 class="mx-2">خطة عمل</h3>
                                                             </div>
                                                         </div>
                                                     </div>
