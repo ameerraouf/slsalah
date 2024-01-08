@@ -1819,7 +1819,7 @@
                                                         </div>
                                                         <div class="cz_title_content">
                                                             <div class="cz_wpe_content">
-                                                                <h3 style="text-align: center;">عملائنا</h3>
+                                                                <h3 style="text-align: center;">عملاؤنا </h3>
                                                             </div>
                                                         </div>
                                                     </div>
