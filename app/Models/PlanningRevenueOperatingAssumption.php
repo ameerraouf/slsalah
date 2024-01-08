@@ -126,9 +126,9 @@ class PlanningRevenueOperatingAssumption extends Model
         $secondYearOperatingExpenses = $planningCostAssumption->operational_costs / 100 * $secondYearTotalAfterOperatingAssumption;
         $thirdYearOperatingExpenses = $planningCostAssumption->operational_costs / 100 * $thirdYearTotalAfterOperatingAssumption;
 
-        $firstYearOperatingExpensesAsString = formatCurrency($firstYearOperatingExpenses, getWorkspaceCurrency($settings));
-        $secondYearOperatingExpensesAsString = formatCurrency($secondYearOperatingExpenses, getWorkspaceCurrency($settings));
-        $thirdYearOperatingExpensesAsString = formatCurrency($thirdYearOperatingExpenses, getWorkspaceCurrency($settings));
+        $firstYearOperatingExpensesAsString = formatCurrency($firstYearOperatingExpenses, $currency);
+        $secondYearOperatingExpensesAsString = formatCurrency($secondYearOperatingExpenses, $currency);
+        $thirdYearOperatingExpensesAsString = formatCurrency($thirdYearOperatingExpenses, $currency);
 
         // المصروفات التسويقية
         // = نسبتها * الايرادات قبل افتراضات التشغيل
@@ -136,9 +136,9 @@ class PlanningRevenueOperatingAssumption extends Model
         $secondYearMarketingExpenses = $planningCostAssumption->marketing_expenses / 100 * $secondYearTotalAfterOperatingAssumption;
         $thirdYearMarketingExpenses = $planningCostAssumption->marketing_expenses / 100 * $thirdYearTotalAfterOperatingAssumption;
 
-        $firstYearMarketingExpensesAsString = formatCurrency($firstYearMarketingExpenses, getWorkspaceCurrency($settings));
-        $secondYearMarketingExpensesAsString = formatCurrency($secondYearMarketingExpenses, getWorkspaceCurrency($settings));
-        $thirdYearMarketingExpensesAsString = formatCurrency($thirdYearMarketingExpenses, getWorkspaceCurrency($settings));
+        $firstYearMarketingExpensesAsString = formatCurrency($firstYearMarketingExpenses, $currency);
+        $secondYearMarketingExpensesAsString = formatCurrency($secondYearMarketingExpenses, $currency);
+        $thirdYearMarketingExpensesAsString = formatCurrency($thirdYearMarketingExpenses, $currency);
 
 
         // مصروفات عمومية
@@ -147,19 +147,19 @@ class PlanningRevenueOperatingAssumption extends Model
         $secondYearGeneralExpenses = $planningCostAssumption->general_expenses / 100 * $secondYearTotalAfterOperatingAssumption;
         $thirdYearGeneralExpenses = $planningCostAssumption->general_expenses / 100 * $thirdYearTotalAfterOperatingAssumption;
 
-        $firstYearGeneralExpensesAsString = formatCurrency($firstYearGeneralExpenses, getWorkspaceCurrency($settings));
-        $secondYearGeneralExpensesAsString = formatCurrency($secondYearGeneralExpenses, getWorkspaceCurrency($settings));
-        $thirdYearGeneralExpensesAsString = formatCurrency($thirdYearGeneralExpenses, getWorkspaceCurrency($settings));
+        $firstYearGeneralExpensesAsString = formatCurrency($firstYearGeneralExpenses, $currency);
+        $secondYearGeneralExpensesAsString = formatCurrency($secondYearGeneralExpenses, $currency);
+        $thirdYearGeneralExpensesAsString = formatCurrency($thirdYearGeneralExpenses, $currency);
 
         //total cost
         $totalCostFirstYear = $firstYearGeneralExpenses + $firstYearMarketingExpenses + $firstYearOperatingExpenses;
-        $totalCostFirstYearAsString = formatCurrency($totalCostFirstYear, getWorkspaceCurrency($settings));
+        $totalCostFirstYearAsString = formatCurrency($totalCostFirstYear, $currency);
 
         $totalCostSecondYear = $secondYearGeneralExpenses + $secondYearMarketingExpenses + $secondYearOperatingExpenses;
-        $totalCostSecondYearAsString = formatCurrency($totalCostSecondYear, getWorkspaceCurrency($settings));
+        $totalCostSecondYearAsString = formatCurrency($totalCostSecondYear, $currency);
 
         $totalCostThirdYear = $thirdYearGeneralExpenses + $thirdYearMarketingExpenses + $thirdYearOperatingExpenses;
-        $totalCostThirdYearAsString = formatCurrency($totalCostThirdYear, getWorkspaceCurrency($settings));
+        $totalCostThirdYearAsString = formatCurrency($totalCostThirdYear, $currency);
 
         //end by abanoub
         $profit_before_zakat = ($totalRevenueFirstYear + $totalRevenueSecondYear + $totalRevenueThirdYear) - ($first_year + $second_year + $third_year);
@@ -170,9 +170,9 @@ class PlanningRevenueOperatingAssumption extends Model
         $second_year_profit_before_zakat = $secondYearTotalAfterOperatingAssumption - $totalCostSecondYear;
         $third_year_profit_before_zakat = $thirdYearTotalAfterOperatingAssumption - $totalCostThirdYear;
 
-        $firstYearProfitBeforeZakatAsString = formatCurrency($first_year_profit_before_zakat, getWorkspaceCurrency($settings));
-        $secondYearProfitBeforeZakatAsString = formatCurrency($second_year_profit_before_zakat, getWorkspaceCurrency($settings));
-        $thirdYearProfitBeforeZakatAsString = formatCurrency($third_year_profit_before_zakat, getWorkspaceCurrency($settings));
+        $firstYearProfitBeforeZakatAsString = formatCurrency($first_year_profit_before_zakat, $currency);
+        $secondYearProfitBeforeZakatAsString = formatCurrency($second_year_profit_before_zakat, $currency);
+        $thirdYearProfitBeforeZakatAsString = formatCurrency($third_year_profit_before_zakat, $currency);
 
 
 
@@ -258,15 +258,15 @@ class PlanningRevenueOperatingAssumption extends Model
             'second_year_profit_before_zakat_as_number' => $second_year_profit_before_zakat,
             'third_year_profit_before_zakat_as_number' => $third_year_profit_before_zakat,
 
-            'first_year_profit_before_zakat_percent_value' => formatCurrency($first_year_profit_before_zakat * 0.025, getWorkspaceCurrency($settings)),
-            'second_year_profit_before_zakat_percent_value' => formatCurrency($second_year_profit_before_zakat * 0.025, getWorkspaceCurrency($settings)),
-            'third_year_profit_before_zakat_percent_value' => formatCurrency($third_year_profit_before_zakat * 0.025, getWorkspaceCurrency($settings)),
+            'first_year_profit_before_zakat_percent_value' => formatCurrency($first_year_profit_before_zakat * 0.025, $currency),
+            'second_year_profit_before_zakat_percent_value' => formatCurrency($second_year_profit_before_zakat * 0.025, $currency),
+            'third_year_profit_before_zakat_percent_value' => formatCurrency($third_year_profit_before_zakat * 0.025, $currency),
 
             'first_year_profit_before_zakat_percent_number' => $first_year_profit_before_zakat * 0.025,
             'second_year_profit_before_zakat_percent_number' => $second_year_profit_before_zakat * 0.025,
             'third_year_profit_before_zakat_percent_number' => $third_year_profit_before_zakat * 0.025,
 
-            'first_year_profit_after_zakat' => formatCurrency(($first_year_profit_before_zakat - $first_year_profit_before_zakat * 0.025), getWorkspaceCurrency($settings)),
+            'first_year_profit_after_zakat' => formatCurrency(($first_year_profit_before_zakat - $first_year_profit_before_zakat * 0.025), $currency),
             'second_year_profit_after_zakat' => formatCurrency(($second_year_profit_before_zakat - $second_year_profit_before_zakat * 0.025), $currency),
             'third_year_profit_after_zakat' => formatCurrency(($third_year_profit_before_zakat - $third_year_profit_before_zakat * 0.025), $currency),
 
