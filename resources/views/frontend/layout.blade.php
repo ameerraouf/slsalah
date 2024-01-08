@@ -2813,7 +2813,7 @@
                                             <img src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20width=&#39;106&#39;%20height=&#39;60&#39;%20viewBox%3D&#39;0%200%20106%2060&#39;%2F%3E"
                                                 data-czlz
                                                 data-src="{{ PUBLIC_DIR }}/uploads/2022/شعار-نموذج-3-1.png"
-                                                alt="سلسلة" width="106" height="60" style="width: 106px">
+                                                alt="سلسلة" width="106" height="80" style="width: 120px">
                                         </a>
                                     </div>
                                 </div>
