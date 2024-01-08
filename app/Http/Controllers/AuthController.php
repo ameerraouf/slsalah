@@ -105,7 +105,7 @@ class AuthController extends Controller
             return redirect()
                 ->back()
                 ->withErrors([
-                    "email" => "No account found with this email",
+                    "email" => "لا يوجد حساب مرتبط بالبريد الالكتروني هذا",
                 ]);
         }
 
