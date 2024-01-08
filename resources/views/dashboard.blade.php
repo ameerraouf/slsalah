@@ -283,7 +283,7 @@
                                         {{ __('Task') }}
                                     </th>
 
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" style="text-align: center">
                                         {{ __('Assigned to') }}
 
                                     </th>
