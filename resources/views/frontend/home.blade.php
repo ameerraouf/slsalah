@@ -492,7 +492,7 @@
                                                     }
                                                 </style>
                                                 <h2 class="elementor-heading-title elementor-size-default">
-                                                    أبدأ الأن مع سلسلة</h2>
+                                                    ابدأ الآن مع سلسلة</h2>
                                             </div>
                                         </div>
                                         <div class="elementor-element elementor-element-1dfd910 elementor-widget elementor-widget-button"
