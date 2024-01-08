@@ -70,18 +70,14 @@ class FrontendController extends Controller
 
         if(($this->super_settings['landingpage'] ?? null) === 'Default'){
 
-            return \view('frontend.home',[
-
-                'landingpage' =>  $landingpage,
-                'contact' =>  $contact,
-                'blogs' =>  $blogs,
-            ]);
+            
         }
 
-        return \view('auth.login',[
+        return \view('frontend.home',[
 
             'landingpage' =>  $landingpage,
             'contact' =>  $contact,
+            'blogs' =>  $blogs,
         ]);
 
     }

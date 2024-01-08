@@ -72,7 +72,7 @@
                                                         role="button">
                                                         <span class="elementor-button-content-wrapper">
                                                             <span class="elementor-button-text">بناء خطة
-                                                                العمل الأن</span>
+                                                                العمل الآن </span>
                                                         </span>
                                                     </a>
                                                 </div>
@@ -90,7 +90,7 @@
                                                             <span
                                                                 class="elementor-button-icon elementor-align-icon-left">
                                                                 <i aria-hidden="true"
-                                                                    class="fas fa-play-circle"></i> </span>
+                                                                    class="fas fa-play-circle mx-1"></i> </span>
                                                             <span class="elementor-button-text">ما هي
                                                                 سلسة؟</span>
                                                         </span>
@@ -243,7 +243,7 @@
                                                                             class="cz_counter_num_wrap"><span
                                                                                 class="cz_counter_num">57</span><i>+</i></span><span
                                                                             class="cz_counter_after">دراسة
-                                                                            جدوى مشاريع إلكترونية</span>
+                                                                            جدوى مشاريع الكترونية </span>
                                                                     </div>
 
                                                                 </div>
