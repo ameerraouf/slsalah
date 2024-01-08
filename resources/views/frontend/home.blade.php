@@ -349,7 +349,7 @@
                                                                 decoding="async" /></div>
                                                         <div class="service_text">
                                                             <h3>بناء خطة عمل</h3>
-                                                            <div class="cz_wpe_content">
+                                                            <div class="cz_wpe_content px-2">
                                                                 <p>يقوم نظامنا المبني بالذكاء الاصطناعي
                                                                     ببناء خطة عمل استراتيجية لفكرتك، بجانب
                                                                     خطط التنبؤ المالي لمشروعك.<br />كل ما
@@ -385,7 +385,7 @@
                                                                 decoding="async" /></div>
                                                         <div class="service_text">
                                                             <h3>إنشاء العروض التقديمية</h3>
-                                                            <div class="cz_wpe_content">
+                                                            <div class="cz_wpe_content px-2">
                                                                 <div>
                                                                     <p>لا بد من تقديم مشروعك بأوضح وأبهى
                                                                         وأدق صورة ممكنة، حتى ترفع من نسبة
@@ -426,7 +426,7 @@
                                                                 decoding="async" /></div>
                                                         <div class="service_text">
                                                             <h3>مصمم نموذج العمل التجاري</h3>
-                                                            <div class="cz_wpe_content">
+                                                            <div class="cz_wpe_content px-2">
                                                                 <p>يوفّر مصمم نموذج العمل التجاري أفضل مخطط
                                                                     لنمذجة الأعمال، فهو يساعدك على إنشاء خطة
                                                                     عمل قابلة للتنفيذ، وتحديد تفاصيل دقيقة
