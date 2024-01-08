@@ -2823,12 +2823,12 @@
                                     <div class="cz_elm button_header_2_center_1 inner_button_header_2_center_0"
                                         style="margin-top:-7px;margin-bottom:20px;">
                                         <a href="/signup" class="cz_header_button cz_btn_53789"
-                                            style="font-size:9px;font-weight:700;background-color:#137fc0;border-style:solid;border-radius:0px;">{{ __('Sign Up for free') }}</a>
+                                            style="font-size:12px;font-weight:700;background-color:#137fc0;border-style:solid;border-radius:0px;">{{ __('Sign Up for free') }}</a>
                                     </div>
                                     <div class="cz_elm button_header_2_center_2 inner_button_header_2_center_1"
                                         style="margin-top:-9px;margin-right:29px;margin-bottom:20px;margin-left:17px;">
                                         <a class="cz_header_button cz_btn_61645"
-                                            style="font-size:10px;color:#137fc0;background-color:#d7ecf9;border-style:solid;border-color:#137fc0;"
+                                            style="font-size:12px;color:#137fc0;background-color:#d7ecf9;border-style:solid;border-color:#137fc0;"
                                             href="/login" target="_blank">
                                             {{ __('Login') }}
                                         </a>
