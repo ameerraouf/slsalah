@@ -525,7 +525,7 @@
                                                 </h6>
                                             </td>
                                             <td class="align-middle text-center text-xs">
-                                                <span class="badge bg-info-light fw-bolder">{{ $investor->status }}</span>
+                                                <span class="badge bg-info-light fw-bolder">{{ __($investor->status) }}</span>
                                             </td>
                                             <td>
                                                 <div>
