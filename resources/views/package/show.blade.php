@@ -5,7 +5,7 @@
 
 
         <div class="col-12">
-            <h4 class="my-2">باقات اخري</h4>
+            <h4 class="my-2">باقات أخرى </h4>
             <div class="row">
             @foreach($plans as $plan)
                 <div class="col-md-4  mb-4 ">
@@ -103,9 +103,9 @@
                                     @if($plan)
                                     @if($plan->active == 1)
                                         @if(checkSubscribeIsExpire($package->id))
-                                            <a class="btn btn-primary  mt-1" href="{{route('packages.details', $plan->id)}}">أعادة الاشتراك</a>
+                                            <a class="btn btn-primary  mt-1" href="{{route('packages.details', $plan->id)}}">اعادة الاشتراك</a>
                                         @else
-                                            <button class="btn btn-primary  mt-1" disabled >أعادة الاشتراك</button>
+                                            <button class="btn btn-primary  mt-1" disabled >اعادة الاشتراك</button>
                                         @endif
                                     @endif
                                     @endif
