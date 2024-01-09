@@ -73,8 +73,8 @@ class DashboardController extends BaseController
             ->where("workspace_id", $this->user->workspace_id)
             ->first();
         $recent_notice = NoticeBoard::orderBy("id", "desc")
-
-            ->first();
+        ->where('status' , 'Published')
+        ->first();
         $users = User::all()
             ->keyBy("id")
             ->all();
