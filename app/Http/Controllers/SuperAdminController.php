@@ -467,6 +467,10 @@ class SuperAdminController extends SuperAdminBaseController
             foreach ($chats as $chat) {
                 $chat->delete();
             }
+            $chats = Chat::where('sender_id', $user->id)->get();
+            foreach ($chats as $chat) {
+                $chat->delete();
+            }
             $user->delete();
             $workspace->delete();
             return redirect("/workspaces");
