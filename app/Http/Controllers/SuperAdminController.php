@@ -35,6 +35,7 @@ class SuperAdminController extends SuperAdminBaseController
             ->limit(5)
             ->get();
         $recent_plans = SubscriptionPlan::orderBy("id", "desc")
+            ->where('active' , 1)
             ->limit(5)
             ->get();
 

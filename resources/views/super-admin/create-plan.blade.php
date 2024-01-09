@@ -137,7 +137,7 @@
                             <li class="list-group-item border-0 px-0">
                                 <div class="form-check form-switch ps-0">
                                     <input class="form-check-input ms-auto" @if ($plan)
-                                    disabled
+                                    readonly
                                     @endif  type="checkbox" id="module_all"
                                         name="module_all" value="1" @if (count($available_modules) == count(isset($plan_modules) ? $plan_modules : [])) checked @endif>
                                     <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0"
@@ -155,7 +155,7 @@
                                     <li class="list-group-item border-0 px-0">
                                         <div class="form-check form-switch ps-0">
                                             <input class="form-check-input ms-auto model-input"
-                                                @if ($plan) disabled @endif type="checkbox"
+                                                @if ($plan) readonly @endif type="checkbox"
                                                 id="module_{{ $key }}" name="modules[{{ $key2 }}]"
                                                 @if (!empty($plan_modules) && in_array($key2, $plan_modules)) checked @endif>
                                             <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0"
