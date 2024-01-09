@@ -78,7 +78,7 @@
                                             @endif
 
                                             @if ($workspace->id !== $user->workspace_id)
-                                                <a class="btn btn-link text-danger text-gradient px-3 mb-0"
+                                                <a class="btn btn-link text-danger text-gradient px-3 mb-0 delete-btn"
                                                     href="/delete-workspace/{{ $workspace->id }}"><i
                                                         class="far fa-trash-alt me-2"></i>{{ __('Delete') }}</a>
                                             @endif
@@ -99,6 +99,16 @@
     <script>
         "use strict";
         $(document).ready(function() {
+
+            $('body').on('click', '.delete-btn', function(e) {
+                e.preventDefault()
+                var result = window.confirm("هل أنت متأكد انك تريد الحذف؟");
+                let targetLink = $(this).attr('href')
+                if (result) {
+                    window.location.href = targetLink;
+                }
+
+            })
             if ($('.admin-wokspace-row').length > 0) {
                 $('.target-table').prepend($('.admin-wokspace-row').prop('outerHTML'))
                 $('.admin-wokspace-row')[1].remove()
