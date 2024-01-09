@@ -219,6 +219,7 @@ class SuperAdminController extends SuperAdminBaseController
     }
     public function subscriptionPlanPost(Request $request)
     {
+        
         $validator = $request->validate([
             "name" => "required|max:70",
             "id" => "nullable|integer",

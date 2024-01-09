@@ -36,17 +36,18 @@
                         <div class="mb-3">
                             <label for="projectName" class="form-label">{{ __('Plan Name') }}</label><label
                                 class="text-danger">*</label>
-                            <input type="text" @if ($plan) disabled @endif class="form-control"
+                            <input type="text" @if ($plan) readonly @endif class="form-control"
                                 name="name" value="{{ $plan->name ?? (old('name') ?? '') }}" id="projectName">
                         </div>
 
                         <div class="mb-3">
                             <label for="projectName" class="form-label mt-3">{{ __('Maximum Allowed Users') }}</label><label
                                 class="text-danger">*</label>
-                            <input type="number" @if ($plan) disabled @endif class="form-control"
+                            <input type="number" @if ($plan) readonly @endif class="form-control"
                                 name="maximum_allowed_users"
                                 value="{{ $plan->maximum_allowed_users ?? (old('maximum_allowed_users') ?? '') }}"
                                 id="projectName">
+                                
                         </div>
 
 
@@ -56,7 +57,7 @@
                                     <label for="max_file_upload_size"
                                         class="form-label">{{ __('Maximum File Upload Size') }}
                                         ({{ __('kb') }})</label><label class="text-danger">*</label>
-                                    <input type="text" @if ($plan) disabled @endif
+                                    <input type="text" @if ($plan) readonly @endif
                                         class="form-control" name="max_file_upload_size"
                                         value="{{ $plan->max_file_upload_size ?? (old('max_file_upload_size') ?? '') }}"
                                         id="max_file_upload_size">
@@ -67,7 +68,7 @@
                                     <label for="file_space_limit" class="form-label">نوع الملفات المسموح بها </label><label
                                         class="text-danger">*</label>
                                     <input type="text" class="form-control"
-                                        @if ($plan) disabled @endif name="file_space_limit"
+                                        @if ($plan) readonly @endif name="file_space_limit"
                                         value="{{ $plan->file_space_limit ?? (old('file_space_limit') ?? '') }}"
                                         id="file_space_limit">
 
