@@ -9,7 +9,7 @@
 
         </div>
         <div class="col text-end">
-            <a href="/new-porter" type="button" class="btn btn-info">
+            <a href="/new-porter" type="button" class="btn btn-info" style="text-transform:capitalize">
                 {{__('New Porter Five Forces Model')}}
             </a>
         </div>
