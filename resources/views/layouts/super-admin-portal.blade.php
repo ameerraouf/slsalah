@@ -126,7 +126,7 @@
             {{-- video --}}
             <li class="nav-item">
 
-                <a class="nav-link @if(basename(parse_url(url()->current(), PHP_URL_PATH)) =='video' || request()->path() === 'video/create' || Str::contains(request()->path() , 'edit')) active @endif" href="/video">
+                <a class="nav-link @if(basename(parse_url(url()->current(), PHP_URL_PATH)) =='video' || request()->path() === 'video/create' || Str::contains(request()->path() , 'video')) active @endif" href="/video">
                     <i class="fas fa-video"></i>
                     <span class="nav-link-text ms-3">{{__('control_video')}}</span>
                 </a>
