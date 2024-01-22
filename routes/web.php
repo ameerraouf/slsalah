@@ -381,7 +381,7 @@ Route::prefix("admin")
 
     //finanical evaluation routes
     Route::get('/financial-evaluation' , [FinancialEvaluationController::class , 'index'])->name('financial_evaluation.index');
-    Route::post('/economic-plan-save' , [FinancialEvaluationController::class , 'create'])->name('financial_evaluation.create');
+    Route::post('/financial-evaluation' , [FinancialEvaluationController::class , 'create'])->name('financial_evaluation.create');
 
 
 

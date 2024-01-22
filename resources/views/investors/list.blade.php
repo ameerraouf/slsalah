@@ -36,7 +36,7 @@
                                 <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">{{__('Name')}}</th>
                                 <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">{{__('Email')}}</th>
                                 <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">{{__('Phone')}}</th>
-                                <th class="text-secondary opacity-7"></th>
+                                <th class="text-secondary opacity-7">{{__('Actions')}}</th>
                             </tr>
                             <tbody>
                             @foreach($investors as $investor)

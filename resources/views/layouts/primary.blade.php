@@ -339,7 +339,7 @@
             @if(empty($modules) || in_array('planning_cost_assumptions',$modules))
                 <li class="nav-item ">
                     <a class="nav-link @if(($selected_navigation ?? '') === 'planning_cost_assumptions') active @endif " href="/planning_cost_assumptions">
-                        <img src="{{asset('img/process.png')}}" height="20" width="20" class="bg-white">
+                        <i class="fas fa-coins"></i>
                         <span class="nav-link-text text-end ms-3 ">{{__('Planning cost assumptions')}}</span>
                     </a>
                 </li>
@@ -347,7 +347,7 @@
             @if(empty($modules) || in_array('planning_financial_assumptions',$modules))
                 <li class="nav-item ">
                     <a class="nav-link @if(($selected_navigation ?? '') === 'planning_financial_assumptions') active @endif " href="/planning_financial_assumptions">
-                        <img src="{{asset('img/productivity.png')}}" height="20" width="20" class="bg-white">
+                        <i class="fas fa-coins"></i>
                         <span class="nav-link-text text-end ms-3 ">{{__('Planning financial assumptions')}}</span>
                     </a>
                 </li>
@@ -355,7 +355,7 @@
             @if(empty($modules) || in_array('planning_revenue_operating_assumptions',$modules))
                 <li class="nav-item ">
                     <a class="nav-link @if(($selected_navigation ?? '') === 'planning_revenue_operating_assumptions') active @endif " href="/planning_revenue_operating_assumptions">
-                        <img src="{{asset('img/time.png')}}" height="20" width="20" class="bg-white">
+                        <i class="fas fa-coins"></i>
                         <span class="nav-link-text text-end ms-3 ">{{__('Planning revenue operating assumptions')}}</span>
                     </a>
                 </li>
@@ -417,7 +417,7 @@
             @if(empty($modules) || in_array('PlanningRevenueOperatingAssumptions',$modules))
             <li class="nav-item">
                 <a class="nav-link @if(($selected_navigation ?? '') === 'PlanningRevenueOperatingAssumptions') active @endif  " href="{{ route('planning_revenue_operating_assumptions.get') }}">
-                    <img src="{{asset('img/market-analysis.png')}}" height="20" width="20" class="bg-white">
+                    <i class="fas fa-coins"></i>
                     <span class="nav-link-text ms-3">توقعات الإيرادات</span>
                 </a>
             </li>
@@ -425,7 +425,7 @@
             @if(empty($modules) || in_array('IncomeList',$modules))
             <li class="nav-item">
                 <a class="nav-link @if(($selected_navigation ?? '') === 'IncomeList') active @endif  " href="{{ route('incomeList.get') }}">
-                    <img src="{{asset('img/report.png')}}" height="20" width="20" class="bg-white">
+                    <i class="fas fa-coins"></i>
                     <span class="nav-link-text ms-3"> قائمة الدخل</span>
                 </a>
             </li>
@@ -433,7 +433,7 @@
             @if(empty($modules) || in_array('statement_of_cash_flows',$modules))
             <li class="nav-item">
                 <a class="nav-link @if(($selected_navigation ?? '') === 'statement_of_cash_flows') active @endif  " href="{{ route('statementOfCashFlows.get') }}">
-                    <img src="{{asset('img/cash-flow.png')}}" height="20" width="20" class="bg-white">
+                    <i class="fas fa-coins"></i>
                     <span class="nav-link-text ms-3">قائمة التدفقات النقدية</span>
                 </a>
             </li>
@@ -441,7 +441,7 @@
             @if(empty($modules) || in_array('capital_investment_model',$modules))
             <li class="nav-item">
                 <a class="nav-link @if(($selected_navigation ?? '') === 'capital_investment_model') active @endif  " href="{{ route('capital_investment_model.get') }}">
-                    <img src="{{asset('img/insight.png')}}" height="20" width="20" class="bg-white">
+                    <i class="fas fa-coins"></i>
                     <span class="nav-link-text ms-3"> نموذج الاستثمار الرأسمالي</span>
                 </a>
             </li>
@@ -450,7 +450,7 @@
             @if(empty($modules) || in_array('textReport',$modules))
             <li class="nav-item">
                 <a class="nav-link @if(($selected_navigation ?? '') === 'textReport') active @endif  " href="{{ route('textReport.get') }}">
-                    <img src="{{asset('img/reports.svg')}}" height="20" width="20" class="bg-white">
+                    <i class="fas fa-coins"></i>
                     <span class="nav-link-text ms-3"> التقارير النصية</span>
                 </a>
             </li>
@@ -515,14 +515,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link @if(($selected_navigation ?? '') === 'team') active @endif " href="/staff">
-
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                         class="feather feather-database">
-                        <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
-                        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
-                        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
-                    </svg>
+<i class="fas fa-users"></i>
                     <span class="nav-link-text ms-3">{{__('Users')}}</span>
                 </a>
             </li>
@@ -530,13 +523,7 @@
             <li class="nav-item">
                 <a class="nav-link @if(request()->path() === 'user/videos') active @endif " href="/user/videos">
 
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                         class="feather feather-database">
-                        <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
-                        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
-                        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
-                    </svg>
+                    <i class="fas fa-video"></i>
                     <span class="nav-link-text ms-3">{{__('فيديوهات تعليمية')}}</span>
                 </a>
             </li>
@@ -544,13 +531,7 @@
             <li class="nav-item">
                 <a class="nav-link @if(request()->path() === 'user/chat') active @endif " href="/user/chat">
 
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                         class="feather feather-database">
-                        <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
-                        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
-                        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
-                    </svg>
+                  <i class="fas fa-question"></i>
 
                     <span class="nav-link-text ">{{__('جلسات دعم ومساعدة')}}</span>
                     <strong class=" text-danger mx-2" id="user_chat_count" >

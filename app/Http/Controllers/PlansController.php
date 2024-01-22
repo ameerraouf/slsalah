@@ -78,6 +78,9 @@ class PlansController extends BaseController
         $request->validate([
             "title" => "required|max:150",
             "id" => "nullable|integer",
+            "start_date" => 'after:today'
+        ] , [
+            "start_date.after" => 'الحقل تاريخ و وقت البدء يجب ان لا يكون قبل اليوم على الاقل '
         ]);
 
         $event = false;

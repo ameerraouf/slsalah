@@ -48,6 +48,7 @@ class ActionsController extends BaseController
 
     public function viewNote(Request $request)
     {
+       
         if ($this->modules && !in_array("notes", $this->modules)) {
             abort(401);
         }
@@ -80,6 +81,8 @@ class ActionsController extends BaseController
             "id" => "nullable|integer",
             "topic" => "required|string",
             "cover_photo" => "nullable|file|mimes:jpeg,png,jpg,gif,svg",
+        ] , [
+            "topic.required" => 'الحقل الموضوع مطلوب.'
         ]);
 
         $note = false;

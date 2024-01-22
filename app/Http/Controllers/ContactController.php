@@ -31,11 +31,12 @@ class ContactController extends BaseController
             ->keyBy("id")
             ->all();
 
-
+        $selected_navigation = 'invested_capital_planning';
         return \view("investors.add", [
             "selected_navigation" => "investors",
             "investor" =>  $investor,
             "products" =>  $products,
+            "selected_navigation" => $selected_navigation
         ]);
     }
 
@@ -85,10 +86,14 @@ class ContactController extends BaseController
         $request->validate([
             "first_name" => "required|string|max:100",
             "last_name" => "required|string|max:100",
-            "email" => "required|email|unique:investors,email",
-            "phone_number" => "nullable|string|max:50|unique:investors,phone_number",
-            "amount" => "nullable|gt:0",
+            "email" => "required|email",
+            "phone_number" => "nullable|string|max:50",
+            "amount" => "required|gt:0",
             "id" => "nullable|integer",
+        ] , [
+            "first_name.required" => 'الحقل الاسم الأول مطلوب.',
+            "last_name.required" => 'الحقل الأخير الأول مطلوب.',
+            "email.required" => 'الحقل اسم المستخدم / البريد الالكترونى مطلوب.'
         ]);
 
 
@@ -182,12 +187,12 @@ class ContactController extends BaseController
             ->all();
 
 
-
+            $selected_navigation = 'invested_capital_planning';
         return \view("investors.view", [
             "selected_navigation" => "investors",
             "investor" => $investor,
             "products" => $products,
-
+            "selected_navigation" => $selected_navigation
         ]);
     }
 }

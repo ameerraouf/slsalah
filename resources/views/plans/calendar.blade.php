@@ -3,43 +3,56 @@
     <div class=" row">
         <div class="col">
             <h5 class="text-secondary fw-bolder">
-                {{__('Calendar')}}
+                {{ __('Calendar') }}
             </h5>
         </div>
         <div class="col text-end">
             <div class="col-12 ms-auto">
                 <button type="button" class="btn btn-info" id="addEvent">
-                    {{__('Add Event')}}
+                    {{ __('Add Event') }}
                 </button>
             </div>
         </div>
     </div>
     <div class="row">
+        <div class="col-12 mb-2">
+            @if ($errors->any())
+                <div class="alert bg-pink-light text-danger">
+                    <ul class="list-unstyled">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+        </div>
         <div class="col-xl-3">
             <div class="row">
+                <div class="col-12">
+                    
+                </div>
                 <div class="col-xl-12 col-md-6 mt-xl-0 mt-4">
 
                     <div class="card">
 
                         <div class="card-header p-3 pb-0">
                             <h6 class="mb-0">
-                                {{__('Events')}}
+                                {{ __('Events') }}
 
                             </h6>
                         </div>
                         <div class="card-body border-radius-lg p-3">
 
-                            @foreach($events as $event)
-
+                            @foreach ($events as $event)
                                 <div class="d-flex mt-4">
                                     <div>
                                         <div
                                             class="icon icon-shape bg-purple-light shadow text-center border-radius-md shadow-none">
 
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                 class="feather feather-clock text-purple mt-2 ">
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="feather feather-clock text-purple mt-2 ">
                                                 <circle cx="12" cy="12" r="10"></circle>
                                                 <polyline points="12 6 12 12 16 14"></polyline>
                                             </svg>
@@ -47,21 +60,21 @@
                                     </div>
                                     <div class="ms-3">
                                         <div class="numbers">
-                                            <h6 class="mb-1 text-dark text-sm">{{$event->title}}</h6>
-                                            <span
-                                                class="text-sm">
-                                                {{(\App\Supports\DateSupport::parse($event->start_date))->format(config('app.date_time_format'))}}
-                                                </span>
-                                            <a class="btn btn-link text-dark px-3 mb-0"
-                                               href="/delete/event/{{$event->id}}"><i
-                                                    class="fas fa-trash text-dark me-2"
-                                                    aria-hidden="true"></i>{{__('Delete')}}</a>
+                                            <h6 class="mb-1 text-dark text-sm">{{ $event->title }}</h6>
+                                            <span class="text-sm">
+                                                {{ \App\Supports\DateSupport::parse($event->start_date)->format(config('app.date_time_format')) }}
+                                            </span><br>
+                                            <span class="text-sm">
+                                                {{ \App\Supports\DateSupport::parse($event->end_date)->format(config('app.date_time_format')) }}
+                                            </span>
+                                            <a class="btn btn-link text-dark px-3 mb-0 delete-btn"
+                                                href="/delete/event/{{ $event->id }}"><i
+                                                    class="fas fa-trash text-dark me-2"></i>{{ __('Delete') }}</a>
                                         </div>
 
 
                                     </div>
                                 </div>
-
                             @endforeach
 
 
@@ -80,11 +93,11 @@
         </div>
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">{{__('Add Event')}}</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{ __('Add Event') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -100,22 +113,29 @@
 @endsection
 @section('script')
     <script>
-        $(function () {
+        $('body').on('click', '.delete-btn', function(e) {
+            e.preventDefault()
+            var result = window.confirm("Are you sure you want to proceed?");
+            let targetLink = $(this).attr('href')
+            if (result) {
+                window.location.href = targetLink;
+            }
+
+        })
+        $(function() {
             "use strict";
 
             let $addEvent = $('#addEvent');
 
-            $addEvent.on('click', function (event) {
+            $addEvent.on('click', function(event) {
                 event.preventDefault();
 
-                let create_event_form = Fancybox.show([
-                    {
-                        src: "/calendar/event",
-                        type: "ajax",
-                    },
-                ]);
+                let create_event_form = Fancybox.show([{
+                    src: "/calendar/event",
+                    type: "ajax",
+                }, ]);
 
-                create_event_form.on('done', function () {
+                create_event_form.on('done', function() {
                     flatpickr("#start_date", {
 
                         enableTime: true,
@@ -137,7 +157,7 @@
         });
     </script>
     <script>
-        (function(){
+        (function() {
             "use strict";
 
             var calendar = new FullCalendar.Calendar(document.getElementById("calendar"), {
@@ -150,22 +170,22 @@
                 },
                 selectable: true,
                 editable: true,
-                initialDate: '{{date('Y-m-d')}}',
+                initialDate: '{{ date('Y-m-d') }}',
                 events: [
 
-                        @foreach($events as $event)
+                    @foreach ($events as $event)
 
 
-                    {
-                        id: '{{$event->id}}',
-                        title: '{{$event->title}}',
-                        start: '{{$event->start_date}}',
-                        end: '{{$event->end_date}}',
+                        {
+                            id: '{{ $event->id }}',
+                            title: "{{ $event->title }} {{ $event->start_date->format('d-m-Y H:i') }}  -  {{ $event->end_date->format('d-m-Y H:i') }}",
+                            start: '{{ $event->start_date }}',
+                            end: '{{ $event->end_date }}',
 
-                        className: 'bg-purple-light',
+                            className: 'bg-primary',
 
 
-                    },
+                        },
                     @endforeach
 
                 ],
@@ -191,16 +211,14 @@
                         }
                     }
                 },
-                eventClick: function (info) {
+                eventClick: function(info) {
 
-                    let create_event_form = Fancybox.show([
-                        {
-                            src: "/calendar/event?id=" + info.event.id,
-                            type: "ajax",
-                        },
-                    ]);
+                    let create_event_form = Fancybox.show([{
+                        src: "/calendar/event?id=" + info.event.id,
+                        type: "ajax",
+                    }, ]);
 
-                    create_event_form.on('done', function () {
+                    create_event_form.on('done', function() {
                         flatpickr("#start_date", {
 
                             enableTime: true,
@@ -216,15 +234,13 @@
 
                     });
                 },
-                dateClick: function (info) {
-                    let create_event_form = Fancybox.show([
-                        {
-                            src: "/calendar/event?date=" + info.dateStr,
-                            type: "ajax",
-                        },
-                    ]);
+                dateClick: function(info) {
+                    let create_event_form = Fancybox.show([{
+                        src: "/calendar/event?date=" + info.dateStr,
+                        type: "ajax",
+                    }, ]);
 
-                    create_event_form.on('done', function () {
+                    create_event_form.on('done', function() {
                         flatpickr("#start_date", {
 
                             enableTime: true,
@@ -308,7 +324,5 @@
                 },
             });
         })();
-
     </script>
-
 @endsection

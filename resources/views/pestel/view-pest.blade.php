@@ -38,12 +38,13 @@
                         {{__('Political')}}
                     </div>
                     <div class="card-body">
-                        <p class="card-text">
+                        <div style="color: black;"> <p class="card-text">
                             @if (!empty($model))
                             {!!clean(json_decode($model->political))[0]!!}
                             @endif
 
-                        </p>
+                        </p></div>
+                       
                     </div>
                 </div>
                 <div class="card">
@@ -52,12 +53,13 @@
                         {{__('Economic')}}
                     </div>
                     <div class="card-body">
-                        <p class="card-text">
+                        <div style="color: black;"><p class="card-text">
                             @if (!empty($model))
                                 {!!clean(json_decode($model->economic))[0]!!}
                             @endif
 
-                        </p>
+                        </p></div>
+                        
                     </div>
                 </div>
                 <div class="card">
@@ -66,12 +68,13 @@
                         {{__('Social')}}
                     </div>
                     <div class="card-body">
-                        <p class="card-text">
+                        <div style="color: black;"> <p class="card-text">
                             @if (!empty($model))
                                 {!!clean(json_decode($model->social))[0]!!}
                             @endif
 
-                        </p>
+                        </p></div>
+                       
                     </div>
                 </div>
                 <div class="card">
@@ -80,11 +83,12 @@
                         {{__('Technological')}}
                     </div>
                     <div class="card-body">
-                        <p>  @if (!empty($model))
-                                {!!clean(json_decode($model->technological))[0]!!}
-                            @endif
+                        <div style="color: black;">  <p>  @if (!empty($model))
+                            {!!clean(json_decode($model->technological))[0]!!}
+                        @endif
 
-                        </p>
+                    </p></div>
+                      
                     </div>
                 </div>
                 <div class="card">
@@ -93,11 +97,12 @@
                         {{__('Environmental')}}
                     </div>
                     <div class="card-body">
-                        <p class="card-text">
+                        <div style="color: black;"><p class="card-text">
                             @if (!empty($model))
                             {!!clean(json_decode($model->environmental))[0]!!}                            
                             @endif
-                        </p>
+                        </p></div>
+                        
                     </div>
                 </div>
                 <div class="card">
@@ -106,11 +111,12 @@
                         {{__('Legal')}}
                     </div>
                     <div class="card-body">
-                        <p class="card-text">
+                        <div style="color: black;"><p class="card-text">
                             @if (!empty($model))
                             {!!clean(json_decode($model->legal))[0]!!}
                             @endif
-                        </p>
+                        </p></div>
+                        
                     </div>
                 </div>
             </div>

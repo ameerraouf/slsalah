@@ -35,6 +35,7 @@ class SuperAdminController extends SuperAdminBaseController
             ->limit(5)
             ->get();
         $recent_plans = SubscriptionPlan::orderBy("id", "desc")
+            ->where('active', 1)
             ->limit(5)
             ->get();
 
@@ -85,7 +86,7 @@ class SuperAdminController extends SuperAdminBaseController
 
     public function users()
     {
-        $users = User::orderBy('created_at' , 'desc')->get();
+        $users = User::orderBy('created_at', 'desc')->get();
         $workspaces = Workspace::all()
             ->keyBy("id")
             ->all();
@@ -100,10 +101,17 @@ class SuperAdminController extends SuperAdminBaseController
     public function workspaces()
     {
         $users = User::all();
+        $super_admin = User::where('super_admin', 1)->first();
+        $admin_workspace = Workspace::where('owner_id', $super_admin->id)->first();
 
-        $workspaces = Workspace::orderBy('created_at', 'desc')->get()
-            ->keyBy("id")
+        $workspaces = Workspace::orderBy('created_at', 'desc')->get();
+
+        if ($admin_workspace) {
+            $workspaces->prepend($admin_workspace);
+        }
+        $workspaces->keyBy("id")
             ->all();
+
         $plans = SubscriptionPlan::orderBy('created_at', 'desc')->get()
             ->keyBy("id")
             ->all();
@@ -113,6 +121,7 @@ class SuperAdminController extends SuperAdminBaseController
             "users" => $users,
             "workspaces" => $workspaces,
             "plans" => $plans,
+            "super_admin" => $super_admin
         ]);
     }
 
@@ -219,6 +228,7 @@ class SuperAdminController extends SuperAdminBaseController
     }
     public function subscriptionPlanPost(Request $request)
     {
+
         $validator = $request->validate([
             "name" => "required|max:70",
             "id" => "nullable|integer",
@@ -311,7 +321,6 @@ class SuperAdminController extends SuperAdminBaseController
             $skit_user = User::find($request->id);
             if ($skit_user->workspace_id) {
                 $skit_user_workspace = Workspace::find($skit_user->workspace_id);
-
             } else {
                 $skit_user_workspace = null;
             }
@@ -366,7 +375,7 @@ class SuperAdminController extends SuperAdminBaseController
         $available_languages = User::$available_languages;
         $api_keys = $this->settings['api_keys'] ?? null;
         if ($api_keys) {
-            $api_keys = implode(',' , json_decode($api_keys));
+            $api_keys = implode(',', json_decode($api_keys));
         }
         $api_module = $this->settings['api_module'] ?? null;
         return \view("settings.settings", [
@@ -455,6 +464,10 @@ class SuperAdminController extends SuperAdminBaseController
 
             $user = User::where('workspace_id', $id)->first();
             $chats = Chat::where('receiver_id', $user->id)->get();
+            foreach ($chats as $chat) {
+                $chat->delete();
+            }
+            $chats = Chat::where('sender_id', $user->id)->get();
             foreach ($chats as $chat) {
                 $chat->delete();
             }

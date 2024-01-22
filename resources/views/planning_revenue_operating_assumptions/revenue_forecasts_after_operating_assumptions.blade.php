@@ -47,23 +47,23 @@
                                         <td>{{ $source->unit_price }} SAR</td>
                                         <td>
                                             @if($planningRevenueOperatingAssumptions->first_year != 100)
-                                                {{ formatCurrency(($source->total_revenue * ($planningRevenueOperatingAssumptions->first_year / 100)),getWorkspaceCurrency($settings)) }}
+                                                {{ formatCurrency(($source->total_revenue * ($planningRevenueOperatingAssumptions->first_year / 100)),$currency) }}
                                             @else
-                                                {{ formatCurrency($source->total_revenue,getWorkspaceCurrency($settings)) }}
+                                                {{ formatCurrency($source->total_revenue,$currency) }}
                                             @endif
                                         </td>
                                         <td>
                                             @if($planningRevenueOperatingAssumptions->second_year != 100)
-                                                {{ formatCurrency(($source->total_second_revenue * ($planningRevenueOperatingAssumptions->second_year / 100)),getWorkspaceCurrency($settings)) }}
+                                                {{ formatCurrency(($source->total_second_revenue * ($planningRevenueOperatingAssumptions->second_year / 100)),$currency) }}
                                             @else
-                                                {{ formatCurrency($source->total_second_revenue,getWorkspaceCurrency($settings)) }}
+                                                {{ formatCurrency($source->total_second_revenue,$currency) }}
                                             @endif
                                         </td>
                                         <td>
                                             @if($planningRevenueOperatingAssumptions->third_year != 100)
-                                                {{ formatCurrency(($source->total_third_revenue * ($planningRevenueOperatingAssumptions->third_year / 100)),getWorkspaceCurrency($settings)) }}
+                                                {{ formatCurrency(($source->total_third_revenue * ($planningRevenueOperatingAssumptions->third_year / 100)),$currency) }}
                                             @else
-                                                {{ formatCurrency($source->total_third_revenue,getWorkspaceCurrency($settings)) }}
+                                                {{ formatCurrency($source->total_third_revenue,$currency) }}
                                             @endif
                                         </td>
 
@@ -87,11 +87,11 @@
                             $second_year_percentage = $planningRevenueOperatingAssumptions? $planningRevenueOperatingAssumptions->second_year / 100: 1;
                              $third_year_percentage = $planningRevenueOperatingAssumptions? $planningRevenueOperatingAssumptions->third_year / 100: 1;
                         @endphp
-                        <div class="col-md-2 text-muted">{{ formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueFirstYear() * $first_year_percentage,getWorkspaceCurrency($settings) )}}</div>
+                        <div class="col-md-2 text-muted">{{ formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueFirstYear() * $first_year_percentage,$currency )}}</div>
                         <div class="col-md-2" style="background-color: #DDD;">{{ __('second_year') }}</div>
-                        <div class="col-md-2 text-muted">{{ formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueSecondYear() * $second_year_percentage,getWorkspaceCurrency($settings)) }}</div>
+                        <div class="col-md-2 text-muted">{{ formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueSecondYear() * $second_year_percentage,$currency) }}</div>
                         <div class="col-md-2" style="background-color: #DDD;">{{ __('third_year') }}</div>
-                        <div class="col-md-2 text-muted">{{ formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueThirdYear()  * $third_year_percentage,getWorkspaceCurrency($settings))}}</div>
+                        <div class="col-md-2 text-muted">{{ formatCurrency(\App\Models\ProjectRevenuePlanning::calcTotalRevenueThirdYear()  * $third_year_percentage,$currency)}}</div>
 
                         {{--                                <td>{{ $total_first_year }} SAR</td>--}}
                         {{--                                <td>{{ $total_second_year }} SAR</td>--}}

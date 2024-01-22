@@ -116,7 +116,7 @@
         $(document).ready(function() {
             $('body').on('click', '.delete-btn', function(e) {
                 e.preventDefault()
-                var result = window.confirm("Are you sure you want to proceed?");
+                var result = window.confirm("هل أنت متأكد من الحذف؟");
                 let targetLink = $(this).attr('href')
                 if (result) {
                     window.location.href = targetLink;

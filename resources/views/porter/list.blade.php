@@ -9,7 +9,7 @@
 
         </div>
         <div class="col text-end">
-            <a href="/new-porter" type="button" class="btn btn-info">
+            <a href="/new-porter" type="button" class="btn btn-info" style="text-transform:capitalize">
                 {{__('New Porter Five Forces Model')}}
             </a>
         </div>
@@ -62,7 +62,7 @@
     <script>
          $('body').on('click', '.delete-btn', function(e) {
             e.preventDefault()
-            var result = window.confirm("Are you sure you want to proceed?");
+            var result = window.confirm("هل أنت متأكد من الحذف؟");
             let targetLink = $(this).attr('href')
             if (result) {
                 window.location.href = targetLink;

@@ -265,12 +265,12 @@
                     <ul class="list-group">
                         @foreach ($recent_plans as $plans)
                             <li class="list-group-item border-0 d-flex p-4 mb-2 mt-3 bg-gray-100 border-radius-lg">
-                                <div class="d-flex flex-column">
+                                <div class="d-flex flex-column" style="width:70%;">
                                     <h6 class="mb-3 text-sm">{{ $plans->name }}</h6>
-                                    <span class="mb-2 text-xs d-flex">{{ __('Monthly Price') }} <span
+                                    <span class="mb-2 text-xs d-flex justify-content-between">{{ __('Monthly Price') }} <span
                                             class="text-dark font-weight-bold ms-sm-2">
                                             {{ formatCurrency($plans->price_monthly, getWorkspaceCurrency($settings)) }}</span></span>
-                                    <span class="mb-2 text-xs  d-flex">{{ __('Yearly Price') }} <span
+                                    <span class="mb-2 text-xs  d-flex justify-content-between">{{ __('Yearly Price') }} <span
                                             class="text-dark ms-sm-2 font-weight-bold"><a
                                                 data-cfemail="e98c9d818887a98f808b8c9bc78a8684">
                                                 {{ formatCurrency($plans->price_yearly, getWorkspaceCurrency($settings)) }}</a></span></span>

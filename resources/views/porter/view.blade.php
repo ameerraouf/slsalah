@@ -16,9 +16,9 @@
         <div class="col text-center">
             <h5 class="mb-2 text-secondary fw-bolder">
                 <span class="d-inline-block me-2">{{ __('Porter 5-F Model') }}</span>
-                {{-- @if (!empty($model))
+                @if (!empty($model))
                     {{ $model->company_name }}
-                @endif --}}
+                @endif
 
             </h5>
         </div>

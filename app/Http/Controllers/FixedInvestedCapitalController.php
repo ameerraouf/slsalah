@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\FixedInvestedCapital;
+use App\Models\User;
+use App\Models\Setting;
 use App\Models\Investor;
 use App\Models\Projects;
 use App\Models\Workspace;
 use Illuminate\Http\Request;
+use App\Models\FixedInvestedCapital;
+use App\Http\Controllers\BaseController;
 
 class FixedInvestedCapitalController extends BaseController
 {
@@ -41,11 +44,18 @@ class FixedInvestedCapitalController extends BaseController
         $workspace = Workspace::find($this->user->workspace_id);
 
 
-
+        $user = User::where('super_admin' , 1)->first();
+        $settings_mod = Setting::where('workspace_id' , $user->workspace_id)->get()->keyBy('key');
+        if (isset($settings_mod['currency'])) {
+            $currency = $settings_mod['currency']->value;
+        } else {
+            $currency = config('app.currency');
+        }
         return \view("Fixedinvested.list", [
             "selected_navigation" => "fixed_capital_planning",
             "fixedInvested" =>  $fixedInvested,
             'workspace' => $workspace,
+            'currency' => $currency
 
         ]);
     }

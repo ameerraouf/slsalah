@@ -3,7 +3,7 @@
 
     <div class="row mb-4">
         <div class="mt-lg-0 ">
-            <div class="card " id="basic-info">
+            <div class="card px-4" id="basic-info">
                 <div class="card-header">
                     <div class="float-end">
                         <a href="/projects" type="button" class="btn btn-sm btn-info">

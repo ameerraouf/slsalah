@@ -283,7 +283,7 @@
                                         {{ __('Task') }}
                                     </th>
 
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" style="text-align: center">
                                         {{ __('Assigned to') }}
 
                                     </th>
@@ -391,13 +391,19 @@
                                                     @foreach (json_decode($project->members) as $member)
                                                         @if (isset($users[$member]))
                                                             @if (!empty($users[$member]->photo))
-                                                                <a href="javascript:"
+                                                                <div class="d-flex align-items-center">
+                                                                    <a href="javascript:"
                                                                     class="avatar avatar-sm rounded-circle"
                                                                     data-bs-toggle="tooltip" data-bs-placement="bottom"
                                                                     title="{{ $users[$member]->first_name }}">
                                                                     <img src="{{ PUBLIC_DIR }}/uploads/{{ $users[$member]->photo }}"
                                                                         alt="team1">
+                                                                        
                                                                 </a>
+                                                                <span class="d-inline-block mx-1">
+                                                                    {{ $users[$member]->first_name }} {{ $users[$member]->last_name }}
+                                                                </span>
+                                                                </div>
                                                             @else
                                                                 <div
                                                                     class="avatar avatar-sm rounded-circle bg-purple-light">
@@ -499,7 +505,7 @@
                                                         class="d-flex flex-column justify-content-center">
                                                         <div class="">
                                                             <h6 class="mb-0 text-sm">
-                                                                {{ $investor->first_name }}{{ $investor->last_name }}</h6>
+                                                                {{ $investor->first_name }} {{ $investor->last_name }}</h6>
                                                         </div>
                                                     </a>
                                                 </div>
@@ -519,7 +525,7 @@
                                                 </h6>
                                             </td>
                                             <td class="align-middle text-center text-xs">
-                                                <span class="badge bg-info-light fw-bolder">{{ $investor->status }}</span>
+                                                <span class="badge bg-info-light fw-bolder">{{ __($investor->status) }}</span>
                                             </td>
                                             <td>
                                                 <div>

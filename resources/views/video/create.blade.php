@@ -54,6 +54,7 @@
                                                     <option selected disabled>اختر</option>
                                                     <option value="study_projects">  فيديوهات تعليمية حول دراسة المشاريع وإعداد الخطط اللازمة باستخدام الأدوات العلمية اللازمة</option>
                                                     <option value="financial_planning"> فيديوهات تعليمية حول التخطيط المالي للمشاريع باستخدام الأدوات العلمية اللازمة</option>
+                                                    <option value="all"> فيديو يظهر للجميع</option>
                                                 </select>
 
                                             </div>
