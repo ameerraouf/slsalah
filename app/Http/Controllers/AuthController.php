@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\View;
+use function Symfony\Component\Translation\t;
 
 class AuthController extends Controller
 {
@@ -207,53 +208,54 @@ class AuthController extends Controller
         if (Auth::attempt($credentials, $remember)) {
             $user = User::where('email', $request->email)->first();
             session()->put('user_id', $user->id);
-        $user = User::where('email', $request->email)->first();
-
-        if ($user) {
-            if ($user->account_type == 2 || $user->account_type == "2" ) {
-                if (Auth::guard('investor')->attempt($credentials, $remember)) {
-                    return redirect()->intended(route('investor.index')); // Redirect to the intended page
-                }
-            }
-        }
-
-        if (Auth::attempt($credentials, $remember)) {
-//            $user = User::where('email', $request->email)->first();
-            session()->put('user_id', $user->id);
 
             if ($user) {
-                $workspace = Workspace::find($user->workspace_id);
-
-
-
-                if ($workspace && $workspace->id != 1 && $workspace->trial == 1) {
-
-                    $super_admin_settings = Setting::getSuperAdminSettings();
-
-                    if (!empty($super_admin_settings['free_trial_days'])) {
-                        $free_trial_days = $super_admin_settings['free_trial_days'];
-                        $free_trial_days = (int) $free_trial_days;
-                        $workspace_creation_date = $workspace->created_at;
-                        $trial_will_expire = strtotime($workspace_creation_date) + ($free_trial_days * 24 * 60 * 60);
-
-                        if ($trial_will_expire < time()) {
-
-                            Auth::logout();
-                            return back()->withErrors([
-                                'trial_expired' => __('Your trial has been expired.'),
-                            ]);
-                        }
+                if ($user->account_type == 2 || $user->account_type == "2") {
+                    if (Auth::guard('investor')->attempt($credentials, $remember)) {
+                        return redirect()->intended(route('investor.index')); // Redirect to the intended page
                     }
                 }
             }
-            $request->session()->regenerate();
 
-            return redirect()->intended('dashboard')->with('success', 'تم تسجيل الدخول بنجاح.');
+            if (Auth::attempt($credentials, $remember)) {
+//            $user = User::where('email', $request->email)->first();
+                session()->put('user_id', $user->id);
+
+                if ($user) {
+                    $workspace = Workspace::find($user->workspace_id);
+
+
+                    if ($workspace && $workspace->id != 1 && $workspace->trial == 1) {
+
+                        $super_admin_settings = Setting::getSuperAdminSettings();
+
+                        if (!empty($super_admin_settings['free_trial_days'])) {
+                            $free_trial_days = $super_admin_settings['free_trial_days'];
+                            $free_trial_days = (int)$free_trial_days;
+                            $workspace_creation_date = $workspace->created_at;
+                            $trial_will_expire = strtotime($workspace_creation_date) + ($free_trial_days * 24 * 60 * 60);
+
+                            if ($trial_will_expire < time()) {
+
+                                Auth::logout();
+                                return back()->withErrors([
+                                    'trial_expired' => __('Your trial has been expired.'),
+                                ]);
+                            }
+                        }
+                    }
+                }
+                $request->session()->regenerate();
+
+                return redirect()->intended('dashboard')->with('success', 'تم تسجيل الدخول بنجاح.');
+            }
+
+            return back()->withErrors([
+                'email' => __('The provided credentials do not match our records.'),
+            ]);
         }
 
-        return back()->withErrors([
-            'email' => __('The provided credentials do not match our records.'),
-        ]);
+        return true;
     }
 
     public function superAdminAuthenticate(Request $request)

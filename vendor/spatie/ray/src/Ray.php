@@ -24,6 +24,7 @@ use Spatie\Ray\Payloads\CreateLockPayload;
 use Spatie\Ray\Payloads\CustomPayload;
 use Spatie\Ray\Payloads\DecodedJsonPayload;
 use Spatie\Ray\Payloads\ExceptionPayload;
+use Spatie\Ray\Payloads\ExpandPayload;
 use Spatie\Ray\Payloads\FileContentsPayload;
 use Spatie\Ray\Payloads\HideAppPayload;
 use Spatie\Ray\Payloads\HidePayload;
@@ -102,6 +103,9 @@ class Ray
 
     /** @var string */
     public static $projectName = '';
+
+    /** @var Closure|null */
+    public static $beforeSendRequest = null;
 
     public static function create(Client $client = null, string $uuid = null): self
     {
@@ -315,6 +319,22 @@ class Ray
         $payload = new MeasurePayload('closure', $event);
 
         return $this->sendRequest($payload);
+    }
+
+    public function expand(...$levelOrKey): self
+    {
+        if (empty($levelOrKey)) {
+            $levelOrKey = [1];
+        }
+
+        $payload = new ExpandPayload($levelOrKey);
+
+        return $this->sendRequest($payload);
+    }
+
+    public function expandAll(): self
+    {
+        return $this->expand(999);
     }
 
     public function stopTime(string $stopwatchName = ''): self
@@ -682,7 +702,7 @@ class Ray
                 return $argument;
             }
 
-            if (! is_callable($argument)) {
+            if (! $argument instanceof Closure) {
                 return $argument;
             }
 
@@ -796,6 +816,10 @@ class Ray
             'project_name' => static::$projectName,
         ], $meta);
 
+        if ($closure = static::$beforeSendRequest) {
+            $closure($payloads, $allMeta);
+        }
+
         foreach ($payloads as $payload) {
             $payload->remotePath = $this->settings->remote_path;
             $payload->localPath = $this->settings->local_path;
@@ -833,5 +857,10 @@ class Ray
         self::$client->send($request);
 
         self::rateLimiter()->notify();
+    }
+
+    public static function beforeSendRequest(?Closure $closure = null): void
+    {
+        static::$beforeSendRequest = $closure;
     }
 }
