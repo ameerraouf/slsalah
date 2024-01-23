@@ -1,10 +1,10 @@
-@extends('layouts.super-admin-portal')
+@extends('investor.layouts.index')
 @section('content')
 
     <div class=" row">
         <div class="col">
             <h5 class="mb-2 text-secondary fw-bolder">
-                {{__('Subscription')}}
+                الفرص الاستثمارية
             </h5>
 
         </div>
@@ -19,33 +19,22 @@
                     <div class="table-responsive p-0">
                         <table class="table align-items-center mb-0" id="cloudonex_table">
                             <div >
-                                <form action="{{route('all_subscriptions')}}">
+                                <form action="{{route('opportunities.index')}}">
                                     <div class="my-2 d-flex flex-wrap">
                                     <div class="col-3">
-                                        <label>حالة الاشتراك : </label>
+                                        <label>مجال العمل  : </label>
                                         <select class="px-2 " name="is_subscription_end">
                                             <option disabled selected> اختر</option>
-                                            <option value="false" {{ request()->has('is_subscription_end') && request()->get('is_subscription_end') == 'false' ? 'selected' : '' }}>ساري</option>
-                                            <option value="true" {{ request()->has('is_subscription_end') && request()->get('is_subscription_end') == 'true' ? 'selected' : '' }}>منتهي</option>
                                         </select>
                                     </div>
                                     <div class="col-3">
-                                        <label>الباقة : </label>
+                                        <label>حجم التمويل : </label>
                                         <select class="px-2 " name="subscription_plan_id">
                                             <option disabled selected> اختر</option>
-                                            @foreach(\App\Models\SubscriptionPlan::query()->get() as $plan)
-                                                <option @if($plan->id == request()->subscription_plan_id) selected @endif value="{{$plan->id}}" >{{$plan->name}}</option>
-                                            @endforeach
+
                                         </select>
                                     </div>
-                                    <div class="col-3">
-                                        <label>نوع الاشتراك : </label>
-                                        <select class="px-2 " name="subscription_type">
-                                            <option disabled selected> اختر</option>
-                                            <option value="monthly" {{ request()->has('subscription_type') && request()->get('subscription_type') == 'monthly' ? 'selected' : '' }}>شهري</option>
-                                            <option value="yearly" {{ request()->has('subscription_type') && request()->get('subscription_type') == 'yearly' ? 'selected' : '' }}>سنوي</option>
-                                        </select>
-                                    </div>
+
                                     <div class="col-3">
                                         <button class="btn btn-primary">فلتر</button>
                                         <button type="button" class="btn btn-info" onclick="window.location.href='/subscriptions-all'">أعادة تعيين</button>
@@ -59,43 +48,44 @@
 
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('username')}}</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('plan_name')}}</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">نوع الاشتراك</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('amount')}}</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('payment method')}}</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('Subscription date')}}</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">حالة الاشتراك</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">{{__('Transfer number')}}</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الأجراء</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">الشعار</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">اسم الشركة</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">نبذة عن الشركة</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">مجال العمل</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">حجم  التمويل المطلوب</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">العرض الاستثماري</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">تقيم الشركة</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">تواصل</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">اضافة الى المفضلة</th>
                             </tr>
 
                             <tbody>
-                            @foreach($workspaces as $key=> $workspace)
-
+                            @foreach($opportunities as $key=> $workspace)
                                 <tr>
                                     <td class="text-center">
-                                        {{$key}}
+                                        {{$key +1 }}
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{isset($workspace->user) ? $workspace->user->first_name . ' ' . $workspace->user->last_name : ''}}</p>
+                                        <p class="text-xs font-weight-bold mb-0">
+                                            {{ $workspace->photo}}</p>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{isset($workspace->subscriptionPlan) ? $workspace->subscriptionPlan->name : ''}}</p>
+                                        <p class="text-xs font-weight-bold mb-0">
+                                            {{ $workspace->company_name }}</p>                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">
+                                            {{$workspace->company_description}}</p>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{trans("$workspace->subscription_type")}}</p>
-                                    </td>
-                                    <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{$workspace->price}}</p>
-                                    </td>
-
-                                    <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{trans("$workspace->payment_type")}}</p>
+                                        <p class="text-xs font-weight-bold mb-0">{{$workspace->work_field}}</p>
                                     </td>
 
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{ \Carbon\Carbon::parse($workspace->subscription_start_date)->format('Y-m-d')}}</p>
+                                        <p class="text-xs font-weight-bold mb-0"></p>
+                                    </td>
+
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0"></p>
                                     </td>
                                     <td>
                                         <p class="text-xs font-weight-bold mb-0">
@@ -118,14 +108,15 @@
                                         </p>
                                     </td>
                                     <td>
-                                        @if($workspace->is_active == 0)
-                                            <form action="{{route('admin.active_subscription', $workspace->id)}}" method="post">
-                                                @csrf
-                                                @method('post')
-                                                <button type="submit" class="btn btn-primary">تفعيل الاشتراك</button>
-                                            </form>
-                                        @endif
-                                        <a class="btn btn-info" href="{{route('admin.subscriptions.details', $workspace->id)}}">عرض التفاصيل</a>
+{{--                                        @if($workspace->is_active == 0)--}}
+{{--                                            <form action="{{route('admin.active_subscription', $workspace->id)}}" method="post">--}}
+{{--                                                @csrf--}}
+{{--                                                @method('post')--}}
+{{--                                                <button type="submit" class="btn btn-primary">تفعيل الاشتراك</button>--}}
+{{--                                            </form>--}}
+{{--                                        @endif--}}
+{{--                                            <a class="btn btn-info" href="{{route('admin.subscriptions.details', $workspace->id)}}">عرض التفاصيل</a>--}}
+                                            <a class="btn btn-info" href="{{route('admin.subscriptions.details', $workspace->id)}}">اضافة الى المفضلة</a>
                                     </td>
 
                                 </tr>

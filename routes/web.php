@@ -9,10 +9,13 @@ use App\Http\Controllers\DeleteController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\DownloadController;
 
+use App\Http\Controllers\FavoriteOpportunityController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\InvestmentPortfolioController;
 use App\Http\Controllers\MarketingController;
 use App\Http\Controllers\MckinseyController;
 use App\Http\Controllers\NoticeController;
+use App\Http\Controllers\OpportunityController;
 use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\PestController;
 use App\Http\Controllers\PestelController;
@@ -26,6 +29,8 @@ use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\SwotController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\VideoController;
+use App\Http\Controllers\InvestorController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,6 +43,36 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// Authentication Routes for Investor
+Route::middleware('guest:investor')->group(function () {
+    Route::view('/investor/login', 'auth.login')->name('investor.login');
+    Route::post('/investor/login', 'InvestorLoginController@login')->name('investor.login.submit');
+});
+
+// investor all route
+Route::middleware('auth:investor')->prefix('investor')->group(function () {
+    Route::get('index', [InvestorController::class,'index'])->name('investor.index');
+    Route::get('news', [InvestorController::class,'news'])->name('investor.news.index');
+    Route::get('profile', [InvestorController::class,'profile'])->name('investor.profile.index');
+    // Opportunity routes
+    Route::resource('opportunities', OpportunityController::class);
+
+    // Favorite Opportunity routes
+    Route::resource('favorite_opportunities', FavoriteOpportunityController::class);
+
+    // Investment Portfolio routes
+    Route::resource('investment_portfolios', InvestmentPortfolioController::class);
+
+
+
+    Route::post('/investor/logout', 'InvestorLoginController@logout')->name('investor.logout');
+
+    // Add more routes as needed
+});
+
+
+
 
 Route::get('/', [FrontendController::class,'home']);
 

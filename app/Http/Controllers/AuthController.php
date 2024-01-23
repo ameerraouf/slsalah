@@ -204,9 +204,20 @@ class AuthController extends Controller
         }
 
 
+        $user = User::where('email', $request->email)->first();
+
+        if ($user) {
+            if ($user->account_type == 2 || $user->account_type == "2" ) {
+                if (Auth::guard('investor')->attempt($credentials, $remember)) {
+                    return redirect()->intended(route('investor.index')); // Redirect to the intended page
+                }
+            }
+        }
+
         if (Auth::attempt($credentials, $remember)) {
-            $user = User::where('email', $request->email)->first();
+//            $user = User::where('email', $request->email)->first();
             session()->put('user_id', $user->id);
+
             if ($user) {
                 $workspace = Workspace::find($user->workspace_id);
 
@@ -299,9 +310,9 @@ class AuthController extends Controller
             "password" => ["required"],
             'account_type' => 'required|in:1,2',
             'company_name' => 'required_if:account_type,1',
-            'count_startup_company' => 'required_if:account_type,2|integer',
-            'from' => 'required_if:account_type,2|integer',
-            'to' => 'required_if:account_type,2|integer',
+            'count_startup_company' => 'required_if:account_type,2',
+            'from' => 'required_if:account_type,2',
+            'to' => 'required_if:account_type,2',
         ]);
 
         if (!empty($super_settings['config_recaptcha_in_user_signup'])) {

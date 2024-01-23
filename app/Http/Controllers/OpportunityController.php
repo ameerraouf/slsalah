@@ -4,14 +4,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Opportunity;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class OpportunityController extends Controller
 {
     public function index()
     {
-        $opportunities = Opportunity::all();
-        return view('opportunities.index', compact('opportunities'));
+        $opportunities = User::where("account_type",1)->get();
+        return view('investor.opportunities.index', compact('opportunities'));
     }
 
     public function create()

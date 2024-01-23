@@ -1,4 +1,4 @@
-@extends('layouts.'.($layout ?? 'primary'))
+@extends('investor.layouts.index')
 @section('content')
 
     <div class="page-header card min-height-250 "@if(!empty($user->cover_photo))

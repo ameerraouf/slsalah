@@ -730,6 +730,12 @@
     "from" : "من",
     "to" : "الى",
     "work_field" : "مجال العمل",
-    "company_description" : "وصف الشركة"
-
+    "company_description" : "وصف الشركة",
+    "message" : "الرسائل",
+    "Investment_opportunities" : "الفرص الاستثمارية",
+    "Favorite_companies" : "الشركات المفضلة",
+    "My_investment_portfolio" : "محفظتي الاستثمارية",
+    "Investment_news" : "أخبار استثمارية",
+    "file" : "الملفات",
+    "Contact_the_administration": "مراسلة الإدارة"
 }

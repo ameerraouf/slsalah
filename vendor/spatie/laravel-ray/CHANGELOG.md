@@ -2,6 +2,32 @@
 
 All notable changes to `laravel-ray` will be documented in this file
 
+## 1.33.0 - 2023-09-04
+
+### What's Changed
+
+- Bump shivammathur/setup-php from 2.25.4 to 2.25.5 by @dependabot in https://github.com/spatie/laravel-ray/pull/309
+- Add ability to return the results of callable by @grantholle in https://github.com/spatie/laravel-ray/pull/314
+
+### New Contributors
+
+- @grantholle made their first contribution in https://github.com/spatie/laravel-ray/pull/314
+
+**Full Changelog**: https://github.com/spatie/laravel-ray/compare/1.32.6...1.33.0
+
+## 1.32.6 - 2023-07-19
+
+### What's Changed
+
+- Bump dependabot/fetch-metadata from 1.5.1 to 1.6.0 by @dependabot in https://github.com/spatie/laravel-ray/pull/305
+- feat: support raw sql by @innocenzi in https://github.com/spatie/laravel-ray/pull/306
+
+### New Contributors
+
+- @innocenzi made their first contribution in https://github.com/spatie/laravel-ray/pull/306
+
+**Full Changelog**: https://github.com/spatie/laravel-ray/compare/1.32.5...1.32.6
+
 ## 1.32.5 - 2023-06-23
 
 - fix displaying Mailables

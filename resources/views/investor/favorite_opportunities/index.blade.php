@@ -4,7 +4,7 @@
     <div class=" row">
         <div class="col">
             <h5 class="mb-2 text-secondary fw-bolder">
-                الفرص الاستثمارية
+                 الشركات المفضلة
             </h5>
 
         </div>
