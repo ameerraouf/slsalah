@@ -251,6 +251,10 @@ class SuperAdminController extends SuperAdminBaseController
         ]);
         $plan = false;
 
+        if (!($request->has('percentage_discount_annual') && $request->filled('percentage_discount_annual'))) {
+            $request['percentage_discount_annual'] = 0;
+        }
+
         if ($request->id) {
             $plan = SubscriptionPlan::find($request->id);
         }
@@ -275,7 +279,6 @@ class SuperAdminController extends SuperAdminBaseController
         $plan->description = clean($request->description);
 
         $features = [];
-
         foreach ($request->features as $feature) {
             if (!empty($feature)) {
                 $features[] = $feature;
