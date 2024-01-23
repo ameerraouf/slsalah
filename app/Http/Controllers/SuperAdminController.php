@@ -477,7 +477,7 @@ class SuperAdminController extends SuperAdminBaseController
             }
             $user->delete();
             $workspace->delete();
-            return redirect("/workspaces");
+            return redirect("/workspaces")->with('deleteSuccess' , 'deleted');
         }
     }
     public function deleteUser($id)

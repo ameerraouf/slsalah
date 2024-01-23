@@ -12,6 +12,11 @@
     </div>
     <div class="row">
         <div class="col-12">
+            @if (session('deleteSuccess'))
+            <div class="alert alert-success text-white">
+                <i class="far fa-check-circle"></i> تم حذف مساحة العمل بنجاح
+            </div>
+            @endif
             <div class="card card-body mb-4">
 
                 <div class="card-body px-0 pt-0 pb-2">
