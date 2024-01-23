@@ -103,7 +103,7 @@
             <li class="nav-item ">
                 <a class="nav-link @if(($selected_navigation ?? '') === 'economic-plan') active @endif "
                    href="/economic-plan">
-                    <i class="fas fa-file"></i>
+                   <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 640 512" width="20" height="20"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M48 0C21.5 0 0 21.5 0 48v64c0 8.8 7.2 16 16 16h80V48C96 21.5 74.5 0 48 0zm208 412.6V352h288V96c0-52.9-43.1-96-96-96H111.6C121.7 13.4 128 29.9 128 48v368c0 38.9 34.7 69.7 74.8 63.1C234.2 474 256 444.5 256 412.6zM288 384v32c0 52.9-43.1 96-96 96h336c61.9 0 112-50.1 112-112 0-8.8-7.2-16-16-16H288z"/></svg>
                     <span class="nav-link-text ms-3">{{__('marketing_and_economic_plan')}}</span>
                 </a>
             </li>
