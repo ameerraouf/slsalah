@@ -131,7 +131,7 @@ class ProfileController extends BaseController
         $request->validate([
             "first_name" => "required|string|max:100",
             "last_name" => "required|string|max:100",
-            "email" => "required|email|unique:users,email",
+            "email" => "required|email",
             "phone" => "nullable|string|max:50",
             "password" => "required|string|max:255",
             "id" => "nullable|integer",
@@ -178,6 +178,9 @@ class ProfileController extends BaseController
 
 
         if (!$user) {
+            $request->validate([
+                "email" => "required|email|unique:users,email",
+            ]);
             $user = new User();
             $user->workspace_id = 0;
         }
