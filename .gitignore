@@ -1,0 +1,36 @@
+# Ignore the .env file as it usually contains sensitive information
+.env
+
+# Ignore the storage directory as it's where Laravel stores logs, cache, and other temporary files
+/storage
+
+# Ignore the public/hot and public/storage directories which are used by Laravel for asset generation
+/public/hot
+/public/storage
+
+# Ignore the node_modules directory if you're using npm to manage your frontend dependencies
+/node_modules
+
+# Ignore the vendor directory as it contains Composer dependencies
+/vendor
+
+# Ignore any generated application key files
+*.key
+
+# Ignore the Homestead.yaml file if you're using Laravel Homestead for local development
+Homestead.yaml
+
+# Ignore the Homestead.json file if you're using Laravel Homestead for local development
+Homestead.json
+
+# Ignore macOS Finder files
+.DS_Store
+
+# Ignore any SQLite database files
+*.sqlite
+
+# Ignore PhpStorm project files
+.idea/
+
+# Ignore testing SQLite database
+/tests/_data/testing.sqlite
