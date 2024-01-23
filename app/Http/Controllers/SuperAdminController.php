@@ -166,6 +166,7 @@ class SuperAdminController extends SuperAdminBaseController
     {
         $users = User::all();
         $plans = SubscriptionPlan::all()
+            ->where('active', 1)
             ->keyBy("id")
             ->all();
 
