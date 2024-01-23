@@ -46,6 +46,11 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+        'investor' => [
+            'driver' => 'session',
+            'provider' => 'users', // Assuming your table name is 'users'
+        ],
+
     ],
 
     /*
@@ -70,6 +75,7 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+
 
         // 'users' => [
         //     'driver' => 'database',

@@ -86,6 +86,7 @@ class ContactController extends BaseController
         $request->validate([
             "first_name" => "required|string|max:100",
             "last_name" => "required|string|max:100",
+<<<<<<< HEAD
             "email" => "required|email",
             "phone_number" => "nullable|string|max:50",
             "amount" => "required|gt:0",
@@ -94,6 +95,12 @@ class ContactController extends BaseController
             "first_name.required" => 'الحقل الاسم الأول مطلوب.',
             "last_name.required" => 'الحقل الأخير الأول مطلوب.',
             "email.required" => 'الحقل اسم المستخدم / البريد الالكترونى مطلوب.'
+=======
+            "email" => "required|email|unique:investors,email",
+            "phone_number" => "nullable|string|max:50|unique:investors,phone_number",
+            "amount" => "nullable|gt:0",
+            "id" => "nullable|integer",
+>>>>>>> amr
         ]);
 
 
@@ -187,12 +194,20 @@ class ContactController extends BaseController
             ->all();
 
 
+<<<<<<< HEAD
             $selected_navigation = 'invested_capital_planning';
+=======
+
+>>>>>>> amr
         return \view("investors.view", [
             "selected_navigation" => "investors",
             "investor" => $investor,
             "products" => $products,
+<<<<<<< HEAD
             "selected_navigation" => $selected_navigation
+=======
+
+>>>>>>> amr
         ]);
     }
 }
