@@ -45,7 +45,7 @@
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-md-12">
-                                            <label>{{ __('Username/Email') }}</label><label class="text-danger">*</label>
+                                            <label>{{ __('Email-Username') }}</label><label class="text-danger">*</label>
                                             <input name="email" class="multisteps-form__input form-control" type="email"
                                                 @if ($selected_user) value="{{ $selected_user->email }}" @endif />
                                         </div>

@@ -103,7 +103,7 @@
             <li class="nav-item ">
                 <a class="nav-link @if(($selected_navigation ?? '') === 'economic-plan') active @endif "
                    href="/economic-plan">
-                    <i class="fas fa-file"></i>
+                   <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 640 512" width="20" height="20"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M48 0C21.5 0 0 21.5 0 48v64c0 8.8 7.2 16 16 16h80V48C96 21.5 74.5 0 48 0zm208 412.6V352h288V96c0-52.9-43.1-96-96-96H111.6C121.7 13.4 128 29.9 128 48v368c0 38.9 34.7 69.7 74.8 63.1C234.2 474 256 444.5 256 412.6zM288 384v32c0 52.9-43.1 96-96 96h336c61.9 0 112-50.1 112-112 0-8.8-7.2-16-16-16H288z"/></svg>
                     <span class="nav-link-text ms-3">{{__('marketing_and_economic_plan')}}</span>
                 </a>
             </li>
@@ -148,7 +148,7 @@
                     <a class="nav-link  @if(($selected_navigation ?? '') === 'porter') active @endif" href="/porter-models">
 
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-life-buoy"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"></line><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"></line><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"></line><line x1="14.83" y1="9.17" x2="18.36" y2="5.64"></line><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"></line></svg>
-                        <span class="nav-link-text ms-3">{{__('Porter 5-F Model')}}</span>
+                        <span class="nav-link-text ms-3">{{__('Porter Five test')}}</span>
                     </a>
                 </li>
 

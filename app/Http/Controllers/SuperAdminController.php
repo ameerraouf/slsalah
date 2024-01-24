@@ -103,6 +103,7 @@ class SuperAdminController extends SuperAdminBaseController
 
         $workspaces = Workspace::all()
             ->keyBy("id")
+
             ->all();
         $plans = SubscriptionPlan::all()
             ->keyBy("id")
@@ -160,6 +161,7 @@ class SuperAdminController extends SuperAdminBaseController
     {
         $users = User::all();
         $plans = SubscriptionPlan::all()
+            ->where('active', 1)
             ->keyBy("id")
             ->all();
 
@@ -247,6 +249,10 @@ class SuperAdminController extends SuperAdminBaseController
 
         $plan = false;
 
+        if (!($request->has('percentage_discount_annual') && $request->filled('percentage_discount_annual'))) {
+            $request['percentage_discount_annual'] = 0;
+        }
+
         if ($request->id) {
             $plan = SubscriptionPlan::find($request->id);
         }
@@ -271,7 +277,6 @@ class SuperAdminController extends SuperAdminBaseController
         $plan->description = clean($request->description);
 
         $features = [];
-
         foreach ($request->features as $feature) {
             if (!empty($feature)) {
                 $features[] = $feature;
@@ -460,7 +465,7 @@ class SuperAdminController extends SuperAdminBaseController
             User::where('workspace_id',$id)->delete();
 
             $workspace->delete();
-            return redirect("/workspaces");
+            return redirect("/workspaces")->with('deleteSuccess' , 'deleted');
         }
     }
     public function deleteUser($id)

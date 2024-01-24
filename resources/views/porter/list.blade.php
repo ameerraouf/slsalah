@@ -4,7 +4,7 @@
     <div class=" row">
         <div class="col">
             <h5 class="mb-2 text-secondary fw-bolder">
-                {{__('Porter 5-F Model')}}
+                {{__('Porter Five test')}}
             </h5>
 
         </div>

@@ -214,7 +214,7 @@
                 var KanbanTest = new jKanban({
                     element: "#myKanban",
                     gutter: "1px",
-                    widthBoard: "350px",
+                    widthBoard: "250px",
 
                     click: el => {
 

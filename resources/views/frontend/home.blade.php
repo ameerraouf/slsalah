@@ -2025,7 +2025,7 @@
                         </section>
                         <section
                             class="elementor-section elementor-top-section elementor-element elementor-element-5a96ff2 elementor-section-boxed elementor-section-height-default elementor-section-height-default"
-                            data-id="5a96ff2" data-element_type="section">
+                            data-id="5a96ff2" data-element_type="section" id="footer">
                             <div class="elementor-container elementor-column-gap-default">
                                 <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-8e5f4d3"
                                     data-id="8e5f4d3" data-element_type="column">
