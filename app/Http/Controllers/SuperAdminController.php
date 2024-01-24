@@ -97,7 +97,7 @@ class SuperAdminController extends SuperAdminBaseController
             "workspaces" => $workspaces,
         ]);
     }
-    public function workspaces()
+   /* public function workspaces()
     {
         $users = User::all();
 
@@ -116,6 +116,29 @@ class SuperAdminController extends SuperAdminBaseController
             "plans" => $plans,
         ]);
     }
+    */
+        public function workspaces()
+    {
+        $users = User::all();
+
+        $workspaces = Workspace::WhereNotIn('id',[$admin_workspace->id])->orderBy('created_at', 'desc')->get();
+        if($admin_workspace){
+            $workspaces->prepend($admin_workspace);
+        }
+            $workspaces->keyBy("id")
+
+      
+   
+            ->all();
+
+        return \view("super-admin.workspaces", [
+            "selected_navigation" => "workspaces",
+            "users" => $users,
+            "workspaces" => $workspaces,
+            "plans" => $plans,
+        ]);
+    }
+
 
 
     public function saveWorkspace(Request $request)
