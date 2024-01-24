@@ -274,8 +274,6 @@ class TaskController extends BaseController
                 $request->validate([
                     "subject" => "required|max:150",
                     "contact_id" => "nullable|integer",
-                ] , [
-                    "subject.required" => 'الحقل الموضوع مطلوب'
                 ]);
 
                 $task = false;

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\View;
+use function Symfony\Component\Translation\t;
 
 class AuthController extends Controller
 {
@@ -207,39 +208,54 @@ class AuthController extends Controller
         if (Auth::attempt($credentials, $remember)) {
             $user = User::where('email', $request->email)->first();
             session()->put('user_id', $user->id);
+
             if ($user) {
-                $workspace = Workspace::find($user->workspace_id);
-
-
-
-                if ($workspace && $workspace->id != 1 && $workspace->trial == 1) {
-
-                    $super_admin_settings = Setting::getSuperAdminSettings();
-
-                    if (!empty($super_admin_settings['free_trial_days'])) {
-                        $free_trial_days = $super_admin_settings['free_trial_days'];
-                        $free_trial_days = (int) $free_trial_days;
-                        $workspace_creation_date = $workspace->created_at;
-                        $trial_will_expire = strtotime($workspace_creation_date) + ($free_trial_days * 24 * 60 * 60);
-
-                        if ($trial_will_expire < time()) {
-
-                            Auth::logout();
-                            return back()->withErrors([
-                                'trial_expired' => __('Your trial has been expired.'),
-                            ]);
-                        }
+                if ($user->account_type == 2 || $user->account_type == "2") {
+                    if (Auth::guard('investor')->attempt($credentials, $remember)) {
+                        return redirect()->intended(route('investor.index')); // Redirect to the intended page
                     }
                 }
             }
-            $request->session()->regenerate();
 
-            return redirect()->intended('dashboard')->with('success', 'تم تسجيل الدخول بنجاح.');
+            if (Auth::attempt($credentials, $remember)) {
+//            $user = User::where('email', $request->email)->first();
+                session()->put('user_id', $user->id);
+
+                if ($user) {
+                    $workspace = Workspace::find($user->workspace_id);
+
+
+                    if ($workspace && $workspace->id != 1 && $workspace->trial == 1) {
+
+                        $super_admin_settings = Setting::getSuperAdminSettings();
+
+                        if (!empty($super_admin_settings['free_trial_days'])) {
+                            $free_trial_days = $super_admin_settings['free_trial_days'];
+                            $free_trial_days = (int)$free_trial_days;
+                            $workspace_creation_date = $workspace->created_at;
+                            $trial_will_expire = strtotime($workspace_creation_date) + ($free_trial_days * 24 * 60 * 60);
+
+                            if ($trial_will_expire < time()) {
+
+                                Auth::logout();
+                                return back()->withErrors([
+                                    'trial_expired' => __('Your trial has been expired.'),
+                                ]);
+                            }
+                        }
+                    }
+                }
+                $request->session()->regenerate();
+
+                return redirect()->intended('dashboard')->with('success', 'تم تسجيل الدخول بنجاح.');
+            }
+
+            return back()->withErrors([
+                'email' => __('The provided credentials do not match our records.'),
+            ]);
         }
 
-        return back()->withErrors([
-            'email' => __('The provided credentials do not match our records.'),
-        ]);
+        return true;
     }
 
     public function superAdminAuthenticate(Request $request)
@@ -297,6 +313,11 @@ class AuthController extends Controller
             "first_name" => ["required"],
             "last_name" => ["required"],
             "password" => ["required"],
+            'account_type' => 'required|in:1,2',
+            'company_name' => 'required_if:account_type,1',
+            'count_startup_company' => 'required_if:account_type,2',
+            'from' => 'required_if:account_type,2',
+            'to' => 'required_if:account_type,2',
         ]);
 
         if (!empty($super_settings['config_recaptcha_in_user_signup'])) {
@@ -333,6 +354,12 @@ class AuthController extends Controller
 
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
+
+        $user->account_type = $request->account_type;
+        $user->company_name = $request->company_name ?? null;
+        $user->count_startup_company = $request->count_startup_company??null;
+        $user->from = $request->from ?? 0;
+        $user->to = $request->to?? 0;
 
         $user->email = $request->input("email");
 
