@@ -299,87 +299,83 @@
     @endif
 @endsection
 
-
-
-@if ($user->super_admin)
 @section('script')
-<script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
-<script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-<script>
-    let test = "{{ $api_keys_test }}"
-    if (test !== null && test !== '') {
-        test = test.split(",");
-    }
-    var apiKeys = document.getElementById('openai_api_keys')
-    tagify = new Tagify(apiKeys);
-    tagify.addTags(test);
+    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script>
+        let test = "{{ $api_keys_test }}"
+        if (test !== null && test !== '') {
+            test = test.split(",");
+        }
+        var apiKeys = document.getElementById('openai_api_keys')
+        tagify = new Tagify(apiKeys);
+        tagify.addTags(test);
 
 
-    // api module 
-    let apiModule = "{{ $api_module }}"
-    if (apiModule) {
-        $('#api_module').val(apiModule)
-    }
-    // test api keys
-    $('body').on('click', '.test-keys', function(e) {
-        e.preventDefault()
+        // api module 
+        let apiModule = "{{ $api_module }}"
+        if (apiModule) {
+            $('#api_module').val(apiModule)
+        }
+        // test api keys
+        $('body').on('click', '.test-keys', function(e) {
+            e.preventDefault()
 
-        let apiKeys = JSON.parse($('#openai_api_keys').val())
-        apiKeys.forEach(key => {
-            let apiKey = key.value;
-            // Send the prompt to the OpenAI API
-            $.ajax({
-                url: 'https://api.openai.com/v1/chat/completions',
-                headers: {
-                    'Authorization': 'Bearer ' + apiKey,
-                    'Content-Type': 'application/json'
-                },
-                method: 'POST',
-                data: JSON.stringify({
-                    model: 'gpt-3.5-turbo',
-                    messages: [{
-                            role: 'system',
-                            content: 'You are a helpful assistant.'
-                        },
-                        {
-                            role: 'user',
-                            content: 'This is a test'
-                        }
-                    ]
-                }),
-                success: function(response) {
-                    // Extract the assistant's reply from the API response
-                    // const reply = response.choices[0].message.content;
-                    // console.log('Assistant reply:', reply);
-                    Toastify({
-                        text: apiKey + " success",
-                        duration: 3000,
-                        close: true,
-                        gravity: "top", // `top` or `bottom`
-                        position: "right", // `left`, `center` or `right`
-                        stopOnFocus: true, // Prevents dismissing of toast on hover
-                        style: {
-                            background: "green",
-                        },
-                    }).showToast();
-                },
-                error: function(xhr, status, error) {
-                    Toastify({
-                        text: apiKey + " fail",
-                        duration: 3000,
-                        close: true,
-                        gravity: "top", // `top` or `bottom`
-                        position: "right", // `left`, `center` or `right`
-                        stopOnFocus: true, // Prevents dismissing of toast on hover
-                        style: {
-                            background: "red",
-                        },
-                    }).showToast();
-                }
+            let apiKeys = JSON.parse($('#openai_api_keys').val())
+            apiKeys.forEach(key => {
+                let apiKey = key.value;
+                // Send the prompt to the OpenAI API
+                $.ajax({
+                    url: 'https://api.openai.com/v1/chat/completions',
+                    headers: {
+                        'Authorization': 'Bearer ' + apiKey,
+                        'Content-Type': 'application/json'
+                    },
+                    method: 'POST',
+                    data: JSON.stringify({
+                        model: 'gpt-3.5-turbo',
+                        messages: [{
+                                role: 'system',
+                                content: 'You are a helpful assistant.'
+                            },
+                            {
+                                role: 'user',
+                                content: 'This is a test'
+                            }
+                        ]
+                    }),
+                    success: function(response) {
+                        // Extract the assistant's reply from the API response
+                        // const reply = response.choices[0].message.content;
+                        // console.log('Assistant reply:', reply);
+                        Toastify({
+                            text: apiKey + " success",
+                            duration: 3000,
+                            close: true,
+                            gravity: "top", // `top` or `bottom`
+                            position: "right", // `left`, `center` or `right`
+                            stopOnFocus: true, // Prevents dismissing of toast on hover
+                            style: {
+                                background: "green",
+                            },
+                        }).showToast();
+                    },
+                    error: function(xhr, status, error) {
+                        Toastify({
+                            text: apiKey + " fail",
+                            duration: 3000,
+                            close: true,
+                            gravity: "top", // `top` or `bottom`
+                            position: "right", // `left`, `center` or `right`
+                            stopOnFocus: true, // Prevents dismissing of toast on hover
+                            style: {
+                                background: "red",
+                            },
+                        }).showToast();
+                    }
+                });
             });
-        });
-    })
-</script>
-@endsection  
-@endif
+        })
+    </script>
+@endsection
